@@ -17,26 +17,45 @@ class SliderController extends Controller
         return ['sliders' => Slider::where('inicio', 1)->orderBy('created_at', 'desc')->get()];
     }
 
+    public function indexUbicacion($ubicacion){  
+        switch ($ubicacion) {
+            case 1:
+                $sliders = Slider::where('descanso_uno', 1)->orderBy('created_at', 'desc')->get();
+                break;
+            case 2:
+                $sliders = Slider::where('descanso_dos', 1)->orderBy('created_at', 'desc')->get();
+                break;
+            case 3:
+                $sliders = Slider::where('pagina_nosotros', 1)->orderBy('created_at', 'desc')->get();
+                break;
+            case 4:
+                $sliders = Slider::where('pagina_contacto', 1)->orderBy('created_at', 'desc')->get();
+                break;
+            case 5:
+                $sliders = Slider::where('pagina_comunidad', 1)->orderBy('created_at', 'desc')->get();
+                break;
+            case 6:
+                $sliders = Slider::where('pagina_servicios', 1)->orderBy('created_at', 'desc')->get();
+                break;
+        }
+
+        return ['sliders' => $sliders];
+    }
+
     public function crearOactualizar(Request $request){
+        
+        $slider = Slider::updateOrCreate(
+            ['id' => $request->slider_id],
+            ['texto' => $request->texto,
+                'color' => $request->color,
+                'link' => $request->link
+            ]
+        );
+
         if ($request->hasFile('imagen_slider')) {
-
-            $slider = Slider::updateOrCreate(
-                ['id' => $request->slider_id],
-                ['texto' => $request->texto,
-                 'color' => $request->color,
-                 'link' => $request->link
-                ]
-            );
-
-            $img_slider = $request->file('imagen_slider');
-            
             if($slider->url_imagen != null) { Storage::disk('public')->delete($slider->url_imagen); }
             
-            $url = Storage::disk('public')->putFile(
-                'sliders', $img_slider
-            );
-
-            $slider = Slider::updateOrCreate(['id' => $slider->id], ['url_imagen' => $url]);
+            Slider::updateOrCreate(['id' => $slider->id], ['url_imagen' => Storage::disk('public')->putFile('sliders', $request->file('imagen_slider'))]);
         }  
     }
 

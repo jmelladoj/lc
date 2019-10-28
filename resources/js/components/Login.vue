@@ -5,6 +5,12 @@
                 <b-col cols="5" class="align-self-center"><h4 class="text-themecolor">Login</h4></b-col>
                 <b-col cols="7">
                     <div class="d-flex justify-content-end align-items-right">
+                        <ol class="breadcrumb">
+                            <li><a href="https://www.youtube.com/channel/UC78DsrgVX7KslItHoTuw8uQ?view_as=subscriber" target="_blank" aria-expanded="false" class="breadcrumb-item active h3 pl-1 pr-1"><i class="fa fa-youtube"></i></a></li>
+                            <li><a href="https://www.facebook.com/prevencion.lebenco.3" target="_blank" aria-expanded="false" class="breadcrumb-item active h3 pl-1 pr-1"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="https://www.instagram.com/prevencionlebenco.cl/?hl=es-la" target="_blank" aria-expanded="false" class="breadcrumb-item active h3 pl-1 pr-1"><i class="fa fa-instagram"></i></a></li>
+                            <li><a href="https://www.linkedin.com/in/prevenci%C3%B3n-lebenco-62b632184/" target="_blank" aria-expanded="false" class="breadcrumb-item active h3 pl-1 pr-1"><i class="fa fa-linkedin"></i></a></li>
+                        </ol>
                         <b-button @click="actualizarPagina()" class="btn btn-info d-lg-block m-l-15" v-b-tooltip.hover title="Actualiza información de la página login"><i class="fa fa-plus-circle"></i> Actualizar página</b-button>
                     </div>                    
                 </b-col>
@@ -49,7 +55,7 @@
             },
             listarLogin (){
                 let me=this;
-                axios.get('/registro').then(function (response) {
+                axios.get('/pagina/registro').then(function (response) {
                     me.pagina.mensaje_uno = response.data.pagina.mensaje_uno;
                     me.pagina.mensaje_dos = response.data.pagina.mensaje_dos;
                 })
@@ -60,7 +66,7 @@
             actualizarPagina(){
                 let me = this;
 
-                axios.post('/login/actualizar',{
+                axios.post('/pagina/login/actualizar',{
                     'mensaje_uno': me.pagina.mensaje_uno,
                     'mensaje_dos': me.pagina.mensaje_dos
                 }).then(function (response) {

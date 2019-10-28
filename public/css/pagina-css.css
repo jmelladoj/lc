@@ -3584,7 +3584,7 @@ input[type="button"].btn-block {
 }
 
 .custom-radio .custom-control-input:checked ~ .custom-control-label::before {
-  background-color: #007bff;
+  background-color: #8AB733;
 }
 
 .custom-radio .custom-control-input:checked ~ .custom-control-label::after {
@@ -8983,8 +8983,8 @@ a.text-dark:hover, a.text-dark:focus {
 /*# sourceMappingURL=bootstrap.css.map */
 ﻿@import url('https://fonts.googleapis.com/css?family=Barlow:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i'); /*Google Font Loaded*/
 @import url('https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i'); /*Google Font Loaded*/
-@import url("icon_font-awesome.css"); /*FontAwesome Icon Font Style*/
-@import url("icon_themify.css"); /*Themify Icon Font Style*/
+@import url("../pagina/css/icon_font-awesome.css"); /*FontAwesome Icon Font Style*/
+@import url("../pagina/css/icon_themify.css"); /*Themify Icon Font Style*/
 
 /*
 * GENERAL
@@ -9147,7 +9147,7 @@ hr {
 }
 
 .sale-color {
-    color: #fd6262 !important;
+    color: #8AB733 !important;
 }
 /*------------------------------------------------------------*/
 /* Typography */
@@ -9648,7 +9648,7 @@ form {
 }
 
     form .required {
-        color: #fd6262;
+        color: #8AB733;
         text-decoration: none;
         margin-left: 2px;
     }
@@ -9848,7 +9848,7 @@ button, .btn {
     border-style: solid;
     border-color: transparent;
     border-width: 1px;
-    font-size: 14px !important;
+    font-size: 17px !important;
     font-family: inherit;
     line-height: 1.2;
     cursor: pointer;
@@ -10052,6 +10052,11 @@ ul:last-child {
 }
 
 /**/
+.space--button {
+    margin-top: 1px;
+    margin-bottom: 1px;
+}
+
 .space--1 {
     margin-top: 15px;
     margin-bottom: 15px;
@@ -10686,7 +10691,7 @@ ul:last-child {
 
     .site-logo a {
         z-index: 1;
-        height: 22px;
+        height: 34px;
         display: inline-block;
         position: relative;
         width: 100%;
@@ -10732,6 +10737,7 @@ ul:last-child {
     .nav-menu > ul > li {
         padding-left: 15px;
         padding-right: 15px;
+        font-size: 17px;
         transition: none;
         -webkit-transition: none;
         -moz-transition: none;
@@ -11717,6 +11723,18 @@ ul:last-child {
     -moz-transform: translateY(-50%);
 }
 
+@media (min-width: 240px){
+    .intro-caption-middel {
+        top: 30%;
+    }
+}
+
+@media (min-width: 768px){
+    .intro-caption-middel {
+        top: 40%;
+    }
+}
+
 .owl-item.active .intro-caption-fade {
     animation: 1s .4s fadeIn both;
     -moz-animation: 1s .4s fadeIn both;
@@ -12065,15 +12083,16 @@ ul:last-child {
     display: block;
     padding: 0;
     margin: 0;
+    background-color: #E8ECD1;
 }
 
-    .breadcrumb .background-image {
-        z-index: 0;
-    }
+.breadcrumb .background-image {
+    z-index: 0;
+}
 
 .breadcrumb-content {
-    padding-top: 110px;
-    padding-bottom: 110px;
+    padding-top: 20px;
+    padding-bottom: 20px;
     z-index: 1;
     display: block;
     width: 100%;
@@ -12081,7 +12100,7 @@ ul:last-child {
 }
 
     .breadcrumb-content * {
-        color: #fff;
+        color: #1E2F13;
     }
 
 .breadcrumb-light * {
@@ -12371,11 +12390,11 @@ ul:last-child {
 
 .product-rating-count {
     margin-left: 7px;
-    color: #fd6262;
+    color: #8AB733;
 }
 
     .product-rating-count:hover {
-        color: #fd6262;
+        color: #8AB733;
         text-decoration: underline;
     }
 
@@ -12473,7 +12492,7 @@ ul:last-child {
     }
 
 .label-hot {
-    background: #fd6262;
+    background: #8AB733;
 }
 
 .label-sale {
@@ -14985,6 +15004,13 @@ input.quantity[type=number]::-webkit-outer-spin-button {
 .my-account-box {
     border: 1px solid rgba(0,0,0,0.07);
     padding: 30px;
+    min-height: 500px;
+}
+
+.my-account-box-selected {
+    border: 1px solid #8ab733;
+    padding: 30px;
+    min-height: 500px;
 }
 
 form .form-row, form .lost_password {
@@ -15112,6 +15138,8 @@ form .lost_password {
 /* Footer Style */
 .footer {
     position: relative;
+    bottom: 0;
+    width: 100%;
 }
 
 .footer-bottom-area {
@@ -15129,7 +15157,7 @@ form .lost_password {
 }
 
 .footer-widget-area {
-    padding-top: 90px;
+    padding-top: 60px;
     padding-bottom: 60px;
 }
 
@@ -15150,7 +15178,7 @@ form .lost_password {
 }
 
 .footer a {
-    text-transform: capitalize;
+    text-transform: none;
 }
 
 .footer .footer-widget-title {
@@ -15171,7 +15199,7 @@ form .lost_password {
 }
 
 .footer-logo {
-    max-height: 23px;
+    max-height: 150px;
 }
 
 .footer a.type--sm:hover {
@@ -15265,10 +15293,10 @@ form .lost_password {
     -moz-transition: all 0.3s ease;
 }
 
-    .footer a:hover {
-        color: #fff;
-        opacity: 1;
-    }
+.footer a:hover {
+    color: #fff;
+    opacity: 1;
+}
 
 .footer .type--sm {
     opacity: 0.5;
@@ -15311,7 +15339,7 @@ form .lost_password {
 /* Typography */
 /*------------------------------------------------------------*/
 a:hover, a:active {
-    color: #27af9a;
+    color: #8AB733;
 }
 
 .text--light h1,
@@ -15341,7 +15369,7 @@ a:hover, a:active {
 .nav-icon-count,
 .price-range-slider .ui-slider-range, .price-range-slider .ui-slider-handle,
 .pagination-numbers li a:hover, .pagination-numbers li span:hover, .pagination-numbers li span.current, .pagination-numbers li a.current {
-    background-color: #27af9a;
+    background-color: #8AB733;
 }
 
 .bg--secondary {
@@ -15353,7 +15381,7 @@ a:hover, a:active {
 }
 
 .bg--dark {
-    background-color: #333;
+    background-color: #E8ECD1;
 }
 
 .bg--light {
@@ -15366,14 +15394,14 @@ a:hover, a:active {
 .site-loader .loader .loader-spinner::before,
 .product-filter li a.active,
 .product-tabs-nav li a.active {
-    border-bottom-color: #27af9a;
+    border-bottom-color: #8AB733;
 }
 
 /*------------------------------------------------------------*/
 /* Color */
 /*------------------------------------------------------------*/
 .color--primary {
-    color: #27af9a;
+    color: #8AB733;
 }
 
 .color--secondary {
@@ -15401,12 +15429,12 @@ a:hover, a:active {
 /* Button color */
 /*------------------------------------------------------------*/
 .btn--primary {
-    background: #27af9a !important;
+    background: #8AB733 !important;
     color: #fff !important;
 }
 
     .btn--primary:hover {
-        background: #36c2ad !important;
+        background: #3F8A24 !important;
         color: #fff !important;
     }
 
@@ -15456,7 +15484,7 @@ input, input[type="text"], input[type="search"], input[type="email"], input[type
 
     /*input[type="text"]:hover, input[type="search"]:hover, input[type="email"]:hover, input[type="tel"]:hover, input[type="number"]:hover, input[type="radio"]:hover, input[type="checkbox"]:hover, input[type="password"]:hover, textarea:hover, select:hover,*/
     input:focus, input[type="text"]:focus, input[type="search"]:focus, input[type="email"]:focus, input[type="tel"]:focus, input[type="number"]:focus, input[type="radio"]:focus, input[type="checkbox"]:focus, input[type="password"]:focus, textarea:focus, select:focus {
-        border-color: #27af9a;
+        border-color: #8AB733;
     }
 
     input:focus, input[type="text"]:focus, input[type="search"]:focus, input[type="email"]:focus, input[type="tel"]:focus, input[type="number"]:focus, input[type="radio"]:focus, input[type="checkbox"]:focus, input[type="password"]:focus, textarea:focus {
@@ -15488,12 +15516,12 @@ a[href]:hover,
 .product-list-view .product-item .product-item-content .tag,
 a.tag:hover, .tag a:hover,
 .alert-info:before, .alert-message:before {
-    color: #27af9a;
+    color: #8AB733;
 }
 
 .important-primary-color,
 .widget_nav_menu .sub-menu .is-active > a, .widget_nav_menu li a:hover {
-    color: #27af9a !important;
+    color: #8AB733 !important;
 }
 
 .hover--dark:hover {
@@ -15510,9 +15538,9 @@ a.tag:hover, .tag a:hover,
 
 
 /*plugins*/
-@import url("plugins/animate.css");
-@import url("plugins/owl.carousel.css");
-@import url("plugins/owl.theme.default.css");
-@import url("plugins/magnific-popup.css");
-@import url("plugins/slick.css");
-@import url("plugins/slick-theme.css");
+@import url("../../pagina/css/plugins/animate.css");
+@import url("../../pagina/css/plugins/owl.carousel.css");
+@import url("../../pagina/css/plugins/owl.theme.default.css");
+@import url("../../pagina/css/plugins/magnific-popup.css");
+@import url("../../pagina/css/plugins/slick.css");
+@import url("../../pagina/css/plugins/slick-theme.css");

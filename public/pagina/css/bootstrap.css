@@ -3584,7 +3584,7 @@ input[type="button"].btn-block {
 }
 
 .custom-radio .custom-control-input:checked ~ .custom-control-label::before {
-  background-color: #007bff;
+  background-color: #8AB733;
 }
 
 .custom-radio .custom-control-input:checked ~ .custom-control-label::after {

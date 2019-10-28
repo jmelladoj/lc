@@ -28,6 +28,8 @@ import VueCurrencyFilter from 'vue-currency-filter';
 import Swatches from 'vue-swatches';
 import 'vue-swatches/dist/vue-swatches.min.css';
 import tinymce from 'vue-tinymce-editor';
+import VueCarousel from 'vue-carousel';
+import vueRut from 'vue-rut'
 
 // Register it globally
 
@@ -44,6 +46,8 @@ Vue.component('Swatches', Swatches);
 Vue.component('tinymce', tinymce);
 
 Vue.use(BootstrapVue);
+Vue.use(VueCarousel);
+Vue.use(vueRut);
 Vue.use(VueCurrencyFilter,
 {
     symbol : '$',
@@ -64,6 +68,18 @@ Vue.component('sliders-home', require('./components/SlidersHome.vue').default);
 Vue.component('categoria-documentos', require('./components/CategoriaDocumentos.vue').default);
 Vue.component('documentos', require('./components/Documentos.vue').default);
 Vue.component('categorias-usuario', require('./components/CategoriasUsuario.vue').default);
+Vue.component('slider-footer', require('./components/SliderFooter.vue').default);
+Vue.component('categorias-home', require('./components/MostrarCategorias.vue').default);
+Vue.component('sliders-ubicacion', require('./components/SlidersUbicacion.vue').default);
+Vue.component('documentos-tipo', require('./components/DocumentosHome.vue').default);
+Vue.component('tips', require('./components/Tips.vue').default);
+Vue.component('usuarios', require('./components/Usuarios.vue').default);
+Vue.component('usuarios-black-list', require('./components/UsuariosListaNegra.vue').default);
+Vue.component('sorteos', require('./components/Sorteos.vue').default);
+Vue.component('promociones', require('./components/Promociones.vue').default);
+Vue.component('solicitar-documento', require('./components/SolicitarDocumento.vue').default);
+Vue.component('recomendar', require('./components/Recomendar.vue').default);
+Vue.component('solicitar-asesoria', require('./components/SolicitarAsesoria.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

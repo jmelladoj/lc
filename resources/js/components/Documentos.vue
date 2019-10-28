@@ -5,6 +5,12 @@
                 <b-col cols="5" class="align-self-center"><h4 class="text-themecolor" v-text="titulo"></h4></b-col>
                 <b-col cols="7">
                     <div class="d-flex justify-content-end align-items-right">
+                        <ol class="breadcrumb">
+                            <li><a href="https://www.youtube.com/channel/UC78DsrgVX7KslItHoTuw8uQ?view_as=subscriber" target="_blank" aria-expanded="false" class="breadcrumb-item active h3 pl-1 pr-1"><i class="fa fa-youtube"></i></a></li>
+                            <li><a href="https://www.facebook.com/prevencion.lebenco.3" target="_blank" aria-expanded="false" class="breadcrumb-item active h3 pl-1 pr-1"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="https://www.instagram.com/prevencionlebenco.cl/?hl=es-la" target="_blank" aria-expanded="false" class="breadcrumb-item active h3 pl-1 pr-1"><i class="fa fa-instagram"></i></a></li>
+                            <li><a href="https://www.linkedin.com/in/prevenci%C3%B3n-lebenco-62b632184/" target="_blank" aria-expanded="false" class="breadcrumb-item active h3 pl-1 pr-1"><i class="fa fa-linkedin"></i></a></li>
+                        </ol>
                         <b-button @click="abrirModal(1)" class="btn btn-info d-lg-block m-l-15" v-b-tooltip.hover title="Agrega un documento a la plataforma"><i class="fa fa-plus-circle"></i> Agregar Documento</b-button>
                     </div>                    
                 </b-col>
@@ -91,11 +97,15 @@
                                 </template>
 
                                 <template v-slot:cell(acciones)="row">
-                                    <b-button size="xs" variant="warning" title="Actualizar Documento" @click="abrirModal(2, row.item)">
+                                    <b-button size="xs" variant="success" title="Descargar documento" @click="descargar(row.item.id)">
+                                        <i class="fa fa-file"></i>
+                                    </b-button>
+
+                                    <b-button v-show="tipo_usuario < 3" size="xs" variant="warning" title="Actualizar Documento" @click="abrirModal(2, row.item)">
                                         <i class="fa fa-pencil"></i>
                                     </b-button>
 
-                                    <b-button size="xs" variant="danger" title="Eliminar Documento" @click="borrar(row.item.id)">
+                                    <b-button v-show="tipo_usuario < 3" size="xs" variant="danger" title="Eliminar Documento" @click="borrar(row.item.id)">
                                         <i class="fa fa-trash"></i>
                                     </b-button>
                                 </template>
@@ -103,13 +113,8 @@
                                 </b-table>
 
                                 <b-row>
-                                    <b-col md="6" class="my-1">
-                                        <b-pagination
-                                        :total-rows="totalRows"
-                                        :per-page="perPage"
-                                        v-model="currentPage"
-                                        class="my-0"
-                                        />
+                                    <b-col>
+                                        <b-pagination :total-rows="totalRows" :per-page="perPage" v-model="currentPage" class="my-3" align="fill"/>
                                     </b-col>
                                 </b-row>
                             </b-container>
@@ -130,7 +135,7 @@
                                     </ValidationProvider>
                                 </b-form-group>
                             </b-col>
-                            <b-col>
+                            <b-col v-if="tipo_usuario < 3">
                                 <b-form-group label="Valor">
                                     <ValidationProvider name="Valor" rules="required|numeric|min_value:0" v-slot="{ errors }">
                                         <b-form-input type="number" v-model="documento.valor"></b-form-input>
@@ -148,7 +153,7 @@
                         </b-form-group>
 
                         <b-row>
-                            <b-col>
+                            <b-col v-if="tipo_usuario < 3">
                                 <b-form-group label="Código">
                                     <ValidationProvider name="código" rules="required|min:3" v-slot="{ errors }">
                                         <b-form-input type="text" v-model="documento.codigo"></b-form-input>
@@ -156,7 +161,7 @@
                                     </ValidationProvider>
                                 </b-form-group>
                             </b-col>
-                            <b-col>
+                            <b-col v-if="tipo_usuario < 3">
                                 <b-form-group label="Código Interno">
                                     <ValidationProvider name="código interno" rules="required|min:3" v-slot="{ errors }">
                                         <b-form-input type="text" v-model="documento.codigo_interno"></b-form-input>
@@ -167,7 +172,7 @@
                         </b-row>
 
                         <b-row>
-                            <b-col>
+                            <b-col v-if="tipo_usuario < 3">
                                 <b-form-group label="Clasificación">
                                     <ValidationProvider name="clasificación" rules="required|oneOf:1,2,3" v-slot="{ errors }">
                                         <b-form-select v-model="documento.clasificacion" class="mb-3">
@@ -218,7 +223,7 @@
 
     export default {
         props: [
-            'estado', 'tipo_documento', 'titulo'
+            'tipo', 'tipo_documento', 'titulo', 'tipo_usuario'
         ],
         data() {
             return {
@@ -232,7 +237,7 @@
                     valor: 0,
                     clasificacion: 0,
                     categoria_id: 0,
-                    estado: this.estado
+                    estado: this.tipo_documento
                 },
                 modal_documento: {
                     titulo: '',
@@ -286,7 +291,7 @@
             },
             listarDocumentos (){
                 let me=this;
-                axios.get('/documentos/' + this.tipo_documento).then(function (response) {
+                axios.get('/documentos/' + this.tipo).then(function (response) {
                     me.items = response.data.documentos;
                     me.totalRows = me.items.length;
                 })
@@ -346,6 +351,38 @@
                     } else if (result.dismiss === Swal.DismissReason.cancel) {}
                 })
             },
+            descargar(id){
+                Swal.fire({
+                    title: '¿Deseas descargar el Documento?',
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Aceptar!',
+                    cancelButtonText: 'Cancelar',
+                    confirmButtonClass: 'btn btn-success',
+                    cancelButtonClass: 'btn btn-danger',
+                }).then((result) => {
+                    if (result.value) {
+                        let me = this;
+                        axios.post('/documento/descargar',{
+                            'id': id
+                        }).then(function (response) {
+                            me.mensaje('success', 'El Documento se descargara pronto!');
+                                const url = window.URL.createObjectURL(new Blob([response.data.documento_url]));
+                                const link = document.createElement('a');
+                                link.href = url;
+                                link.setAttribute('download',  response.data.documento.titulo + '.' + response.data.documento.extension);
+                                document.body.appendChild(link);
+                                link.click();
+                        }).catch(function (error) {
+                            console.log(error);
+                        });
+                    } else if (result.dismiss === Swal.DismissReason.cancel) {}
+                })
+            },
+
+
             cerrarModal(){
                 this.modal_documento.titulo = "";
                 this.modal_documento.accion = 0;
@@ -392,14 +429,3 @@
         }
     }
 </script>
-
-<style>
-    .custom-file-input:lang(en) ~ .custom-file-label::after {
-        content: 'Buscar';
-    }
-
-    .imagen-documento{
-        max-height: 250px;
-        width: auto;
-    }
-</style>

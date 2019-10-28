@@ -3,12 +3,32 @@
 namespace App\Http\Controllers;
 
 use App\Pagina;
+use App\Servicio;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class PaginaController extends Controller
 {
     //
+    public function indexHomeNosotros(){
+        $pagina = Pagina::find(1);
+
+        return view('nosotros')->with(compact('pagina'));
+    }
+
+    public function indexHomeComunidad(){
+        $pagina = Pagina::find(2);
+
+        return view('comunidad')->with(compact('pagina'));
+    }
+
+    public function indexHomeServicios(){
+        $pagina = Pagina::find(3);
+        $servicios = Servicio::get();
+
+        return view('servicios')->with(compact('pagina', 'servicios'));
+    }
+
     public function indexComunidad(Request $request)
     {
         return ['pagina' => Pagina::find(2)];

@@ -22,7 +22,7 @@
 /* Typography */
 /*------------------------------------------------------------*/
 a:hover, a:active {
-    color: #27af9a;
+    color: #8AB733;
 }
 
 .text--light h1,
@@ -52,7 +52,7 @@ a:hover, a:active {
 .nav-icon-count,
 .price-range-slider .ui-slider-range, .price-range-slider .ui-slider-handle,
 .pagination-numbers li a:hover, .pagination-numbers li span:hover, .pagination-numbers li span.current, .pagination-numbers li a.current {
-    background-color: #27af9a;
+    background-color: #8AB733;
 }
 
 .bg--secondary {
@@ -64,7 +64,7 @@ a:hover, a:active {
 }
 
 .bg--dark {
-    background-color: #333;
+    background-color: #E8ECD1;
 }
 
 .bg--light {
@@ -77,14 +77,14 @@ a:hover, a:active {
 .site-loader .loader .loader-spinner::before,
 .product-filter li a.active,
 .product-tabs-nav li a.active {
-    border-bottom-color: #27af9a;
+    border-bottom-color: #8AB733;
 }
 
 /*------------------------------------------------------------*/
 /* Color */
 /*------------------------------------------------------------*/
 .color--primary {
-    color: #27af9a;
+    color: #8AB733;
 }
 
 .color--secondary {
@@ -112,12 +112,12 @@ a:hover, a:active {
 /* Button color */
 /*------------------------------------------------------------*/
 .btn--primary {
-    background: #27af9a !important;
+    background: #8AB733 !important;
     color: #fff !important;
 }
 
     .btn--primary:hover {
-        background: #36c2ad !important;
+        background: #3F8A24 !important;
         color: #fff !important;
     }
 
@@ -167,7 +167,7 @@ input, input[type="text"], input[type="search"], input[type="email"], input[type
 
     /*input[type="text"]:hover, input[type="search"]:hover, input[type="email"]:hover, input[type="tel"]:hover, input[type="number"]:hover, input[type="radio"]:hover, input[type="checkbox"]:hover, input[type="password"]:hover, textarea:hover, select:hover,*/
     input:focus, input[type="text"]:focus, input[type="search"]:focus, input[type="email"]:focus, input[type="tel"]:focus, input[type="number"]:focus, input[type="radio"]:focus, input[type="checkbox"]:focus, input[type="password"]:focus, textarea:focus, select:focus {
-        border-color: #27af9a;
+        border-color: #8AB733;
     }
 
     input:focus, input[type="text"]:focus, input[type="search"]:focus, input[type="email"]:focus, input[type="tel"]:focus, input[type="number"]:focus, input[type="radio"]:focus, input[type="checkbox"]:focus, input[type="password"]:focus, textarea:focus {
@@ -199,12 +199,12 @@ a[href]:hover,
 .product-list-view .product-item .product-item-content .tag,
 a.tag:hover, .tag a:hover,
 .alert-info:before, .alert-message:before {
-    color: #27af9a;
+    color: #8AB733;
 }
 
 .important-primary-color,
 .widget_nav_menu .sub-menu .is-active > a, .widget_nav_menu li a:hover {
-    color: #27af9a !important;
+    color: #8AB733 !important;
 }
 
 .hover--dark:hover {

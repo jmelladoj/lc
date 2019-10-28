@@ -48,11 +48,22 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
+        $messages = [
+            'run.unique' => 'Este Run / Rut (según sea Pyme o no) ya está en uso, ¡utiliza otro!.',
+            'email.unique' => 'Este correo eléctronico ya está en uso, ¡utiliza otro!.',
+            'email.email' => 'El correo electrónico no corresponde con una dirección de email válida.',
+            'clave_uno.min' => 'Las claves deben de contener al menos 6 caracteres.',
+            'clave_dos.min' => 'Las claves deben de contener al menos 6 caracteres.',
+            'clave_dos.same' => 'Las claves no coinciden.'
+        ];
+
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
+            'run' => ['required', 'string', 'max:255', 'unique:users'],
+            'nombre' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);
+            'clave_uno' => ['required','string','min:6'],
+            'clave_dos' => ['required','string','min:6','same:clave_uno'],
+        ], $messages);
     }
 
     /**
@@ -64,9 +75,11 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         return User::create([
-            'name' => $data['name'],
+            'run' => $data['run'],
+            'nombre' => $data['nombre'],
             'email' => $data['email'],
-            'password' => Hash::make($data['password']),
+            'password' => Hash::make($data['clave_dos']),
+            'tipo_persona' => $data['tipo_persona']
         ]);
     }
 }

@@ -5,6 +5,12 @@
                 <b-col cols="5" class="align-self-center"><h4 class="text-themecolor">Sliders</h4></b-col>
                 <b-col cols="7">
                     <div class="d-flex justify-content-end align-items-right">
+                        <ol class="breadcrumb">
+                            <li><a href="https://www.youtube.com/channel/UC78DsrgVX7KslItHoTuw8uQ?view_as=subscriber" target="_blank" aria-expanded="false" class="breadcrumb-item active h3 pl-1 pr-1"><i class="fa fa-youtube"></i></a></li>
+                            <li><a href="https://www.facebook.com/prevencion.lebenco.3" target="_blank" aria-expanded="false" class="breadcrumb-item active h3 pl-1 pr-1"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="https://www.instagram.com/prevencionlebenco.cl/?hl=es-la" target="_blank" aria-expanded="false" class="breadcrumb-item active h3 pl-1 pr-1"><i class="fa fa-instagram"></i></a></li>
+                            <li><a href="https://www.linkedin.com/in/prevenci%C3%B3n-lebenco-62b632184/" target="_blank" aria-expanded="false" class="breadcrumb-item active h3 pl-1 pr-1"><i class="fa fa-linkedin"></i></a></li>
+                        </ol>
                         <b-button @click="abrirModal(1)" class="btn btn-info d-lg-block m-l-15" v-b-tooltip.hover title="Agrega una slider a la plataforma"><i class="fa fa-plus-circle"></i> Agregar Slider</b-button>
                     </div>                    
                 </b-col>
@@ -91,7 +97,7 @@
                                 </template>
 
                                 <template v-slot:cell(imagen)="data">
-                                    <b-img :src="'storage/' + data.item.url_imagen" fluid center alt="Slider" class="imagen-slider"></b-img>
+                                    <b-img :src="'storage/' + data.item.url_imagen" fluid center alt="Slider" class="imagen"></b-img>
                                 </template>
 
                                 <template v-slot:cell(acciones)="row">
@@ -111,13 +117,8 @@
                                 </b-table>
 
                                 <b-row>
-                                    <b-col md="6" class="my-1">
-                                        <b-pagination
-                                        :total-rows="totalRows"
-                                        :per-page="perPage"
-                                        v-model="currentPage"
-                                        class="my-0"
-                                        />
+                                    <b-col>
+                                        <b-pagination :total-rows="totalRows" :per-page="perPage" v-model="currentPage" class="my-3" align="fill"/>
                                     </b-col>
                                 </b-row>
                             </b-container>
@@ -145,14 +146,14 @@
 
                         <b-form-group label="Imagen (Rec. 1920px ancho X 1280px alto | JPG, JPEG y PNG)">
                             <ValidationProvider name="imagen" rules="required|image" v-slot="{ errors, validate }">
-                                <b-img  :src="slider.url_imagen" fluid id="img_slider" center name="img_slider" class="imagen-slider"></b-img>
+                                <b-img  :src="slider.url_imagen" fluid id="img_slider" center name="img_slider" class="imagen"></b-img>
                                 <b-form-file id="imagen_slider" name="imagen_slider" accept="image/*" placeholder="Sin archivo" @change="mostrarFoto($event)" @input="validate"></b-form-file>
                                 <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
                             </ValidationProvider>
                         </b-form-group>
 
                         <b-form-group label="¿Redirección a?">
-                            <ValidationProvider name="redirección" rules="required|" v-slot="{ errors }">
+                            <ValidationProvider name="redirección" rules="required" v-slot="{ errors }">
                                 <b-form-select v-model="slider.link" class="mb-3">
                                     <option :value="0">Sin redirección</option>
                                 </b-form-select>
@@ -439,14 +440,3 @@
         }
     }
 </script>
-
-<style>
-    .custom-file-input:lang(en) ~ .custom-file-label::after {
-        content: 'Buscar';
-    }
-
-    .imagen-slider{
-        max-height: 250px;
-        width: auto;
-    }
-</style>

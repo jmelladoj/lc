@@ -12,6 +12,9 @@ class CategoriaDocumentoController extends Controller
         return ['categorias' => CategoriaDocumento::orderBy('nombre', 'desc')->get()];
     }
 
+    public function indexHome(){
+        return ['categorias' => CategoriaDocumento::orderBy('nombre', 'desc')->get()];
+    }
     
     public function crearOactualizar(Request $request){
         CategoriaDocumento::updateOrCreate(

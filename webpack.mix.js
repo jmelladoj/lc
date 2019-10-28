@@ -35,7 +35,8 @@ mix.styles([
    'public/pagina/js/plugins/jquery.magnific-popup.min.js',
    'public/pagina/js/plugins/instafeed.min.js',
    'public/pagina/js/plugins/sticky-sidebar.js',
-   'public/pagina/js/theme.js'
+   'public/pagina/js/theme.js',
+   'public/pagina/js/jquery.rut.js'
    ], 'public/js/pagina-js.js').version();
 
 mix.styles([

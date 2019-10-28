@@ -1,7 +1,7 @@
 ﻿@import url('https://fonts.googleapis.com/css?family=Barlow:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i'); /*Google Font Loaded*/
 @import url('https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i'); /*Google Font Loaded*/
-@import url("icon_font-awesome.css"); /*FontAwesome Icon Font Style*/
-@import url("icon_themify.css"); /*Themify Icon Font Style*/
+@import url("../pagina/css/icon_font-awesome.css"); /*FontAwesome Icon Font Style*/
+@import url("../pagina/css/icon_themify.css"); /*Themify Icon Font Style*/
 
 /*
 * GENERAL
@@ -164,7 +164,7 @@ hr {
 }
 
 .sale-color {
-    color: #fd6262 !important;
+    color: #8AB733 !important;
 }
 /*------------------------------------------------------------*/
 /* Typography */
@@ -665,7 +665,7 @@ form {
 }
 
     form .required {
-        color: #fd6262;
+        color: #8AB733;
         text-decoration: none;
         margin-left: 2px;
     }
@@ -865,7 +865,7 @@ button, .btn {
     border-style: solid;
     border-color: transparent;
     border-width: 1px;
-    font-size: 14px !important;
+    font-size: 17px !important;
     font-family: inherit;
     line-height: 1.2;
     cursor: pointer;
@@ -1069,6 +1069,11 @@ ul:last-child {
 }
 
 /**/
+.space--button {
+    margin-top: 1px;
+    margin-bottom: 1px;
+}
+
 .space--1 {
     margin-top: 15px;
     margin-bottom: 15px;
@@ -1703,7 +1708,7 @@ ul:last-child {
 
     .site-logo a {
         z-index: 1;
-        height: 22px;
+        height: 34px;
         display: inline-block;
         position: relative;
         width: 100%;
@@ -1749,6 +1754,7 @@ ul:last-child {
     .nav-menu > ul > li {
         padding-left: 15px;
         padding-right: 15px;
+        font-size: 17px;
         transition: none;
         -webkit-transition: none;
         -moz-transition: none;
@@ -2734,6 +2740,18 @@ ul:last-child {
     -moz-transform: translateY(-50%);
 }
 
+@media (min-width: 240px){
+    .intro-caption-middel {
+        top: 30%;
+    }
+}
+
+@media (min-width: 768px){
+    .intro-caption-middel {
+        top: 40%;
+    }
+}
+
 .owl-item.active .intro-caption-fade {
     animation: 1s .4s fadeIn both;
     -moz-animation: 1s .4s fadeIn both;
@@ -3082,15 +3100,16 @@ ul:last-child {
     display: block;
     padding: 0;
     margin: 0;
+    background-color: #E8ECD1;
 }
 
-    .breadcrumb .background-image {
-        z-index: 0;
-    }
+.breadcrumb .background-image {
+    z-index: 0;
+}
 
 .breadcrumb-content {
-    padding-top: 110px;
-    padding-bottom: 110px;
+    padding-top: 20px;
+    padding-bottom: 20px;
     z-index: 1;
     display: block;
     width: 100%;
@@ -3098,7 +3117,7 @@ ul:last-child {
 }
 
     .breadcrumb-content * {
-        color: #fff;
+        color: #1E2F13;
     }
 
 .breadcrumb-light * {
@@ -3388,11 +3407,11 @@ ul:last-child {
 
 .product-rating-count {
     margin-left: 7px;
-    color: #fd6262;
+    color: #8AB733;
 }
 
     .product-rating-count:hover {
-        color: #fd6262;
+        color: #8AB733;
         text-decoration: underline;
     }
 
@@ -3490,7 +3509,7 @@ ul:last-child {
     }
 
 .label-hot {
-    background: #fd6262;
+    background: #8AB733;
 }
 
 .label-sale {
@@ -6002,6 +6021,13 @@ input.quantity[type=number]::-webkit-outer-spin-button {
 .my-account-box {
     border: 1px solid rgba(0,0,0,0.07);
     padding: 30px;
+    min-height: 500px;
+}
+
+.my-account-box-selected {
+    border: 1px solid #8ab733;
+    padding: 30px;
+    min-height: 500px;
 }
 
 form .form-row, form .lost_password {
@@ -6129,6 +6155,8 @@ form .lost_password {
 /* Footer Style */
 .footer {
     position: relative;
+    bottom: 0;
+    width: 100%;
 }
 
 .footer-bottom-area {
@@ -6146,7 +6174,7 @@ form .lost_password {
 }
 
 .footer-widget-area {
-    padding-top: 90px;
+    padding-top: 60px;
     padding-bottom: 60px;
 }
 
@@ -6167,7 +6195,7 @@ form .lost_password {
 }
 
 .footer a {
-    text-transform: capitalize;
+    text-transform: none;
 }
 
 .footer .footer-widget-title {
@@ -6188,7 +6216,7 @@ form .lost_password {
 }
 
 .footer-logo {
-    max-height: 23px;
+    max-height: 150px;
 }
 
 .footer a.type--sm:hover {
@@ -6282,10 +6310,10 @@ form .lost_password {
     -moz-transition: all 0.3s ease;
 }
 
-    .footer a:hover {
-        color: #fff;
-        opacity: 1;
-    }
+.footer a:hover {
+    color: #fff;
+    opacity: 1;
+}
 
 .footer .type--sm {
     opacity: 0.5;

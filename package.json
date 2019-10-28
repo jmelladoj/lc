@@ -27,7 +27,9 @@
         "bootstrap-vue": "^2.0.2",
         "sweetalert2": "^8.18.0",
         "vee-validate": "^3.0.10",
+        "vue-carousel": "^0.18.0",
         "vue-currency-filter": "^3.4.3",
+        "vue-rut": "^2.0.2",
         "vue-swatches": "^1.0.4",
         "vue-tinymce-editor": "^1.6.2"
     }

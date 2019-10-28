@@ -17,8 +17,8 @@ class CreateSubCategoriaDocumentosTable extends Migration
             $table->bigIncrements('id');
             $table->string('nombre');
 
-            $table->unsignedBigInteger('categoria_documento_id');
-            $table->foreign('categoria_documento_id')->references('id')->on('categoria_documentos');
+            $table->unsignedBigInteger('categorias_documentos_id');
+            $table->foreign('categorias_documentos_id')->references('id')->on('categoria_documentos');
 
             $table->softDeletes();
             $table->timestamps();

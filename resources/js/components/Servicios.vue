@@ -5,6 +5,12 @@
                 <b-col cols="5" class="align-self-center"><h4 class="text-themecolor">Servicios</h4></b-col>
                 <b-col cols="7">
                     <div class="d-flex justify-content-end align-items-right">
+                        <ol class="breadcrumb">
+                            <li><a href="https://www.youtube.com/channel/UC78DsrgVX7KslItHoTuw8uQ?view_as=subscriber" target="_blank" aria-expanded="false" class="breadcrumb-item active h3 pl-1 pr-1"><i class="fa fa-youtube"></i></a></li>
+                            <li><a href="https://www.facebook.com/prevencion.lebenco.3" target="_blank" aria-expanded="false" class="breadcrumb-item active h3 pl-1 pr-1"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="https://www.instagram.com/prevencionlebenco.cl/?hl=es-la" target="_blank" aria-expanded="false" class="breadcrumb-item active h3 pl-1 pr-1"><i class="fa fa-instagram"></i></a></li>
+                            <li><a href="https://www.linkedin.com/in/prevenci%C3%B3n-lebenco-62b632184/" target="_blank" aria-expanded="false" class="breadcrumb-item active h3 pl-1 pr-1"><i class="fa fa-linkedin"></i></a></li>
+                        </ol>
                         <b-button @click="actualizarPagina()" class="btn btn-info d-lg-block m-l-15" v-b-tooltip.hover title="Actualiza información de la página servicios"><i class="fa fa-plus-circle"></i> Actualizar página</b-button>
                         <b-button @click="abrirModal(1)" class="btn btn-info d-lg-block m-l-15" v-b-tooltip.hover title="Agrega un servicio a la plataforma"><i class="fa fa-plus-circle"></i> Agregar Serivios</b-button>
                     </div>                    
@@ -104,13 +110,8 @@
                                 </b-table>
 
                                 <b-row>
-                                    <b-col md="6" class="my-1">
-                                        <b-pagination
-                                        :total-rows="totalRows"
-                                        :per-page="perPage"
-                                        v-model="currentPage"
-                                        class="my-0"
-                                        />
+                                    <b-col>
+                                        <b-pagination :total-rows="totalRows" :per-page="perPage" v-model="currentPage" class="my-3" align="fill"/>
                                     </b-col>
                                 </b-row>
                             </b-container>
@@ -232,7 +233,7 @@
             },
             listarMensajeServicios(){
                 let me=this;
-                axios.get('/servicios/mensaje').then(function (response) {
+                axios.get('/pagina/servicios/mensaje').then(function (response) {
                     me.pagina.mensaje = response.data.pagina.mensaje_uno;
                 })
                 .catch(function (error) {
@@ -241,7 +242,7 @@
             },
             listarServicios (){
                 let me=this;
-                axios.get('/servicios').then(function (response) {
+                axios.get('/pagina/servicios').then(function (response) {
                     me.items = response.data.servicios;
                     me.totalRows = me.items.length;
                 })
@@ -252,7 +253,7 @@
             actualizarPagina(){
                 let me = this;
 
-                axios.post('/servicios/actualizar',{
+                axios.post('/pagina/servicios/actualizar',{
                     'mensaje': me.pagina.mensaje
                 }).then(function (response) {
                     Swal.fire({

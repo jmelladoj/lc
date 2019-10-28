@@ -1,8 +1,8 @@
 
 /*plugins*/
-@import url("plugins/animate.css");
-@import url("plugins/owl.carousel.css");
-@import url("plugins/owl.theme.default.css");
-@import url("plugins/magnific-popup.css");
-@import url("plugins/slick.css");
-@import url("plugins/slick-theme.css");
+@import url("../../pagina/css/plugins/animate.css");
+@import url("../../pagina/css/plugins/owl.carousel.css");
+@import url("../../pagina/css/plugins/owl.theme.default.css");
+@import url("../../pagina/css/plugins/magnific-popup.css");
+@import url("../../pagina/css/plugins/slick.css");
+@import url("../../pagina/css/plugins/slick-theme.css");

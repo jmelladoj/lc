@@ -5,6 +5,12 @@
                 <b-col cols="5" class="align-self-center"><h4 class="text-themecolor">Categorías Clientes</h4></b-col>
                 <b-col cols="7">
                     <div class="d-flex justify-content-end align-items-right">
+                        <ol class="breadcrumb">
+                            <li><a href="https://www.youtube.com/channel/UC78DsrgVX7KslItHoTuw8uQ?view_as=subscriber" target="_blank" aria-expanded="false" class="breadcrumb-item active h3 pl-1 pr-1"><i class="fa fa-youtube"></i></a></li>
+                            <li><a href="https://www.facebook.com/prevencion.lebenco.3" target="_blank" aria-expanded="false" class="breadcrumb-item active h3 pl-1 pr-1"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="https://www.instagram.com/prevencionlebenco.cl/?hl=es-la" target="_blank" aria-expanded="false" class="breadcrumb-item active h3 pl-1 pr-1"><i class="fa fa-instagram"></i></a></li>
+                            <li><a href="https://www.linkedin.com/in/prevenci%C3%B3n-lebenco-62b632184/" target="_blank" aria-expanded="false" class="breadcrumb-item active h3 pl-1 pr-1"><i class="fa fa-linkedin"></i></a></li>
+                        </ol>
                         <b-button @click="abrirModal(1)" class="btn btn-info d-lg-block m-l-15" v-b-tooltip.hover title="Agrega una categoría a la plataforma"><i class="fa fa-plus-circle"></i> Agregar Categoría</b-button>
                     </div>                    
                 </b-col>
@@ -112,13 +118,8 @@
                                 </b-table>
 
                                 <b-row>
-                                    <b-col md="6" class="my-1">
-                                        <b-pagination
-                                        :total-rows="totalRows"
-                                        :per-page="perPage"
-                                        v-model="currentPage"
-                                        class="my-0"
-                                        />
+                                    <b-col>
+                                        <b-pagination :total-rows="totalRows" :per-page="perPage" v-model="currentPage" class="my-3" align="fill"/>
                                     </b-col>
                                 </b-row>
                             </b-container>
@@ -352,65 +353,3 @@
         }
     }
 </script>
-
-<style>    
-    .modal-content{
-        width: 100% !important;
-        position: absolute !important;
-    }
-
-    .modal-body{
-        max-height: calc(100vh - 200px);
-        overflow-y: auto;
-    }
-
-    .modal-lg{
-        max-width: 90%;
-    }
-
-    .form-group{
-        margin-bottom: 5px; 
-    }
-
-    .custom-file-input:lang(en) ~ .custom-file-label::after {
-        content: 'Buscar';
-    }
-
-    .btn-file {
-        position: relative;
-        overflow: hidden;
-    }
-
-    .btn-file input[type=file] {
-        position: absolute;
-        top: 0;
-        right: 0;
-        min-width: 100%;
-        min-height: 100%;
-        font-size: 100px;
-        text-align: right;
-        filter: alpha(opacity=0);
-        opacity: 0;
-        outline: none;   
-        cursor: inherit;
-        display: block;
-    }
-
-    .btn-bottom{
-        bottom: 0;
-        position: absolute;
-    }  
-
-    .btn-block {
-        width: 90%;
-    }
-
-    .btn-block-modal {
-        width: 100%;
-    }
-
-    .tabla-altura {
-        max-height: 325px;
-    }
-
-</style>
