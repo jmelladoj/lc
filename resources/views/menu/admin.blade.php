@@ -116,6 +116,10 @@
     <categorias-usuario></categorias-usuario>
 </template>
 
+<template v-if="ubicacion == 1 && menu==4">
+    <profesiones-rubros></profesiones-rubros>
+</template>
+
 <template v-if="ubicacion == 1 && menu==5">
     <usuarios></usuarios>
 </template>

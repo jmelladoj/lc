@@ -106,4 +106,17 @@ Route::post('/solicitar/documento', 'DocumentoController@solicitarDocumento')->n
 Route::post('/invitar', 'UsuarioController@solicitarDocumento')->name('Invitar amigo');
 Route::post('/solicitar/asesoria', 'UsuarioController@solicitarAsesoria')->name('Solicitar Asesoria');
 
+//Rutas de rubros
+Route::get('/rubros/{tipo}', 'RubroController@index')->name('Listar Rubros');
+Route::post('/rubro/crear/actualizar', 'RubroController@crearOactualizar')->name('Crear o Actualizar Rubros');
+Route::post('/rubro/restaurar', 'RubroController@restaurar')->name('Resturar Rubro');
+Route::post('/rubro/eliminar', 'RubroController@eliminar')->name('Borrar Rubros');
+
+
+//Rutas de profesiones u oficios
+Route::get('/profesiones/oficios/{tipo}', 'ProfesionController@index')->name('Listar Profesiones u Oficios');
+Route::post('/profesion/oficio/crear/actualizar', 'ProfesionController@crearOactualizar')->name('Crear o Actualizar Profesiones u Oficios');
+Route::post('/profesion/oficio/restaurar', 'ProfesionController@restaurar')->name('Resturar Profesiones u Oficios');
+Route::post('/rubro/eliminar', 'ProfesionController@eliminar')->name('Borrar Profesiones u Oficios');
+
 

@@ -1,7 +1,5 @@
 <?php
 
-use App\CategoriaUsuario;
-use App\UbicacionSlider;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -17,5 +15,7 @@ class DatabaseSeeder extends Seeder
         $this->call(UsersTableSeeder::class);
         $this->call(CategoriasDocumentosTableSeeder::class);
         $this->call(PaginasTableSeeder::class);
+        $this->call(ProfesionesTableSeeder::class);
+        $this->call(RubrosTableSeeder::class);
     }
 }

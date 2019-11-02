@@ -58,28 +58,37 @@ Vue.use(VueCurrencyFilter,
     symbolSpacing: true
 });
 
-Vue.component('general', require('./components/General.vue').default);
-Vue.component('sliders', require('./components/Sliders.vue').default);
-Vue.component('nosotros', require('./components/Nosotros.vue').default);
-Vue.component('comunidad', require('./components/Comunidad.vue').default);
-Vue.component('servicios', require('./components/Servicios.vue').default);
-Vue.component('login', require('./components/Login.vue').default);
-Vue.component('sliders-home', require('./components/SlidersHome.vue').default);
-Vue.component('categoria-documentos', require('./components/CategoriaDocumentos.vue').default);
-Vue.component('documentos', require('./components/Documentos.vue').default);
-Vue.component('categorias-usuario', require('./components/CategoriasUsuario.vue').default);
-Vue.component('slider-footer', require('./components/SliderFooter.vue').default);
-Vue.component('categorias-home', require('./components/MostrarCategorias.vue').default);
-Vue.component('sliders-ubicacion', require('./components/SlidersUbicacion.vue').default);
-Vue.component('documentos-tipo', require('./components/DocumentosHome.vue').default);
-Vue.component('tips', require('./components/Tips.vue').default);
-Vue.component('usuarios', require('./components/Usuarios.vue').default);
-Vue.component('usuarios-black-list', require('./components/UsuariosListaNegra.vue').default);
-Vue.component('sorteos', require('./components/Sorteos.vue').default);
-Vue.component('promociones', require('./components/Promociones.vue').default);
-Vue.component('solicitar-documento', require('./components/SolicitarDocumento.vue').default);
-Vue.component('recomendar', require('./components/Recomendar.vue').default);
-Vue.component('solicitar-asesoria', require('./components/SolicitarAsesoria.vue').default);
+//General
+Vue.component('sociales', require('./components/general/Sociales.vue').default);
+
+//Pagina
+Vue.component('login', require('./components/pagina/Login.vue').default);
+Vue.component('sliders-home', require('./components/pagina/SlidersHome.vue').default);
+Vue.component('slider-footer', require('./components/pagina/SliderFooter.vue').default);
+Vue.component('categorias-home', require('./components/pagina/MostrarCategorias.vue').default);
+Vue.component('sliders-ubicacion', require('./components/pagina/SlidersUbicacion.vue').default);
+Vue.component('documentos-tipo', require('./components/pagina/DocumentosHome.vue').default);
+
+//Intranet
+Vue.component('general', require('./components/intranet/General.vue').default);
+Vue.component('sliders', require('./components/intranet/Sliders.vue').default);
+Vue.component('nosotros', require('./components/intranet/Nosotros.vue').default);
+Vue.component('comunidad', require('./components/intranet/Comunidad.vue').default);
+Vue.component('servicios', require('./components/intranet/Servicios.vue').default);
+Vue.component('categoria-documentos', require('./components/intranet/CategoriaDocumentos.vue').default);
+Vue.component('categorias-usuario', require('./components/intranet/CategoriasUsuario.vue').default);
+Vue.component('tips', require('./components/intranet/Tips.vue').default);
+Vue.component('usuarios', require('./components/intranet/Usuarios.vue').default);
+Vue.component('usuarios-black-list', require('./components/intranet/UsuariosListaNegra.vue').default);
+Vue.component('sorteos', require('./components/intranet/Sorteos.vue').default);
+Vue.component('promociones', require('./components/intranet/Promociones.vue').default);
+Vue.component('solicitar-documento', require('./components/intranet/SolicitarDocumento.vue').default);
+Vue.component('recomendar', require('./components/intranet/Recomendar.vue').default);
+Vue.component('solicitar-asesoria', require('./components/intranet/SolicitarAsesoria.vue').default);
+Vue.component('rubros', require('./components/intranet/Rubros.vue').default);
+Vue.component('documentos', require('./components/intranet/Documentos.vue').default);
+Vue.component('profesiones', require('./components/intranet/Profesiones.vue').default);
+Vue.component('profesiones-rubros', require('./components/intranet/ProfesionesRubros.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

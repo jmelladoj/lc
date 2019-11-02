@@ -30,6 +30,9 @@ class CreateUsersTable extends Migration
             $table->unsignedBigInteger('categorias_usuarios_id')->default(1);
             $table->foreign('categorias_usuarios_id')->references('id')->on('categoria_usuarios');
 
+            $table->unsignedBigInteger('rubro_id')->nullable()->default(null);
+            $table->foreign('rubro_id')->references('id')->on('rubros');
+
             $table->rememberToken();
             $table->softDeletes();
             $table->datetime('last_login_at')->nullable();

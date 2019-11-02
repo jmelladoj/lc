@@ -24,7 +24,6 @@ class DocumentoController extends Controller
                 return ['documentos' => Documento::where('user_id', Auth::id())->orderBy('created_at', 'asc')->get()];
                 break;
         }
-
     }
 
     public function indexHome($tipo){  
