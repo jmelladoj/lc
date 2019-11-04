@@ -46,8 +46,8 @@
                         <li @click="menu=9"><a href="javascript:void(0)">TIPIFICADOR DT</a></li>
                         <li @click="menu=10"><a href="javascript:void(0)">SORTEOS</a></li>
                         <li @click="menu=11"><a href="javascript:void(0)">PROMOCIONES</a></li>
-                        <li @click="menu=12"><a href="javascript:void(0)">BENEFICIOS</a></li>
-                        <li @click="menu=13"><a href="javascript:void(0)">SEMINARIO</a></li>
+                        {{--  <li @click="menu=12"><a href="javascript:void(0)">BENEFICIOS</a></li> --}}
+                        <li @click="menu=13"><a href="javascript:void(0)">SEMINARIOS</a></li>
                         <li @click="menu=14"><a href="javascript:void(0)">VISITAS A TERRENO</a></li>
                         <li @click="menu=15"><a href="javascript:void(0)">TIPS</a></li>
                     </ul>
@@ -124,6 +124,15 @@
     <usuarios></usuarios>
 </template>
 
+<template v-if="ubicacion == 1 && menu==6">
+    <perfil :usuario_id="{{ json_encode(Auth::user()->id) }}" :tipo_usuario_logeado="{{ json_encode(Auth::user()->tipo_usuario) }}"></perfil>
+</template>
+
+<template v-if="ubicacion == 1 && menu==7">
+    <solicitud-documentos></solicitud-documentos>
+</template>
+
+
 <template v-if="ubicacion == 1 && menu==8">
     <usuarios-black-list></usuarios-black-list>
 </template>
@@ -134,6 +143,14 @@
 
 <template v-if="ubicacion == 1 && menu==11">
     <promociones :tipo_usuario="{{ Auth::user()->tipo_usuario }}"></promociones>
+</template>
+
+<template v-if="ubicacion == 1 && menu==13">
+    <seminarios :tipo_usuario="{{ Auth::user()->tipo_usuario }}" :tipo="1"></seminarios>
+</template>
+
+<template v-if="ubicacion == 1 && menu==14">
+    <asesorias></asesorias>
 </template>
 
 <template v-if="ubicacion == 1 && menu==15">

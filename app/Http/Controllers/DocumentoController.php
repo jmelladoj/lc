@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Documento;
 use App\Mail\SolicitarDocumento;
+use App\Notifications\SolicitudDocumento as AppSolicitudDocumento;
+use App\SolicitudDocumento;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -78,6 +81,17 @@ class DocumentoController extends Controller
         $usuario = Auth::user();
 
         if($request->pago <= $usuario->saldo){
+
+            SolicitudDocumento::create([
+                'user_id' => Auth::id(),
+                'descripcion' => $request->descripcion,
+                'valor' => $request->pago,
+                'plazo' => $request->plazo
+            ]);
+
+            $usuario = User::find(1);
+            $usuario->notify(new AppSolicitudDocumento('Ha solicitado un documento.', $usuario->nombre, 'fa fa-search', 1));
+
             if(! Mail::to('prueba@prevencionlebenco.cl')->cc('j.melladojimenez@gmail.com')->send(new SolicitarDocumento(Auth::user(), $request->descripcion, $request->plazo, $request->pago))){
                 $usuario->saldo = $usuario->saldo - $request->pago;
                 $usuario->save();

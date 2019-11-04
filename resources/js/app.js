@@ -60,6 +60,7 @@ Vue.use(VueCurrencyFilter,
 
 //General
 Vue.component('sociales', require('./components/general/Sociales.vue').default);
+Vue.component('perfil_usuario', require('./components/general/Perfil.vue').default);
 
 //Pagina
 Vue.component('login', require('./components/pagina/Login.vue').default);
@@ -68,11 +69,13 @@ Vue.component('slider-footer', require('./components/pagina/SliderFooter.vue').d
 Vue.component('categorias-home', require('./components/pagina/MostrarCategorias.vue').default);
 Vue.component('sliders-ubicacion', require('./components/pagina/SlidersUbicacion.vue').default);
 Vue.component('documentos-tipo', require('./components/pagina/DocumentosHome.vue').default);
+Vue.component('nosotros', require('./components/pagina/Nosotros.vue').default);
+Vue.component('top-five', require('./components/pagina/TopFive.vue').default);
+Vue.component('sliders-comunidad-pyme', require('./components/pagina/SlidersComunidadPyme.vue').default);
 
 //Intranet
 Vue.component('general', require('./components/intranet/General.vue').default);
 Vue.component('sliders', require('./components/intranet/Sliders.vue').default);
-Vue.component('nosotros', require('./components/intranet/Nosotros.vue').default);
 Vue.component('comunidad', require('./components/intranet/Comunidad.vue').default);
 Vue.component('servicios', require('./components/intranet/Servicios.vue').default);
 Vue.component('categoria-documentos', require('./components/intranet/CategoriaDocumentos.vue').default);
@@ -89,6 +92,11 @@ Vue.component('rubros', require('./components/intranet/Rubros.vue').default);
 Vue.component('documentos', require('./components/intranet/Documentos.vue').default);
 Vue.component('profesiones', require('./components/intranet/Profesiones.vue').default);
 Vue.component('profesiones-rubros', require('./components/intranet/ProfesionesRubros.vue').default);
+Vue.component('perfil', require('./components/intranet/Perfil.vue').default);
+Vue.component('solicitud-documentos', require('./components/intranet/SolicitudDocumentos.vue').default);
+Vue.component('notificaciones', require('./components/intranet/Notificaciones.vue').default);
+Vue.component('asesorias', require('./components/intranet/Asesorias.vue').default);
+Vue.component('seminarios', require('./components/intranet/Seminarios.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -100,6 +108,6 @@ const app = new Vue({
     el: '#app',
     data :{
         ubicacion: 1,
-        menu : 3
+        menu : 6
     }
 });

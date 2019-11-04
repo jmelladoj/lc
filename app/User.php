@@ -18,8 +18,8 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $fillable = [
-        'nombre', 'run', 'email', 'password', 'tipo_usuario', 'tipo_persona', 'mailing', 'saldo', 'lista_negra', 'last_login_at'
+    protected $guarded = [
+        'id'
     ];
 
     /**
@@ -40,7 +40,25 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+
+
+    public function getCantidadLikeAttribute(){
+        return $this->hasMany(Valoracion::class, 'user_id')->where('tipo_votacion', 1)->count();
+    }
+
+    public function getCantidadDislikeAttribute(){
+        return $this->hasMany(Valoracion::class, 'user_id')->where('tipo_votacion', 2)->count();
+    }
+
     public function categoria(){
         return $this->belongsTo(CategoriaUsuario::class, 'categorias_usuarios_id');
+    }
+
+    public function comuna(){
+        return $this->belongsTo(Comuna::class, 'comuna_id');
+    }
+
+    public function valoraciones(){
+        return $this->hasMany(Valoracion::class, 'user_id');
     }
 }

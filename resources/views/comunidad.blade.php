@@ -22,12 +22,18 @@
                     <p>
                         {{ $pagina->mensaje_uno }}
                     </p>
-                    <div class="table-responsive m-t-40">
-                    </div>
+                    @guest
+                        <top-five :tipo="1" :logeado="0"></top-five>
+                    @else
+                        <top-five :tipo="1" :logeado="1"></top-five>
+                    @endguest
+                    
                 </div>
             </div>
         </div>
     </section>
+
+    <sliders-comunidad-pyme {{-- @auth :tipo_persona="{{ Auth::user()->tipo_persona }}" @endauth  --}}></sliders-comunidad-pyme>
 
     <section class="breadcrumb">
         <div class="breadcrumb-content">
@@ -49,8 +55,11 @@
                     <p>
                         {{ $pagina->mensaje_dos }}
                     </p>
-                    <div class="table-responsive m-t-40">
-                    </div>
+                    @guest
+                        <top-five :tipo="2" :logeado="0"></top-five>
+                    @else
+                        <top-five :tipo="2" :logeado="1"></top-five>
+                    @endguest
                 </div>
             </div>
         </div>

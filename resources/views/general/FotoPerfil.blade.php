@@ -1,6 +1,6 @@
 <div class="user-profile">
     <div class="user-pro-body">
-        <div><img src="{{ asset(Auth::user()->url_perfil) }}" alt="Imagen perfil" class="img-circle"></div>
+        <div><img src="{{ Auth::user()->url_perfil == 'img/perfil.svg' ? Auth::user()->url_perfil : 'storage/' . Auth::user()->url_perfil  }}" alt="Imagen perfil" class="img-circle"></div>
         <div class="dropdown">
             <a href="javascript:void(0)" class="dropdown-toggle u-dropdown link hide-menu" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                 <b>{{ Auth::user()->nombre }}</b><br>

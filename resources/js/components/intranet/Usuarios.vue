@@ -98,7 +98,7 @@
                                 </template>
 
                                 <template v-slot:cell(acciones)="row">
-                                    <b-button size="xs" variant="success" title="Actualizar saldo usuario" @click="abrirModalSaldo(row.item)">
+                                    <b-button size="xs" variant="success" title="Agregar saldo usuario" @click="abrirModalSaldo(row.item)">
                                         <i class="fa fa-usd"></i>
                                     </b-button>
 
@@ -142,7 +142,7 @@
             
             <ValidationObserver ref="observer_usuario" v-slot="{ valid }">
                 <b-modal ref="modal_usuario" :title="modal_usuario.titulo" size="lg" no-close-on-backdrop>
-                    <b-form>
+                    <b-form v-if="modal_usuario.accion == 1">
                         <b-row>
                             <b-col>
                                 <b-form-group label="Nombre de Usuario">
@@ -201,9 +201,12 @@
                         </b-row>
                     </b-form>
 
+                    <b-form v-if="modal_usuario.accion == 2">
+                        <perfil_usuario :usuario_id="usuario.id" :tipo_usuario_logeado="1"></perfil_usuario>
+                    </b-form>
+
                     <template slot="modal-footer">
                         <b-button :disabled="!valid" v-show="modal_usuario.accion == 1" size="md" variant="success" @click="crearOactualizar(1)"> Guardar </b-button>
-                        <b-button v-show="modal_usuario.accion == 2" size="md" variant="warning" @click="crearOactualizar(2)"> Actualizar </b-button>
                         <b-button size="md" variant="danger" @click="cerrarModal()"> Cerrar </b-button>
                     </template>
                 </b-modal>

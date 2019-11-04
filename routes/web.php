@@ -26,6 +26,8 @@ Route::get('/sliders/home', 'SliderController@indexHome')->name('Listar Sliders 
 Route::get('/categorias/home', 'CategoriaDocumentoController@indexHome')->name('Listar Categorias Home');
 Route::get('/sliders/ubicacion/{ubicacion}', 'SliderController@indexUbicacion')->name('Listar Sliders Por Ubicacion');
 Route::get('/documentos/tipo/{tipo}', 'DocumentoController@indexHome')->name('Listar Documentos Por Tipo');
+Route::get('/usuario/{id}', 'UsuarioController@especifico')->name('Listar Usuario Especifico');
+Route::get('/usuarios/pymes/{tipo}', 'UsuarioController@indexPymes')->name('Listar Usuarios pymes');
 
 Route::get('/home', 'HomeController@index')->name('home');
 
@@ -86,6 +88,8 @@ Route::get('/usuarios/{tipo}', 'UsuarioController@index')->name('Listar usuarios
 Route::post('/usuario/crear/actualizar', 'UsuarioController@crearOactualizar')->name('Crear o Actualizar usuarios');
 Route::post('/usuario/restaurar', 'UsuarioController@restaurar')->name('Resturar Usuario');
 Route::post('/usuario/eliminar', 'UsuarioController@eliminar')->name('Eliminar usuario');
+Route::post('usuario/actualizar/imagen', 'UsuarioController@imagen')->name('Actualizar foto de usuario');
+
 Route::post('/usuario/saldo', 'UsuarioController@saldo')->name('Agregar saldo');
 Route::post('/usuario/blacklist/agregar', 'UsuarioController@blacklistAgregar')->name('Agregar a black list');
 Route::post('/usuario/blacklist/quitar', 'UsuarioController@blacklistQuitar')->name('Agregar a black list');
@@ -101,9 +105,15 @@ Route::get('/promociones/{tipo}', 'PromocionController@index')->name('Listar Pro
 Route::post('/promocion/crear/actualizar', 'PromocionController@crearOactualizar')->name('Crear o Actualizar Promociones');
 Route::post('/promocion/eliminar', 'PromocionController@eliminar')->name('Borrar Promociones');
 
-//Rutas de mensajes
+//Rutas de mensajes y notificaciones solicitar documento
 Route::post('/solicitar/documento', 'DocumentoController@solicitarDocumento')->name('Solicitar documento');
+Route::get('/solicitudes/documento', 'SolicitudDocumentoController@index')->name('Listar solicitudes documento');
+
+//Rtuas de mensajes y notificaciones invitar amigo
 Route::post('/invitar', 'UsuarioController@solicitarDocumento')->name('Invitar amigo');
+
+
+Route::get('/asesorias', 'AsesoriaController@index')->name('Listar asesorias');
 Route::post('/solicitar/asesoria', 'UsuarioController@solicitarAsesoria')->name('Solicitar Asesoria');
 
 //Rutas de rubros
@@ -118,5 +128,24 @@ Route::get('/profesiones/oficios/{tipo}', 'ProfesionController@index')->name('Li
 Route::post('/profesion/oficio/crear/actualizar', 'ProfesionController@crearOactualizar')->name('Crear o Actualizar Profesiones u Oficios');
 Route::post('/profesion/oficio/restaurar', 'ProfesionController@restaurar')->name('Resturar Profesiones u Oficios');
 Route::post('/rubro/eliminar', 'ProfesionController@eliminar')->name('Borrar Profesiones u Oficios');
+
+//Rutas de comunas
+Route::get('/comunas', 'ComunaController@index')->name('Listar Comunas');
+
+//Rutas de notificaciones
+Route::get('/notificaciones', 'NotificacionController@index')->name('Listar notificaciones');
+Route::post('/notificacion/leer', 'NotificacionController@leer')->name('Leer notificaciones');
+
+//Rutas de promociones
+Route::get('/seminarios/{tipo}', 'SeminarioController@index')->name('Listar Seminarios');
+Route::post('/seminario/crear/actualizar', 'SeminarioController@crearOactualizar')->name('Crear o Actualizar Seminarios');
+Route::post('/seminario/eliminar', 'SeminarioController@eliminar')->name('Borrar Seminarios');
+Route::post('/seminario/participar', 'SeminarioController@participar')->name('Participar Seminario');
+Route::get('/seminario/participantes/{id}', 'SeminarioController@indexParticipantes')->name('Ver participantes');
+
+//Rutas de valoracion
+Route::post('/valorar/pyme', 'ValoracionController@valorar')->name('Valorar Pyme');
+
+
 
 

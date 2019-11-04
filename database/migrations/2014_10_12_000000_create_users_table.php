@@ -19,13 +19,57 @@ class CreateUsersTable extends Migration
             $table->string('run');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable()->default(NULL);
-            $table->string('password');
-            $table->integer('tipo_usuario')->default(3);
-            $table->integer('tipo_persona')->default(1);
-            $table->integer('mailing')->default(0);
+            $table->string('password')->nullable();
+
+            //Datos Personales
+            $table->string('fecha_nacimiento')->nullable()->default(NULL);
+            $table->integer('telefono')->nullable()->default(NULL);
+            $table->string('direccion')->nullable()->default(NULL);
+            $table->integer('hijos')->nullable()->default(0);
+            $table->string('estado_civil')->nullable()->default(NULL);
+
+            //Datos academicos
+            $table->string('casa_estudio')->nullable()->default(NULL);
+            $table->string('ramo_favorito')->nullable()->default(NULL);
+            $table->string('ramo_odiado')->nullable()->default(NULL);
+            $table->string('titulo')->nullable()->default(NULL);
+            $table->string('fecha_titulo')->nullable()->default(NULL);
+            $table->text('seremi_o_practica')->nullable()->default(NULL);
+            $table->text('software')->nullable()->default(NULL);
+            $table->text('experiencia')->nullable()->default(NULL);
+
+            //Datos del ejercicio
+            $table->text('amigo')->nullable()->default(NULL);
+
+            $table->unsignedBigInteger('profesion_id')->nullable()->default(NULL);
+            $table->foreign('profesion_id')->references('id')->on('profesiones');
+
+            $table->integer('tiempo_experiencia')->nullable()->default(NULL);
+            $table->string('otro_rubro')->nullable()->default(NULL);
+            $table->integer('porcentaje_terreno')->nullable()->default(NULL);
+            $table->integer('porcentaje_oficina')->nullable()->default(NULL);
+            $table->text('especializacion')->nullable()->default(NULL);
+            $table->string('habilidad_sobresaliente')->nullable()->default(NULL);
+            $table->string('habilidad_mejora')->nullable()->default(NULL);
+            $table->integer('preferencia_laboral')->nullable()->default(0);
+            $table->text('emprendimiento')->nullable()->default(NULL);
+            $table->text('enterarse')->nullable()->default(NULL);
+            $table->text('coaching')->nullable()->default(NULL);
+            $table->text('ultimo_trabajo')->nullable()->default(NULL);
+            $table->string('ultimo_empresa')->nullable()->default(NULL);
+            $table->string('rubro_empresa')->nullable()->default(NULL);
+            $table->string('organismo_administrador_empresa')->nullable()->default(NULL);
+            
+
+            $table->integer('tipo_usuario')->nullable()->default(3);
+            $table->integer('tipo_persona')->nullable()->default(1);
+            $table->integer('mailing')->nullable()->default(0);
             $table->integer('saldo')->default(1000);
             $table->boolean('lista_negra')->default(false);
             $table->string('url_perfil')->default('img/perfil.svg');
+
+            $table->unsignedBigInteger('comuna_id')->nullable()->default(NULL);
+            $table->foreign('comuna_id')->references('id')->on('comunas');
 
             $table->unsignedBigInteger('categorias_usuarios_id')->default(1);
             $table->foreign('categorias_usuarios_id')->references('id')->on('categoria_usuarios');
