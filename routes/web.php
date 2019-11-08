@@ -20,6 +20,10 @@ Auth::routes();
 Route::get('/nosotros', 'PaginaController@indexHomeNosotros')->name('Mostrar Página nosotros');
 Route::get('/comunidad', 'PaginaController@indexHomeComunidad')->name('Mostrar Página Comunidad');
 Route::get('/servicios', 'PaginaController@indexHomeServicios')->name('Mostrar Página Servicios');
+Route::get('/busqueda/{id}', 'PaginaController@indexHomeBusqueda')->name('Mostrar Resultados Búsqueda');
+Route::get('/contacto', 'PaginaController@indexHomeContacto')->name('Mostrar Página Contacto');
+Route::get('/documentos/busqueda/{categoria}', 'DocumentoController@indexBusqueda')->name('Mostrar Resultados Búsqueda por Categoriá');
+
 
 
 Route::get('/sliders/home', 'SliderController@indexHome')->name('Listar Sliders Home');

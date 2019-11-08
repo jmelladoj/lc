@@ -10,9 +10,7 @@ class CategoriaUsuario extends Model
     //
     use SoftDeletes;
 
-    protected $fillable = [
-        'id','nombre', 'nivel', 'gasto_inicio', 'gasto_fin', 'color', 'bonificacion'
-    ];
+    protected $guard = ['id'];
 
     protected $dates = ['deleted_at'];
 

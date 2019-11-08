@@ -199,7 +199,12 @@ a[href]:hover,
 .product-list-view .product-item .product-item-content .tag,
 a.tag:hover, .tag a:hover,
 .alert-info:before, .alert-message:before {
-    color: #8AB733;
+    color: #1E2F13;
+}
+
+.footer-copyright a:hover {
+    color: #8AB733 !important;
+    text-decoration:none; 
 }
 
 .important-primary-color,

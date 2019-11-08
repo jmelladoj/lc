@@ -16,6 +16,9 @@
                         </b-form-group >
                         <h4 class="card-title m-t-10" v-text="usuario.nombre"></h4>
                         <h6 class="card-subtitle" v-text="categoria.nombre + ' - ' + categoria.nivel"></h6>
+                        <h6 class="card-subtitle" v-if="usuario.tipo_persona == 1"> Persona</h6>
+                        <h6 class="card-subtitle" v-else-if="usuario.tipo_persona == 2"> Pyme</h6>
+                        <h6 class="card-subtitle" v-else-if="usuario.tipo_persona == 3"> Estudiante</h6>
                         <hr>
                         <small class="text-muted">Correo: </small><h6 v-text="usuario.email"></h6>
                     </ValidationObserver>

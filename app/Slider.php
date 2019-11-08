@@ -10,8 +10,8 @@ class Slider extends Model
     //
     use SoftDeletes;
 
-    protected $fillable = [
-        'id','texto', 'color', 'url_imagen', 'link', 'inicio', 'descanso_uno', 'descanso_dos', 'pagina_nosotros', 'pagina_contacto', 'pagina_comunidad', 'pagina_servicios'
+    protected $guarded = [
+        'id'
     ];
 
     protected $dates = ['deleted_at'];

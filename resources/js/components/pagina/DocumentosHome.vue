@@ -10,19 +10,7 @@
             <carousel :per-page="4" :autoplay="true" :navigationEnabled="true">
                 <slide v-for="(documento, index) in documentos" :key="index"> 
                     <div class="product-item ml-2 mr-2">
-                        <div class="product-item-img">
-                            <a class="product-item-img-link">
-                                <img v-bind:src="documento.imagen" alt="Imagen de documento" />
-                            </a>
-
-                            <div class="add-to-link">
-                                <div class="card">
-                                    <p class="text-justify" v-text="documento.descripcion"></p>
-                                </div>
-                                <br>
-                                <a class="btn btn--primary btn--sm" v-if="autenticado == 1">Descargar</a>
-                            </div>
-                        </div>
+                        <ver-documento :documento="documento" :autenticado="autenticado"></ver-documento>
                     </div>
                 </slide>
             </carousel>

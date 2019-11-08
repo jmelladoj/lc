@@ -111,8 +111,6 @@
                                     <b-button v-show="tipo_usuario < 3" size="xs" variant="danger" title="Eliminar seminario" @click="borrar(row.item.id)">
                                         <i class="fa fa-trash"></i>
                                     </b-button>
-
-                                    <label for="" class="label-control" v-show="tipo_usuario == 3"> Sin acciones</label>
                                 </template>
 
                                 </b-table>

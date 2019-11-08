@@ -61,4 +61,18 @@ class User extends Authenticatable
     public function valoraciones(){
         return $this->hasMany(Valoracion::class, 'user_id');
     }
+
+    public function getPersonaAttribute(){
+        switch ($this->tipo_persona) {
+            case 1:
+                return "Persona";
+                break;
+            case 2:
+                return "Pyme";
+                break;
+            case 3:
+                return "Estudiante";
+                break;
+        }
+    }
 }

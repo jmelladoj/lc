@@ -11187,7 +11187,7 @@ ul:last-child {
         }
 
         .nav-icons .nav-icon-item .nav-icon-trigger {
-            font-size: 20px;
+            font-size: 17px;
             cursor: pointer;
             display: block;
             position: relative;
@@ -15516,7 +15516,12 @@ a[href]:hover,
 .product-list-view .product-item .product-item-content .tag,
 a.tag:hover, .tag a:hover,
 .alert-info:before, .alert-message:before {
-    color: #8AB733;
+    color: #1E2F13;
+}
+
+.footer-copyright a:hover {
+    color: #8AB733 !important;
+    text-decoration:none; 
 }
 
 .important-primary-color,

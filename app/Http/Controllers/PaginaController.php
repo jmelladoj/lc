@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\CategoriaDocumento;
 use App\Pagina;
 use App\Servicio;
 use Illuminate\Http\Request;
@@ -47,6 +48,11 @@ class PaginaController extends Controller
     public function indexLogin(Request $request)
     {
         return ['pagina' => Pagina::find(4)];
+    }
+
+    public function indexHomeBusqueda($id){
+        $categoria = CategoriaDocumento::find($id);
+        return view('busqueda')->with(compact('categoria'));
     }
 
     public function actualizarNosotros(Request $request){

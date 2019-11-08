@@ -61,6 +61,7 @@ Vue.use(VueCurrencyFilter,
 //General
 Vue.component('sociales', require('./components/general/Sociales.vue').default);
 Vue.component('perfil_usuario', require('./components/general/Perfil.vue').default);
+Vue.component('ver-documento', require('./components/general/VerDocumento.vue').default);
 
 //Pagina
 Vue.component('login', require('./components/pagina/Login.vue').default);
@@ -72,6 +73,7 @@ Vue.component('documentos-tipo', require('./components/pagina/DocumentosHome.vue
 Vue.component('nosotros', require('./components/pagina/Nosotros.vue').default);
 Vue.component('top-five', require('./components/pagina/TopFive.vue').default);
 Vue.component('sliders-comunidad-pyme', require('./components/pagina/SlidersComunidadPyme.vue').default);
+Vue.component('busqueda', require('./components/pagina/Busqueda.vue').default);
 
 //Intranet
 Vue.component('general', require('./components/intranet/General.vue').default);
@@ -97,6 +99,7 @@ Vue.component('solicitud-documentos', require('./components/intranet/SolicitudDo
 Vue.component('notificaciones', require('./components/intranet/Notificaciones.vue').default);
 Vue.component('asesorias', require('./components/intranet/Asesorias.vue').default);
 Vue.component('seminarios', require('./components/intranet/Seminarios.vue').default);
+
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

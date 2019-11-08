@@ -32,13 +32,23 @@ class DocumentoController extends Controller
     public function indexHome($tipo){  
         switch ($tipo) {
             case 1:
-                $documentos = Documento::where('estado', 1)->orderBy('cantidad_descargas', 'desc')->get();
+                $documentos = Documento::where('estado', 1)->with('usuario')->orderBy('cantidad_descargas', 'desc')->get();
                 break;
             case 2:
-                $documentos = Documento::where('estado', 1)->orderBy('updated_at', 'asc')->get();
+                $documentos = Documento::where('estado', 1)->with('usuario')->orderBy('updated_at', 'asc')->get();
                 break;
         }
 
+        foreach($documentos AS $d){
+            $d->imagen = $d->img;
+        }
+
+        return ['documentos' => $documentos];
+    }
+
+    public function indexBusqueda($categoria){
+        $documentos = Documento::where('estado', 1)->where('categorias_documentos_id', $categoria)->with('usuario')->orderBy('updated_at', 'asc')->get();
+        
         foreach($documentos AS $d){
             $d->imagen = $d->img;
         }

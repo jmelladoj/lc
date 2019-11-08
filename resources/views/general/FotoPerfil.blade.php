@@ -4,7 +4,7 @@
         <div class="dropdown">
             <a href="javascript:void(0)" class="dropdown-toggle u-dropdown link hide-menu" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                 <b>{{ Auth::user()->nombre }}</b><br>
-                <b>{{ Auth::user()->categoria->nombre . ' - ' . Auth::user()->categoria->nivel }}</b>
+                <b>{{ Auth::user()->categoria->nombre . ' - ' . Auth::user()->categoria->nivel }} <br> {{ Auth::user()->persona }} </b>
 
                 <span class="caret"></span>
             </a>

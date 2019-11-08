@@ -39,4 +39,8 @@ class Documento extends Model
         }
     }
 
+    public function usuario(){
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
 }

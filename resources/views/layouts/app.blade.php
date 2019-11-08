@@ -40,17 +40,17 @@
                                     <li class="nav-menu-item"><a href="{{ url('/nosotros') }}" class="{{ (request()->is('nosotros')) ? 'sale-color' : '' }}">Comunidad LebenCo.</a></li>
                                     <li class="nav-menu-item"><a href="{{ url('/comunidad') }}" class="{{ (request()->is('comunidad')) ? 'sale-color' : '' }}">Comunidad Pyme</a></li>
                                     <li class="nav-menu-item"><a href="{{ url('/servicios') }}" class="{{ (request()->is('servicios')) ? 'sale-color' : '' }}">Nuestros Servicios</a></li>
-                                    <li class="nav-menu-item"><a href="{{ url('/nosotros') }}" class="sale-color h2"><i class="fa fa-youtube"></i></a></li>
-                                    <li class="nav-menu-item"><a href="{{ url('/nosotros') }}" class="sale-color h2"><i class="fa fa-facebook"></i></a></li>
-                                    <li class="nav-menu-item"><a href="{{ url('/nosotros') }}" class="sale-color h2"><i class="fa fa-instagram"></i></a></li>
-                                    <li class="nav-menu-item"><a href="{{ url('/nosotros') }}" class="sale-color h2"><i class="fa fa-linkedin"></i></a></li>
+                                    <li class="nav-menu-item"><a href="{{ url('https://www.youtube.com/channel/UC78DsrgVX7KslItHoTuw8uQ?view_as=subscriber') }}" class="sale-color h2"><i class="fa fa-youtube"></i></a></li>
+                                    <li class="nav-menu-item"><a href="{{ url('https://www.facebook.com/prevencion.lebenco.3') }}" class="sale-color h2"><i class="fa fa-facebook"></i></a></li>
+                                    <li class="nav-menu-item"><a href="{{ url('https://www.instagram.com/prevencionlebenco.cl/?hl=es-la') }}" class="sale-color h2"><i class="fa fa-instagram"></i></a></li>
+                                    <li class="nav-menu-item"><a href="{{ url('https://www.linkedin.com/in/prevenci%C3%B3n-lebenco-62b632184/') }}" class="sale-color h2"><i class="fa fa-linkedin"></i></a></li>
                                 </ul>
                             </div>
 
                             <div class="nav-icons">
                                 <ul>
                                     <li class="nav-icon-item">                           
-                                        <a href="{{ url('/login') }}" class="nav-icon-trigger" title="Ingresar"><span><i class="fa fa-user sale-color"></i> @if(Auth::check())  {{ Auth::user()->name }} @else Ingresar @endif </span></a>
+                                        <a href="{{ url('/login') }}" class="nav-icon-trigger" title="Ingresar"><span><i class="fa fa-user sale-color"></i> @if(Auth::check())  {{ Auth::user()->nombre }} @else Ingresar @endif </span></a>
                                     </li>
                                 </ul>
                             </div>
