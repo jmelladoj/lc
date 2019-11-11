@@ -15,7 +15,7 @@
                 <li @click="menu=8"><a class="waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fa fa-share-alt"></i><span class="hide-menu"> RECOMIÉNDANOS</span></a></li>
 
                 <li class="nav-small-cap">--- FEEDBACK</li>
-                <li @click="menu=9"><a class="waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fa fa-comment"></i><span class="hide-menu"> SUGERENCIAS</span></a></li>
+                {{--  <li @click="menu=9"><a class="waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fa fa-comment"></i><span class="hide-menu"> SUGERENCIAS</span></a></li> --}}
                 <li><a class="waves-effect waves-dark" href="https://api.whatsapp.com/send?phone=56944995688&text=Cont%C3%A1cto%20desde%20PREVENCIONLEBENCO.CL" target="_blank" aria-expanded="false"><i class="fa fa-envelope"></i><span class="hide-menu"> CONTÁCTENOS</span></a></li>
                 <li @click="menu=11"><a class="waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fa fa-cloud-upload"></i><span class="hide-menu"> SUBIR DOCUMENTO</span></a></li>
             </ul>

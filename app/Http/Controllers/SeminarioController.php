@@ -7,6 +7,7 @@ use App\Seminario;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class SeminarioController extends Controller
 {
@@ -28,7 +29,7 @@ class SeminarioController extends Controller
     }
 
     public function crearOactualizar(Request $request){
-        Seminario::updateOrCreate(
+        $seminario = Seminario::updateOrCreate(
             ['id' => $request->seminario_id],
             [
                 'titulo' => $request->titulo,
@@ -39,6 +40,12 @@ class SeminarioController extends Controller
                 'tipo_persona' => $request->tipo_persona
             ]
         );
+
+        if ($request->hasFile('imagen_seminario')) {
+            if($seminario->url_imagen != null) { Storage::disk('public')->delete($seminario->url_imagen); }
+            
+            Seminario::updateOrCreate(['id' => $seminario->id], ['url_imagen' => Storage::disk('public')->putFile('seminarios', $request->file('imagen_seminario'))]);
+        }  
     }
 
     public function eliminar(Request $request){

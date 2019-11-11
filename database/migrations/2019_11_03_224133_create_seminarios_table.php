@@ -22,6 +22,7 @@ class CreateSeminariosTable extends Migration
             $table->text('descripcion');
             $table->integer('participantes')->nullable()->default(0);
             $table->integer('tipo_persona');
+            $table->string('url_imagen')->nullable()->default(null);
             $table->timestamps();
         });
     }

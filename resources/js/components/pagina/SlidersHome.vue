@@ -1,23 +1,13 @@
  <template>   
     <section id="intro" class="intro" v-show="sliders.length > 0">
-        <div class="item height-600px sm-height-600px">
-            <carousel :per-page="1" :autoplay="true">
-                <slide  v-for="(slider, index) in sliders" :key="index"  :paginationActiveColor="'#3F8A24'">
-                    <div class="background-image div-img" data-bg-posx="center" data-bg-posy="top" data-bg-overlay="6"></div>
-                    <img v-bind:src="'storage/' + slider.url_imagen">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-lg-12 col-md-12">
-                                <div class="intro-caption intro-caption-middel text-center intro-caption-fade sec-padding--lg">
-                                    <h1 class="intro-title" v-text="slider.texto" :style="'color:' + slider.color"></h1>
-                                    <a :href="slider.link" class="btn btn--primary space--1" v-if="slider.link != ''">Ver más</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </slide>
-            </carousel>
-        </div>
+        <b-carousel  :interval="4000" controls indicators background="rgba(0,0,0,0.6)" img-width="" img-height="600" style="text-shadow: 1px 1px 2px #333;">
+
+            <b-carousel-slide v-for="(slider, index) in sliders" :key="index" img-src="https://picsum.photos/1024/480/?image=52">
+                <h2 class="intro-title" v-text="slider.texto" :style="'color:' + slider.color"></h2>
+                <a :href="slider.link" class="btn btn--primary space--1 btn-sm" v-if="slider.link != ''">Ver más</a>
+            </b-carousel-slide>
+            
+        </b-carousel>
     </section>   
 </template>
 
@@ -46,11 +36,21 @@
 </script>
 
 <style>
-    .background-image {
-        background-color: transparent;
+    .carousel-caption {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 10;
+        padding-top: 250px;
+        padding-bottom: 20px;
+        text-align: center;
+        top: 0;
+        background-color:rgba(0,0,0,0.4);
     }
 
-    .intro-caption-middel{
-        top: 25%;
+    .img-fluid{
+        height: 600px;
     }
+
 </style>

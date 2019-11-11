@@ -187,6 +187,14 @@
                             </ValidationProvider>
                         </b-form-group>
 
+                        <b-form-group label="Imagen (Rec. 1920px ancho X 1280px alto | JPG, JPEG y PNG)">
+                            <ValidationProvider name="imagen" rules="required|image" v-slot="{ errors, validate }">
+                                <b-img  :src="seminario.url_imagen"  id="img_seminario" center name="img_seminario" class="imagen"></b-img>
+                                <b-form-file id="imagen_seminario" name="imagen_seminario" accept="image/*" placeholder="Sin archivo" @change="mostrarFoto($event)" @input="validate"></b-form-file>
+                                <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
+                            </ValidationProvider>
+                        </b-form-group>
+
                     </b-form>
 
                     <template slot="modal-footer">
@@ -224,6 +232,10 @@
                                     {{ data.item.usuario.email }}
                                 </template>
 
+                                <template v-slot:cell(imagen)="data">
+                                    <b-img :src="'storage/' + data.item.url_imagen" fluid center alt="Seminario" class="imagen"></b-img>
+                                </template>
+
                             </b-table>
                         </b-form-group>
 
@@ -255,7 +267,8 @@
                     valor: 0,
                     capacidad: 0,
                     descripcion: '',
-                    tipo_persona: 0
+                    tipo_persona: 0,
+                    url_imagen: ''
                 },
                 modal_seminario: {
                     titulo: '',
@@ -272,6 +285,7 @@
                     { key: 'fecha', label: 'FECHA', sortable: true, class: 'text-center' },
                     { key: 'capacidad', label: 'CAPACIDAD', sortable: true, class: 'text-center' },
                     { key: 'participantes', label: 'PARTICIPANTES', sortable: true, class: 'text-center' },
+                    { key: 'imagen', label: 'IMAGEN', sortable: true, class: 'text-center' },
                     { key: 'acciones', label: 'ACCIONES', sortable: true, class: 'text-center' }
                 ],
                 campos: [
@@ -310,6 +324,17 @@
                 this.totalRows = filteredItems.length
                 this.currentPage = 1
             },
+            mostrarFoto(e){
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    $('#imagen_seminario').attr('src', e.target.result);
+                }
+
+                if(e.target.files[0]){
+                    reader.readAsDataURL(e.target.files[0]);
+                    this.seminario.url_imagen = URL.createObjectURL(e.target.files[0]);
+                }
+            },
             listarSeminarios (){
                 let me = this;
                 axios.get('/seminarios/' + this.tipo).then(function (response) {
@@ -334,16 +359,19 @@
             crearOactualizar(accion){
                 let me = this;
 
-                axios.post('seminario/crear/actualizar',{
-                    'seminario_id': me.seminario.id,
-                    'titulo': me.seminario.titulo,
-                    'fecha': me.seminario.fecha,
-                    'valor': me.seminario.valor,
-                    'capacidad': me.seminario.capacidad,
-                    'descripcion': me.seminario.descripcion,
-                    'categoria_usuario': me.seminario.categoria_usuario,
-                    'tipo_persona': me.seminario.tipo_persona
-                }).then(function (response) {
+                let formData = new FormData();
+                let imagen_seminario = document.querySelector('#imagen_seminario');
+                formData.append('imagen_seminario', imagen_seminario.files[0]);
+                
+                formData.append('seminario_id', this.seminario.id);
+                formData.append('titulo', this.seminario.titulo);
+                formData.append('fecha', this.seminario.fecha);
+                formData.append('valor', this.seminario.valor);
+                formData.append('capacidad', this.seminario.capacidad);
+                formData.append('descripcion', this.seminario.descripcion);
+                formData.append('tipo_persona', this.seminario.tipo_persona);
+
+                axios.post('seminario/crear/actualizar',formData).then(function (response) {
                     me.listarSeminarios();
                     me.cerrarModal();
                     var mensaje = accion == 1 ? 'Registro agregado exitosamente' : 'Registro actualizado exitosamente';
@@ -450,6 +478,7 @@
                 this.seminario.descripcion = '';
                 this.seminario.categoria_usuario = 0;
                 this.seminario.tipo_persona = 0;
+                this.seminario.url_imagen = '';
             }
         },
         mounted() {

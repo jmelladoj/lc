@@ -1,23 +1,13 @@
 <template>
     <section id="intro" class="intro" v-show="sliders.length > 0">
-        <div class="item height-400px sm-height-400px">
-            <carousel :per-page="1" :autoplay="true"  :paginationActiveColor="'#3F8A24'">
-                <slide  v-for="(slider, index) in sliders" :key="index">
-                    <div class="background-image div-img" data-bg-posx="center" data-bg-posy="top" data-bg-overlay="6"></div>
-                    <img v-bind:src="'storage/' + slider.url_imagen">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-lg-12 col-md-12">
-                                <div class="intro-caption text-center intro-caption-fade sec-padding--lg">
-                                    <h1 class="intro-title" v-text="slider.texto" :style="'color:' + slider.color"></h1>
-                                    <a :href="slider.link" class="btn btn--primary space--1" v-if="slider.link != ''">Ver más</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </slide>
-            </carousel>
-        </div>
+        <b-carousel  :interval="4000" controls indicators background="rgba(0,0,0,0.6)" img-width="" img-height="400" style="text-shadow: 1px 1px 2px #333;">
+
+            <b-carousel-slide v-for="(slider, index) in sliders" :key="index" img-src="https://picsum.photos/1024/480/?image=52">
+                <h2 class="intro-title" v-text="slider.texto" :style="'color:' + slider.color"></h2>
+                <a :href="slider.link" class="btn btn--primary space--1 btn-sm" v-if="slider.link != ''">Ver más</a>
+            </b-carousel-slide>
+            
+        </b-carousel>
     </section>   
 </template>
 

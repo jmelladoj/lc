@@ -27,11 +27,8 @@
                     <div class="navbar-header">
                         <a class="navbar-brand" href="{{ url('/') }}">
                             <b>
-                                LC
+                                <img src={{ asset('storage/general/favicon.png') }} alt="homepage" class="dark-logo" height="50">
                             </b>
-                            <span>
-                                - LEBEN CO
-                            </span> 
                         </a>
                     </div>
     
