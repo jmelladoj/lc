@@ -29232,7 +29232,12 @@ ul.list-style-none li a:hover {
 }
 
 .sidebar-nav {
-    padding: 15px 0 0
+    padding: 15px 0 0;
+    text-transform: lowercase;
+}
+
+.sidebar-nav::first-letter {
+    text-transform: uppercase;
 }
 
 .sidebar-nav ul {
@@ -29622,7 +29627,7 @@ ul#themecolors li a.working:before {
 
 .ps>.ps__scrollbar-y-rail>.ps__scrollbar-y {
     position: absolute;
-    background-color: rgba(0, 0, 0, .2);
+    background-color: #8AB733;
     -webkit-border-radius: 6px;
     -moz-border-radius: 6px;
     border-radius: 6px;

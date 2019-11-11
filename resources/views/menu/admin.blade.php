@@ -4,72 +4,79 @@
 
         <nav class="sidebar-nav">
             <ul id="sidebarnav" v-show="ubicacion == 0">
-                <li class="nav-small-cap">--- MENÚ</li>
-                <li @click="menu=0"> <a class="waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fa fa-cog"></i><span class="hide-menu">GENERAL</span></a></li>
-                <li @click="menu=1"><a class="waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fa fa-picture-o"></i><span class="hide-menu">SLIDERS</span></a></li>
+                <li class="nav-small-cap">--- Menú</li>
                 <li>
-                    <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fa fa-folder-o" aria-hidden="true"></i><span class="hide-menu">PÁGINAS </span></a>
+                    <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fa fa-cog" aria-hidden="true"></i><span class="hide-menu">General </span></a>
                     <ul aria-expanded="false" class="collapse">
-                        <li @click="menu=2"><a href="javascript:void(0)">NOSOTROS</a></li>
-                        <li @click="menu=3"><a href="javascript:void(0)">COMUNIDAD PYME</a></li>
-                        <li @click="menu=4"><a href="javascript:void(0)">SERVICIOS</a></li>
-                        <li @click="menu=5"><a href="javascript:void(0)">LOGIN</a></li>
+                        <li @click="menu=0"><a href="javascript:void(0)">LebenCo.</a></li>
+                        <li @click="menu=7"><a href="javascript:void(0)">Pymes</a></li>
+                        <li @click="menu=6"><a href="javascript:void(0)">Organismos</a></li>
                     </ul>
                 </li>
-                <li @click="menu=6"><a class="waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fa fa-picture-o"></i><span class="hide-menu">INTERÉS</span></a></li>
+                <li @click="menu=1"><a class="waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fa fa-picture-o"></i><span class="hide-menu">Sliders</span></a></li>
+                <li>
+                    <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fa fa-folder-o" aria-hidden="true"></i><span class="hide-menu">Páginas </span></a>
+                    <ul aria-expanded="false" class="collapse">
+                        <li @click="menu=2"><a href="javascript:void(0)">Nosotros</a></li>
+                        <li @click="menu=3"><a href="javascript:void(0)">Comunidad Pyme</a></li>
+                        <li @click="menu=4"><a href="javascript:void(0)">Servicios</a></li>
+                        <li @click="menu=5"><a href="javascript:void(0)">Login</a></li>
+                    </ul>
+                </li>
+                
                 
             </ul>
 
             <ul id="sidebarnav" v-show="ubicacion == 1">
-                <li class="nav-small-cap">--- MENÚ</li>
+                <li class="nav-small-cap">--- Menú</li>
                 <li>
-                    <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fa fa-folder-o" aria-hidden="true"></i><span class="hide-menu">CONTENIDO </span></a>
+                    <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fa fa-folder-o" aria-hidden="true"></i><span class="hide-menu">Contenido </span></a>
                     <ul aria-expanded="false" class="collapse">
-                        <li @click="menu=0"><a href="javascript:void(0)">CATEGORÍAS</a></li>
-                        <li @click="menu=1"><a href="javascript:void(0)">DOCUMENTOS APROBADOS</a></li>
-                        <li @click="menu=2"><a href="javascript:void(0)">DOCUMENTOS PENDIENTES</a></li>
+                        <li @click="menu=0"><a href="javascript:void(0)">Categorías</a></li>
+                        <li @click="menu=1"><a href="javascript:void(0)">Documentos aprobados</a></li>
+                        <li @click="menu=2"><a href="javascript:void(0)">Documentos pendientes</a></li>
                     </ul>
                 </li>
                 <li>
-                    <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fa fa-users" aria-hidden="true"></i><span class="hide-menu">CLIENTES </span></a>
+                    <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fa fa-users" aria-hidden="true"></i><span class="hide-menu">Clientes </span></a>
                     <ul aria-expanded="false" class="collapse">
-                        <li @click="menu=3"><a href="javascript:void(0)">CATEGORÍAS USUARIO</a></li>
-                        <li @click="menu=4"><a href="javascript:void(0)">PROFESIONES Y RUBROS</a></li>
-                        <li @click="menu=5"><a href="javascript:void(0)">USUARIOS DEL SISTEMA</a></li>
+                        <li @click="menu=3"><a href="javascript:void(0)">Categorías USUARIO</a></li>
+                        <li @click="menu=4"><a href="javascript:void(0)">Prefesiones y rubros</a></li>
+                        <li @click="menu=5"><a href="javascript:void(0)">Usuarios del sistema</a></li>
                     </ul>
                 </li>
                 <li>
-                    <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fa fa-wrench" aria-hidden="true"></i><span class="hide-menu">HERRAMIENTAS </span></a>
+                    <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fa fa-wrench" aria-hidden="true"></i><span class="hide-menu">Herramientas </span></a>
                     <ul aria-expanded="false" class="collapse">
-                        <li @click="menu=6"><a href="javascript:void(0)">MI CUENTA</a></li>
-                        <li @click="menu=7"><a href="javascript:void(0)">DOCUMENTOS A PEDIDO</a></li>
-                        <li @click="menu=8"><a href="javascript:void(0)">BLACK LIST</a></li>
-                        <li @click="menu=9"><a href="javascript:void(0)">TIPIFICADOR DT</a></li>
-                        <li @click="menu=10"><a href="javascript:void(0)">SORTEOS</a></li>
-                        <li @click="menu=11"><a href="javascript:void(0)">PROMOCIONES</a></li>
+                        <li @click="menu=6"><a href="javascript:void(0)">Mi cuenta</a></li>
+                        <li @click="menu=7"><a href="javascript:void(0)">Documentos a pedido</a></li>
+                        <li @click="menu=8"><a href="javascript:void(0)">Black list</a></li>
+                        <li @click="menu=9"><a href="javascript:void(0)">Tipificador dt</a></li>
+                        <li @click="menu=10"><a href="javascript:void(0)">Sorteos</a></li>
+                        <li @click="menu=11"><a href="javascript:void(0)">Promociones</a></li>
                         {{--  <li @click="menu=12"><a href="javascript:void(0)">BENEFICIOS</a></li> --}}
-                        <li @click="menu=13"><a href="javascript:void(0)">SEMINARIOS</a></li>
-                        <li @click="menu=14"><a href="javascript:void(0)">VISITAS A TERRENO</a></li>
-                        <li @click="menu=15"><a href="javascript:void(0)">TIPS</a></li>
+                        <li @click="menu=13"><a href="javascript:void(0)">Seminariosc</a></li>
+                        <li @click="menu=14"><a href="javascript:void(0)">Visitas a terreno</a></li>
+                        <li @click="menu=15"><a href="javascript:void(0)">Tips</a></li>
                     </ul>
                 </li>
                 <li>
-                    <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="hide-menu">FEEDBACK </span></a>
+                    <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="hide-menu">Feedback </span></a>
                     <ul aria-expanded="false" class="collapse">
-                        <li @click="menu=16"><a href="javascript:void(0)">SUGERENCÍAS</a></li>
-                        <li @click="menu=17"><a href="javascript:void(0)">CONTÁCTENOS</a></li>
-                        <li @click="menu=18"><a href="javascript:void(0)">ASESORÍA Y COTIZA HOY</a></li>
-                        <li @click="menu=19"><a href="javascript:void(0)">COMPARTIR DOCUMENTO</a></li>
-                        <li @click="menu=20"><a href="javascript:void(0)">ALERTAS</a></li>
-                        <li @click="menu=21"><a href="javascript:void(0)">RECLUTAMIENTO</a></li>
-                        <li @click="menu=22"><a href="javascript:void(0)">LIKE Y DISLIKE</a></li>
+                        <li @click="menu=16"><a href="javascript:void(0)">Sugerencías</a></li>
+                        <li @click="menu=17"><a href="javascript:void(0)">Contáctenos</a></li>
+                        <li @click="menu=18"><a href="javascript:void(0)">Asesoría y cotiza hoy</a></li>
+                        <li @click="menu=19"><a href="javascript:void(0)">Compartir documento</a></li>
+                        <li @click="menu=20"><a href="javascript:void(0)">Alertas</a></li>
+                        <li @click="menu=21"><a href="javascript:void(0)">Reclutamiento</a></li>
+                        <li @click="menu=22"><a href="javascript:void(0)">Like y dislike</a></li>
                     </ul>
                 </li>
                 <li>
-                    <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fa fa-list" aria-hidden="true"></i><span class="hide-menu">INFORMES </span></a>
+                    <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fa fa-list" aria-hidden="true"></i><span class="hide-menu">Informes </span></a>
                     <ul aria-expanded="false" class="collapse">
-                        <li @click="menu=16"><a href="javascript:void(0)">VENTAS CONTENIDO</a></li>
-                        <li @click="menu=17"><a href="javascript:void(0)">CLIENTES ACTIVO</a></li>
+                        <li @click="menu=16"><a href="javascript:void(0)">Ventas contenido</a></li>
+                        <li @click="menu=17"><a href="javascript:void(0)">Clientes activos</a></li>
                     </ul>
                 </li>
             </ul>

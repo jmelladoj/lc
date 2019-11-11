@@ -50,7 +50,7 @@
                             <div class="nav-icons">
                                 <ul>
                                     <li class="nav-icon-item">                           
-                                        <a href="{{ url('/login') }}" class="nav-icon-trigger" title="Ingresar"><span><i class="fa fa-user sale-color"></i> @if(Auth::check())  {{ Auth::user()->nombre }} @else Ingresar @endif </span></a>
+                                        <a href="{{ url('/login') }}" class="nav-icon-trigger" title="Ingresar"><span> @if(Auth::check())  {{ Auth::user()->nombre }} @else Ingresar @endif </span></a>
                                     </li>
                                 </ul>
                             </div>

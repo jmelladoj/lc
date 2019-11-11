@@ -1,6 +1,6 @@
 <template>
     <div class="page-wrapper">
-        <b-container fluid>
+        <b-container fluid class="mb-5">
             <b-row class="page-titles">
                 <b-col cols="5" class="align-self-center"><h4 class="text-themecolor">Categorías</h4></b-col>
                 <b-col cols="7">
@@ -15,7 +15,7 @@
                 <b-col>
                     <b-card>
                         <b-form-group>
-                            <b-container fluid>
+                            <b-container fluid class="mb-5">
                                 <b-row>
                                     <b-col md="6" class="my-1">
                                         <b-form-group label-cols-sm="3" label="Filtrar" class="mb-0">
