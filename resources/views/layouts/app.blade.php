@@ -67,41 +67,43 @@
             @if(request()->is('/'))
                 <slider-footer></slider-footer>
             @endif
+
             <footer class="footer bg--dark">
-                <section class="footer-widget-area">
-                    <div class="container">
-                        <div class="row text-dark">
-                            <div class="col-md-4">
-                                <div class="col-sm-12 col-md-12 col-lg-12 mb-lg-0 mb-4 text-center">
-                                    <img src="{{ asset('storage/general/logo_footer.png') }}" class="footer-logo mb-4" alt="LebenCO" />
+                @if(!request()->is('login'))
+                    <section class="footer-widget-area">
+                        <div class="container">
+                            <div class="row text-dark">
+                                <div class="col-md-4">
+                                    <div class="col-sm-12 col-md-12 col-lg-12 mb-lg-0 mb-4 text-center">
+                                        <img src="{{ asset('storage/general/logo_footer.png') }}" class="footer-logo mb-4" alt="LebenCO" />
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="footer-widget col-sm-12 col-md-12 col-lg-12 mb-lg-0 mb-4 text-center">
-                                    <h6 class="footer-widget-title"><a href="{{ url('/nosotros') }}" class="{{ (request()->is('nosotros')) ? 'sale-color' : 'text-dark' }}" style="opacity: 1;">Comunidad LebenCo.</a></h6>
+                                <div class="col-md-4">
+                                    <div class="footer-widget col-sm-12 col-md-12 col-lg-12 mb-lg-0 mb-4 text-center">
+                                        <h6 class="footer-widget-title"><a href="{{ url('/nosotros') }}" class="{{ (request()->is('nosotros')) ? 'sale-color' : 'text-dark' }}" style="opacity: 1;">Comunidad LebenCo.</a></h6>
+                                    </div>
+                                    <div class="footer-widget col-sm-12 col-md-12 col-lg-12 mb-lg-0 mb-4 text-center">
+                                        <h6 class="footer-widget-title"><a href="{{ url('/servicios') }}" class="{{ (request()->is('servicios')) ? 'sale-color' : 'text-dark' }}" style="opacity: 1;">Nuestros Servicios</a></h6>
+                                    </div>
+                                    <div class="footer-widget col-sm-12 col-md-12 col-lg-12 mb-lg-0 mb-4 text-center">
+                                        <h6 class="footer-widget-title"><a href="#" class="text-dark" style="opacity: 1;">Trabaja en LebenCo.</a></h6>
+                                    </div>
                                 </div>
-                                <div class="footer-widget col-sm-12 col-md-12 col-lg-12 mb-lg-0 mb-4 text-center">
-                                    <h6 class="footer-widget-title"><a href="{{ url('/servicios') }}" class="{{ (request()->is('servicios')) ? 'sale-color' : 'text-dark' }}" style="opacity: 1;">Nuestros Servicios</a></h6>
-                                </div>
-                                <div class="footer-widget col-sm-12 col-md-12 col-lg-12 mb-lg-0 mb-4 text-center">
-                                    <h6 class="footer-widget-title"><a href="#" class="text-dark" style="opacity: 1;">Trabaja en LebenCo.</a></h6>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="footer-widget col-sm-12 col-md-12 col-lg-12 mb-lg-0 mb-4 text-center">
-                                    <h6 class="footer-widget-title"><a href="{{ url('/comunidad') }}" class="{{ (request()->is('comunidad')) ? 'sale-color' : 'text-dark' }}" style="opacity: 1;">Comunidad Pyme</a></h6>
-                                </div>
-                                <div class="footer-widget col-sm-12 col-md-12 col-lg-12 mb-lg-0 mb-4 text-center">
-                                    <h6 class="footer-widget-title"><a href="{{ url('/contacto') }}" class="text-dark" style="opacity: 1;">Contáctanos</a></h6>
-                                </div>
-                                <div class="footer-widget col-sm-12 col-md-12 col-lg-12 mb-lg-0 mb-4 text-center">
-                                    <h6 class="footer-widget-title"><a href="{{ url('#') }}" class="text-dark" style="opacity: 1;">Nuestras Políticas</a></h6>
+                                <div class="col-md-4">
+                                    <div class="footer-widget col-sm-12 col-md-12 col-lg-12 mb-lg-0 mb-4 text-center">
+                                        <h6 class="footer-widget-title"><a href="{{ url('/comunidad') }}" class="{{ (request()->is('comunidad')) ? 'sale-color' : 'text-dark' }}" style="opacity: 1;">Comunidad Pyme</a></h6>
+                                    </div>
+                                    <div class="footer-widget col-sm-12 col-md-12 col-lg-12 mb-lg-0 mb-4 text-center">
+                                        <h6 class="footer-widget-title"><a href="{{ url('/contacto') }}" class="text-dark" style="opacity: 1;">Contáctanos</a></h6>
+                                    </div>
+                                    <div class="footer-widget col-sm-12 col-md-12 col-lg-12 mb-lg-0 mb-4 text-center">
+                                        <h6 class="footer-widget-title"><a href="{{ url('#') }}" class="text-dark" style="opacity: 1;">Nuestras Políticas</a></h6>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </section>
-        
+                    </section>
+                @endif
                 <section class="footer-bottom-area">
                     <div class="container">
                         <div class="row">

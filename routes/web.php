@@ -150,6 +150,11 @@ Route::get('/seminario/participantes/{id}', 'SeminarioController@indexParticipan
 //Rutas de valoracion
 Route::post('/valorar/pyme', 'ValoracionController@valorar')->name('Valorar Pyme');
 
+//Rutas de link de interés
+Route::get('/sitios', 'InteresController@index')->name('Listar sitios de interes');
+Route::post('/sitio/crear/actualizar', 'InteresController@crearOactualizar')->name('Crear o Actualizar sitios de interes');
+Route::post('/sitio/eliminar', 'InteresController@eliminar')->name('Borrar sitios de interes');
+
 
 
 

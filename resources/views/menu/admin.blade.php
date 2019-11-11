@@ -16,6 +16,7 @@
                         <li @click="menu=5"><a href="javascript:void(0)">LOGIN</a></li>
                     </ul>
                 </li>
+                <li @click="menu=6"><a class="waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fa fa-picture-o"></i><span class="hide-menu">INTERÉS</span></a></li>
                 
             </ul>
 
@@ -98,6 +99,10 @@
 
 <template v-if="ubicacion == 0 && menu==5">
     <login></login>
+</template>
+
+<template v-if="ubicacion == 0 && menu==6">
+    <interes></interes>
 </template>
 
 <template v-if="ubicacion == 1 && menu==0">

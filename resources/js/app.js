@@ -99,6 +99,7 @@ Vue.component('solicitud-documentos', require('./components/intranet/SolicitudDo
 Vue.component('notificaciones', require('./components/intranet/Notificaciones.vue').default);
 Vue.component('asesorias', require('./components/intranet/Asesorias.vue').default);
 Vue.component('seminarios', require('./components/intranet/Seminarios.vue').default);
+Vue.component('interes', require('./components/intranet/Interes.vue').default);
 
 
 /**
@@ -111,6 +112,7 @@ const app = new Vue({
     el: '#app',
     data :{
         ubicacion: 1,
-        menu : 6
+        menu : 6,
+        formulario: 0
     }
 });

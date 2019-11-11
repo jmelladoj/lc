@@ -122,12 +122,13 @@ a:hover, a:active {
     }
 
 .btn--secondary {
-    background: #333 !important;
-    color: #fff !important;
+    background: #E8ECD1 !important;
+    color: #1E2F13 !important;
 }
 
     .btn--secondary:hover {
-        background: #3d3d3d !important;
+        background: #8AB733 !important;
+        color: #E8ECD1 !important;
     }
 
 .btn--gray {

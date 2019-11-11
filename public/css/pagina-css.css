@@ -9987,6 +9987,11 @@ ul:last-child {
     padding-bottom: 90px;
 }
 
+.sec-padding-login {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
 .sec-padding-t {
     padding-top: 90px;
 }
@@ -15004,13 +15009,11 @@ input.quantity[type=number]::-webkit-outer-spin-button {
 .my-account-box {
     border: 1px solid rgba(0,0,0,0.07);
     padding: 30px;
-    min-height: 500px;
 }
 
 .my-account-box-selected {
     border: 1px solid #8ab733;
     padding: 30px;
-    min-height: 500px;
 }
 
 form .form-row, form .lost_password {
@@ -15439,12 +15442,13 @@ a:hover, a:active {
     }
 
 .btn--secondary {
-    background: #333 !important;
-    color: #fff !important;
+    background: #E8ECD1 !important;
+    color: #1E2F13 !important;
 }
 
     .btn--secondary:hover {
-        background: #3d3d3d !important;
+        background: #8AB733 !important;
+        color: #E8ECD1 !important;
     }
 
 .btn--gray {
