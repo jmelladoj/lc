@@ -57,6 +57,6 @@ mix.styles([
    'public/intranet/node_modules/raphael/raphael-min.js',
    'public/intranet/node_modules/morrisjs/morris.min.js',
    'public/intranet/js/dashboard1.js'
-], 'public/js/admin.js');
+], 'public/js/admin.js').version();
    
          

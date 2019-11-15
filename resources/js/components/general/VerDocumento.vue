@@ -16,7 +16,7 @@
         </div>
         <div class="product-item-content">
             <div class="text-center"><b>{{ documento.titulo }}</b></div>
-            <div class="text-center" v-text="'Autor:' + documento.usuario.nombre"></div>
+            <div class="text-center" v-text="documento.usuario.tipo_usuario < 3 ? 'Autor: Prevención LebenCo.' : 'Autor : ' + documento.usuario.nombre"></div>
             <p class="product-item-price">
                 <span class="product-price-amount">
                     <span class="product-price-currency-symbol">$</span>{{ documento.valor}}

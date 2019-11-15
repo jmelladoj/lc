@@ -1,8 +1,8 @@
  <template>   
-    <section id="intro" class="intro" v-show="sliders.length > 0">
+    <section id="intro" class="intro" v-if="sliders.length > 0">
         <b-carousel  :interval="4000" controls indicators background="rgba(0,0,0,0.6)" img-width="" img-height="600" style="text-shadow: 1px 1px 2px #333;">
 
-            <b-carousel-slide v-for="(slider, index) in sliders" :key="index" img-src="https://picsum.photos/1024/480/?image=52">
+            <b-carousel-slide v-for="(slider, index) in sliders" :key="index" :img-src="'storage/' + slider.url_imagen">
                 <h2 class="intro-title" v-text="slider.texto" :style="'color:' + slider.color"></h2>
                 <a :href="slider.link" class="btn btn--primary space--1 btn-sm" v-if="slider.link != ''">Ver más</a>
             </b-carousel-slide>

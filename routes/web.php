@@ -17,6 +17,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
+Route::get('/politicas', 'PaginaController@indexHomePoliticas')->name('Mostrar Página de politicas');
 Route::get('/nosotros', 'PaginaController@indexHomeNosotros')->name('Mostrar Página nosotros');
 Route::get('/comunidad', 'PaginaController@indexHomeComunidad')->name('Mostrar Página Comunidad');
 Route::get('/servicios', 'PaginaController@indexHomeServicios')->name('Mostrar Página Servicios');

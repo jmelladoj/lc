@@ -150,7 +150,7 @@
                         <b-form-group label="¿Redirección a?">
                             <ValidationProvider name="redirección" rules="required" v-slot="{ errors }">
                                 <b-form-select v-model="slider.link" class="mb-3">
-                                    <option :value="null" selected>Sin redirección</option>
+                                    <option :value="0" selected>Sin redirección</option>
                                 </b-form-select>
                                 <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
                             </ValidationProvider>
@@ -227,7 +227,7 @@
                     texto: '',
                     color: '',
                     url_imagen: null,
-                    link: null,
+                    link: 0,
                     inicio: 0,
                     descanso_uno: 0,
                     descanso_dos: 0,
@@ -419,7 +419,7 @@
                 this.slider.id = 0;
                 this.slider.texto = '';
                 this.slider.color = '';
-                this.slider.link = null;
+                this.slider.link = 0;
                 this.slider.url_imagen = null;
                 this.inicio = 0;
                 this.descanso_uno = 0;

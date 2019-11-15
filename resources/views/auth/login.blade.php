@@ -112,7 +112,7 @@
                                 </div>
                             </p>
                             <p class="form-field-wrapper text-justify">
-                                Sus datos personales se utilizarán con el fin de respaldar su experiencia en nuestro sitio web, administrar el acceso a su cuenta y para otros fines descritos en <a class="sale-color" target="_blank">nuestras Políticas </a>, al registrarse usted acepta nuestros términos de uso y condiciones de privacidad, que han sido establecidas por Prevención LebenCo. SpA.
+                                Sus datos personales se utilizarán con el fin de respaldar su experiencia en nuestro sitio web, administrar el acceso a su cuenta y para otros fines descritos en <a class="sale-color" href="{{ url('/politicas') }}" target="_blank">nuestras Políticas </a>, al registrarse usted acepta nuestros términos de uso y condiciones de privacidad, que han sido establecidas por Prevención LebenCo. SpA.
                                 {{--<a href="{{ asset('storage/' . $pagina->terminos_url ) }}" style="color: #009bdb;" target="_blank">i.- Términos y condiciones <a>, 
                                 <a href="{{ asset('storage/' . $pagina->privacidad_url ) }}" style="color: #009bdb;" target="_blank">ii.- Política de privacidad <a>, 
                                 <a href="{{ asset('storage/' . $pagina->satisfaccion_url ) }}" style="color: #009bdb;" target="_blank">iii.- Política de satisfacción <a>, 

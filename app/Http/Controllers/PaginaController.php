@@ -50,6 +50,10 @@ class PaginaController extends Controller
         return ['pagina' => Pagina::find(4)];
     }
 
+    public function indexHomePoliticas(Request $request){
+        return view('politicas');
+    }
+
     public function indexHomeBusqueda($id){
         $categoria = CategoriaDocumento::find($id);
         return view('busqueda')->with(compact('categoria'));
