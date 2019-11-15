@@ -18708,8 +18708,8 @@ fieldset:disabled a.btn {
 
 .btn-success:hover {
     color: #fff;
-    background-color: #009c75;
-    border-color: #008f6c
+    background-color: #3F8A24;
+    border-color: #3F8A24;
 }
 
 .btn-success.disabled,
@@ -18811,8 +18811,8 @@ fieldset:disabled a.btn {
 
 .btn-danger:hover {
     color: #fff;
-    background-color: #de4a58;
-    border-color: #dc3f4e
+    background-color: #D7552A;
+    border-color: #D7552A;
 }
 
 .btn-danger.disabled,
@@ -29233,7 +29233,6 @@ ul.list-style-none li a:hover {
 
 .sidebar-nav {
     padding: 15px 0 0;
-    text-transform: lowercase;
 }
 
 .sidebar-nav::first-letter {
@@ -32504,6 +32503,15 @@ html body .navbar-dark .mailbox .message-center a .mail-contnet .time {
     width: auto;
 }
 
+.modal-backdrop {   
+    background-color: #CBCFB5;
+    /*opacity: 0.9 !important;*/
+}
+
+.form-control:focus {
+    box-shadow: 0 0 0 0.05rem rgba(138, 183, 51, 0.25);
+    border-color: rgba(138, 183, 51);
+}
 
 @import url(https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700);
 /*Theme Colors*/

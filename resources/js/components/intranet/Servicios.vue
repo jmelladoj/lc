@@ -7,7 +7,7 @@
                     <div class="d-flex justify-content-end align-items-right">
                         <sociales></sociales>
                         <b-button @click="actualizarPagina()" class="btn btn-success d-lg-block m-l-15" v-b-tooltip.hover title="Actualiza información de la página servicios"><i class="fa fa-plus-circle"></i> Actualizar página</b-button>
-                        <b-button @click="abrirModal(1)" class="btn btn-success d-lg-block m-l-15" v-b-tooltip.hover title="Agrega un servicio a la plataforma"><i class="fa fa-plus-circle"></i> Agregar Serivios</b-button>
+                        <b-button @click="abrirModal(1)" class="btn btn-success d-lg-block m-l-15" v-b-tooltip.hover title="Agrega un servicio a la plataforma"><i class="fa fa-plus-circle"></i> Agregar Servicios</b-button>
                     </div>                    
                 </b-col>
             </b-row>
@@ -140,7 +140,7 @@
 
                         <b-form-group label="Imagen (Rec. 150px ancho X 150px alto | JPG, JPEG y PNG)">
                             <ValidationProvider name="imagen" rules="required|image" v-slot="{ errors, validate }">
-                                <b-img  :src="servicio.imagen_url" fluid id="img_servicio" center name="img_servicio" class="imagen-servicio"></b-img>
+                                <b-img v-if="servicio.imagen_url != null" :src="servicio.imagen_url" fluid id="img_servicio" center name="img_servicio" class="imagen-servicio"></b-img>
                                 <b-form-file id="imagen_servicio" name="imagen_servicio" accept="image/*" placeholder="Sin archivo" @change="mostrarFoto($event)" @input="validate"></b-form-file>
                                 <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
                             </ValidationProvider>
@@ -173,7 +173,7 @@
                     id: 0,
                     nombre: '',
                     descripcion: '',
-                    imagen_url: ''
+                    imagen_url: null
                 },
                 modal_servicio: {
                     titulo: '',
@@ -272,7 +272,7 @@
                 formData.append('nombre', this.servicio.nombre);
                 formData.append('descripcion', this.servicio.descripcion);
 
-                axios.post('servicio/crear/actualizar',formData).then(function (response) {
+                axios.post('/pagina/servicio/crear/actualizar',formData).then(function (response) {
                     me.listarServicios();
                     me.cerrarModal();
                     var mensaje = accion == 1 ? 'Registro agregado exitosamente' : 'Registro actualizado exitosamente';
@@ -295,7 +295,7 @@
                 }).then((result) => {
                     if (result.value) {
                         let me = this;
-                        axios.post('/servicio/eliminar',{
+                        axios.post('/pagina/servicio/eliminar',{
                             'id': id
                         }).then(function (response) {
                             me.listarServicios();

@@ -141,7 +141,7 @@
 
                         <b-form-group label="Imagen (Rec. 1920px ancho X 1280px alto | JPG, JPEG y PNG)">
                             <ValidationProvider name="imagen" rules="required|image" v-slot="{ errors, validate }">
-                                <b-img  :src="slider.url_imagen" fluid id="img_slider" center name="img_slider" class="imagen"></b-img>
+                                <b-img v-if="slider.url_imagen != null" :src="slider.url_imagen" fluid id="img_slider" center name="img_slider" class="imagen"></b-img>
                                 <b-form-file id="imagen_slider" name="imagen_slider" accept="image/*" placeholder="Sin archivo" @change="mostrarFoto($event)" @input="validate"></b-form-file>
                                 <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
                             </ValidationProvider>
@@ -150,7 +150,7 @@
                         <b-form-group label="¿Redirección a?">
                             <ValidationProvider name="redirección" rules="required" v-slot="{ errors }">
                                 <b-form-select v-model="slider.link" class="mb-3">
-                                    <option :value="0">Sin redirección</option>
+                                    <option :value="null" selected>Sin redirección</option>
                                 </b-form-select>
                                 <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
                             </ValidationProvider>
@@ -226,8 +226,8 @@
                     id: 0,
                     texto: '',
                     color: '',
-                    url_imagen: '',
-                    link: 0,
+                    url_imagen: null,
+                    link: null,
                     inicio: 0,
                     descanso_uno: 0,
                     descanso_dos: 0,
@@ -419,7 +419,7 @@
                 this.slider.id = 0;
                 this.slider.texto = '';
                 this.slider.color = '';
-                this.slider.link = '';
+                this.slider.link = null;
                 this.slider.url_imagen = null;
                 this.inicio = 0;
                 this.descanso_uno = 0;

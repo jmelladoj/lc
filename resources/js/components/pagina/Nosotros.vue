@@ -18,7 +18,7 @@
                             <tinymce id="d1" v-model="pagina.contenido" :other_options="options"></tinymce>
                         </b-form-group>
                         <b-form-group label="Vídeo:" label-for="video" label-cols-sm="2">
-                            <b-form-file id="video" name="video" accept="video/*"></b-form-file>
+                            <b-form-file id="video" name="video" accept="video/*" placeholder="Sin archivo"></b-form-file>
                         </b-form-group>
                     </b-card>
                 </b-col>
@@ -47,6 +47,7 @@
                     type: clase,
                     title: mensaje,
                     showConfirmButton: true,
+                    showLoaderOnConfirm: true,
                     timer: 2000
                 });
             },

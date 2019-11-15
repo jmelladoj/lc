@@ -22,7 +22,7 @@
 </head>
 <body>
     <div id="app">
-        <footer class="site-wrapper">
+        <div class="site-wrapper">
             <header id="header" @if(request()->is('/')) class="header header--dark header--sticky" @else class="header header--sticky header-hover" @endif data-header-hover="true">
                 <nav id="navigation" class="header-nav">
                     <div class="container-fluid">
@@ -61,8 +61,8 @@
             </header>
 
             <div class="page-container">
-                    @yield('content')
-                </div>
+                @yield('content')
+            </div>
         
             @if(request()->is('/'))
                 <slider-footer></slider-footer>

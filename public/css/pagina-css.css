@@ -15141,13 +15141,14 @@ form .lost_password {
 /* Footer Style */
 .footer {
     position: relative;
-    bottom: 0;
+    bottom: 0;  
     width: 100%;
+    min-height: 20px;
 }
 
 .footer-bottom-area {
-    padding-top: 30px;
-    padding-bottom: 30px;
+    padding-top: 15px;
+    padding-bottom: 15px;
 }
 
 .footer-primary-area {
@@ -15160,8 +15161,8 @@ form .lost_password {
 }
 
 .footer-widget-area {
-    padding-top: 40px;
-    padding-bottom: 20px;
+    padding-top: 25px;
+    padding-bottom: 10px;
 }
 
 .footer-single-area {
@@ -15444,11 +15445,13 @@ a:hover, a:active {
 .btn--secondary {
     background: #E8ECD1 !important;
     color: #1E2F13 !important;
+    border: 1px solid #8ab733;
 }
 
     .btn--secondary:hover {
         background: #8AB733 !important;
         color: #E8ECD1 !important;
+        border: 1px solid #8ab733;
     }
 
 .btn--gray {
