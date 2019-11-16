@@ -139,7 +139,7 @@
                             </ValidationProvider>
                         </b-form-group>
 
-                        <b-form-group label="Imagen (Rec. 1920px ancho X 1280px alto | JPG, JPEG y PNG)">
+                        <b-form-group label="Imagen (Rec. 1920px ancho X 1080px alto | JPG, JPEG y PNG)">
                             <ValidationProvider name="imagen" rules="required|image" v-slot="{ errors, validate }">
                                 <b-img v-if="slider.url_imagen != null" :src="slider.url_imagen" fluid id="img_slider" center name="img_slider" class="imagen"></b-img>
                                 <b-form-file id="imagen_slider" name="imagen_slider" accept="image/*" placeholder="Sin archivo" @change="mostrarFoto($event)" @input="validate"></b-form-file>
@@ -171,33 +171,32 @@
                         <b-row>
                             <b-col>
                                 <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="inicio" v-model="slider.inicio">
-                                    <label class="custom-control-label" for="inicio">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Inicio</label>
+                                    <b-form-checkbox id="checkbox-1" v-model="slider.inicio" value="1" unchecked-value="0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Inicio</b-form-checkbox>
                                 </div>
                                 <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="descanso_uno" v-model="slider.descanso_uno">
+                                    <input type="checkbox" class="custom-control-input" id="descanso_uno" v-model="slider.descanso_uno" :value="0" :checked="1">
                                     <label class="custom-control-label" for="descanso_uno">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Descanso uno</label>
                                 </div>
                                 <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="descanso_dos" v-model="slider.descanso_dos">
+                                    <input type="checkbox" class="custom-control-input" id="descanso_dos" v-model="slider.descanso_dos" :value="0" :checked="1">
                                     <label class="custom-control-label" for="descanso_dos">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Descanso dos</label>
                                 </div>
                                 <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="pagina_nosotros" v-model="slider.pagina_nosotros">
+                                    <input type="checkbox" class="custom-control-input" id="pagina_nosotros" v-model="slider.pagina_nosotros" :value="0" :checked="1">
                                     <label class="custom-control-label" for="pagina_nosotros">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Página nosotros</label>
                                 </div>
                             </b-col>
                             <b-col>
                                 <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="pagina_contacto" v-model="slider.pagina_contacto">
+                                    <input type="checkbox" class="custom-control-input" id="pagina_contacto" v-model="slider.pagina_contacto" :checked="1">
                                     <label class="custom-control-label" for="pagina_contacto">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Página contácto</label>
                                 </div>
                                 <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="pagina_comunidad" v-model="slider.pagina_comunidad">
+                                    <input type="checkbox" class="custom-control-input" id="pagina_comunidad" v-model="slider.pagina_comunidad" :checked="1">
                                     <label class="custom-control-label" for="pagina_comunidad">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Página comunidad</label>
                                 </div>
                                 <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="pagina_servicios" v-model="slider.pagina_servicios">
+                                    <input type="checkbox" class="custom-control-input" id="pagina_servicios" v-model="slider.pagina_servicios" :checked="1">
                                     <label class="custom-control-label" for="pagina_servicios">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Página servicios</label>
                                 </div>
                             </b-col>
@@ -421,13 +420,13 @@
                 this.slider.color = '';
                 this.slider.link = 0;
                 this.slider.url_imagen = null;
-                this.inicio = 0;
-                this.descanso_uno = 0;
-                this.descanso_dos = 0;
-                this.pagina_nosotros = 0;
-                this.pagina_contacto = 0;
-                this.pagina_comunidad = 0;
-                this.pagina_servicios = 0;                
+                this.slider.inicio = 0;
+                this.slider.descanso_uno = 0;
+                this.slider.descanso_dos = 0;
+                this.slider.pagina_nosotros = 0;
+                this.slider.pagina_contacto = 0;
+                this.slider.pagina_comunidad = 0;
+                this.slider.pagina_servicios = 0;                
             }
         },
         mounted() {
