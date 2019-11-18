@@ -19,6 +19,7 @@ class CreateSlidersTable extends Migration
             $table->string('color');
             $table->string('url_imagen')->nullable()->default(null);
             $table->text('link');
+            $table->smallInteger('tipo_persona')->nullable()->default(null);
             $table->boolean('inicio')->default(false);
             $table->boolean('descanso_uno')->default(false);
             $table->boolean('descanso_dos')->default(false);

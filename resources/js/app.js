@@ -29,7 +29,7 @@ import Swatches from 'vue-swatches';
 import 'vue-swatches/dist/vue-swatches.min.css';
 import tinymce from 'vue-tinymce-editor';
 import VueCarousel from 'vue-carousel';
-import vueRut from 'vue-rut'
+import vueRut from 'vue-rut';
 
 // Register it globally
 

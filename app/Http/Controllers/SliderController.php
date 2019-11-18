@@ -46,9 +46,11 @@ class SliderController extends Controller
         
         $slider = Slider::updateOrCreate(
             ['id' => $request->slider_id],
-            ['texto' => $request->texto,
+            [
+                'texto' => $request->texto,
                 'color' => $request->color,
-                'link' => $request->link
+                'link' => $request->link,
+                'tipo_persona' => $request->tipo_persona == 'null' ? NULL : $request->tipo_persona
             ]
         );
 

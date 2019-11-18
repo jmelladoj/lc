@@ -132,9 +132,9 @@
                             </ValidationProvider>
                         </b-form-group>
 
-                        <b-form-group label="Nombre de Slider">
+                        <b-form-group label="Color de letra">
                             <ValidationProvider name="color de letra" rules="required" v-slot="{ errors }">
-                                <swatches v-model="slider.color" inline></swatches>
+                                <swatches v-model="slider.color" :colors="colors" show-fallback popover-to="left"></swatches>
                                 <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
                             </ValidationProvider>
                         </b-form-group>
@@ -155,6 +155,18 @@
                                 <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
                             </ValidationProvider>
                         </b-form-group>
+
+                        <b-form-group label="Segmento de personas">
+                            <ValidationProvider name="segmento de personas" v-slot="{ errors }">
+                                <b-form-select v-model="slider.tipo_persona" class="mb-3">
+                                    <option :value="null" selected>Todos</option>
+                                    <option :value="1" selected>Persona</option>
+                                    <option :value="2" selected>Pyme</option>
+                                    <option :value="3" selected>Estudiante</option>
+                                </b-form-select>
+                                <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
+                            </ValidationProvider>
+                        </b-form-group>
                     </b-form>
 
                     <template slot="modal-footer">
@@ -171,33 +183,30 @@
                         <b-row>
                             <b-col>
                                 <div class="custom-control custom-checkbox">
-                                    <b-form-checkbox id="checkbox-1" v-model="slider.inicio" value="1" unchecked-value="0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Inicio</b-form-checkbox>
+                                    <b-form-checkbox v-model="slider.inicio">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Inicio</b-form-checkbox>
                                 </div>
                                 <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="descanso_uno" v-model="slider.descanso_uno" :value="0" :checked="1">
-                                    <label class="custom-control-label" for="descanso_uno">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Descanso uno</label>
+                                    <b-form-checkbox v-model="slider.descanso_uno">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Descanso uno</b-form-checkbox>
                                 </div>
                                 <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="descanso_dos" v-model="slider.descanso_dos" :value="0" :checked="1">
-                                    <label class="custom-control-label" for="descanso_dos">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Descanso dos</label>
+                                    <b-form-checkbox v-model="slider.descanso_dos">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Descanso dos</b-form-checkbox>
                                 </div>
                                 <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="pagina_nosotros" v-model="slider.pagina_nosotros" :value="0" :checked="1">
-                                    <label class="custom-control-label" for="pagina_nosotros">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Página nosotros</label>
+                                    <b-form-checkbox v-model="slider.pagina_nosotros">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Página nosotros</b-form-checkbox>
                                 </div>
                             </b-col>
                             <b-col>
                                 <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="pagina_contacto" v-model="slider.pagina_contacto" :checked="1">
-                                    <label class="custom-control-label" for="pagina_contacto">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Página contácto</label>
+                                    <b-form-checkbox v-model="slider.pagina_contacto">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Página contácto</b-form-checkbox>
                                 </div>
                                 <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="pagina_comunidad" v-model="slider.pagina_comunidad" :checked="1">
-                                    <label class="custom-control-label" for="pagina_comunidad">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Página comunidad</label>
+                                    <b-form-checkbox v-model="slider.pagina_comunidad">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Página comunidad</b-form-checkbox>
                                 </div>
                                 <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="pagina_servicios" v-model="slider.pagina_servicios" :checked="1">
-                                    <label class="custom-control-label" for="pagina_servicios">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Página servicios</label>
+                                    <b-form-checkbox v-model="slider.pagina_servicios">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Página servicios</b-form-checkbox>
+                                </div>
+                                <div class="custom-control custom-checkbox">
+                                    <b-form-checkbox v-model="estado_checkbox" id="todo" name="todo">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ texto_checkbox }} </b-form-checkbox>
                                 </div>
                             </b-col>
                         </b-row>
@@ -227,14 +236,18 @@
                     color: '',
                     url_imagen: null,
                     link: 0,
-                    inicio: 0,
-                    descanso_uno: 0,
-                    descanso_dos: 0,
-                    pagina_nosotros: 0,
-                    pagina_contacto: 0,
-                    pagina_comunidad: 0,
-                    pagina_servicios: 0
+                    tipo_persona: null,
+                    inicio: false,
+                    descanso_uno: false,
+                    descanso_dos: false,
+                    pagina_nosotros: false,
+                    pagina_contacto: false,
+                    pagina_comunidad: false,
+                    pagina_servicios: false
                 },
+                estado_checkbox: false,
+                texto_checkbox: 'Marcar todos',
+                colors: ['#E8ECD1', '#8AB733', '#3F8A24', '#1E2F13', '#D4AF37', '#D7552A', '#0070C0', '#FFFF99' ,''],
                 modal_slider: {
                     titulo: '',
                     accion: 0
@@ -263,13 +276,30 @@
                 })
             }
         },
+        watch: {
+            estado_checkbox: function(){
+                if(this.estado_checkbox == true){
+                    this.texto_checkbox = 'Desmarcar todos';
+                } else {
+                    this.texto_checkbox = 'Marcar todos';
+                }
+
+                this.slider.inicio = this.estado_checkbox;
+                this.slider.descanso_uno = this.estado_checkbox;
+                this.slider.descanso_dos = this.estado_checkbox;
+                this.slider.pagina_nosotros = this.estado_checkbox;
+                this.slider.pagina_contacto = this.estado_checkbox;
+                this.slider.pagina_comunidad = this.estado_checkbox;
+                this.slider.pagina_servicios = this.estado_checkbox;           
+            }
+        },
         methods:{
             mensaje(clase, mensaje) {
                 Swal.fire({
                     type: clase,
                     title: mensaje,
                     showConfirmButton: true,
-                    timer: 2000
+                    timer: 1000
                 });
             },
             onFiltered(filteredItems) {
@@ -308,6 +338,7 @@
                 formData.append('texto', this.slider.texto);
                 formData.append('color', this.slider.color);
                 formData.append('link', this.slider.link);
+                formData.append('tipo_persona', this.slider.tipo_persona);
                 formData.append('inicio', this.slider.inicio);
                 formData.append('descanso_uno', this.slider.descanso_uno);
                 formData.append('descanso_dos', this.slider.descanso_dos);
@@ -390,6 +421,7 @@
                     me.slider.texto = data['texto'];
                     me.slider.color = data['color'];
                     me.slider.link = data['link'];
+                    me.slider.tipo_persona = data['tipo_persona'];
                     me.slider.url_imagen = 'storage/' + data['url_imagen'];
                 }
 
@@ -399,14 +431,16 @@
                 let me = this;
                 this.limpiarDatosSlider();
 
+                this.texto_checkbox = 'Desmarcar todos';
+                this.estado_checkbox = true;
                 this.slider.id = data['id'];
-                this.slider.inicio = data['inicio'];
-                this.slider.descanso_uno = data['descanso_uno'];
-                this.slider.descanso_dos = data['descanso_dos'];
-                this.slider.pagina_nosotros = data['pagina_nosotros'];
-                this.slider.pagina_contacto = data['pagina_contacto'];
-                this.slider.pagina_comunidad = data['pagina_comunidad'];
-                this.slider.pagina_servicios = data['pagina_servicios'];
+                this.slider.inicio = data['inicio'] == 1 ? true : false;
+                this.slider.descanso_uno = data['descanso_uno'] == 1 ? true : false;
+                this.slider.descanso_dos = data['descanso_dos'] == 1 ? true : false;
+                this.slider.pagina_nosotros = data['pagina_nosotros'] == 1 ? true : false;
+                this.slider.pagina_contacto = data['pagina_contacto'] == 1 ? true : false;
+                this.slider.pagina_comunidad = data['pagina_comunidad'] == 1 ? true : false;
+                this.slider.pagina_servicios = data['pagina_servicios'] == 1 ? true : false;
 
                 this.$refs['modal_ubicaciones'].show();
             },
@@ -420,13 +454,16 @@
                 this.slider.color = '';
                 this.slider.link = 0;
                 this.slider.url_imagen = null;
-                this.slider.inicio = 0;
-                this.slider.descanso_uno = 0;
-                this.slider.descanso_dos = 0;
-                this.slider.pagina_nosotros = 0;
-                this.slider.pagina_contacto = 0;
-                this.slider.pagina_comunidad = 0;
-                this.slider.pagina_servicios = 0;                
+                this.slider.tipo_persona = null;
+                this.slider.inicio = false;
+                this.slider.descanso_uno = false;
+                this.slider.descanso_dos = false;
+                this.slider.pagina_nosotros = false;
+                this.slider.pagina_contacto = false;
+                this.slider.pagina_comunidad = false;
+                this.slider.pagina_servicios = false;               
+                this.estado_checkbox = false;
+                this.texto_checkbox = 'Marcar todos';
             }
         },
         mounted() {
@@ -434,3 +471,18 @@
         }
     }
 </script>
+
+<style>
+    .vue-swatches__wrapper {
+        width: auto !important;
+    }
+
+    .vue-swatches__fallback__wrapper {
+        width: auto !important;
+    }
+
+    .vue-swatches__swatch {
+        height: 30px !important;
+        width: 30px !important;
+    }
+</style>

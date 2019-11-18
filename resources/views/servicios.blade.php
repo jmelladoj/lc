@@ -13,7 +13,7 @@
         </div>
     </section>
 
-    <section class="sec-padding">
+    <section class="sec-padding-login">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
@@ -30,13 +30,15 @@
                                 <!--Blog Item-->
                             <div class="blog-item">
                                 <div class="blog-item-content">
-                                    <h4 class="blog-title"><a href="#">{{ $item->titulo }}</a></h4>
+                                    <h4 class="blog-title"><a href="#">{{ $item->nombre }}</a></h4>
                                     <div class="blog-description-content">
                                         <p>
                                             {{ $item->descripcion }}
                                         </p>
                                     </div>
-                                    <img src="{{ asset('storage/' . $item->clase) }}" class="img-fluid" />
+                                    <div class="text-center">
+                                        <img  src="{{ asset('storage/' . $item->imagen_url) }}" class="img-fluid" height="80"/>
+                                    </div>
                                 </div>
                             </div>
                             <!--End Blog Item-->
@@ -47,4 +49,6 @@
             @endif
         </div>
     </section>
+
+    <sliders-ubicacion :ubicacion="6"></sliders-ubicacion>
 @endsection

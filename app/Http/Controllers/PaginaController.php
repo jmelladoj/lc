@@ -30,6 +30,10 @@ class PaginaController extends Controller
         return view('servicios')->with(compact('pagina', 'servicios'));
     }
 
+    public function indexHomeContacto(){
+        return view('contacto');
+    }
+
     public function indexComunidad(Request $request)
     {
         return ['pagina' => Pagina::find(2)];
