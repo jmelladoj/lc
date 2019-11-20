@@ -4,6 +4,7 @@
             <b-carousel  :interval="4000" controls indicators background="rgba(0,0,0,0.6)" img-width="" img-height="600" style="text-shadow: 1px 1px 2px #333;">
                 <b-carousel-slide v-for="(slider, index) in sliders" :key="index" :img-src="'storage/' + slider.url_imagen">
                     <h2 class="intro-title" v-text="slider.texto" :style="'color:' + slider.color"></h2>
+                    <h4 v-if="slider.subtexto != ''" :style="'color:' + slider.subcolor" v-text="slider.subtexto"></h4>
                     <a :href="slider.link" class="btn btn--primary space--1 btn-sm" v-if="slider.link != ''">Ver más</a>
                 </b-carousel-slide>
             </b-carousel>
@@ -46,7 +47,7 @@
         bottom: 0;
         left: 0;
         z-index: 10;
-        padding-top: 10%;
+        padding-top: 5%;
         padding-bottom: 20px;
         text-align: center;
         top: 0;

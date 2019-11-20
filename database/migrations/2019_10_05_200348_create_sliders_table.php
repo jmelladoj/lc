@@ -17,6 +17,8 @@ class CreateSlidersTable extends Migration
             $table->bigIncrements('id');
             $table->string('texto');
             $table->string('color');
+            $table->string('subtexto')->nullable()->default(null);
+            $table->string('subcolor')->nullable()->default(null);
             $table->string('url_imagen')->nullable()->default(null);
             $table->text('link');
             $table->smallInteger('tipo_persona')->nullable()->default(null);

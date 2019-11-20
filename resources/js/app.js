@@ -78,6 +78,7 @@ Vue.component('busqueda', require('./components/pagina/Busqueda.vue').default);
 //Intranet
 Vue.component('general', require('./components/intranet/General.vue').default);
 Vue.component('sliders', require('./components/intranet/Sliders.vue').default);
+Vue.component('sliders-comunidad', require('./components/intranet/SlidersComunidad.vue').default);
 Vue.component('comunidad', require('./components/intranet/Comunidad.vue').default);
 Vue.component('servicios', require('./components/intranet/Servicios.vue').default);
 Vue.component('categoria-documentos', require('./components/intranet/CategoriaDocumentos.vue').default);

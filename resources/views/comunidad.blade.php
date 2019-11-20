@@ -33,7 +33,7 @@
         </div>
     </section>
 
-    <sliders-comunidad-pyme {{-- @auth :tipo_persona="{{ Auth::user()->tipo_persona }}" @endauth  --}}></sliders-comunidad-pyme>
+    <sliders-comunidad-pyme  @auth :tipo_persona="{{ Auth::user()->tipo_persona }}" @endauth></sliders-comunidad-pyme>
 
     <section class="breadcrumb">
         <div class="breadcrumb-content">

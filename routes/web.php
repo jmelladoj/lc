@@ -27,6 +27,7 @@ Route::get('/documentos/busqueda/{categoria}', 'DocumentoController@indexBusqued
 
 
 
+Route::get('/sliders/comunidad/home', 'SliderComunidadController@indexHome')->name('Listar Sliders Home Comunidad');
 Route::get('/sliders/home', 'SliderController@indexHome')->name('Listar Sliders Home');
 Route::get('/categorias/home', 'CategoriaDocumentoController@indexHome')->name('Listar Categorias Home');
 Route::get('/sliders/ubicacion/{ubicacion}', 'SliderController@indexUbicacion')->name('Listar Sliders Por Ubicacion');
@@ -52,6 +53,7 @@ Route::post('/pagina/nosotros/actualizar', 'PaginaController@actualizarNosotros'
 Route::post('/pagina/comunidad/actualizar', 'PaginaController@actualizarComunidad')->name('Actualizar página comunidad');
 Route::post('/pagina/servicios/actualizar', 'PaginaController@actualizarServicios')->name('Actualizar página servicios');
 Route::post('/pagina/login/actualizar', 'PaginaController@actualizarLogin')->name('Actualizar página login');
+Route::post('/pagina/comunidad/alerta', 'PaginaController@alertaComunidad')->name('Alertas comunidad');
 
 //Rutas de servicios
 Route::get('/pagina/servicios/intranet', 'ServicioController@index')->name('Listar Servicios');
@@ -155,6 +157,12 @@ Route::post('/valorar/pyme', 'ValoracionController@valorar')->name('Valorar Pyme
 Route::get('/sitios', 'InteresController@index')->name('Listar sitios de interes');
 Route::post('/sitio/crear/actualizar', 'InteresController@crearOactualizar')->name('Crear o Actualizar sitios de interes');
 Route::post('/sitio/eliminar', 'InteresController@eliminar')->name('Borrar sitios de interes');
+
+//Rutas de sliders
+Route::get('/sliders/comunidad', 'SliderComunidadController@index')->name('Listar Sliders comunidad');
+Route::post('/slider/comunidad/crear/actualizar', 'SliderComunidadController@crearOactualizar')->name('Crear o Actualizar Sliders comunidad');
+Route::post('/slider/comunidad/eliminar', 'SliderComunidadController@eliminar')->name('Borrar Slider comunidad');
+
 
 
 

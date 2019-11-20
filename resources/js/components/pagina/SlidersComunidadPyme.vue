@@ -1,5 +1,5 @@
 <template>
-    <section id="intro" class="intro mb-5">
+    <section v-show="tipo_persona == undefined || tipo_persona == 2" id="intro" class="intro mb-5">
         <div class="item height-400px sm-height-400px">
             <div class="item height-400px sm-height-400px">
                 <b-carousel v-if="tipo_persona == undefined"  :interval="4000" controls indicators background="rgba(0,0,0,0.6)" img-width="" img-height="200" style="text-shadow: 1px 1px 2px #333;">
@@ -10,10 +10,10 @@
                 </b-carousel>
 
                 <b-carousel v-else-if="tipo_persona == 2"  :interval="4000" controls indicators background="rgba(0,0,0,0.6)" img-width="" img-height="200" style="text-shadow: 1px 1px 2px #333;">
-
-                    <b-carousel-slide v-for="(slider, index) in sliders_no_logeado" :key="index" :img-src="'https://i1.wp.com/www.practicallysane.net/wp-content/uploads/2019/01/work.jpg?fit=1950%2C1300&ssl=1'">
+                    <b-carousel-slide v-for="(slider, index) in sliders" :key="index" :img-src="'storage/' + slider.url_imagen">
                         <h2 class="intro-title"  v-text="slider.texto" style="color: #fff"></h2>
-                        <a href="#" class="btn btn--primary space--1 btn-sm" v-text="slider.boton"></a>
+                        <h4 v-if="slider.subtexto != ''" :style="'color:' + slider.subcolor" v-text="slider.subtexto"></h4>
+                        <a href="javascript:void(0)" @click="realizarConsulta(slider.texto_modal, slider.link)" class="btn btn--primary space--1 btn-sm" v-text="slider.texto_boton"></a>
                     </b-carousel-slide>
                 </b-carousel>
             </div>
@@ -28,28 +28,62 @@
         ],
         data() {
             return {
-                sliders_no_logeado: null
+                sliders: []
             }
         },  
+        methods: {
+            mensaje(clase, mensaje) {
+                Swal.fire({
+                    type: clase,
+                    title: mensaje,
+                    showConfirmButton: true,
+                    timer: 2000
+                });
+            },
+            listarSliders (){
+                let me=this;
+                axios.get('/sliders/comunidad/home').then(function (response) {
+                    me.sliders = response.data.sliders;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+            },
+            realizarConsulta(titulo, ruta){
+                Swal.fire({
+                    title: titulo,
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#8AB733',
+                    cancelButtonColor: '#d7552a',
+                    confirmButtonText: 'Aceptar!',
+                    cancelButtonText: 'Cancelar',
+                    confirmButtonClass: 'btn btn-success',
+                    cancelButtonClass: 'btn btn-danger',
+                }).then((result) => {
+                    if (result.value) {
+                        let me = this;
+                        axios.post('/pagina/comunidad/alerta',{
+                            'mensaje': 'Prueba de mensaje'
+                        }).then(function (response) {
+                            me.listarSliders();
+                            me.mensaje('success', '!Felicitaciones¡, pronto serás contactado por Prevención LebenCo.');
+                        }).catch(function (error) {
+                            console.log(error);
+                        });
+                    } else if (result.dismiss === Swal.DismissReason.cancel) {}
+                })
+            }
+        },
         mounted() {
-            this.sliders_no_logeado = [
-                {
-                    boton: 'Ver más',
-                    texto: '¿Quieres ser parte de nuestra comunidad Pyme?'
-                },
-                {
-                    boton: '¿Cómo ser parte de la comunidad Pyme?',
-                    texto: '¡Comienza aquí!'
-                },
-                {
-                    boton: '¿Cómo llegar al Top five en la comunidad Pyme?',
-                    texto: '¡Descúbrelo aquí!'
-                },
-                {
-                    boton: '¿Cómo destacar tu Pyme?',
-                    texto: '¡Destácate aquí!'
-                }
-            ]
+            this.listarSliders();
         }
     }
 </script>
+
+<style>
+    .swal2-styled:focus {
+        outline: 0;
+        box-shadow: none;
+    }
+</style>

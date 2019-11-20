@@ -293,8 +293,8 @@
                     title: mensaje,
                     type: 'warning',
                     showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
+                    confirmButtonColor: '#8AB733',
+                    cancelButtonColor: '#d7552a',
                     confirmButtonText: 'Aceptar!',
                     cancelButtonText: 'Cancelar',
                     confirmButtonClass: 'btn btn-success',
@@ -348,3 +348,11 @@
         }
     }
 </script>
+
+
+<style>
+    .swal2-styled:focus {
+        outline: 0;
+        box-shadow: none;
+    }
+</style>

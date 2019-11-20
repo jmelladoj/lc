@@ -2,7 +2,7 @@
     <div class="page-wrapper">
         <b-container fluid class="mb-5">
             <b-row class="page-titles">
-                <b-col cols="5" class="align-self-center"><h4 class="text-themecolor">Sliders</h4></b-col>
+                <b-col cols="5" class="align-self-center"><h4 class="text-themecolor">Sliders generales</h4></b-col>
                 <b-col cols="7">
                     <div class="d-flex justify-content-end align-items-right">
                         <sociales></sociales>
@@ -125,19 +125,34 @@
             <ValidationObserver ref="observer_slider" v-slot="{ valid }">
                 <b-modal ref="modal_slider" :title="modal_slider.titulo" no-close-on-backdrop scrollable>
                     <b-form>
-                        <b-form-group label="Texto de Slider">
-                            <ValidationProvider name="texto" rules="required|min:3" v-slot="{ errors }">
+                        <b-form-group label="Título">
+                            <ValidationProvider name="título" rules="required|min:3" v-slot="{ errors }">
                                 <b-form-input type="text" v-model="slider.texto"></b-form-input>
                                 <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
                             </ValidationProvider>
                         </b-form-group>
 
-                        <b-form-group label="Color de letra">
-                            <ValidationProvider name="color de letra" rules="required" v-slot="{ errors }">
+                        <b-form-group label="Color de título">
+                            <ValidationProvider name="color de título" rules="required" v-slot="{ errors }">
                                 <swatches v-model="slider.color" :colors="colors" show-fallback popover-to="left"></swatches>
                                 <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
                             </ValidationProvider>
                         </b-form-group>
+
+                        <b-form-group label="Subtítulo">
+                            <ValidationProvider name="subtítulo" rules="min:3" v-slot="{ errors }">
+                                <b-form-input type="text" v-model="slider.subtexto"></b-form-input>
+                                <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
+                            </ValidationProvider>
+                        </b-form-group>
+
+                        <b-form-group label="Color de subtítulo">
+                            <ValidationProvider name="color de subtítulo" v-slot="{ errors }">
+                                <swatches v-model="slider.subcolor" :colors="colors" show-fallback popover-to="left"></swatches>
+                                <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
+                            </ValidationProvider>
+                        </b-form-group>
+
 
                         <b-form-group label="Imagen (1920px ancho X 1080px alto | JPG, JPEG y PNG)">
                             <ValidationProvider name="imagen" rules="required|dimensions:1920,1080" v-slot="{ errors, validate }">
@@ -233,7 +248,9 @@
                 slider: {
                     id: 0,
                     texto: '',
+                    subtexto: '',
                     color: '',
+                    subcolor: '',
                     url_imagen: null,
                     link: 0,
                     tipo_persona: null,
@@ -337,6 +354,8 @@
                 formData.append('slider_id', this.slider.id);
                 formData.append('texto', this.slider.texto);
                 formData.append('color', this.slider.color);
+                formData.append('subtexto', this.slider.subtexto);
+                formData.append('subcolor', this.slider.subcolor);
                 formData.append('link', this.slider.link);
                 formData.append('tipo_persona', this.slider.tipo_persona);
                 formData.append('inicio', this.slider.inicio);
@@ -381,8 +400,8 @@
                     title: '¿Deseas borrar el Slider?',
                     type: 'warning',
                     showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
+                    confirmButtonColor: '#8AB733',
+                    cancelButtonColor: '#d7552a',
                     confirmButtonText: 'Aceptar!',
                     cancelButtonText: 'Cancelar',
                     confirmButtonClass: 'btn btn-success',
@@ -420,6 +439,8 @@
                     me.slider.id = data['id'];
                     me.slider.texto = data['texto'];
                     me.slider.color = data['color'];
+                    me.slider.subtexto = data['subtexto'];
+                    me.slider.subcolor = data['subcolor'];
                     me.slider.link = data['link'];
                     me.slider.tipo_persona = data['tipo_persona'];
                     me.slider.url_imagen = 'storage/' + data['url_imagen'];
@@ -452,6 +473,8 @@
                 this.slider.id = 0;
                 this.slider.texto = '';
                 this.slider.color = '';
+                this.slider.subtexto = '';
+                this.slider.subcolor = '';
                 this.slider.link = 0;
                 this.slider.url_imagen = null;
                 this.slider.tipo_persona = null;

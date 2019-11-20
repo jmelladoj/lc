@@ -13,7 +13,15 @@
                         <li @click="menu=6"><a href="javascript:void(0)">Organismos</a></li>
                     </ul>
                 </li>
-                <li @click="menu=1"><a class="waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fa fa-picture-o"></i><span class="hide-menu">Sliders</span></a></li>
+
+                <li>
+                    <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fa fa-picture-o" aria-hidden="true"></i><span class="hide-menu">Sliders </span></a>
+                    <ul aria-expanded="false" class="collapse">
+                        <li @click="menu=1"><a href="javascript:void(0)">General</a></li>
+                        <li @click="menu=8"><a href="javascript:void(0)">Comunidad</a></li>
+                    </ul>
+                </li>
+
                 <li>
                     <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fa fa-folder-o" aria-hidden="true"></i><span class="hide-menu">Páginas </span></a>
                     <ul aria-expanded="false" class="collapse">
@@ -111,6 +119,12 @@
 <template v-if="ubicacion == 0 && menu==6">
     <interes></interes>
 </template>
+
+<template v-if="ubicacion == 0 && menu==8">
+    <sliders-comunidad></sliders-comunidad>
+</template>
+
+
 
 <template v-if="ubicacion == 1 && menu==0">
     <categoria-documentos></categoria-documentos>

@@ -50,6 +50,8 @@ class SliderController extends Controller
                 'texto' => $request->texto,
                 'color' => $request->color,
                 'link' => $request->link,
+                'subtexto' => $request->subtexto,
+                'subcolor' =>  $request->subcolor,
                 'tipo_persona' => $request->tipo_persona == 'null' ? NULL : $request->tipo_persona
             ]
         );
