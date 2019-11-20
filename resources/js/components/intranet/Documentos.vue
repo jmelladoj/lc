@@ -198,7 +198,8 @@
                                 <b-form-file id="documento" name="documento" accept=".pdf,.docx,.xlsx,.mp4,.pptx,.mp3" placeholder="Sin archivo" @input="validate"></b-form-file>
                                 <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
                             </ValidationProvider>
-                        </b-form-group>
+                        </b-form-group> 
+
                     </b-form>
 
                     <template slot="modal-footer">

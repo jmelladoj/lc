@@ -14,13 +14,13 @@
             <b-row>
                 <b-col>
                     <b-card title="Logos">
-                        <b-form-group label="Logo (155px alto X 95px ancho | PNG):" label-for="logo" label-cols-sm="4">
+                        <b-form-group label="Logo (150px alto X 34px ancho | PNG):" label-for="logo" label-cols-sm="4">
                             <b-form-file id="logo" name="logo" accept="image/png" placeholder="Sin archivo"></b-form-file>
                         </b-form-group>
                         <b-form-group label="Favicon (155px alto X 95px ancho | PNG):" label-for="favicon" label-cols-sm="4">
                             <b-form-file id="favicon" name="favicon" accept="image/png" placeholder="Sin archivo"></b-form-file>
                         </b-form-group>
-                        <b-form-group label="Logo Footer (155px alto X 95px ancho | PNG):" label-for="logo_footer" label-cols-sm="4">
+                        <b-form-group label="Logo Footer (150px alto X 34px ancho | PNG)" label-for="logo_footer" label-cols-sm="4">
                             <b-form-file id="logo_footer" name="logo_footer" accept="image/png" placeholder="Sin archivo"></b-form-file>
                         </b-form-group>
                     </b-card>

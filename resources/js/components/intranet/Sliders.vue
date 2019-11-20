@@ -139,8 +139,8 @@
                             </ValidationProvider>
                         </b-form-group>
 
-                        <b-form-group label="Imagen (Rec. 1920px ancho X 1080px alto | JPG, JPEG y PNG)">
-                            <ValidationProvider name="imagen" rules="required|image" v-slot="{ errors, validate }">
+                        <b-form-group label="Imagen (1920px ancho X 1080px alto | JPG, JPEG y PNG)">
+                            <ValidationProvider name="imagen" rules="required|dimensions:1920,1080" v-slot="{ errors, validate }">
                                 <b-img v-if="slider.url_imagen != null" :src="slider.url_imagen" fluid id="img_slider" center name="img_slider" class="imagen"></b-img>
                                 <b-form-file id="imagen_slider" name="imagen_slider" accept="image/*" placeholder="Sin archivo" @change="mostrarFoto($event)" @input="validate"></b-form-file>
                                 <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
