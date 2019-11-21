@@ -39,6 +39,7 @@
                         </ul>
                         
                         <ul class="navbar-nav my-lg-0">
+                            <li class="nav-item right-side-toggle btn-info"><a class="nav-link dropdown-toggle waves-effect waves-dark" aria-expanded="false"><i class="fa fa-usd"></i><span class="hide-menu"> {{ Auth::user()->saldo }}</span></a></li>
                             @if(Auth::user()->tipo_usuario < 3)
                                 <notificaciones></notificaciones>
                             @endif

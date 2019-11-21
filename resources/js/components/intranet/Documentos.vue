@@ -91,6 +91,12 @@
                                     {{ data.index + 1 }}
                                 </template>
 
+                                <template v-slot:cell(nombre_categoria)="data">
+                                    {{ data.item.categoria.nombre }}
+                                </template>
+
+                                
+
                                 <template v-slot:cell(acciones)="row">
                                     <b-button size="xs" variant="success" title="Descargar documento" @click="descargar(row.item.id)">
                                         <i class="fa fa-file"></i>
@@ -200,6 +206,20 @@
                             </ValidationProvider>
                         </b-form-group> 
 
+                        <b-form-group label="Vista previa de uno">
+                            <ValidationProvider name="vista previa" v-slot="{ errors, validate }">
+                                <b-form-file id="documento_uno" name="documento_uno" accept="image/*" placeholder="Sin archivo" @change="validate"></b-form-file>
+                                <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
+                            </ValidationProvider>
+                        </b-form-group>
+
+                        <b-form-group label="Vista previa de dos">
+                            <ValidationProvider name="vista previa" v-slot="{ errors, validate }">
+                                <b-form-file id="documento_dos" name="documento_dos" accept="image/*" placeholder="Sin archivo" @change="validate"></b-form-file>
+                                <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
+                            </ValidationProvider>
+                        </b-form-group>
+
                     </b-form>
 
                     <template slot="modal-footer">
@@ -243,6 +263,7 @@
                 fields: [
                     { key: 'index', label: '#', sortable: true, sortDirection: 'desc', class: 'text-center' },
                     { key: 'titulo', label: 'NOMBRE', sortable: true, class: 'text-left' },
+                    { key: 'nombre_categoria', label: 'CATEGORÍA', sortable: true, class: 'text-left' },
                     { key: 'acciones', label: 'ACCIONES', sortable: true, class: 'text-center' }
                 ],
                 categorias: [],
@@ -299,8 +320,15 @@
                 let me = this;
 
                 let formData = new FormData();
+
                 let documento = document.querySelector('#documento');
                 formData.append('documento', documento.files[0]);
+
+                let documento_uno = document.querySelector('#documento_uno');
+                formData.append('documento_uno', documento_uno.files[0]);
+
+                let documento_dos = document.querySelector('#documento_dos');
+                formData.append('documento_dos', documento_dos.files[0]);
                 
                 formData.append('documento_id', this.documento.id);
                 formData.append('titulo', this.documento.titulo);
@@ -402,7 +430,7 @@
                     me.documento.codigo_interno = data['codigo_interno'];
                     me.documento.valor = data['valor'];
                     me.documento.clasificacion = data['clasificacion'];
-                    me.documento.categoria_id = data['categoria_documentos_id'];
+                    me.documento.categoria_id = data['categorias_documentos_id'];
                 }
 
                 this.$refs['modal_documento'].show();

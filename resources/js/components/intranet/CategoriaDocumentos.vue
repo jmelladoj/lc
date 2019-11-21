@@ -76,8 +76,7 @@
                                     :sort-by.sync="sortBy"
                                     :sort-desc.sync="sortDesc"
                                     :sort-direction="sortDirection"
-                                    @filtered="onFiltered"
->
+                                    @filtered="onFiltered">
 
                                 <template slot="empty">
                                     <center><h5>No hay registros para mostrar.</h5></center>
@@ -128,7 +127,7 @@
                 <b-modal ref="modal_categoria" :title="modal_categoria.titulo" no-close-on-backdrop>
                     <b-form>
                         <b-form-group label="Nombre de Categoría">
-                            <ValidationProvider name="nombre" rules="required|min:3|alpha_spaces" v-slot="{ errors }">
+                            <ValidationProvider name="nombre" rules="required|min:3|alpha_dash" v-slot="{ errors }">
                                 <b-form-input type="text" v-model="categoria.nombre"></b-form-input>
                                 <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
                             </ValidationProvider>
@@ -149,7 +148,7 @@
                         <b-form-group>
                             <b-row>
                                 <b-col cols="8">
-                                    <ValidationProvider name="nombre" rules="required|min:3|alpha_spaces" v-slot="{ errors }">
+                                    <ValidationProvider name="nombre" rules="required|min:3|alpha_dash" v-slot="{ errors }">
                                         <b-form-input type="text" v-model="subcategoria.nombre" placeholder="Nombre de subcategoría"></b-form-input>
                                         <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
                                     </ValidationProvider>

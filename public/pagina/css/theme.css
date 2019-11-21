@@ -6336,3 +6336,13 @@ form .lost_password {
 .footer .social a:hover, .footer .links li a:hover, .footer .links li a:hover {
     opacity: 0.7;
 }
+
+.modal-backdrop {   
+    background-color: #CBCFB5;
+    /*opacity: 0.9 !important;*/
+}
+
+.form-control:focus {
+    box-shadow: 0 0 0 0.05rem rgba(138, 183, 51, 0.25);
+    border-color: rgba(138, 183, 51);
+}

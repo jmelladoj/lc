@@ -18,10 +18,10 @@ class DocumentoController extends Controller
     public function index($tipo){      
         switch ($tipo) {
             case 1:
-                return ['documentos' => Documento::where('estado', 1)->orderBy('created_at', 'desc')->get()];
+                return ['documentos' => Documento::where('estado', 1)->with('categoria')->orderBy('created_at', 'desc')->get()];
                 break;
             case 2:
-                return ['documentos' => Documento::where('estado', 0)->orderBy('created_at', 'desc')->get()];
+                return ['documentos' => Documento::where('estado', 0)->with('categoria')->orderBy('created_at', 'desc')->get()];
                 break;
             case 3:
                 return ['documentos' => Documento::where('user_id', Auth::id())->orderBy('created_at', 'asc')->get()];
@@ -72,16 +72,20 @@ class DocumentoController extends Controller
             ]
         );
         
-        if ($request->hasFile('documento')) {
-            $url = Storage::disk('public')->putFile(
-                'documentos', $request->file('documento')
-            );
-
-            Documento::updateOrCreate(['id' => $documento->id], 
-                                    ['documento_url' => $url,
-                                    'extension' => $request->file('documento')->getClientOriginalExtension(),
-                                    'version' => $documento->version += 1]);
+        if ($request->hasFile('documento')) { 
+            $url = Storage::disk('public')->putFile('documentos', $request->file('documento'));
+            Documento::updateOrCreate(['id' => $documento->id], ['documento_url' => $url, 'extension' => $request->file('documento')->getClientOriginalExtension(),'version' => $documento->version += 1]);
         }  
+
+        if ($request->hasFile('documento_uno')) { 
+            $url = Storage::disk('public')->putFile('vista_documentos', $request->file('documento_uno'));
+            Documento::updateOrCreate(['id' => $documento->id], ['url_imagen_vista_uno' => $url]);
+        } 
+
+        if ($request->hasFile('documento_dos')) { 
+            $url = Storage::disk('public')->putFile('vista_documentos', $request->file('documento_dos'));
+            Documento::updateOrCreate(['id' => $documento->id], ['url_imagen_vista_dos' => $url]);
+        } 
     }
     public function eliminar(Request $request){
         Documento::findOrFail($request->id)->delete();
@@ -115,6 +119,22 @@ class DocumentoController extends Controller
     }
 
     public function descargar(Request $request){
-        return ['documento' => Documento::find($request->id)];
+
+        $documento = Documento::find($request->id);
+        $usuario = Auth::user();
+
+        if($usuario->tipo_usuario < 3){
+            return ['documento' => $documento, 'clase' => 'success'];
+        } else if($usuario->saldo >= $documento->valor){
+            $usuario->saldo -= $documento->valor;
+            $usuario->save();
+
+            $documento->cantidad_descargas += 1;
+            $documento->save();
+
+            return ['documento' => $documento, 'clase' => 'success'];
+        } else {
+            return ['mensaje' => 'No tienes saldo para usar el servicio, por favor recarga e intenta nuevamente', 'clase' => 'error'];
+        }        
     }
 }

@@ -10,8 +10,8 @@ class SubCategoriaDocumento extends Model
     //
     use SoftDeletes;
 
-    protected $fillable = [
-        'id','nombre', 'categoria_documento_id'
+    protected $guarded = [
+        'id'
     ];
 
     protected $dates = ['deleted_at'];

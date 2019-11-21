@@ -10,8 +10,8 @@ class Documento extends Model
     //
     use SoftDeletes;
 
-    protected $fillable = [
-        'id','titulo', 'descripcion', 'codigo', 'codigo_interno', 'documento_url', 'valor', 'clasificacion', 'cantidad_descargas', 'extension', 'version', 'categorias_documentos_id', 'estado', 'user_id'
+    protected $guarded = [
+        'id'
     ];
 
     protected $dates = ['deleted_at'];
@@ -41,6 +41,10 @@ class Documento extends Model
 
     public function usuario(){
         return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function categoria(){
+        return $this->belongsTo(CategoriaDocumento::class, 'categorias_documentos_id');
     }
 
 }
