@@ -95,6 +95,9 @@
                                     </div>
                                     <div class="col-lg-4 col-md-4">
                                         <input class="input--lg form-full run" name="run" id="run" type="text" placeholder="RUN personal o RUT si eres una Pyme" value="{{ old('run') }}" required>
+                                        <div id="error_rut" name="error_rut" class="alert alert-danger" role="alert">
+                                            <span>El rut o run ingresado no es válido</span>
+                                        </div>
                                     </div>
                                     <div class="col-lg-4 col-md-4">
                                         <input class="input--lg form-full" name="email" id="email" type="email" placeholder="Correo electrónico" value="{{ old('email') }}" required>
@@ -113,10 +116,6 @@
                             </p>
                             <p class="form-field-wrapper text-justify">
                                 Sus datos personales se utilizarán con el fin de respaldar su experiencia en nuestro sitio web, administrar el acceso a su cuenta y para otros fines descritos en <a class="sale-color" href="{{ url('/politicas') }}" target="_blank">nuestras Políticas </a>, al registrarse usted acepta nuestros términos de uso y condiciones de privacidad, que han sido establecidas por Prevención LebenCo. SpA.
-                                {{--<a href="{{ asset('storage/' . $pagina->terminos_url ) }}" style="color: #009bdb;" target="_blank">i.- Términos y condiciones <a>, 
-                                <a href="{{ asset('storage/' . $pagina->privacidad_url ) }}" style="color: #009bdb;" target="_blank">ii.- Política de privacidad <a>, 
-                                <a href="{{ asset('storage/' . $pagina->satisfaccion_url ) }}" style="color: #009bdb;" target="_blank">iii.- Política de satisfacción <a>, 
-                                <a href="{{ asset('storage/' . $pagina->derecho_url ) }}" style="color: #009bdb;" target="_blank">iv.- Derechos de autor <a>.--}}
                                 
                             </p>
                             <p class="form-field-wrapper">

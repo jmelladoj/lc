@@ -13,7 +13,7 @@
                     <b-carousel-slide v-for="(slider, index) in sliders" :key="index" :img-src="'storage/' + slider.url_imagen">
                         <h2 class="intro-title"  v-text="slider.texto" style="color: #fff"></h2>
                         <h4 v-if="slider.subtexto != ''" :style="'color:' + slider.subcolor" v-text="slider.subtexto"></h4>
-                        <a href="javascript:void(0)" @click="realizarConsulta(slider.texto_modal, slider.link)" class="btn btn--primary space--1 btn-sm" v-text="slider.texto_boton"></a>
+                        <a href="javascript:void(0)" @click="realizarConsulta(slider.texto_alerta, slider.link)" class="btn btn--primary space--1 btn-sm" v-text="slider.texto_boton"></a>
                     </b-carousel-slide>
                 </b-carousel>
             </div>
@@ -64,7 +64,7 @@
                     if (result.value) {
                         let me = this;
                         axios.post('/pagina/comunidad/alerta',{
-                            'mensaje': 'Prueba de mensaje'
+                            'mensaje': titulo
                         }).then(function (response) {
                             me.listarSliders();
                             me.mensaje('success', '!Felicitaciones¡, pronto serás contactado por Prevención LebenCo.');

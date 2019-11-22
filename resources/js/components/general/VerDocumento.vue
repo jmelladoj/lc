@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="product-item-img">
+        <div class="product-item-img" @click="abrirModalVistaDocumento()">
             <a class="product-item-img-link">
                 <img v-bind:src="'../' + documento.imagen" alt="Imagen de documento" />
             </a>
@@ -24,7 +24,7 @@
             </p>
         </div>
 
-        <b-modal ref="modal_vista_documento" :title="modal_vista_documento.titulo"  size="lg" modal-scrollable no-close-on-backdrop>
+        <b-modal ref="modal_vista_documento" :title="modal_vista_documento.titulo"  size="lg"  no-close-on-backdrop>
             <b-form>
                 <b-form-group class="mb-4">
                     <b-form-textarea readonly="" :value="documento.descripcion" no-resize></b-form-textarea>
@@ -114,12 +114,18 @@
                         }).then(function (response) {
                             if(response.data.clase == 'success'){
                                 me.mensaje('success', 'El Documento se descargara pronto!');
-                                const url = window.URL.createObjectURL(new Blob([response.data.documento_url]));
+
+                                const url = window.URL.createObjectURL(new Blob(['/storage/' + response.data.documento_url]));
+
+                                
                                 const link = document.createElement('a');
                                 link.href = url;
+
                                 link.setAttribute('download',  response.data.documento.titulo + '.' + response.data.documento.extension);
                                 document.body.appendChild(link);
                                 link.click();
+                                link.remove();
+                                window.URL.revokeObjectURL(url);
                             } else {
                                 me.mensaje(response.data.clase, response.data.mensaje);
                             }
@@ -150,5 +156,18 @@
 
     .modal-footer {
         border-top: 0px solid #e9ecef;
+    }
+
+    .modal{
+        display: block !important; /* I added this to see the modal, you don't need this */
+    }
+
+    /* Important part */
+    .modal-dialog{
+        overflow-y: initial !important
+    }
+    .modal-body {
+        max-height: calc(100vh - 13rem);
+        overflow-y: auto;
     }
 </style>

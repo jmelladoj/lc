@@ -15329,6 +15329,10 @@ form .lost_password {
     box-shadow: 0 0 0 0.05rem rgba(138, 183, 51, 0.25);
     border-color: rgba(138, 183, 51);
 }
+
+#error_rut {
+    display: none;
+}
 ﻿/*
  * General
     - Typography

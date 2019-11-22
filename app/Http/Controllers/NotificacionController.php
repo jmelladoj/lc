@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Notifications\DatabaseNotification;
 use Illuminate\Support\Facades\Auth;
@@ -13,13 +14,16 @@ class NotificacionController extends Controller
     public function index($tipo){      
         switch ($tipo) {
             case 1:
-                return ['alertas' => User::find(1)->unreadNotifications];
+                $lunes = Carbon::parse('monday this week')->format('Y-m-d');
+                $domingo = Carbon::parse('sunday this week')->format('Y-m-d');
+
+                $alertas = User::find(1)->unreadNotifications->reverse();
+                $alertas = $alertas->merge(User::find(1)->notifications->whereBetween('created_at', [$lunes, $domingo])->reverse());           
+
+                return ['alertas' => $alertas];
+                break;
             case 2:
-                echo "i es igual a 1";
-                break;
-            case 3:
-                echo "i es igual a 2";
-                break;
+                return ['alertas' => User::find(1)->unreadNotifications];
         }
         
     }

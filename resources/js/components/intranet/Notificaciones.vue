@@ -11,10 +11,10 @@
                 <li>
                     <div class="message-center ps ps--theme_default" data-ps-id="1f364355-630f-3dc6-d666-9e64a51ae8da">
 
-                        <a href="javascript:void(0)" v-for="notificacion in notificaciones" :key="notificacion.id" @click="leerNotificacion(notificacion.id)">
+                        <a href="javascript:void(0)" v-for="notificacion in notificaciones" :key="notificacion.id" @click="cambiarMenu()">
                             <div class="btn btn-warning btn-circle"><i v-bind:class="notificacion.data.clase"></i></div>
                             <div class="mail-contnet">
-                                <h5 v-text="notificacion.data.nombre"></h5> 
+                                <h5 v-text="notificacion.data.usuario.nombre"></h5> 
                                 <span class="mail-desc" v-text="notificacion.data.mensaje"></span> 
                                 <span class="time" v-text="notificacion.data.created_at"></span> 
                             </div>
@@ -47,10 +47,13 @@
                     timer: 2000
                 });
             },
+            cambiarMenu(){
+                this.$root.menu=20;
+            },
             listarNotificaciones (){
                 let me=this;
-                axios.get('/notificaciones').then(function (response) {
-                    me.notificaciones = response.data.notificaciones.splice(0, 10);
+                axios.get('/notificaciones/2').then(function (response) {
+                    me.notificaciones = response.data.alertas.splice(0, 5);
                 })
                 .catch(function (error) {
                     console.log(error);

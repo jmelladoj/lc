@@ -90,17 +90,25 @@
                                     </template>
 
                                     <template v-slot:cell(contacto)="data">
-                                        {{ data.item.data.usuario.nombre + ' - +56 9 '+ data.item.data.usuario.telefono + ' - ' + data.item.data.usuario.email }}
+                                        {{ data.item.data.usuario.nombre + ' - +56 9 ' + data.item.data.usuario.telefono + ' - ' + data.item.data.usuario.email }}
                                     </template>
 
                                     <template v-slot:cell(mensaje)="data">
                                         {{ data.item.data.mensaje }}
                                     </template>
 
+                                    <template v-slot:cell(tipo)="data">
+                                        <label v-if="data.item.data.usuario.tipo_persona == 1"> Prevencionista </label>
+                                        <label v-else-if="data.item.data.usuario.tipo_persona == 2"> Pyme </label>
+                                        <label v-else-if="data.item.data.usuario.tipo_persona == 3"> Estudiante </label>
+                                    </template>
+
                                     <template v-slot:cell(acciones)="row">
-                                        <b-button size="xs" variant="success" title="Marcar notificación como leída" @click="leerNotificacion(row.item)">
+                                        <b-button v-if="row.item.read_at == null" size="xs" variant="success" title="Marcar notificación como leída" @click="leerNotificacion(row.item)">
                                             <i class="fa fa-check"></i>
                                         </b-button>
+
+                                        <label v-else for="" class="text-center">Leída</label>
                                     </template>
 
                                 </b-table>
@@ -134,7 +142,9 @@
                 fields: [
                     { key: 'index', label: '#', sortable: true, sortDirection: 'desc', class: 'text-center' },
                     { key: 'contacto', label: 'CONTÁCTO', sortable: true, class: 'text-left' },
+                    { key: 'tipo', label: 'TIPO USUARIO', sortable: true, class: 'text-left' },
                     { key: 'mensaje', label: 'MENSAJE', sortable: true, class: 'text-left' },
+                    { key: 'created_at', label: 'FECHA SOLICITUD', sortable: true, class: 'text-left' },
                     { key: 'acciones', label: 'ACCIONES', sortable: true, class: 'text-center' }
                 ],
                 currentPage: 1,
@@ -183,7 +193,7 @@
                 axios.post('/notificacion/leer',{
                     'id': id
                 }).then(function (response) {
-                    me.listarNotificaciones();
+                    me.listarAlertas();
                     me.mensaje('success', 'Notificacion marcada como leída');
                 }).catch(function (error) {
                     console.error(error);
