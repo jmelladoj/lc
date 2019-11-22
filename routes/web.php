@@ -53,7 +53,7 @@ Route::post('/pagina/nosotros/actualizar', 'PaginaController@actualizarNosotros'
 Route::post('/pagina/comunidad/actualizar', 'PaginaController@actualizarComunidad')->name('Actualizar página comunidad');
 Route::post('/pagina/servicios/actualizar', 'PaginaController@actualizarServicios')->name('Actualizar página servicios');
 Route::post('/pagina/login/actualizar', 'PaginaController@actualizarLogin')->name('Actualizar página login');
-Route::post('/pagina/comunidad/alerta', 'PaginaController@alertaComunidad')->name('Alertas comunidad');
+Route::post('/pagina/comunidad/alerta', 'PaginaController@alerta')->name('Alertas');
 
 //Rutas de servicios
 Route::get('/pagina/servicios/intranet', 'ServicioController@index')->name('Listar Servicios');
@@ -140,7 +140,7 @@ Route::post('/rubro/eliminar', 'ProfesionController@eliminar')->name('Borrar Pro
 Route::get('/comunas', 'ComunaController@index')->name('Listar Comunas');
 
 //Rutas de notificaciones
-Route::get('/notificaciones', 'NotificacionController@index')->name('Listar notificaciones');
+Route::get('/notificaciones/{tipo}', 'NotificacionController@index')->name('Listar notificaciones');
 Route::post('/notificacion/leer', 'NotificacionController@leer')->name('Leer notificaciones');
 
 //Rutas de promociones

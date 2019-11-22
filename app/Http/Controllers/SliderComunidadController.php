@@ -28,6 +28,7 @@ class SliderComunidadController extends Controller
                 'subcolor' => $request->subcolor,
                 'texto_boton' => $request->texto_boton,
                 'texto_modal' => $request->texto_modal,
+                'texto_alerta' => $request->texto_alerta,
                 'link' => $request->link
             ]
         );

@@ -182,3 +182,7 @@
 <template v-if="ubicacion == 1 && menu==15">
     <tips></tips>
 </template>
+
+<template v-if="ubicacion == 1 && menu==20">
+    <alertas :titulo="'Alertas'" :tipo="1"></alertas>
+</template>

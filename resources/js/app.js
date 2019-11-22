@@ -101,6 +101,9 @@ Vue.component('notificaciones', require('./components/intranet/Notificaciones.vu
 Vue.component('asesorias', require('./components/intranet/Asesorias.vue').default);
 Vue.component('seminarios', require('./components/intranet/Seminarios.vue').default);
 Vue.component('interes', require('./components/intranet/Interes.vue').default);
+Vue.component('alertas', require('./components/intranet/Alertas.vue').default);
+
+
 
 
 /**

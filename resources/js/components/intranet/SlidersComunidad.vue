@@ -165,6 +165,13 @@
                             </ValidationProvider>
                         </b-form-group>
 
+                        <b-form-group label="Texto de alerta">
+                            <ValidationProvider name="texto de alerta" rules="required|min:3" v-slot="{ errors }">
+                                <b-form-input type="text" v-model="slider.texto_alerta"></b-form-input>
+                                <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
+                            </ValidationProvider>
+                        </b-form-group>
+
                         <b-form-group label="Imagen (1920px ancho X 1080px alto | JPG, JPEG y PNG)">
                             <ValidationProvider name="imagen" rules="required|dimensions:1920,1080" v-slot="{ errors, validate }">
                                 <b-img v-if="slider.url_imagen != null" :src="slider.url_imagen" fluid id="img_slider" center name="img_slider" class="imagen"></b-img>
@@ -208,6 +215,7 @@
                     subtexto: '',
                     texto_boton: '',
                     texto_modal: '',
+                    texto_alerta: '', 
                     color: '',
                     subcolor: '',
                     url_imagen: null,
@@ -287,6 +295,7 @@
                 formData.append('texto_slider', this.slider.texto_slider);
                 formData.append('texto_boton', this.slider.texto_boton);
                 formData.append('texto_modal', this.slider.texto_modal);
+                formData.append('texto_alerta', this.slider.texto_alerta);
                 formData.append('color', this.slider.color);
                 formData.append('subtexto', this.slider.subtexto);
                 formData.append('subcolor', this.slider.subcolor);
@@ -346,6 +355,7 @@
                     me.slider.texto_slider = data['texto'];
                     me.slider.texto_boton = data['texto_boton'];
                     me.slider.texto_modal = data['texto_modal'];
+                    me.slider.texto_alerta = data['texto_alerta'];
                     me.slider.color = data['color'];
                     me.slider.subtexto = data['subtexto'];
                     me.slider.subcolor = data['subcolor'];
@@ -360,6 +370,7 @@
                 this.slider.texto_slider = '';
                 this.slider.texto_boton = '';
                 this.slider.texto_modal = '';
+                this.slider.texto_alerta = '';
                 this.slider.color = '';
                 this.slider.subtexto = '';
                 this.slider.subcolor = '';

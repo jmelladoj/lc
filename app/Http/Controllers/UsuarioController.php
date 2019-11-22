@@ -159,7 +159,7 @@ class UsuarioController extends Controller
         Asesoria::create([ 'user_id' => Auth::id() ]);
 
         $usuario = User::find(1);
-        $usuario->notify(new AppAsesoria('Ha solicitado una asesoría.', $usuario->nombre, 'fa fa-car', 2));
+        $usuario->notify(new AppAsesoria('Ha solicitado una asesoría.', Auth::user()->nombre, 'fa fa-car', 2));
 
         if(! Mail::to('prueba@prevencionlebenco.cl')->cc('j.melladojimenez@gmail.com')->send(new SolicitarAsesoria(Auth::user()))){
             return ['mensaje' => 'Asesoría solicitada!, Dentro de un plazo de 24 horas el equipo de Prevención LebenCo. se contactara contigo.', 'clase' => 'success'];

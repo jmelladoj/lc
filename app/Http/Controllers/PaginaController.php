@@ -3,11 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\CategoriaDocumento;
-use App\Notifications\SliderComunidad;
+use App\Notifications\Alerta;
 use App\Pagina;
 use App\Servicio;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class PaginaController extends Controller
@@ -99,8 +100,8 @@ class PaginaController extends Controller
         Pagina::where('id', 4)->update(['mensaje_uno' => $request->mensaje_uno, 'mensaje_dos' => $request->mensaje_dos]);
     }
 
-    public function alertaComunidad(Request $request){
+    public function alerta(Request $request){
         $usuario = User::find(1);
-        $usuario->notify(new SliderComunidad($request->mensaje, $usuario->nombre, 'fa fa-picture-o', 1));
+        $usuario->notify(new Alerta($request->mensaje, Auth::user(), 'fa fa-exclamation-circle', 1));
     }
 }

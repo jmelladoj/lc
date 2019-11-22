@@ -11,18 +11,18 @@ class SliderComunidad extends Notification
 {
     use Queueable;
 
-    protected $mensaje, $nombre, $clase, $tipo;
+    protected $mensaje, $usuario, $clase, $tipo;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($mensaje, $nombre, $clase, $tipo)
+    public function __construct($mensaje, $usuario, $clase, $tipo)
     {
         //
         $this->mensaje = $mensaje;
-        $this->nombre = $nombre;
+        $this->usuario = $usuario;
         $this->clase = $clase;
         $this->tipo = $tipo;
     }
@@ -62,7 +62,7 @@ class SliderComunidad extends Notification
     {
         return [
             'mensaje' => $this->mensaje,
-            'nombre' => $this->nombre,
+            'usuario' => $this->usuario,
             'clase' => $this->clase,
             'tipo' => $this->tipo
         ];

@@ -17,10 +17,11 @@ class CreateSliderComunidadsTable extends Migration
             $table->bigIncrements('id');
             $table->string('texto');
             $table->string('color');
-            $table->string('subtexto');
-            $table->string('subcolor');
+            $table->string('subtexto')->nullable()->default(null);
+            $table->string('subcolor')->nullable()->default(null);
             $table->string('texto_boton');
             $table->string('texto_modal');
+            $table->string('texto_alerta');
             $table->string('url_imagen')->nullable()->default(null);
             $table->text('link')->nullable()->default(null);
             $table->timestamps();
