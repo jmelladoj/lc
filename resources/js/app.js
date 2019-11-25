@@ -32,8 +32,7 @@ import 'vue-swatches/dist/vue-swatches.min.css';
 import tinymce from 'vue-tinymce-editor';
 import VueCarousel from 'vue-carousel';
 import vueRut from 'vue-rut';
-
-// Register it globally
+import ValidationPlugin from 'vue-laravel-errors';
 
 for (let rule in rules) {
     extend(rule, {
@@ -50,6 +49,7 @@ Vue.component('tinymce', tinymce);
 Vue.use(BootstrapVue);
 Vue.use(VueCarousel);
 Vue.use(vueRut);
+Vue.use(ValidationPlugin);
 Vue.use(VueCurrencyFilter,
 {
     symbol : '$',
@@ -76,6 +76,7 @@ Vue.component('nosotros', require('./components/pagina/Nosotros.vue').default);
 Vue.component('top-five', require('./components/pagina/TopFive.vue').default);
 Vue.component('sliders-comunidad-pyme', require('./components/pagina/SlidersComunidadPyme.vue').default);
 Vue.component('busqueda', require('./components/pagina/Busqueda.vue').default);
+Vue.component('iniciar-sesion', require('./components/pagina/IniciarSesion.vue').default);
 
 //Intranet
 Vue.component('general', require('./components/intranet/General.vue').default);
@@ -119,7 +120,6 @@ const app = new Vue({
     el: '#app',
     data :{
         ubicacion: 1,
-        menu : 6,
-        formulario: 0
+        menu : 6
     }
 });

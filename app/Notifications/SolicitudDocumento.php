@@ -9,22 +9,20 @@ use Illuminate\Notifications\Notification;
 
 class SolicitudDocumento extends Notification
 {
-    protected $mensaje, $usuario, $clase, $tipo;
-
-    use Queueable;
+    protected $mensaje, $usuario, $clase, $tipo_notificacion;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($mensaje, $usuario, $clase, $tipo)
+    public function __construct($mensaje, $usuario, $clase, $tipo_notificacion)
     {
         //
         $this->mensaje = $mensaje;
         $this->usuario = $usuario;
         $this->clase = $clase;
-        $this->tipo = $tipo;
+        $this->tipo_notificacion = $tipo_notificacion;
     }
 
     /**
@@ -64,7 +62,7 @@ class SolicitudDocumento extends Notification
             'mensaje' => $this->mensaje,
             'usuario' => $this->usuario,
             'clase' => $this->clase,
-            'tipo' => $this->tipo
+            'tipo_notificacion' => $this->tipo_notificacion
         ];
     }
 }
