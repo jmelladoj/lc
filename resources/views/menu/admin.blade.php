@@ -184,5 +184,5 @@
 </template>
 
 <template v-if="ubicacion == 1 && menu==20">
-    <alertas :titulo="'Alertas'" :tipo="1"></alertas>
+    <alertas :titulo="'Alertas'" :tipo="1" ref="componente_alerta"></alertas>
 </template>

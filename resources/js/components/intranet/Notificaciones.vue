@@ -74,6 +74,10 @@
         },
         mounted() {
             this.listarNotificaciones();
+
+            Event.$on('marcar', (id) => {
+                this.listarNotificaciones();
+            })
         }
     }
 </script>

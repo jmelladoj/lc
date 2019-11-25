@@ -195,6 +195,7 @@
                 }).then(function (response) {
                     me.listarAlertas();
                     me.mensaje('success', 'Notificacion marcada como leída');
+                    Event.$emit('marcar', id);
                 }).catch(function (error) {
                     console.error(error);
                 });

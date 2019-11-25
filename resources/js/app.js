@@ -8,6 +8,7 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 window.Swal = require('sweetalert2');
+window.Event = new Vue ();
 
 /**
  * The following block of code may be used to automatically register your
@@ -19,6 +20,7 @@ window.Swal = require('sweetalert2');
 
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
+const bus = new Vue();
 
 import BootstrapVue from "bootstrap-vue";
 import { ValidationProvider, extend, ValidationObserver } from 'vee-validate';
@@ -111,6 +113,7 @@ Vue.component('alertas', require('./components/intranet/Alertas.vue').default);
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
+var EventBus = new Vue;
 
 const app = new Vue({
     el: '#app',
