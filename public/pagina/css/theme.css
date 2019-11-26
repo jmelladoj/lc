@@ -6164,9 +6164,17 @@ form .lost_password {
     min-height: 20px;
 }
 
+.footer-absolute {
+    position: absolute;
+    bottom: 0;  
+    width: 100%;
+    min-height: 20px;
+}
+
 .footer-bottom-area {
     padding-top: 15px;
     padding-bottom: 15px;
+    background-color: #c5c9b2;
 }
 
 .footer-primary-area {
@@ -6325,7 +6333,7 @@ form .lost_password {
 }
 
 .footer .footer-bottom-area:not(.bg-none) {
-    background-color: rgba(0,0,0,0.15);
+    background-color: #c5c9b2;
 }
 
 .footer .social a:hover, .footer .social a:hover i {

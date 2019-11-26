@@ -1204,13 +1204,12 @@ Object.defineProperty(exports, '__esModule', { value: true });
         $document.ready(function () {
             headerHeight();
 
-            $(".run").rut({formatOn: 'keyup', ignoreControlKeys: false});
 
-            $(".run").rut({formatOn: 'keyup', ignoreControlKeys: false}).on('rutInvalido', function(e) {
+            $(".run").rut({formatOn: 'change', ignoreControlKeys: false}).on('rutInvalido', function(e) {
                 $('#error_rut').css('display', 'inline-block');
             });
 
-            $(".run").rut({formatOn: 'keyup', ignoreControlKeys: false}).on('rutValido', function(e) {
+            $(".run").rut({formatOn: 'change', ignoreControlKeys: false}).on('rutValido', function(e) {
                 $('#error_rut').css('display', 'none');
             });
     
@@ -2552,7 +2551,6 @@ Object.defineProperty(exports, '__esModule', { value: true });
 			if (this.length > 1) {
 				/* Valida multiples objetos a la vez */
 				for (var i = 0; i < this.length; i++) {
-					console.log(this[i]);
 					$(this[i]).rut(options);
 				}
 			} else {

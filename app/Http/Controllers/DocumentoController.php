@@ -118,9 +118,9 @@ class DocumentoController extends Controller
         }
     }
 
-    public function descargar(Request $request){
+    public function descargar(Request $request, $id){
 
-        $documento = Documento::find($request->id);
+        $documento = Documento::find($id);
         $usuario = Auth::user();
 
         if($usuario->tipo_usuario < 3){

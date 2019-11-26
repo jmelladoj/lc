@@ -11,6 +11,7 @@
         "php": "^7.2",
         "artesaos/seotools": "^0.16.0",
         "fideloper/proxy": "^4.0",
+        "freshwork/transbank": "^1.2",
         "laravel/framework": "^6.0",
         "laravel/tinker": "^1.0"
     },

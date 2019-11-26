@@ -32,7 +32,6 @@ import 'vue-swatches/dist/vue-swatches.min.css';
 import tinymce from 'vue-tinymce-editor';
 import VueCarousel from 'vue-carousel';
 import vueRut from 'vue-rut';
-import ValidationPlugin from 'vue-laravel-errors';
 
 for (let rule in rules) {
     extend(rule, {
@@ -49,7 +48,6 @@ Vue.component('tinymce', tinymce);
 Vue.use(BootstrapVue);
 Vue.use(VueCarousel);
 Vue.use(vueRut);
-Vue.use(ValidationPlugin);
 Vue.use(VueCurrencyFilter,
 {
     symbol : '$',
@@ -64,6 +62,7 @@ Vue.use(VueCurrencyFilter,
 Vue.component('sociales', require('./components/general/Sociales.vue').default);
 Vue.component('perfil_usuario', require('./components/general/Perfil.vue').default);
 Vue.component('ver-documento', require('./components/general/VerDocumento.vue').default);
+Vue.component('errores', require('./components/general/Errores.vue').default);
 
 //Pagina
 Vue.component('login', require('./components/pagina/Login.vue').default);

@@ -77,7 +77,7 @@ Route::get('/documentos/{tipo}', 'DocumentoController@index')->name('Listar Docu
 Route::post('/documento/crear/actualizar', 'DocumentoController@crearOactualizar')->name('Crear o Actualizar Documentos');
 Route::post('/documento/restaurar', 'DocumentoController@restaurar')->name('Resturar Documentos');
 Route::post('/documento/eliminar', 'DocumentoController@eliminar')->name('Borrar Documento');
-Route::post('/documento/descargar', 'DocumentoController@descargar')->name('Descargar Documento');
+Route::get('/documento/descargar/{id}' , 'DocumentoController@descargar')->name('Descargar Documento');
 
 //Rutas de categorías de usuario
 Route::get('/categorias/usuario', 'CategoriaUsuarioController@index')->name('Listar Categorias Usuario');

@@ -389,18 +389,21 @@
                 }).then((result) => {
                     if (result.value) {
                         let me = this;
-                        axios.post('/documento/descargar',{
-                            'id': id
-                        }).then(function (response) {
-                            me.mensaje('success', 'El Documento se descargara pronto!');
-                                const url = window.URL.createObjectURL(new Blob([response.data.documento_url]));
+                        axios.get('/documento/descargar/' + id).then(function (response) {         
+                            if(response.data.clase == 'success'){
+                                me.mensaje('success', 'El Documento se descargara pronto!');
+                                
                                 const link = document.createElement('a');
-                                link.href = url;
-                                link.setAttribute('download',  response.data.documento.titulo + '.' + response.data.documento.extension);
+                                link.href = '/storage/' + response.data.documento.documento_url;
+                                link.download = response.data.documento.titulo + '.' + response.data.documento.extension;
                                 document.body.appendChild(link);
                                 link.click();
+                            } else {
+                                me.mensaje(response.data.clase, response.data.mensaje);
+                            }              
+                            
                         }).catch(function (error) {
-                            console.log(error);
+                            console.log(error.response.data);
                         });
                     } else if (result.dismiss === Swal.DismissReason.cancel) {}
                 })
