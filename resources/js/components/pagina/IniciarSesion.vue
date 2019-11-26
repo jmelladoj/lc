@@ -1,5 +1,5 @@
 <template>
-    <section class="sec-padding-login">
+    <section class="sec-padding-login mt-5 mb-5">
         <div class="container">
             <errores :errors="validationErrors" v-if="validationErrors"> </errores>
             <div class="row">
@@ -17,7 +17,7 @@
                             
                             <p class="large text-justify">Bienvenido a tu comunidad LebenCo.</p>
                             <p class="form-field-wrapper">
-                                <input class="input--lg form-full run" v-model="usuario_login.run" autocomplete="run" type="text" placeholder="RUN personal o RUT si eres una Pyme" required>
+                                <input class="input--lg form-full" v-rut v-model="usuario_login.run" autocomplete="run" type="text" placeholder="RUN personal o RUT si eres una Pyme" required>
                             </p>
                             <p class="form-field-wrapper">
                                 <input class="input--lg form-full" v-model="usuario_login.password" autocomplete="current-password" type="password" placeholder="Ingresa tu clave" required>
@@ -77,7 +77,7 @@
                                         <input class="input--lg form-full" v-model="usuario_nuevo.nombre" type="text" placeholder="Nombre completo o Razón social" required>
                                     </div>
                                     <div class="col-lg-4 col-md-4">
-                                        <input class="input--lg form-full run" v-model="usuario_nuevo.run" type="text" placeholder="RUN personal o RUT si eres una Pyme" required>
+                                        <input class="input--lg form-full run_nuevo" v-rut v-model="usuario_nuevo.run" type="text" placeholder="RUN personal o RUT si eres una Pyme" required>
                                         <div id="error_rut" name="error_rut" class="alert alert-danger" role="alert">
                                             <span>El rut o run ingresado no es válido</span>
                                         </div>

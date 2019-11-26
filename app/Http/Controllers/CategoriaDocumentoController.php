@@ -9,11 +9,11 @@ class CategoriaDocumentoController extends Controller
 {
     //
     public function index(){      
-        return ['categorias' => CategoriaDocumento::orderBy('nombre', 'desc')->get()];
+        return ['categorias' => CategoriaDocumento::orderBy('nombre', 'asc')->get()];
     }
 
     public function indexHome(){
-        return ['categorias' => CategoriaDocumento::orderBy('nombre', 'desc')->get()];
+        return ['categorias' => CategoriaDocumento::orderBy('nombre', 'asc')->get()];
     }
     
     public function crearOactualizar(Request $request){

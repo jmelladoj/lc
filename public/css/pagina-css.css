@@ -12811,7 +12811,7 @@ ul:last-child {
 /*------------------------------------------------------------*/
 .blog-item {
     position: relative;
-    margin-bottom: 30px;
+    /*margin-bottom: 30px;*/
     display: block;
 }
 

@@ -15,7 +15,7 @@
 
     <section class="sec-padding-login">
         <div class="container">
-            <div class="row">
+            <div class="row mb-4">
                 <div class="col-md-12">
                     <p>
                         {{ $pagina->mensaje_uno }}
@@ -23,29 +23,27 @@
                 </div>
             </div>
             @if(count($servicios) > 0)
-                <div class="row">
-                    @foreach ($servicios as $item)
-
-                        <div class="col-md-6 col-lg-4">
-                                <!--Blog Item-->
-                            <div class="blog-item">
-                                <div class="blog-item-content">
-                                    <h4 class="blog-title"><a href="#">{{ $item->nombre }}</a></h4>
+                @foreach ($servicios as $item)
+                    <div class="card mb-3">
+                        <div class="row mt-0 ml-0 mr-0 mb-0">
+                            <div class="col-md-2 mx-auto my-auto  mt-0 ml-0 mr-0 mb-0">
+                                <div class="text-center ">
+                                    <img  src="{{ asset('storage/' . $item->imagen_url) }}" height="100"/>
+                                </div>
+                            </div>
+                            <div class="col-md-10 mx-auto my-auto  mt-0 ml-0 mr-0 mb-0">
+                                <div class="blog-item mr-5">
+                                    <h4 class="blog-title"><a href="javascript:void(0)">{{ $item->nombre }}</a></h4>
                                     <div class="blog-description-content">
-                                        <p>
+                                        <p class="text-justify">
                                             {{ $item->descripcion }}
                                         </p>
                                     </div>
-                                    <div class="text-center">
-                                        <img  src="{{ asset('storage/' . $item->imagen_url) }}" class="img-fluid" height="80"/>
-                                    </div>
                                 </div>
                             </div>
-                            <!--End Blog Item-->
                         </div>
-
-                    @endforeach
-                </div>
+                    </div>
+                @endforeach
             @endif
         </div>
     </section>

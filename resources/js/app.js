@@ -31,7 +31,10 @@ import Swatches from 'vue-swatches';
 import 'vue-swatches/dist/vue-swatches.min.css';
 import tinymce from 'vue-tinymce-editor';
 import VueCarousel from 'vue-carousel';
-import vueRut from 'vue-rut';
+import { rutInputDirective } from 'vue-dni';
+
+Vue.directive('rut', rutInputDirective);
+
 
 for (let rule in rules) {
     extend(rule, {
@@ -47,7 +50,6 @@ Vue.component('tinymce', tinymce);
 
 Vue.use(BootstrapVue);
 Vue.use(VueCarousel);
-Vue.use(vueRut);
 Vue.use(VueCurrencyFilter,
 {
     symbol : '$',

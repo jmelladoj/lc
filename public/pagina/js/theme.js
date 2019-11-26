@@ -27,16 +27,6 @@
     (function () {
         $document.ready(function () {
             headerHeight();
-
-
-            $(".run").rut({formatOn: 'change', ignoreControlKeys: false}).on('rutInvalido', function(e) {
-                $('#error_rut').css('display', 'inline-block');
-            });
-
-            $(".run").rut({formatOn: 'change', ignoreControlKeys: false}).on('rutValido', function(e) {
-                $('#error_rut').css('display', 'none');
-            });
-    
     
             $("#ingreso").click(function(){
                     $( "#ingreso" ).removeClass( "my-account-box" ).addClass( "my-account-box-selected" );

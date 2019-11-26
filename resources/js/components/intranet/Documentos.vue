@@ -214,10 +214,7 @@
                         </b-form-group>
 
                         <b-form-group label="Vista previa de dos">
-                            <ValidationProvider name="vista previa" v-slot="{ errors, validate }">
-                                <b-form-file id="documento_dos" name="documento_dos" accept="image/*" placeholder="Sin archivo" @change="validate"></b-form-file>
-                                <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
-                            </ValidationProvider>
+                            <b-form-file id="documento_dos" name="documento_dos" accept="image/*" placeholder="Sin archivo"></b-form-file>
                         </b-form-group>
 
                     </b-form>

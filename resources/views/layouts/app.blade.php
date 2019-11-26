@@ -68,8 +68,8 @@
                 <slider-footer></slider-footer>
             @endif
 
-
-            <footer class="{{ request()->is('login') || request()->is('servicios') ? 'footer-absolute bg--dark' : 'footer bg--dark' }}">
+            {{-- <footer class="{{ request()->is('login') || request()->is('servicios') ? 'footer-absolute bg--dark' : 'footer bg--dark' }}"> --}}
+            <footer class="footer bg--dark">
                 @if(!request()->is('login'))
                     <section class="footer-widget-area">
                         <div class="container">

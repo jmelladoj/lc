@@ -237,7 +237,7 @@
             },
             listarServicios (){
                 let me=this;
-                axios.get('/pagina/servicios').then(function (response) {
+                axios.get('/pagina/servicios/intranet').then(function (response) {
                     me.items = response.data.servicios;
                     me.totalRows = me.items.length;
                 })
