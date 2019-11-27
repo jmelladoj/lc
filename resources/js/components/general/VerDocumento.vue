@@ -15,11 +15,11 @@
             </div>
         </div>
         <div class="product-item-content">
-            <div class="text-center"><b class="titulo-documento">{{ documento.titulo }}</b></div>
+            <div class="text-center"><b><h6 class="titulo-documento"> {{ documento.titulo }} </h6></b></div>
             <div class="text-center" v-text="documento.usuario.tipo_usuario < 3 ? 'Autor: Prevención LebenCo.' : 'Autor : ' + documento.usuario.nombre"></div>
             <p class="product-item-price">
                 <span class="product-price-amount">
-                    <span class="product-price-currency-symbol"></span>{{ documento.valor | currency}}
+                    <span class="product-price-currency-symbol"></span><h6 class="titulo-documento"> {{ documento.valor | currency}} </h6>
                 </span>
             </p>
         </div>
@@ -169,7 +169,8 @@
     }
 
     .titulo-documento {
-        color: #3F8A24;
+        color:#1E2F13; 
+        font-weight: 500;
     }
 
 </style>

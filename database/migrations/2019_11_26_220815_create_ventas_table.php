@@ -19,11 +19,12 @@ class CreateVentasTable extends Migration
             $table->integer('monto_venta');
             $table->integer('estado')->default(0);
 
-            $table->unsignedInteger('documento_id')->nullable()->default(NULL);
-            $table->foreign('documento_id')->references('id')->on('users');
+            $table->integer('monto_recarga');
+            $table->integer('monto_bonificacion');
 
             $table->unsignedInteger('user_id')->nullable()->default(NULL);
             $table->foreign('user_id')->references('id')->on('users');
+            
             $table->timestamps();
         });
     }

@@ -78,6 +78,7 @@ Vue.component('top-five', require('./components/pagina/TopFive.vue').default);
 Vue.component('sliders-comunidad-pyme', require('./components/pagina/SlidersComunidadPyme.vue').default);
 Vue.component('busqueda', require('./components/pagina/Busqueda.vue').default);
 Vue.component('iniciar-sesion', require('./components/pagina/IniciarSesion.vue').default);
+Vue.component('contacto', require('./components/pagina/Contacto.vue').default);
 
 //Intranet
 Vue.component('general', require('./components/intranet/General.vue').default);

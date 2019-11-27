@@ -104,4 +104,20 @@ class PaginaController extends Controller
         $usuario = User::find(1);
         $usuario->notify(new Alerta($request->mensaje, Auth::user(), 'fa fa-exclamation-circle', 1));
     }
+
+    public function contacto(Request $request){
+
+        if(Auth::check()){
+            $user = Auth::user();
+        } else {
+            $user = new User();
+            $user->nombre = $request->nombre;
+            $user->email = $request->email;
+            $user->telefono = $request->telefono;
+            $user->tipo_persona = $request->tipo_persona;
+        }
+
+        $usuario = User::find(1);
+        $usuario->notify(new Alerta('Contacto', Auth::user(), 'fa fa-envelope', 2));
+    }
 }

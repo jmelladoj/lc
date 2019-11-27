@@ -23,6 +23,7 @@ Route::get('/comunidad', 'PaginaController@indexHomeComunidad')->name('Mostrar P
 Route::get('/servicios', 'PaginaController@indexHomeServicios')->name('Mostrar Página Servicios');
 Route::get('/busqueda/{id}', 'PaginaController@indexHomeBusqueda')->name('Mostrar Resultados Búsqueda');
 Route::get('/contacto', 'PaginaController@indexHomeContacto')->name('Mostrar Página Contacto');
+Route::post('/contacto/generar', 'PaginaController@contacto')->name('Generar alerta contácto');
 Route::get('/documentos/busqueda/{categoria}', 'DocumentoController@indexBusqueda')->name('Mostrar Resultados Búsqueda por Categoriá');
 
 

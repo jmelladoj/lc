@@ -76,6 +76,7 @@
                         <li @click="menu=18"><a href="javascript:void(0)">Asesoría y cotiza hoy</a></li>
                         <li @click="menu=19"><a href="javascript:void(0)">Compartir documento</a></li>
                         <li @click="menu=20"><a href="javascript:void(0)">Alertas</a></li>
+                        <li @click="menu=23"><a href="javascript:void(0)">Contácto</a></li>
                         <li @click="menu=21"><a href="javascript:void(0)">Reclutamiento</a></li>
                         <li @click="menu=22"><a href="javascript:void(0)">Like y dislike</a></li>
                     </ul>
@@ -185,4 +186,8 @@
 
 <template v-if="ubicacion == 1 && menu==20">
     <alertas :titulo="'Alertas'" :tipo="1" ref="componente_alerta"></alertas>
+</template>
+
+<template v-if="ubicacion == 1 && menu==23">
+    <alertas :titulo="'Alertas desde contácto'" :tipo="2" ref="componente_alerta"></alertas>
 </template>

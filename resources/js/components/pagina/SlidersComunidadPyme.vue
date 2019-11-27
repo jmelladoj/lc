@@ -1,5 +1,5 @@
 <template>
-    <section v-show="tipo_persona == undefined || tipo_persona == 2" id="intro" class="intro mb-5">
+    <section v-show="tipo_persona == undefined || tipo_persona == 2 || tipo_usuario < 3" id="intro" class="intro mb-5">
         <div class="item height-400px sm-height-400px">
             <div class="item height-400px sm-height-400px">
                 <b-carousel v-if="tipo_persona == undefined"  :interval="4000" controls indicators background="rgba(0,0,0,0.6)" img-width="" img-height="200" style="text-shadow: 1px 1px 2px #333;">
@@ -9,7 +9,7 @@
                     </b-carousel-slide>
                 </b-carousel>
 
-                <b-carousel v-else-if="tipo_persona == 2"  :interval="4000" controls indicators background="rgba(0,0,0,0.6)" img-width="" img-height="200" style="text-shadow: 1px 1px 2px #333;">
+                <b-carousel v-else-if="tipo_persona == 2 || tipo_usuario < 3"  :interval="4000" controls indicators background="rgba(0,0,0,0.6)" img-width="" img-height="200" style="text-shadow: 1px 1px 2px #333;">
                     <b-carousel-slide v-for="(slider, index) in sliders" :key="index" :img-src="'storage/' + slider.url_imagen">
                         <h2 class="intro-title"  v-text="slider.texto" style="color: #fff"></h2>
                         <h4 v-if="slider.subtexto != ''" :style="'color:' + slider.subcolor" v-text="slider.subtexto"></h4>
@@ -24,7 +24,7 @@
 <script>
     export default {
         props: [
-            'tipo_persona'
+            'tipo_persona', 'tipo_usuario'
         ],
         data() {
             return {

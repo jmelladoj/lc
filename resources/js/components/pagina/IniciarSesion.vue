@@ -20,7 +20,7 @@
                                 <input class="input--lg form-full" v-rut v-model="usuario_login.run" autocomplete="run" type="text" placeholder="RUN personal o RUT si eres una Pyme" required>
                             </p>
                             <p class="form-field-wrapper">
-                                <input class="input--lg form-full" v-model="usuario_login.password" autocomplete="current-password" type="password" placeholder="Ingresa tu clave" required>
+                                <input class="input--lg form-full" v-model="usuario_login.password" autocomplete="current-password" type="password" @keyup.enter="ingresar" placeholder="Ingresa tu clave" required>
                             </p>
                             <p class="form-field-wrapper">
                                 <label class="">

@@ -15,7 +15,7 @@
         <section class="sec-padding">
             <div class="container">
                 <div class="row">
-                    <div v-show="documentos.length > 0" class="col-md-3 product-item ml-2 mr-2" v-for="documento in documentos"  :key="documento.id">
+                    <div v-show="documentos.length > 0" class="col-md-2 product-item mb-4" v-for="documento in documentos"  :key="documento.id">
                         <ver-documento :documento="documento" :autenticado="autenticado"></ver-documento>
                     </div>
 
