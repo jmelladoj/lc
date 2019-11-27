@@ -7,7 +7,7 @@
             </div>
         </div>
         <div class="container justify-content-center">
-            <carousel :per-page="4" :autoplay="true" :navigationEnabled="true">
+            <carousel :per-page="6" :autoplay="true" :navigationEnabled="true">
                 <slide v-for="(documento, index) in documentos" :key="index"> 
                     <div class="product-item ml-2 mr-2">
                         <ver-documento :documento="documento" :autenticado="autenticado"></ver-documento>

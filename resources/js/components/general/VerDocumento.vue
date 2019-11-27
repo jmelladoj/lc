@@ -15,7 +15,7 @@
             </div>
         </div>
         <div class="product-item-content">
-            <div class="text-center"><b>{{ documento.titulo }}</b></div>
+            <div class="text-center"><b class="titulo-documento">{{ documento.titulo }}</b></div>
             <div class="text-center" v-text="documento.usuario.tipo_usuario < 3 ? 'Autor: Prevención LebenCo.' : 'Autor : ' + documento.usuario.nombre"></div>
             <p class="product-item-price">
                 <span class="product-price-amount">
@@ -162,8 +162,14 @@
     .modal-dialog{
         overflow-y: initial !important
     }
+
     .modal-body {
         max-height: calc(100vh - 13rem);
         overflow-y: auto;
     }
+
+    .titulo-documento {
+        color: #3F8A24;
+    }
+
 </style>
