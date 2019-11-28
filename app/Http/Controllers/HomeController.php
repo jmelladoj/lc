@@ -23,6 +23,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $mensaje = 'sin mensaje';
+        return view('home')->with(compact('mensaje'));
     }
 }

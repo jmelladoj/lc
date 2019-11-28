@@ -107,6 +107,8 @@ Vue.component('asesorias', require('./components/intranet/Asesorias.vue').defaul
 Vue.component('seminarios', require('./components/intranet/Seminarios.vue').default);
 Vue.component('interes', require('./components/intranet/Interes.vue').default);
 Vue.component('alertas', require('./components/intranet/Alertas.vue').default);
+Vue.component('recargas', require('./components/intranet/Recargar.vue').default);
+
 
 
 
@@ -122,6 +124,6 @@ const app = new Vue({
     el: '#app',
     data :{
         ubicacion: 1,
-        menu : 6
+        menu : 1
     }
 });

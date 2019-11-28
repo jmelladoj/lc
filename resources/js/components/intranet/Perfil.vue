@@ -10,6 +10,13 @@
                 </b-col>
             </b-row>
 
+
+            <b-form-group v-if="mensaje != 'sin mensaje'">
+                <b-col>
+                    <b-alert variant="warning" show v-text="mensaje">{{ mensaje }}</b-alert>
+                </b-col>
+            </b-form-group>
+
             <perfil_usuario :usuario_id="usuario_id" :tipo_usuario_logeado="tipo_usuario_logeado"></perfil_usuario>
 
         </b-container>
@@ -20,7 +27,7 @@
 <script>
     export default {
         props: [
-            'usuario_id', 'tipo_usuario_logeado'
+            'usuario_id', 'tipo_usuario_logeado', 'mensaje'
         ]
     }
 </script>

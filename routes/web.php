@@ -164,6 +164,16 @@ Route::get('/sliders/comunidad', 'SliderComunidadController@index')->name('Lista
 Route::post('/slider/comunidad/crear/actualizar', 'SliderComunidadController@crearOactualizar')->name('Crear o Actualizar Sliders comunidad');
 Route::post('/slider/comunidad/eliminar', 'SliderComunidadController@eliminar')->name('Borrar Slider comunidad');
 
+//Rutas de ventas
+Route::get('/ventas/{tipo}','VentaController@index')->name('Listar recargas');
+Route::post('/venta/carga','VentaController@recargar')->name('Realizar carga');
+
+Route::post('/venta/procesar','VentaController@procesar')->name('Procesar carga');
+Route::post('/venta/finalizar','VentaController@finalizar')->name('Procesar carga');
+
+
+
+
 
 
 
