@@ -91,6 +91,18 @@
                                     {{ data.index + 1 }}
                                 </template>
 
+                                <template v-slot:cell(venta)="data">
+                                    {{ data.item.monto_venta | currency }}
+                                </template>
+
+                                <template v-slot:cell(recarga)="data">
+                                    {{ data.item.monto_recarga | currency }}
+                                </template>
+
+                                <template v-slot:cell(valido)="data">
+                                    <label v-if="data.item.estado == 2">APROBADA</label>
+                                    <label v-if="data.item.estado == 1">NO APROBADA</label>
+                                </template>
 
                                 </b-table>
 
@@ -145,9 +157,11 @@
                 items: items,
                 fields: [
                     { key: 'index', label: '#', sortable: true, sortDirection: 'desc', class: 'text-center' },
-                    { key: 'monto', label: 'MONTO', sortable: true, class: 'text-left' },
+                    { key: 'venta', label: 'VENTA', sortable: true, class: 'text-left' },
+                    { key: 'recarga', label: 'RECARGA', sortable: true, class: 'text-left' },
                     { key: 'valido', label: 'ESTADO', sortable: true, class: 'text-left' },
-                    { key: 'fecha', label: 'FECHA', sortable: true, class: 'text-center' }
+                    { key: 'tipo_tarjeta', label: 'TARJETA', sortable: true, class: 'text-left' },
+                    { key: 'created_at', label: 'FECHA', sortable: true, class: 'text-center' }
                 ],
                 currentPage: 1,
                 perPage: 10,

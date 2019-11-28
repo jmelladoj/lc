@@ -21,7 +21,7 @@ class CreateVentasTable extends Migration
 
             $table->integer('monto_recarga');
             $table->integer('monto_bonificacion');
-            $table->integer('tipo_tarjeta')->nullable()->default(0);
+            $table->integer('tipo_tarjeta')->nullable()->default(null);
 
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');

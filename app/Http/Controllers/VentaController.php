@@ -56,7 +56,14 @@ class VentaController extends Controller
         $response = $plus->getTransactionResult();
 
         if($response->detailOutput->responseCode == 0){
+            $tipoTarjeta = "CRÉDITO";
+
+            if($response->detailOutput->paymentTypeCode == 'VD'){
+                $tipoTarjeta = 'DÉBITO';
+            }
+
             $venta = Venta::where('token', $request->token_ws)->first();
+            $venta->tipo_tarjeta = $tipoTarjeta;
             $venta->estado = 2;
             $venta->save();
 
@@ -75,7 +82,7 @@ class VentaController extends Controller
 
         $mensaje = "La carga no se ha podido realizar. Por favor intente nuevamente.";
 
-        if($venta != null){
+        if($venta != null && $venta->estado == 2){
             $mensaje = "Muchas gracias por recarga, tu saldo ya ha sido cargado.";
             $total = Venta::where('user_id', Auth::id())->get()->sum('monto_venta');
             $categoria = CategoriaUsuario::where('gasto_inicio','>=', $total)->where('gasto_fin', '<=', $total)->first();

@@ -73,13 +73,13 @@
                 @if(!request()->is('login'))
                     <section class="footer-widget-area">
                         <div class="container">
-                            <div class="row text-dark">
-                                <div class="col-md-4">
-                                    <div class="col-sm-12 col-md-12 col-lg-12 text-center align-middle">
+                            <div class="row text-dark h-100">
+                                <div class="col-md-4 my-auto">
+                                    <div class="col-sm-12 col-md-12 col-lg-12 text-center">
                                         <img src="{{ asset('storage/general/logo_footer.png') }}" class="footer-logo" alt="LebenCO" />
                                     </div>
                                 </div>
-                                <div class="col-md-4 align-middle">
+                                <div class="col-md-4 my-auto">
                                     <div class="footer-widget col-sm-12 col-md-12 col-lg-12 text-center">
                                         <h6 class="footer-widget-title"><a href="{{ url('/nosotros') }}" class="{{ (request()->is('nosotros')) ? 'sale-color' : 'text-dark' }}" style="opacity: 1;">Comunidad LebenCo.</a></h6>
                                     </div>
@@ -90,7 +90,7 @@
                                         <h6 class="footer-widget-title"><a href="#" class="text-dark" style="opacity: 1;">Trabaja en LebenCo.</a></h6>
                                     </div>
                                 </div>
-                                <div class="col-md-4 align-middle">
+                                <div class="col-md-4 my-auto">
                                     <div class="footer-widget col-sm-12 col-md-12 col-lg-12 text-center">
                                         <h6 class="footer-widget-title"><a href="{{ url('/comunidad') }}" class="{{ (request()->is('comunidad')) ? 'sale-color' : 'text-dark' }}" style="opacity: 1;">Comunidad Pyme</a></h6>
                                     </div>
