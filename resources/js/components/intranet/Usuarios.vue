@@ -98,6 +98,10 @@
                                 </template>
 
                                 <template v-slot:cell(acciones)="row">
+                                    <b-button size="xs" variant="success" title="Agregar a top five" @click="abrirModalPosicion(row.item)">
+                                        <i class="fa fa-star"></i>
+                                    </b-button>
+                                    
                                     <b-button size="xs" variant="success" title="Agregar saldo usuario" @click="abrirModalSaldo(row.item)">
                                         <i class="fa fa-usd"></i>
                                     </b-button>
@@ -238,6 +242,51 @@
                     </template>
                 </b-modal>
             </ValidationObserver>
+
+            <ValidationObserver ref="observer_posicion" v-slot="{ valid }">
+                <b-modal ref="modal_posicion" :title="modal_posicion.titulo" size="md" no-close-on-backdrop>
+                    <b-form>
+                        <b-row>
+                            <b-col>
+                                <b-form-group label="Posición actual">
+                                    <b-form-input type="number" :value="usuario.posicion_actual" ></b-form-input>
+                                </b-form-group>
+                            </b-col>
+                            <b-col>
+                                <b-form-group label="Nueva posición">
+                                    <ValidationProvider name="posición" rules="required|numeric|between:1,10" v-slot="{ errors }">
+                                        <b-form-input type="number" v-model="usuario.posicion"></b-form-input>
+                                        <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
+                                    </ValidationProvider>
+                                </b-form-group>
+                            </b-col>
+                        </b-row>
+                        <b-row>
+                            <b-col>
+                                <b-form-group label="Likes">
+                                    <ValidationProvider name="likes" rules="required|numeric|between:1,100" v-slot="{ errors }">
+                                        <b-form-input type="number" v-model="usuario.like"></b-form-input>
+                                        <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
+                                    </ValidationProvider>
+                                </b-form-group>
+                            </b-col>
+                            <b-col>
+                                <b-form-group label="Dislikes">
+                                    <ValidationProvider name="dislikes" rules="required|numeric|between:1,100" v-slot="{ errors }">
+                                        <b-form-input type="number" v-model="usuario.dislikes"></b-form-input>
+                                        <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
+                                    </ValidationProvider>
+                                </b-form-group>
+                            </b-col>
+                        </b-row>
+                    </b-form>
+
+                    <template slot="modal-footer">
+                        <b-button :disabled="!valid" size="md" variant="success" @click="agregarSaldo()"> Guardar </b-button>
+                        <b-button size="md" variant="danger" @click="cerrarModalSaldo()"> Cerrar </b-button>
+                    </template>
+                </b-modal>
+            </ValidationObserver>
         </b-container>
 
     </div>
@@ -257,7 +306,11 @@
                     password: '',
                     tipo_usuario: 0,
                     saldo_actual: 0,
-                    nuevo_saldo: 0
+                    nuevo_saldo: 0, 
+                    posicion: 0,
+                    posicion_actual: 0,
+                    likes: 0,
+                    dislikes: 0
                 },
                 modal_usuario: {
                     titulo: '',
@@ -265,6 +318,9 @@
                 },
                 modal_saldo: {
                     titulo: ''
+                },
+                modal_posicion: {
+                    titulo: 'Asignar posición'
                 },
                 items: items,
                 subusuarios: [],
@@ -446,6 +502,16 @@
                 me.usuario.saldo_actual = data['saldo'];
 
                 this.$refs['modal_saldo'].show();
+            },
+            abrirModalPosicion(data = []){
+                let me = this;
+
+                me.limpiarDatosUsuario();
+                me.usuario.id = data['id'];
+                me.usuario.posicion = data['posicion'];
+                me.usuario.posicion_actual = me.usuario.posicion;
+
+                this.$refs['modal_posicion'].show();
             },
             limpiarDatosUsuario(){
                 this.usuario.id = 0;

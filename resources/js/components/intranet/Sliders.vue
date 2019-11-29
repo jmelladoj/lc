@@ -154,8 +154,8 @@
                         </b-form-group>
 
 
-                        <b-form-group label="Imagen (1920px ancho X 1080px alto | JPG, JPEG y PNG)">
-                            <ValidationProvider name="imagen" rules="required|dimensions:1920,1080" v-slot="{ errors, validate }">
+                        <b-form-group label="Imagen (1080px alto como minímo | JPG, JPEG y PNG)">
+                            <ValidationProvider name="imagen" rules="required" v-slot="{ errors, validate }">
                                 <b-img v-if="slider.url_imagen != null" :src="slider.url_imagen" fluid id="img_slider" center name="img_slider" class="imagen"></b-img>
                                 <b-form-file id="imagen_slider" name="imagen_slider" accept="image/*" placeholder="Sin archivo" @change="mostrarFoto($event)" @input="validate"></b-form-file>
                                 <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
@@ -249,8 +249,8 @@
                     id: 0,
                     texto: '',
                     subtexto: '',
-                    color: '',
-                    subcolor: '',
+                    color: '#E8ECD1',
+                    subcolor: '#E8ECD1',
                     url_imagen: null,
                     link: 0,
                     tipo_persona: null,
@@ -452,8 +452,12 @@
                 let me = this;
                 this.limpiarDatosSlider();
 
-                this.texto_checkbox = 'Desmarcar todos';
-                this.estado_checkbox = true;
+                this.estado_checkbox = false;
+
+                if(data['inicio'] && data['descanso_uno'] && data['descanso_dos'] && data['pagina_nosotros'] && data['pagina_contacto'] && data['pagina_comunidad'] && data['pagina_servicios']){
+                    this.estado_checkbox = true;
+                }
+
                 this.slider.id = data['id'];
                 this.slider.inicio = data['inicio'] == 1 ? true : false;
                 this.slider.descanso_uno = data['descanso_uno'] == 1 ? true : false;
@@ -472,9 +476,9 @@
             limpiarDatosSlider(){
                 this.slider.id = 0;
                 this.slider.texto = '';
-                this.slider.color = '';
+                this.slider.color = '#E8ECD1';
                 this.slider.subtexto = '';
-                this.slider.subcolor = '';
+                this.slider.subcolor = '#E8ECD1';
                 this.slider.link = 0;
                 this.slider.url_imagen = null;
                 this.slider.tipo_persona = null;

@@ -78,6 +78,8 @@ class PaginaController extends Controller
             $pagina->video_url = Storage::disk('public')->putFileAs(
                 'general', $video, $nombre, 'public'
             );
+        } else {
+            $pagina->video_url = $request->link;
         }
 
         if($request->contenido != null || $request->contenido != ''){

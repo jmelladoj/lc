@@ -41,7 +41,6 @@
                 <b-form-group v-show="documento.url_imagen_vista_dos">
                     <b-img v-bind:src="'/storage/' + documento.url_imagen_vista_dos" fluid class="center" alt="Vista previa"></b-img>
                 </b-form-group>
- 
             </b-form>
 
             <template slot="modal-footer">

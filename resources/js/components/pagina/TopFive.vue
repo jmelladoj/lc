@@ -128,9 +128,10 @@
                     { key: 'nombre', label: 'Nombre de la Pyme', sortable: true, class: 'text-left' },
                     { key: 'nombre_comuna', label: 'Comuna', sortable: true, class: 'text-left' },
                     { key: 'nombre_rubro', label: 'Rubro', sortable: true, class: 'text-left' },
-                    { key: 'like', label: 'Me gusta', sortable: true, class: 'text-center' },
-                    { key: 'dislike', label: 'No me gusta', sortable: true, class: 'text-center' },
-                    { key: 'perfil', label: 'Perfil', sortable: true, class: 'text-center' }
+                    { key: 'perfil', label: 'Perfil', sortable: true, class: 'text-center' },
+                    { key: 'valoracion', label: 'Valoración', sortable: true, class: 'text-center valoracion' },
+                    { key: 'like', label: 'Me gusta', sortable: true, class: 'text-center like' },
+                    { key: 'dislike', label: 'No me gusta', sortable: true, class: 'text-center dislike' }
                 ],
                 currentPage: 1,
                 perPage: 10,
@@ -157,6 +158,9 @@
                     showConfirmButton: true,
                     timer: 2000
                 });
+            },
+            ocultar(clase){
+
             },
             onFiltered(filteredItems) {
                 this.totalRows = filteredItems.length
@@ -224,3 +228,20 @@
         }
     }
 </script>
+
+<style>
+    .table thead th {
+        background-color:#8AB733;
+        color: #E8ECD1;
+        border-color: #8AB733 2px solid !important;
+    }
+
+    .table tbody tr h5 {
+        color: #1E2F13;
+    }
+
+    .table-striped tbody tr:nth-of-type(2n+1) {
+        background-color: 
+        rgba(0, 0, 0, 0.05);
+    }
+</style>

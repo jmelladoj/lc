@@ -28917,7 +28917,8 @@ ul.list-style-none li a:hover {
     background: #fff;
     line-height: 65px;
     padding-left: 10px;
-    min-width: 70px
+    min-width: 70px;
+    text-align: center;
 }
 
 .topbar .top-navbar .navbar-header .navbar-brand {

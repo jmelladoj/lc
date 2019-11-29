@@ -43,7 +43,8 @@
                             @if(Auth::user()->tipo_usuario < 3)
                                 <notificaciones></notificaciones>
                             @endif
-                            @if(Auth::user()->tipo_usuario < 3)<li class="nav-item right-side-toggle" @click="ubicacion=0"> <a class="nav-link dropdown-toggle waves-effect waves-dark" aria-expanded="false"><i class="fa fa-file-text"></i><span class="hide-menu"> Pagina</span></a></li>@endif
+                            @if(Auth::user()->tipo_usuario < 3)<li class="nav-item right-side-toggle" @click="ubicacion=0"> <a class="nav-link dropdown-toggle waves-effect waves-dark" aria-expanded="false"><i class="fa fa-file-text"></i><span class="hide-menu"> Home</span></a></li>@endif
+                            @if(Auth::user()->tipo_usuario == 3)<li class="nav-item right-side-toggle"> <a class="nav-link dropdown-toggle waves-effect waves-dark" href="{{ url('/') }}" aria-expanded="false"><i class="fa fa-file-text"></i><span class="hide-menu"> Home</span></a></li>@endif
                             <li class="nav-item right-side-toggle" @click="ubicacion=1"> <a class="nav-link dropdown-toggle waves-effect waves-dark" aria-expanded="false"><i class="fa fa-home"></i><span class="hide-menu"> Escritorio</span></a></li>
                             <li class="nav-item right-side-toggle"> <a class="nav-link  waves-effect waves-light" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();"><img src="{{ asset('img/salir.png') }}" height="40px" width="40px"><form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">@csrf</form></a></li>
                         </ul>

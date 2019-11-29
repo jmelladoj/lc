@@ -14,11 +14,23 @@
             <b-row>
                 <b-col>
                     <b-card>
+                        <b-row>
+                            <b-col cols="2">
+                                <b-form-group>
+                                    <b-form-radio v-model="pagina.tipo" name="tipo" value="1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Link</b-form-radio>
+                                    <b-form-radio v-model="pagina.tipo" name="tipo" value="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Archivo</b-form-radio>
+                                </b-form-group>
+                            </b-col>
+                            <b-col>
+                                <b-form-group label="Vídeo:" label-for="video" label-cols-sm="2">
+                                    <b-form-input v-model="pagina.link" v-if="pagina.tipo == 1"></b-form-input>
+                                    <b-form-file id="video" name="video" accept="video/*" placeholder="Sin archivo" v-else></b-form-file>
+                                </b-form-group>
+                            </b-col>
+                        </b-row>
+
                         <b-form-group>
                             <tinymce id="d1" v-model="pagina.contenido" :other_options="options"></tinymce>
-                        </b-form-group>
-                        <b-form-group label="Vídeo:" label-for="video" label-cols-sm="2">
-                            <b-form-file id="video" name="video" accept="video/*" placeholder="Sin archivo"></b-form-file>
                         </b-form-group>
                     </b-card>
                 </b-col>
@@ -34,10 +46,13 @@
         data() {
             return {
                 pagina: {
-                    contenido: ''
+                    contenido: '',
+                    tipo: 1,
+                    link: ''
                 },
                 options: {
-                    language_url: 'js/es.js' //This url points to location of persian language file.
+                    language_url: 'js/es.js',
+                    height: '1000px'
                 }
             }
         },  
@@ -65,11 +80,14 @@
 
                 let formData = new FormData();
 
-                let video = document.querySelector('#video');
-                formData.append('video', video.files[0]);
-
-                formData.append('contenido', this.pagina.contenido);
-
+                if(this.pagina.link.length > 0){
+                    formData.append('contenido', this.pagina.contenido);
+                    formData.append('link', this.pagina.link);
+                } else {
+                    let video = document.querySelector('#video');
+                    formData.append('video', video.files[0]);
+                }
+                
                 axios.post('/pagina/nosotros/actualizar',formData).then(function (response) {
                     Swal.fire({
                         type: 'success',
@@ -77,6 +95,9 @@
                         showConfirmButton: true,
                         timer: 2000
                     });
+
+                    me.pagina.tipo = 1;
+                    me.pagina.link = '';
                 }).catch(function (error) {
                     console.error(error);
                 });
