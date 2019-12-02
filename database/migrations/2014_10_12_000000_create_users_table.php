@@ -21,6 +21,11 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable()->default(NULL);
             $table->string('password')->nullable();
 
+            //Datos top five
+            $table->integer('posicion')->nullable()->default(0);
+            $table->integer('likes')->nullable()->default(0);
+            $table->integer('dislikes')->nullable()->default(0);
+
             //Datos Personales
             $table->string('fecha_nacimiento')->nullable()->default(NULL);
             $table->integer('telefono')->nullable()->default(NULL);

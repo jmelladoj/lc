@@ -107,6 +107,31 @@ class UsuarioController extends Controller
 
     }
 
+    public function posicion(Request $request){
+
+        $usuario_actual = User::find($request->id);
+
+        if($request->posicion_actual == 0){
+            User::updateOrCreate(['id' => $request->id], ['posicion' => $request->posicion]);
+        } else if($request->posicion > 0){
+            $usuario_antiguo = User::where('posicion', $request->posicion)->get()->first();
+            
+
+            if($usuario_antiguo){
+                $usuario_antiguo->posicion = $request->posicion_actual;
+
+                $usuario_actual->posicion = $request->posicion;
+
+                $usuario_actual->save();
+                $usuario_antiguo->save();
+            } else {
+                $usuario_actual->posicion = $request->posicion;
+                $usuario_actual->save();
+            }
+        }
+
+    }
+
     public function imagen(Request $request){
         $usuario = User::find($request->usuario_id);
         if($usuario->url_perfil != 'img/perfil.svg') { Storage::disk('public')->delete($usuario->url_perfil); }

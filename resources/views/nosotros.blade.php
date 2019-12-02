@@ -12,14 +12,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="embed-responsive embed-responsive-16by9">
-                            <iframe width="auto" height="auto" 
-                            @if(strpos($pagina->video_url, 'www'))
-                            src="{{ $pagina->video_url }}" 
-                            
-                            @else
-                            src="{{ asset('storage/' . $pagina->video_url) }}" 
-                            @endif
-                            frameborder="0" allowfullscreen></iframe>
+                            <iframe width="auto" height="auto" @if(strpos($pagina->video_url, 'www')) src="{{ $pagina->video_url }}" @else src="{{ asset('storage/' . $pagina->video_url) }}" @endif frameborder="0" allowfullscreen></iframe>
                         </div>
                     </div>
                 </div>

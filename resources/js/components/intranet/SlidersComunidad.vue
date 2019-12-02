@@ -253,6 +253,7 @@
         methods:{
             mensaje(clase, mensaje) {
                 Swal.fire({
+                    position: 'bottom-end',
                     type: clase,
                     title: mensaje,
                     showConfirmButton: true,

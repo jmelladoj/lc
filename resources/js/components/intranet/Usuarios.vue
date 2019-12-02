@@ -254,7 +254,7 @@
                             </b-col>
                             <b-col>
                                 <b-form-group label="Nueva posición">
-                                    <ValidationProvider name="posición" rules="required|numeric|between:1,10" v-slot="{ errors }">
+                                    <ValidationProvider name="posición" rules="required|numeric|between:0,10" v-slot="{ errors }">
                                         <b-form-input type="number" v-model="usuario.posicion"></b-form-input>
                                         <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
                                     </ValidationProvider>
@@ -265,7 +265,7 @@
                             <b-col>
                                 <b-form-group label="Likes">
                                     <ValidationProvider name="likes" rules="required|numeric|between:1,100" v-slot="{ errors }">
-                                        <b-form-input type="number" v-model="usuario.like"></b-form-input>
+                                        <b-form-input type="number" v-model="usuario.likes"></b-form-input>
                                         <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
                                     </ValidationProvider>
                                 </b-form-group>
@@ -282,7 +282,7 @@
                     </b-form>
 
                     <template slot="modal-footer">
-                        <b-button :disabled="!valid" size="md" variant="success" @click="agregarSaldo()"> Guardar </b-button>
+                        <b-button :disabled="!valid" size="md" variant="success" @click="cambiarPosiciones()"> Guardar </b-button>
                         <b-button size="md" variant="danger" @click="cerrarModalSaldo()"> Cerrar </b-button>
                     </template>
                 </b-modal>
@@ -352,6 +352,7 @@
         methods:{
             mensaje(clase, mensaje) {
                 Swal.fire({
+                    position: 'bottom-end',
                     type: clase,
                     title: mensaje,
                     showConfirmButton: true,
@@ -387,6 +388,23 @@
                     me.cerrarModal();
                     var mensaje = accion == 1 ? 'Registro agregado exitosamente' : 'Registro actualizado exitosamente';
                     me.mensaje('success', mensaje);
+                }).catch(function (error) {
+                    console.error(error);
+                });
+            },
+            cambiarPosiciones(){
+                let me = this;
+
+                axios.post('/usuario/posicion',{
+                    'id': me.usuario.id,
+                    'posicion_actual': me.usuario.posicion_actual,
+                    'posicion': me.usuario.posicion,
+                    'likes': me.usuario.likes,
+                    'dislikes': me.usuario.dislikes
+                }).then(function (response) {
+                    me.listarUsuarios();
+                    me.cerrarModalSaldo();
+                    me.mensaje('success', 'Posición actualizada exitosamente');
                 }).catch(function (error) {
                     console.error(error);
                 });
@@ -510,6 +528,8 @@
                 me.usuario.id = data['id'];
                 me.usuario.posicion = data['posicion'];
                 me.usuario.posicion_actual = me.usuario.posicion;
+                me.usuario.likes = data['likes'];
+                me.usuario.dislikes = data['dislikes'];
 
                 this.$refs['modal_posicion'].show();
             },

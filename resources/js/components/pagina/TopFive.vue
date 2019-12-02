@@ -123,16 +123,7 @@
                     '1er lugar', '2do lugar', '3er lugar', '4to lugar', '5to lugar'
                 ],
                 items: items,
-                fields: [
-                    { key: 'lugar', label: 'Posición', sortable: true, sortDirection: 'desc', class: 'text-left' },
-                    { key: 'nombre', label: 'Nombre de la Pyme', sortable: true, class: 'text-left' },
-                    { key: 'nombre_comuna', label: 'Comuna', sortable: true, class: 'text-left' },
-                    { key: 'nombre_rubro', label: 'Rubro', sortable: true, class: 'text-left' },
-                    { key: 'perfil', label: 'Perfil', sortable: true, class: 'text-center' },
-                    { key: 'valoracion', label: 'Valoración', sortable: true, class: 'text-center valoracion' },
-                    { key: 'like', label: 'Me gusta', sortable: true, class: 'text-center like' },
-                    { key: 'dislike', label: 'No me gusta', sortable: true, class: 'text-center dislike' }
-                ],
+                fields: [],
                 currentPage: 1,
                 perPage: 10,
                 totalRows: 0,
@@ -225,6 +216,28 @@
         },
         mounted() {
             this.listarPymes();
+
+            if(this.logeado == 0){
+                this.fields = [
+                    { key: 'lugar', label: 'Posición', sortable: true, sortDirection: 'desc', class: 'text-left' },
+                    { key: 'nombre', label: 'Nombre de la Pyme', sortable: true, class: 'text-left' },
+                    { key: 'nombre_comuna', label: 'Comuna', sortable: true, class: 'text-left' },
+                    { key: 'nombre_rubro', label: 'Rubro', sortable: true, class: 'text-left' },
+                    { key: 'perfil', label: 'Perfil', sortable: true, class: 'text-center' },
+                    { key: 'valoracion', label: 'Valoración', sortable: true, class: 'text-center valoracion' },
+                ]
+            } else {
+                this.fields = [
+                    { key: 'lugar', label: 'Posición', sortable: true, sortDirection: 'desc', class: 'text-left' },
+                    { key: 'nombre', label: 'Nombre de la Pyme', sortable: true, class: 'text-left' },
+                    { key: 'nombre_comuna', label: 'Comuna', sortable: true, class: 'text-left' },
+                    { key: 'nombre_rubro', label: 'Rubro', sortable: true, class: 'text-left' },
+                    { key: 'perfil', label: 'Perfil', sortable: true, class: 'text-center' },
+                    { key: 'valoracion', label: 'Valoración', sortable: true, class: 'text-center valoracion' },
+                    { key: 'like', label: 'Me gusta', sortable: true, class: 'text-center like' },
+                    { key: 'dislike', label: 'No me gusta', sortable: true, class: 'text-center dislike' }
+                ] 
+            }
         }
     }
 </script>

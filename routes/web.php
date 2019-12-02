@@ -101,6 +101,7 @@ Route::post('usuario/actualizar/imagen', 'UsuarioController@imagen')->name('Actu
 Route::post('/usuario/saldo', 'UsuarioController@saldo')->name('Agregar saldo');
 Route::post('/usuario/blacklist/agregar', 'UsuarioController@blacklistAgregar')->name('Agregar a black list');
 Route::post('/usuario/blacklist/quitar', 'UsuarioController@blacklistQuitar')->name('Agregar a black list');
+Route::post('/usuario/posicion', 'UsuarioController@posicion')->name('Cambiar posicion');
 
 //Rutas de sliders
 Route::get('/sorteos/{tipo}', 'SorteoController@index')->name('Listar Sorteos');

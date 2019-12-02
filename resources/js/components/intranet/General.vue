@@ -80,6 +80,7 @@
 
                 axios.post('/general/actualizar',formData).then(function (response) {
                     Swal.fire({
+                        position: 'bottom-end',
                         type: 'success',
                         title: 'Página actualizada exitosamente',
                         showConfirmButton: true,

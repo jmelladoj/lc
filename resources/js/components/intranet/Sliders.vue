@@ -185,6 +185,7 @@
                     </b-form>
 
                     <template slot="modal-footer">
+                        <b-spinner v-show="spinner.estado == 1" label="Spinning"></b-spinner>
                         <b-button :disabled="!valid" v-show="modal_slider.accion == 1" size="md" variant="success" @click="crearOactualizar(1)"> Guardar </b-button>
                         <b-button v-show="modal_slider.accion == 2" size="md" variant="warning" @click="crearOactualizar(2)"> Actualizar </b-button>
                         <b-button size="md" variant="danger" @click="cerrarModal()"> Cerrar </b-button>
@@ -245,6 +246,9 @@
     export default {
         data() {
             return {
+                spinner: {
+                    estado: 0
+                },
                 slider: {
                     id: 0,
                     texto: '',
@@ -313,6 +317,7 @@
         methods:{
             mensaje(clase, mensaje) {
                 Swal.fire({
+                    position: 'bottom-end',
                     type: clase,
                     title: mensaje,
                     showConfirmButton: true,
@@ -349,6 +354,8 @@
 
                 let formData = new FormData();
                 let imagen_slider = document.querySelector('#imagen_slider');
+                me.spinner.estado = 1;
+                
                 formData.append('imagen_slider', imagen_slider.files[0]);
                 
                 formData.append('slider_id', this.slider.id);
@@ -423,6 +430,7 @@
             cerrarModal(){
                 this.modal_slider.titulo = "";
                 this.modal_slider.accion = 0;
+                this.spinner.estado = 0;
                 this.$refs['modal_slider'].hide();
             },
             abrirModal(accion, data = []){
