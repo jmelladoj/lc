@@ -216,8 +216,8 @@
                     texto_boton: '',
                     texto_modal: '',
                     texto_alerta: '', 
-                    color: '',
-                    subcolor: '',
+                    color: '#E8ECD1',
+                    subcolor: '#E8ECD1',
                     url_imagen: null,
                     link: ''
                 },
@@ -372,9 +372,9 @@
                 this.slider.texto_boton = '';
                 this.slider.texto_modal = '';
                 this.slider.texto_alerta = '';
-                this.slider.color = '';
+                this.slider.color = '#E8ECD1';
                 this.slider.subtexto = '';
-                this.slider.subcolor = '';
+                this.slider.subcolor = '#E8ECD1';
                 this.slider.url_imagen = null;
                 this.slider.link = '';
             }

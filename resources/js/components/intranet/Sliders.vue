@@ -125,34 +125,38 @@
             <ValidationObserver ref="observer_slider" v-slot="{ valid }">
                 <b-modal ref="modal_slider" :title="modal_slider.titulo" no-close-on-backdrop scrollable>
                     <b-form>
-                        <b-form-group label="Título">
+                        <b-form-group>
                             <ValidationProvider name="título" rules="required|min:3" v-slot="{ errors }">
-                                <b-form-input type="text" v-model="slider.texto"></b-form-input>
+                                <b-form-input type="text" v-model="slider.texto" placeholder="Título"></b-form-input>
                                 <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
                             </ValidationProvider>
                         </b-form-group>
 
-                        <b-form-group label="Color de título">
-                            <ValidationProvider name="color de título" rules="required" v-slot="{ errors }">
-                                <swatches v-model="slider.color" :colors="colors" show-fallback popover-to="left"></swatches>
-                                <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
-                            </ValidationProvider>
-                        </b-form-group>
-
-                        <b-form-group label="Subtítulo">
+                        <b-form-group>
                             <ValidationProvider name="subtítulo" rules="min:3" v-slot="{ errors }">
-                                <b-form-input type="text" v-model="slider.subtexto"></b-form-input>
+                                <b-form-input type="text" v-model="slider.subtexto" placeholder="Subtítulo"></b-form-input>
                                 <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
                             </ValidationProvider>
                         </b-form-group>
 
-                        <b-form-group label="Color de subtítulo">
-                            <ValidationProvider name="color de subtítulo" v-slot="{ errors }">
-                                <swatches v-model="slider.subcolor" :colors="colors" show-fallback popover-to="left"></swatches>
-                                <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
-                            </ValidationProvider>
-                        </b-form-group>
-
+                        <b-row>
+                            <b-col class="text-center">
+                                <b-form-group label="Color de título">
+                                    <ValidationProvider name="color de título" rules="required" v-slot="{ errors }">
+                                        <swatches v-model="slider.color" :colors="colors" show-fallback popover-to="left"></swatches>
+                                        <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
+                                    </ValidationProvider>
+                                </b-form-group>
+                            </b-col>
+                            <b-col class="text-center">
+                                <b-form-group label="Color de subtítulo">
+                                    <ValidationProvider name="color de subtítulo" v-slot="{ errors }">
+                                        <swatches v-model="slider.subcolor" :colors="colors" show-fallback popover-to="left"></swatches>
+                                        <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
+                                    </ValidationProvider>
+                                </b-form-group>
+                            </b-col>
+                        </b-row>
 
                         <b-form-group label="Imagen (1080px alto como minímo | JPG, JPEG y PNG)">
                             <ValidationProvider name="imagen" rules="required" v-slot="{ errors, validate }">
@@ -162,7 +166,7 @@
                             </ValidationProvider>
                         </b-form-group>
 
-                        <b-form-group label="¿Redirección a?">
+                        <b-form-group>
                             <ValidationProvider name="redirección" rules="required" v-slot="{ errors }">
                                 <b-form-select v-model="slider.link" class="mb-3">
                                     <option :value="0" selected>Sin redirección</option>
@@ -171,13 +175,13 @@
                             </ValidationProvider>
                         </b-form-group>
 
-                        <b-form-group label="Segmento de personas">
+                        <b-form-group>
                             <ValidationProvider name="segmento de personas" v-slot="{ errors }">
                                 <b-form-select v-model="slider.tipo_persona" class="mb-3">
-                                    <option :value="null" selected>Todos</option>
-                                    <option :value="1" selected>Persona</option>
-                                    <option :value="2" selected>Pyme</option>
-                                    <option :value="3" selected>Estudiante</option>
+                                    <option :value="null" selected>Para todos los Clientes</option>
+                                    <option :value="1" selected>Solo para Prenvecionistas</option>
+                                    <option :value="2" selected>Solo para Pymes</option>
+                                    <option :value="3" selected>Solo para Estudiantes</option>
                                 </b-form-select>
                                 <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
                             </ValidationProvider>
@@ -185,10 +189,13 @@
                     </b-form>
 
                     <template slot="modal-footer">
-                        <b-spinner v-show="spinner.estado == 1" label="Spinning"></b-spinner>
-                        <b-button :disabled="!valid" v-show="modal_slider.accion == 1" size="md" variant="success" @click="crearOactualizar(1)"> Guardar </b-button>
-                        <b-button v-show="modal_slider.accion == 2" size="md" variant="warning" @click="crearOactualizar(2)"> Actualizar </b-button>
-                        <b-button size="md" variant="danger" @click="cerrarModal()"> Cerrar </b-button>
+                        <div class="w-100">
+                            <b-spinner class="float-left" variant="success" label="Spinning" v-show="spinner.estado == 1"></b-spinner>
+                        
+                            <b-button class="float-right" :disabled="!valid || modal_slider.accion == 0" v-show="modal_slider.accion == 1" size="md" variant="success" @click="crearOactualizar(1)"> Guardar </b-button>
+                            <b-button class="float-right" v-show="modal_slider.accion == 2" size="md" variant="warning" @click="crearOactualizar(2)"> Actualizar </b-button>
+                            <b-button class="float-right" size="md" variant="danger" @click="cerrarModal()"> Cerrar </b-button>
+                        </div>
                     </template>
                 </b-modal>
             </ValidationObserver>
@@ -355,6 +362,7 @@
                 let formData = new FormData();
                 let imagen_slider = document.querySelector('#imagen_slider');
                 me.spinner.estado = 1;
+                me.modal_slider.accion = 0;
                 
                 formData.append('imagen_slider', imagen_slider.files[0]);
                 
@@ -520,4 +528,25 @@
         height: 30px !important;
         width: 30px !important;
     }
+
+    .custom-select:focus {
+        border-color: #8AB733;
+        outline: 0;
+        box-shadow: 0 0 0 1px rgba(138, 183, 51);
+    }
+
+    select option:hover, select option:focus, select option:active, select option:checked{
+        background-color: #E8ECD1 !important;
+    }
+
+    .select:hover::after { 
+        color: #F39C12; 
+    } 
+              
+    .select::after { 
+        -webkit-transition: .25s all ease; 
+        -o-transition: .25s all ease; 
+        transition: .25s all ease; 
+    } 
+
 </style>

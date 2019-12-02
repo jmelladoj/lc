@@ -38,6 +38,10 @@
             <template v-slot:cell(nombre_comuna)="data">
                 {{ data.item.comuna.nombre }}
             </template>
+            
+            <template v-slot:cell(valoracion)="data">
+                A {{ data.item.likes }} % les gusta esto.
+            </template>
 
             <template v-slot:cell(nombre_rubro)="data">
                 Sin rubro
@@ -218,26 +222,53 @@
             this.listarPymes();
 
             if(this.logeado == 0){
-                this.fields = [
-                    { key: 'lugar', label: 'Posición', sortable: true, sortDirection: 'desc', class: 'text-left' },
-                    { key: 'nombre', label: 'Nombre de la Pyme', sortable: true, class: 'text-left' },
-                    { key: 'nombre_comuna', label: 'Comuna', sortable: true, class: 'text-left' },
-                    { key: 'nombre_rubro', label: 'Rubro', sortable: true, class: 'text-left' },
-                    { key: 'perfil', label: 'Perfil', sortable: true, class: 'text-center' },
-                    { key: 'valoracion', label: 'Valoración', sortable: true, class: 'text-center valoracion' },
-                ]
+                if(this.tipo == 1){
+                    this.fields = [
+                        { key: 'lugar', label: 'Posición', sortable: true, sortDirection: 'desc', class: 'text-center' },
+                        { key: 'nombre', label: 'Nombre de la Pyme', sortable: true, class: 'text-center' },
+                        { key: 'nombre_comuna', label: 'Comuna', sortable: true, class: 'text-center' },
+                        { key: 'nombre_rubro', label: 'Rubro', sortable: true, class: 'text-center' },
+                        { key: 'perfil', label: 'Perfil', sortable: true, class: 'text-center' },
+                        { key: 'valoracion', label: 'Valoración', sortable: true, class: 'text-center' },
+                    ]
+                } else {
+                    this.fields = [
+                        { key: 'nombre', label: 'Nombre de la Pyme', sortable: true, class: 'text-center' },
+                        { key: 'nombre_comuna', label: 'Comuna', sortable: true, class: 'text-center' },
+                        { key: 'nombre_rubro', label: 'Rubro', sortable: true, class: 'text-center' },
+                        { key: 'perfil', label: 'Perfil', sortable: true, class: 'text-center' },
+                        { key: 'valoracion', label: 'Valoración', sortable: true, class: 'text-center' },
+                    ]
+                }
+                
             } else {
-                this.fields = [
-                    { key: 'lugar', label: 'Posición', sortable: true, sortDirection: 'desc', class: 'text-left' },
-                    { key: 'nombre', label: 'Nombre de la Pyme', sortable: true, class: 'text-left' },
-                    { key: 'nombre_comuna', label: 'Comuna', sortable: true, class: 'text-left' },
-                    { key: 'nombre_rubro', label: 'Rubro', sortable: true, class: 'text-left' },
-                    { key: 'perfil', label: 'Perfil', sortable: true, class: 'text-center' },
-                    { key: 'valoracion', label: 'Valoración', sortable: true, class: 'text-center valoracion' },
-                    { key: 'like', label: 'Me gusta', sortable: true, class: 'text-center like' },
-                    { key: 'dislike', label: 'No me gusta', sortable: true, class: 'text-center dislike' }
-                ] 
+
+                if(this.tipo == 1){
+                    this.fields = [
+                        { key: 'lugar', label: 'Posición', sortable: true, sortDirection: 'desc', class: 'text-center' },
+                        { key: 'nombre', label: 'Nombre de la Pyme', sortable: true, class: 'text-center' },
+                        { key: 'nombre_comuna', label: 'Comuna', sortable: true, class: 'text-center' },
+                        { key: 'nombre_rubro', label: 'Rubro', sortable: true, class: 'text-center' },
+                        { key: 'perfil', label: 'Perfil', sortable: true, class: 'text-center' },
+                        { key: 'valoracion', label: 'Valoración', sortable: true, class: 'text-center' },
+                        { key: 'like', label: 'Me gusta', sortable: true, class: 'text-center like' },
+                        { key: 'dislike', label: 'No me gusta', sortable: true, class: 'text-center dislike' }
+                    ]
+                } else {
+                    this.fields = [
+                        { key: 'nombre', label: 'Nombre de la Pyme', sortable: true, class: 'text-center' },
+                        { key: 'nombre_comuna', label: 'Comuna', sortable: true, class: 'text-center' },
+                        { key: 'nombre_rubro', label: 'Rubro', sortable: true, class: 'text-center' },
+                        { key: 'perfil', label: 'Perfil', sortable: true, class: 'text-center' },
+                        { key: 'valoracion', label: 'Valoración', sortable: true, class: 'text-center' },
+                        { key: 'like', label: 'Me gusta', sortable: true, class: 'text-center like' },
+                        { key: 'dislike', label: 'No me gusta', sortable: true, class: 'text-center dislike' }
+                    ]
+                }
             }
+        },
+        updated() {
+            this.listarPymes();
         }
     }
 </script>

@@ -18170,7 +18170,7 @@ pre code {
 .form-control:focus {
     color: #4F5467;
     background-color: #fff;
-    border-color: rgba(0, 0, 0, .1);
+    border-color: #8AB733;
     outline: 0;
     box-shadow: transparent
 }
@@ -19869,9 +19869,9 @@ tbody.collapse.show {
     width: 100%
 }
 
-.custom-file-input:lang(en)~.custom-file-label::after,
+.custom-file-input:lang(es)~.custom-file-label::after,
 .custom-file-label::after {
-    content: "Browse"
+    content: "Buscar"
 }
 
 .custom-checkbox .custom-control-label::before {
