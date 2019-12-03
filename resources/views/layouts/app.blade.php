@@ -52,6 +52,7 @@
                                     <li class="nav-icon-item">                           
                                         <a href="{{ url('/login') }}" class="nav-icon-trigger" title="Ingresar"><span> @if(Auth::check())  {{ Auth::user()->nombre }} @else Ingresar @endif </span></a>
                                     </li>
+                                    <li class="nav-icon-item"> <a class="nav-link  waves-effect waves-light" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();"><img src="{{ asset('img/salir.png') }}" height="40"><form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">@csrf</form></a></li>
                                 </ul>
                             </div>
 

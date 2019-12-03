@@ -122,68 +122,72 @@
             <ValidationObserver ref="observer_slider" v-slot="{ valid }">
                 <b-modal ref="modal_slider" :title="modal_slider.titulo" no-close-on-backdrop scrollable>
                     <b-form>
-                        <b-form-group label="Título">
+                        <b-form-group>
                             <ValidationProvider name="título" rules="required|min:3" v-slot="{ errors }">
-                                <b-form-input type="text" v-model="slider.texto_slider"></b-form-input>
+                                <b-form-input type="text" v-model="slider.texto_slider" placeholder="Título"></b-form-input>
                                 <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
                             </ValidationProvider>
                         </b-form-group>
 
-                        <b-form-group label="Color de letra">
-                            <ValidationProvider name="color de letra" rules="required" v-slot="{ errors }">
-                                <swatches v-model="slider.color" :colors="colors" show-fallback popover-to="left"></swatches>
-                                <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
-                            </ValidationProvider>
-                        </b-form-group>
-
-
-                        <b-form-group label="Subtítulo">
+                        <b-form-group>
                             <ValidationProvider name="subtítulo" rules="min:3" v-slot="{ errors }">
-                                <b-form-input type="text" v-model="slider.subtexto"></b-form-input>
+                                <b-form-input type="text" v-model="slider.subtexto" placeholder="Subtítulo"></b-form-input>
                                 <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
                             </ValidationProvider>
                         </b-form-group>
 
-                        <b-form-group label="Color de subtítulo">
-                            <ValidationProvider name="color de subtítulo" v-slot="{ errors }">
-                                <swatches v-model="slider.subcolor" :colors="colors" show-fallback popover-to="left"></swatches>
-                                <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
-                            </ValidationProvider>
-                        </b-form-group>
+                        <b-row>
+                            <b-col class="text-center">
+                                <b-form-group label="Color de título">
+                                    <ValidationProvider name="color de título" rules="required" v-slot="{ errors }">
+                                        <swatches v-model="slider.color" :colors="colors" show-fallback popover-to="left"></swatches>
+                                        <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
+                                    </ValidationProvider>
+                                </b-form-group>
+                            </b-col>
+                            <b-col class="text-center">
+                                <b-form-group label="Color de subtítulo">
+                                    <ValidationProvider name="color de subtítulo" v-slot="{ errors }">
+                                        <swatches v-model="slider.subcolor" :colors="colors" show-fallback popover-to="left"></swatches>
+                                        <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
+                                    </ValidationProvider>
+                                </b-form-group>
+                            </b-col>
+                        </b-row>
 
-                        <b-form-group label="Texto de boton">
+                        <b-form-group>
                             <ValidationProvider name="texto de boton" rules="required|min:3" v-slot="{ errors }">
-                                <b-form-input type="text" v-model="slider.texto_boton"></b-form-input>
+                                <b-form-input type="text" v-model="slider.texto_boton" placeholder="Texto de botón"></b-form-input>
                                 <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
                             </ValidationProvider>
                         </b-form-group>
 
-                        <b-form-group label="Texto de modal">
+                        <b-form-group>
                             <ValidationProvider name="texto de modal" rules="required|min:3" v-slot="{ errors }">
-                                <b-form-input type="text" v-model="slider.texto_modal"></b-form-input>
+                                <b-form-input type="text" v-model="slider.texto_modal" placeholder="Texto de modal"></b-form-input>
                                 <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
                             </ValidationProvider>
                         </b-form-group>
 
-                        <b-form-group label="Texto de alerta">
-                            <ValidationProvider name="texto de alerta" rules="required|min:3" v-slot="{ errors }">
-                                <b-form-input type="text" v-model="slider.texto_alerta"></b-form-input>
+                        <b-form-group>
+                            <ValidationProvider name="texto de notificación" rules="required|min:3" v-slot="{ errors }">
+                                <b-form-input type="text" v-model="slider.texto_alerta" placeholder="Texto de notificación"></b-form-input>
                                 <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
                             </ValidationProvider>
                         </b-form-group>
 
-                        <b-form-group label="Imagen (1920px ancho X 1080px alto | JPG, JPEG y PNG)">
-                            <ValidationProvider name="imagen" rules="required|dimensions:1920,1080" v-slot="{ errors, validate }">
+                        <b-form-group label="Imagen (1080px alto como minímo | JPG, JPEG y PNG)">
+                            <ValidationProvider name="imagen" rules="required" v-slot="{ errors, validate }">
                                 <b-img v-if="slider.url_imagen != null" :src="slider.url_imagen" fluid id="img_slider" center name="img_slider" class="imagen"></b-img>
                                 <b-form-file id="imagen_slider" name="imagen_slider" accept="image/*" placeholder="Sin archivo" @change="mostrarFoto($event)" @input="validate"></b-form-file>
                                 <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
                             </ValidationProvider>
                         </b-form-group>
 
-                        <b-form-group label="¿Redirección a?">
-                            <ValidationProvider name="redirección" v-slot="{ errors }">
+                        <b-form-group>
+                            <ValidationProvider name="redirección" rules="required" v-slot="{ errors }">
                                 <b-form-select v-model="slider.link" class="mb-3">
-                                    <option :value="''" selected>Sin redirección</option>
+                                    <option :value="0" selected>Sin redirección</option>
                                 </b-form-select>
                                 <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
                             </ValidationProvider>
@@ -226,7 +230,7 @@
                     color: '#E8ECD1',
                     subcolor: '#E8ECD1',
                     url_imagen: null,
-                    link: ''
+                    link: 0
                 },
                 colors: ['#E8ECD1', '#8AB733', '#3F8A24', '#1E2F13', '#D4AF37', '#D7552A', '#0070C0', '#FFFF99' ,''],
                 modal_slider: {
@@ -388,7 +392,7 @@
                 this.slider.subtexto = '';
                 this.slider.subcolor = '#E8ECD1';
                 this.slider.url_imagen = null;
-                this.slider.link = '';
+                this.slider.link = 0;
             }
         },
         mounted() {

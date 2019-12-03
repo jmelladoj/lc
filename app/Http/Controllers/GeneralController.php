@@ -9,6 +9,10 @@ use Illuminate\Support\Facades\Storage;
 class GeneralController extends Controller
 {
     //
+    public function indexGeneral(){
+        return ['general' => General::find(1)];
+    }
+
     public function actualizar(Request $request){
         $general = General::find(1);
 

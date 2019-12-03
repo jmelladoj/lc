@@ -32509,11 +32509,19 @@ html body .navbar-dark .mailbox .message-center a .mail-contnet .time {
     /*opacity: 0.9 !important;*/
 }
 
-.form-control:focus {
-    box-shadow: 0 0 0 0.05rem rgba(138, 183, 51, 0.25);
-    border-color: rgba(138, 183, 51);
+textarea:focus, 
+input:focus, 
+input[type]:focus, 
+.uneditable-input:focus, 
+.custom-select:focus {   
+    border-color: rgba(138, 183, 51, 0.8);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(138, 183, 51, 0.6);
+    outline: 0 none;
 }
 
+.btn-secondary.focus, .btn-secondary:focus, .btn-secondary:not(:disabled):not(.disabled).active:focus, .btn-secondary:not(:disabled):not(.disabled):active:focus, .show > .btn-secondary.dropdown-toggle:focus {
+    box-shadow: none;
+}
 @import url(https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700);
 /*Theme Colors*/
 /**

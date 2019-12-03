@@ -2174,7 +2174,7 @@ ul:last-child {
   Header Icons
 ------------------------------------------------------------*/
 .nav-icons {
-    width: 162px;
+    width: auto;
     display: table-cell;
     vertical-align: middle;
     text-align: right;

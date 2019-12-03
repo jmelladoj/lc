@@ -20,5 +20,5 @@
         </div>
     </section>
 
-    <sliders-ubicacion :ubicacion="3"></sliders-ubicacion>
+    <sliders-ubicacion :ubicacion="3" @auth :usuario="{{ json_encode(Auth::user()) }}" @endauth></sliders-ubicacion>
 @endsection

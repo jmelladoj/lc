@@ -1,5 +1,28 @@
 <template>
     <b-container fluid>
+        <b-row class="mb-3">
+            <b-col md="6" class="my-1">
+                <b-form-group class="mb-0">
+                <b-input-group>
+                    <b-form-input v-model="filter" placeholder="Escribe un rubro para buscar"  class="altura-form-control"/>
+                    <b-input-group-append>
+                    <b-button class="boton_chico" size="sm" :disabled="!filter" @click="filter = ''">Limpiar</b-button>
+                    </b-input-group-append>
+                </b-input-group>
+                </b-form-group>
+            </b-col>
+
+            <b-col md="6" class="my-1">
+                <b-form-group class="mb-0">
+                <b-input-group>
+                    <b-form-input v-model="filter" placeholder="Escribe una comuna para buscar" class="altura-form-control"/>
+                    <b-input-group-append>
+                    <b-button class="boton_chico" size="sm" :disabled="!filter" @click="filter = ''">Limpiar</b-button>
+                    </b-input-group-append>
+                </b-input-group>
+                </b-form-group>
+            </b-col>
+        </b-row>
         <b-table
             show-empty
             responsive
@@ -17,6 +40,8 @@
             :sort-desc.sync="sortDesc"
             :sort-direction="sortDirection"
             @filtered="onFiltered">
+
+
 
             <template slot="empty">
                 <center><h5>No hay registros para mostrar.</h5></center>
@@ -287,5 +312,22 @@
     .table-striped tbody tr:nth-of-type(2n+1) {
         background-color: 
         rgba(0, 0, 0, 0.05);
+    }
+
+    .altura-form-control {
+        max-height: 30px !important;
+    }
+
+    .boton_chico {
+        padding-top: 0px !important;
+        padding-bottom: 0px !important;
+        border-bottom-right-radius: 40px !important;
+        color:  #1E2F13 !important;
+        background-color: #E8ECD1 !important;
+        font-size: 14px !important;
+    }
+
+    .table thead th {
+        font-size: 18px !important;
     }
 </style>

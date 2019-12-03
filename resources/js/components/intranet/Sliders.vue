@@ -529,24 +529,15 @@
         width: 30px !important;
     }
 
-    .custom-select:focus {
-        border-color: #8AB733;
-        outline: 0;
-        box-shadow: 0 0 0 1px rgba(138, 183, 51);
-    }
 
     select option:hover, select option:focus, select option:active, select option:checked{
         background-color: #E8ECD1 !important;
     }
 
-    .select:hover::after { 
-        color: #F39C12; 
-    } 
-              
-    .select::after { 
-        -webkit-transition: .25s all ease; 
-        -o-transition: .25s all ease; 
-        transition: .25s all ease; 
-    } 
+    .custom-file:focus, .custom-file:focus{
+        border-color: #8AB733;
+        outline: 0;
+        box-shadow: 0 0 0 1px rgba(138, 183, 51);
+    }
 
 </style>

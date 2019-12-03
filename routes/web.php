@@ -49,6 +49,7 @@ Route::get('/pagina/nosotros', 'PaginaController@indexNosotros')->name('Listar N
 Route::get('/pagina/comunidad', 'PaginaController@indexComunidad')->name('Listar Comunidad');
 Route::get('/pagina/servicios/mensaje', 'PaginaController@indexServicios')->name('Listar Servicios');
 Route::get('/pagina/registro', 'PaginaController@indexLogin')->name('Listar Registro');
+Route::get('/general', 'GeneralController@indexGeneral')->name('Listar General');
 Route::post('/general/actualizar', 'GeneralController@actualizar')->name('Actualizar página general');
 Route::post('/pagina/nosotros/actualizar', 'PaginaController@actualizarNosotros')->name('Actualizar página nosotros');
 Route::post('/pagina/comunidad/actualizar', 'PaginaController@actualizarComunidad')->name('Actualizar página comunidad');

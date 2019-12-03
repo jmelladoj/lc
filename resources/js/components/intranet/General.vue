@@ -14,15 +14,26 @@
             <b-row>
                 <b-col>
                     <b-card title="Logos">
-                        <b-form-group label="Logo (150px alto X 34px ancho | PNG):" label-for="logo" label-cols-sm="4">
-                            <b-form-file id="logo" name="logo" accept="image/png" placeholder="Sin archivo"></b-form-file>
-                        </b-form-group>
-                        <b-form-group label="Favicon (155px alto X 95px ancho | PNG):" label-for="favicon" label-cols-sm="4">
-                            <b-form-file id="favicon" name="favicon" accept="image/png" placeholder="Sin archivo"></b-form-file>
-                        </b-form-group>
-                        <b-form-group label="Logo Footer (150px alto X 34px ancho | PNG)" label-for="logo_footer" label-cols-sm="4">
-                            <b-form-file id="logo_footer" name="logo_footer" accept="image/png" placeholder="Sin archivo"></b-form-file>
-                        </b-form-group>
+                        <b-row>
+                            <b-col class="text-center">
+                                <b-form-group label="Logo (150px alto X 34px ancho | PNG):" label-for="logo">
+                                    <b-form-file id="logo" name="logo" accept="image/png" placeholder="Sin archivo"></b-form-file>
+                                </b-form-group>
+                                <b-img v-show="logo != ''" :src="logo" height="150"></b-img>
+                            </b-col>
+                            <b-col class="text-center">
+                                <b-form-group label="Favicon (155px alto X 95px ancho | PNG):" label-for="favicon">
+                                    <b-form-file id="favicon" name="favicon" accept="image/png" placeholder="Sin archivo"></b-form-file>
+                                </b-form-group>
+                                <b-img v-show="favicon != ''" :src="favicon" height="150"></b-img>
+                            </b-col>
+                            <b-col class="text-center">
+                                <b-form-group label="Footer (150px alto X 34px ancho | PNG)" label-for="logo_footer">
+                                    <b-form-file id="logo_footer" name="logo_footer" accept="image/png" placeholder="Sin archivo"></b-form-file>
+                                </b-form-group>
+                                <b-img v-show="footer != ''" :src="footer" height="150"></b-img>
+                            </b-col>
+                        </b-row>                    
                     </b-card>
                     <b-card title="Documentación">
                         <b-form-group label="Terminos y condiciones" label-for="terminos" label-cols-sm="4">
@@ -48,9 +59,33 @@
 
 <script>
     export default {   
+        data(){
+            return {
+                logo: '',
+                favicon: '',
+                footer: ''
+            }
+        },
         methods:{
             mensaje(clase, mensaje) {
-
+                Swal.fire({
+                    position: 'bottom-end',
+                    type: clase,
+                    title: mensaje,
+                    showConfirmButton: true,
+                    timer: 1000
+                });
+            },
+            listarGeneral (){
+                let me=this;
+                axios.get('/general').then(function (response) {
+                    me.logo = response.data.general.logo_url != null ? 'storage/' + response.data.general.logo_url : '';
+                    me.favicon = response.data.general.favicon_url != null ? 'storage/' + response.data.general.favicon_url : '';
+                    me.footer = response.data.general.logo_fot_url != null ? 'storage/' + response.data.general.logo_fot_url : '';
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
             },
             actualizarPagina(){
                 let me = this;
@@ -86,10 +121,15 @@
                         showConfirmButton: true,
                         timer: 2000
                     });
+
+                    me.listarGeneral()
                 }).catch(function (error) {
                     console.error(error);
                 });
             }
+        },
+        mounted(){
+            this.listarGeneral();
         }
     }
 </script>

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <sliders-ubicacion :ubicacion="5"></sliders-ubicacion>
+    <sliders-ubicacion :ubicacion="5" @auth :usuario="{{ json_encode(Auth::user()) }}" @endauth></sliders-ubicacion>
 
     <section class="breadcrumb">
         <div class="breadcrumb-content">
