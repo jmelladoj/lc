@@ -192,9 +192,13 @@
                     </b-form>
 
                     <template slot="modal-footer">
-                        <b-button :disabled="!valid" v-show="modal_slider.accion == 1" size="md" variant="success" @click="crearOactualizar(1)"> Guardar </b-button>
-                        <b-button v-show="modal_slider.accion == 2" size="md" variant="warning" @click="crearOactualizar(2)"> Actualizar </b-button>
-                        <b-button size="md" variant="danger" @click="cerrarModal()"> Cerrar </b-button>
+                        <div class="w-100">
+                            <b-spinner class="float-left" variant="success" label="Spinning" v-show="spinner.estado == 1"></b-spinner>
+
+                            <b-button class="float-right" :disabled="!valid || modal_slider.accion == 0" v-show="modal_slider.accion == 1" size="md" variant="success" @click="crearOactualizar(1)"> Guardar </b-button>
+                            <b-button class="float-right" v-show="modal_slider.accion == 2" size="md" variant="warning" @click="crearOactualizar(2)"> Actualizar </b-button>
+                            <b-button class="float-right" size="md" variant="danger" @click="cerrarModal()"> Cerrar </b-button>
+                        </div>
                     </template>
                 </b-modal>
             </ValidationObserver>
@@ -209,6 +213,9 @@
     export default {
         data() {
             return {
+                spinner: {
+                    estado: 0
+                },
                 slider: {
                     id: 0,
                     texto_slider: '',
@@ -289,6 +296,10 @@
                 let me = this;
 
                 let formData = new FormData();
+
+                me.spinner.estado = 1;
+                me.modal_slider.accion = 0;
+
                 let imagen_slider = document.querySelector('#imagen_slider');
                 formData.append('imagen_slider', imagen_slider.files[0]);
                 
@@ -339,6 +350,7 @@
             cerrarModal(){
                 this.modal_slider.titulo = "";
                 this.modal_slider.accion = 0;
+                this.spinner.estado = 0;
                 this.$refs['modal_slider'].hide();
             },
             abrirModal(accion, data = []){
@@ -387,7 +399,7 @@
 
 <style>
     .vue-swatches__wrapper {
-        width: auto !important;
+        width: auto !important; 
     }
 
     .vue-swatches__fallback__wrapper {

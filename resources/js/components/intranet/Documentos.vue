@@ -220,9 +220,13 @@
                     </b-form>
 
                     <template slot="modal-footer">
-                        <b-button :disabled="!valid" v-show="modal_documento.accion == 1" size="md" variant="success" @click="crearOactualizar(1)"> Guardar </b-button>
-                        <b-button v-show="modal_documento.accion == 2" size="md" variant="warning" @click="crearOactualizar(2)"> Actualizar </b-button>
-                        <b-button size="md" variant="danger" @click="cerrarModal()"> Cerrar </b-button>
+                        <div class="w-100">
+                            <b-spinner class="float-left" variant="success" label="Spinning" v-show="spinner.estado == 1"></b-spinner>
+
+                            <b-button class="float-right" :disabled="!valid || modal_documento.accion == 0" v-show="modal_documento.accion == 1" size="md" variant="success" @click="crearOactualizar(1)"> Guardar </b-button>
+                            <b-button class="float-right" v-show="modal_documento.accion == 2" size="md" variant="warning" @click="crearOactualizar(2)"> Actualizar </b-button>
+                            <b-button class="float-right" size="md" variant="danger" @click="cerrarModal()"> Cerrar </b-button>
+                        </div>
                     </template>
                 </b-modal>
             </ValidationObserver>
@@ -240,6 +244,9 @@
         ],
         data() {
             return {
+                spinner: {
+                    estado: 0
+                },
                 documento: {
                     id: 0,
                     titulo: '',
@@ -314,10 +321,13 @@
                     console.log(error);
                 });
             },
-            crearOactualizar(accion){
+            crearOactualizar(accion){ 
                 let me = this;
 
                 let formData = new FormData();
+
+                me.spinner.estado = 1;
+                me.modal_documento.accion = 0;
 
                 let documento = document.querySelector('#documento');
                 formData.append('documento', documento.files[0]);
@@ -411,6 +421,7 @@
             cerrarModal(){
                 this.modal_documento.titulo = "";
                 this.modal_documento.accion = 0;
+                this.spinner.estado = 0;
                 this.$refs['modal_documento'].hide();
             },
             abrirModal(accion, data = []){

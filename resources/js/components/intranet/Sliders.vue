@@ -1,6 +1,6 @@
 <template>
     <div class="page-wrapper">
-        <b-container fluid class="mb-5">
+        <b-container fluid class="mb-5"> 
             <b-row class="page-titles">
                 <b-col cols="5" class="align-self-center"><h4 class="text-themecolor">Sliders generales</h4></b-col>
                 <b-col cols="7">
