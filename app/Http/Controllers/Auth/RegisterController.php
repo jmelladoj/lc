@@ -55,6 +55,7 @@ class RegisterController extends Controller
             'clave_uno.min' => 'Las claves deben de contener al menos 6 caracteres.',
             'clave_dos.min' => 'Las claves deben de contener al menos 6 caracteres.',
             'clave_dos.same' => 'Las claves no coinciden.'
+
         ];
 
         return Validator::make($data, [
@@ -63,6 +64,7 @@ class RegisterController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'clave_uno' => ['required','string','min:6'],
             'clave_dos' => ['required','string','min:6','same:clave_uno'],
+            'tipo_persona' => ['required', 'numeric', 'min:1']
         ], $messages);
     }
 

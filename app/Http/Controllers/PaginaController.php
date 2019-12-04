@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\CategoriaDocumento;
+use App\Mail\Contacto;
 use App\Notifications\Alerta;
 use App\Pagina;
 use App\Servicio;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 
 class PaginaController extends Controller
@@ -117,6 +119,12 @@ class PaginaController extends Controller
             $user->email = $request->email;
             $user->telefono = $request->telefono;
             $user->tipo_persona = $request->tipo_persona;
+        }
+
+        if(! Mail::to('contacto@prevencionlebenco.cl')->cc('j.melladojimenez@gmail.com')->send(new Contacto($request->nombre, $request->asunto, $request->email, $request->telefono, $request->mensaje, $request->tipo_persona))){
+            return ['mensaje' => 'Mensaje enviado!, pronto tomaremos contacto contigo.', 'clase' => 'success'];
+        } else {
+            return ['mensaje' => 'Hemos tenido inconvenientes al enviar tu correo. Por favor intenta nuevamente!', 'clase' => 'error'];
         }
 
         $usuario = User::find(1);
