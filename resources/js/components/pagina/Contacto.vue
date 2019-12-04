@@ -115,7 +115,7 @@
                     asunto: '',
                     telefono: null,
                     mensaje: '',
-                    tipo_persona: 1
+                    tipo_persona: 0
                 }
             }
         },
