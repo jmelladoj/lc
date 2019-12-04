@@ -130,10 +130,12 @@
                 });
             },
             listar_usuario(){
-                this.usuario.nombre = this.user.nombre;
-                this.usuario.email = this.user.email;
-                this.usuario.telefono = this.user.telefono;
-                this.usuario.tipo_persona = this.user.tipo_persona;
+                if(user != undefined){
+                    this.usuario.nombre = this.user.nombre;
+                    this.usuario.email = this.user.email;
+                    this.usuario.telefono = this.user.telefono;
+                    this.usuario.tipo_persona = this.user.tipo_persona;
+                }
             },
             contactar(){
                 let me=this;

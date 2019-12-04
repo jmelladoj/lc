@@ -16,7 +16,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/admin.css') }}" rel="stylesheet">
 
-    <link rel="icon" type="image/png" href="{{ asset('images/Favicon.png') }}">
+    <link rel="icon" type="image/png" href="{{ asset('storage/general/favicon.png') }}">
 
 </head>
 <body class="fixed-layout skin-green">
