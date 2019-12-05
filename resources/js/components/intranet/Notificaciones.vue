@@ -39,15 +39,6 @@
             }
         },    
         methods:{
-            mensaje(clase, mensaje) {
-                Swal.fire({
-                    position: 'bottom-end',
-                    type: clase,
-                    title: mensaje,
-                    showConfirmButton: true,
-                    timer: 2000
-                });
-            },
             cambiarMenu(){
                 this.$root.menu=20;
             },
@@ -67,7 +58,13 @@
                     'id': id
                 }).then(function (response) {
                     me.listarNotificaciones();
-                    me.mensaje('success', 'Notificacion marcada como leída');
+
+                    Vue.$toast.open({
+                        message: 'Notificación marcada como leída!',
+                        type: 'success',
+                        duration: 5000
+                    });
+
                 }).catch(function (error) {
                     console.error(error);
                 });

@@ -91,7 +91,7 @@
                                 </template>
 
                                 <template v-slot:cell(tipo)="data">
-                                    <label v-if="data.item.tipo_persona == 1"> Prevencionista </label>
+                                    <label v-if="data.item.tipo_persona == 1"> Persona </label>
                                     <label v-else-if="data.item.tipo_persona == 2"> Pyme </label>
                                     <label v-else-if="data.item.tipo_persona == 3"> Estudiante </label>
                                 </template>
@@ -159,15 +159,6 @@
             }
         },
         methods:{
-            mensaje(clase, mensaje) {
-                Swal.fire({
-                    position: 'bottom-end',
-                    type: clase,
-                    title: mensaje,
-                    showConfirmButton: true,
-                    timer: 2000
-                });
-            },
             onFiltered(filteredItems) {
                 this.totalRows = filteredItems.length
                 this.currentPage = 1
@@ -204,7 +195,13 @@
                         }).then(function (response) {
                             var mensaje = accion == 2 ? 'El usuario ha sido quitado de la black list!' : 'El usuario ha sido añadido a la black list!';
                             me.listarUsuarios();
-                            me.mensaje('success', mensaje);
+
+                            Vue.$toast.open({
+		                        message: mensaje,
+		                        type: 'success',
+		                        duration: 5000
+		                    });
+
                         }).catch(function (error) {
                             console.log(error);
                         });

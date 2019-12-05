@@ -9,13 +9,13 @@
                             <div class="row">
                                 <div class="form-field-wrapper col-md-6">
                                     <ValidationProvider name="nombre" rules="required|min:3|alpha_spaces" v-slot="{ errors }">
-                                        <input v-model="usuario.nombre" class="input--lg form-full" placeholder="Nombre completo o Razón social si eres una Pyme" size="30" aria-required="true" required="" type="text">
+                                        <input @keyup="cambiar_estado" v-model="usuario.nombre" class="input--lg form-full" placeholder="Nombre completo o Razón social si eres una Pyme" size="30" aria-required="true" required="" type="text">
                                         <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
                                     </ValidationProvider>
                                 </div>
                                 <div class="form-field-wrapper col-md-6">
                                     <ValidationProvider name="email" rules="required|email" v-slot="{ errors }">
-                                        <input v-model="usuario.email" class="input--lg form-full" placeholder="Ingresa tu correo electrónico" size="30" aria-required="true" required="" type="email">
+                                        <input @keyup="cambiar_estado" v-model="usuario.email" class="input--lg form-full" placeholder="Ingresa tu correo electrónico" size="30" aria-required="true" required="" type="email">
                                         <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
                                     </ValidationProvider>
                                 </div>
@@ -23,13 +23,13 @@
                             <div class="row">
                                 <div class="form-field-wrapper col-md-6">
                                     <ValidationProvider name="asunto" rules="required|min:3" v-slot="{ errors }">
-                                        <input v-model="usuario.asunto" class="input--lg form-full" placeholder="Ingresa el asunto del mensaje" size="30" aria-required="true" required="" type="text">
+                                        <input @keyup="cambiar_estado" v-model="usuario.asunto" class="input--lg form-full" placeholder="Ingresa el asunto del mensaje" size="30" aria-required="true" required="" type="text">
                                         <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
                                     </ValidationProvider>
                                 </div>
                                 <div class="form-field-wrapper col-md-6">
                                     <ValidationProvider name="teléfono" rules="required|numeric|digits:9" v-slot="{ errors }">
-                                        <input v-model="usuario.telefono" class="input--lg form-full" placeholder="Ingresa tu número telefónico para ser contactado Ej. 56 9 8745 432" size="30" aria-required="true" required="" type="text">
+                                        <input @keyup="cambiar_estado" v-model="usuario.telefono" class="input--lg form-full" placeholder="Ingresa tu número telefónico para ser contactado Ej. 56 9 8745 432" size="30" aria-required="true" required="" type="text">
                                         <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
                                     </ValidationProvider>
                                 </div>
@@ -37,29 +37,29 @@
                             <div class="row"> 
                                 <div class="form-field-wrapper col-md-6">
                                     <ValidationProvider name="mensaje" rules="required|min:20" v-slot="{ errors }">
-                                        <b-form-textarea v-model="usuario.mensaje" class="input--lg form-full" placeholder="Tu consulta es muy importante para nosotros" rows="7" no-resize required></b-form-textarea>
+                                        <b-form-textarea @keyup="cambiar_estado" v-model="usuario.mensaje" class="input--lg form-full" placeholder="Tu consulta es muy importante para nosotros" rows="7" no-resize required></b-form-textarea>
                                         <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
                                     </ValidationProvider>
                                 </div>
                                 <div class="form-field-wrapper col-md-6 mb-0">
-                                    <p class="large text-justify">La comunidad LebenCo. dispone de herramientas para Estudiantes del área, Prevencionistas o Personas encargadas de la prevención y nuestras Pymes.</p> 
+                                    <p class="large text-justify">La comunidad LebenCo. dispone de herramientas para Estudiantes del área, Personas o Personas encargadas de la prevención y nuestras Pymes.</p> 
                                     <p class="form-field-wrapper">
                                         <div class="row">
                                             <div class="col-lg-4 col-md-4 d-flex align-items-center justify-content-center">
                                                 <div class="custom-control custom-radio">
-                                                    <input type="radio" id="estudiante" name="tipo_persona" v-model="usuario.tipo_persona" class="custom-control-input" value="3">
+                                                    <input @change="cambiar_estado" type="radio" id="estudiante" name="tipo_persona" v-model="usuario.tipo_persona" class="custom-control-input" value="3">
                                                     <label class="custom-control-label" for="estudiante"> Estudiante</label>
                                                 </div>
                                             </div>
                                             <div class="col-lg-4 col-md-4 d-flex align-items-center justify-content-center">
                                                 <div class="custom-control custom-radio">
-                                                    <input type="radio" id="persona" name="tipo_persona" v-model="usuario.tipo_persona" class="custom-control-input" value="1">
-                                                    <label class="custom-control-label" for="persona"> Prevencionista</label>
+                                                    <input @change="cambiar_estado" type="radio" id="persona" name="tipo_persona" v-model="usuario.tipo_persona" class="custom-control-input" value="1">
+                                                    <label class="custom-control-label" for="persona"> Persona</label>
                                                 </div>
                                             </div>
                                             <div class="col-lg-4 col-md-4 d-flex align-items-center justify-content-center">
                                                 <div class="custom-control custom-radio">
-                                                    <input type="radio" id="empresa" name="tipo_persona" v-model="usuario.tipo_persona" class="custom-control-input" value="2">
+                                                    <input @change="cambiar_estado" type="radio" id="empresa" name="tipo_persona" v-model="usuario.tipo_persona" class="custom-control-input" value="2">
                                                     <label class="custom-control-label" for="empresa"> Pyme</label>
                                                 </div>
                                             </div>
@@ -68,7 +68,7 @@
                                     <br>
                                     <div class="row">
                                         <div class="form-field-wrapper col-md-12">
-                                            <input class="submit btn btn--lg btn--primary" value="Enviar mensaje" :disabled="!valid" type="button" @click="contactar">
+                                            <input v-show="estado_boton == 1" class="submit btn btn--lg btn--primary" value="Enviar mensaje" :disabled="!valid" type="button" @click="contactar">
                                         </div>
                                     </div>
                                 </div>
@@ -116,26 +116,31 @@
                     telefono: null,
                     mensaje: '',
                     tipo_persona: 0
-                }
+                },
+                estado_boton: 0
             }
         },
         methods:{
-            mensaje(clase, mensaje) {
-                Swal.fire({
-                    position: 'bottom-end',
-                    type: clase,
-                    title: mensaje,
-                    showConfirmButton: true,
-                    timer: 2000
-                });
+            cambiar_estado(){
+                if(!this.usuario){
+                    if(this.usuario.asunto.length > 0 || this.usuario.mensaje.length > 0){
+                        this.estado_boton = 1;
+                    } else {
+                        this.estado_boton = 0;
+                    }
+                } else {
+                    if(this.usuario.nombre.length > 0 ||  this.usuario.email.length > 0 || this.usuario.asunto.length > 0 || this.usuario.telefono > 0 || this.usuario.mensaje.length > 0 || this.usuario.tipo_persona > 0){
+                        this.estado_boton = 1;
+                    } else {
+                        this.estado_boton = 0;
+                }
+                }
             },
             listar_usuario(){
-                if(user != undefined){
-                    this.usuario.nombre = this.user.nombre;
-                    this.usuario.email = this.user.email;
-                    this.usuario.telefono = this.user.telefono;
-                    this.usuario.tipo_persona = this.user.tipo_persona;
-                }
+                this.usuario.nombre = this.user.nombre;
+                this.usuario.email = this.user.email;
+                this.usuario.telefono = this.user.telefono;
+                this.usuario.tipo_persona = this.user.tipo_persona;
             },
             contactar(){
                 let me=this;
@@ -160,7 +165,12 @@
                             'mensaje': this.usuario.mensaje, 
                             'tipo_persona': this.usuario.tipo_persona
                         }).then(function (response) {
-                            me.mensaje(response.data.clase, response.data.mensaje);
+                        	Vue.$toast.open({
+		                        message: response.data.mensaje,
+		                        type: response.data.clase,
+		                        duration: 5000
+		                    });
+
                         }).catch(function (error) {
                             console.log(error);
                         });
@@ -172,6 +182,7 @@
             if(this.user){
                 this.listar_usuario();
             }
+            this.cambiar_estado();
         }
     }
 </script>

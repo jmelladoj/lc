@@ -530,15 +530,6 @@
             }
         },    
         methods:{
-            mensaje(clase, mensaje) {
-                Swal.fire({
-                    position: 'bottom-end',
-                    type: clase,
-                    title: mensaje,
-                    showConfirmButton: true,
-                    timer: 2000
-                });
-            },
             mostrarLabels(){
                 let me = this;
 
@@ -708,7 +699,13 @@
                     
                 }).then(function (response) {
                     me.listarUsuario();
-                    me.mensaje('success', 'Registro actualizado exitosamente');
+
+                    Vue.$toast.open({
+                        message: 'Registro actualizado exitosamente',
+                        type: 'success',
+                        duration: 5000
+                    });
+
                 }).catch(function (error) {
                     console.error(error);
                 });
@@ -726,7 +723,12 @@
                 formData.append('usuario_id', this.usuario.id);
 
                 axios.post('usuario/actualizar/imagen',formData).then(function (response) {
-                    me.mensaje('success', accion == 1 ? 'Foto actualizada exitosamente' : 'Foto eliminada exitosamente');
+
+                	Vue.$toast.open({
+                        message: accion == 1 ? 'Foto actualizada exitosamente' : 'Foto eliminada exitosamente',
+                        type: 'success',
+                        duration: 5000
+                    });
 
                     //if(accion == 1){
                     //    me.$refs['file-input'].reset();

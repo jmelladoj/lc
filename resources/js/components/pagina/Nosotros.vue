@@ -57,15 +57,6 @@
             }
         },  
         methods:{
-            mensaje(clase, mensaje) {
-                Swal.fire({
-                    type: clase,
-                    title: mensaje,
-                    showConfirmButton: true,
-                    showLoaderOnConfirm: true,
-                    timer: 2000
-                });
-            },
             listarNosotros (){
                 let me=this;
                 axios.get('/pagina/nosotros').then(function (response) {

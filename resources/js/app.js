@@ -32,8 +32,13 @@ import 'vue-swatches/dist/vue-swatches.min.css';
 import tinymce from 'vue-tinymce-editor';
 import VueCarousel from 'vue-carousel';
 import { rutInputDirective } from 'vue-dni';
+import VueRouter from 'vue-router';
+import router from './routes.js';
+import VueToast from 'vue-toast-notification';
+import 'vue-toast-notification/dist/index.css';
 
 Vue.directive('rut', rutInputDirective);
+Vue.use(VueToast);
 
 
 for (let rule in rules) {
@@ -49,6 +54,7 @@ Vue.component('Swatches', Swatches);
 Vue.component('tinymce', tinymce);
 
 Vue.use(BootstrapVue);
+Vue.use(VueRouter);
 Vue.use(VueCarousel);
 Vue.use(VueCurrencyFilter,
 {
@@ -125,5 +131,6 @@ const app = new Vue({
     data :{
         ubicacion: 1,
         menu : 1
-    }
+    },
+    router
 });

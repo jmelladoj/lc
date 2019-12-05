@@ -98,7 +98,7 @@
                                     </template>
 
                                     <template v-slot:cell(tipo)="data">
-                                        <label v-if="data.item.data.usuario.tipo_persona == 1"> Prevencionista </label>
+                                        <label v-if="data.item.data.usuario.tipo_persona == 1"> Persona </label>
                                         <label v-else-if="data.item.data.usuario.tipo_persona == 2"> Pyme </label>
                                         <label v-else-if="data.item.data.usuario.tipo_persona == 3"> Estudiante </label>
                                     </template>
@@ -165,15 +165,6 @@
             }
         },
         methods:{
-            mensaje(clase, mensaje) {
-                Swal.fire({
-                    position: 'bottom-end',
-                    type: clase,
-                    title: mensaje,
-                    showConfirmButton: true,
-                    timer: 2000
-                });
-            },
             onFiltered(filteredItems) {
                 this.totalRows = filteredItems.length
                 this.currentPage = 1
@@ -195,7 +186,13 @@
                     'id': id
                 }).then(function (response) {
                     me.listarAlertas();
-                    me.mensaje('success', 'Notificacion marcada como leída');
+
+                    Vue.$toast.open({
+                        message: 'Notificacion marcada como leída',
+                        type: 'success',
+                        duration: 5000
+                    });
+
                     Event.$emit('marcar', id);
                 }).catch(function (error) {
                     console.error(error);

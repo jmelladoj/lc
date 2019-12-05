@@ -250,15 +250,6 @@
             }
         },
         methods:{
-            mensaje(clase, mensaje) {
-                Swal.fire({
-                    position: 'bottom-end',
-                    type: clase,
-                    title: mensaje,
-                    showConfirmButton: true,
-                    timer: 2000
-                });
-            },
             onFiltered(filteredItems) {
                 this.totalRows = filteredItems.length
                 this.currentPage = 1
@@ -292,7 +283,13 @@
                     me.listarCategorias();
                     me.cerrarModal();
                     var mensaje = accion == 1 ? 'Registro agregado exitosamente' : 'Registro actualizado exitosamente';
-                    me.mensaje('success', mensaje);
+
+					Vue.$toast.open({
+                        message: mensaje,
+                        type: 'success',
+                        duration: 5000
+                    });
+
                 }).catch(function (error) {
                     console.error(error);
                 });
@@ -319,7 +316,13 @@
                         }).then(function (response) {
                             var mensaje = accion == 2 ? 'La Categoría ha sido restaurada!' : 'La Categoría ha sido quitada!';
                             me.listarCategorias();
-                            me.mensaje('success', mensaje);
+
+							Vue.$toast.open({
+		                        message: mensaje,
+		                        type: 'success',
+		                        duration: 5000
+		                    });
+
                         }).catch(function (error) {
                             console.log(error);
                         });
@@ -386,7 +389,13 @@
                     me.volverAgregarSubCategoria();
                     me.$refs.observer_subcategoria.reset();
                     var mensaje = accion == 1 ? 'Registro agregado exitosamente' : 'Registro actualizado exitosamente';
-                    me.mensaje('success', mensaje);
+
+                    Vue.$toast.open({
+                        message: mensaje,
+                        type: 'success',
+                        duration: 5000
+                    });
+
                 }).catch(function (error) {
                     console.error(error);
                 });
@@ -423,7 +432,12 @@
                         }).then(function (response) {
                             var mensaje = accion == 2 ? 'La Subcategoría ha sido restaurada!' : 'La Subcategoría ha sido quitada!';
                             me.listarSubCategorias(me.categoria.id);
-                            me.mensaje('success', mensaje);
+                            
+                            Vue.$toast.open({
+		                        message: mensaje,
+		                        type: 'success',
+		                        duration: 5000
+		                    });
                         }).catch(function (error) {
                             console.log(error);
                         });

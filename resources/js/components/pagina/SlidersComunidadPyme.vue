@@ -32,15 +32,6 @@
             }
         },  
         methods: {
-            mensaje(clase, mensaje) {
-                Swal.fire({
-                    position: 'bottom-end',
-                    type: clase,
-                    title: mensaje,
-                    showConfirmButton: true,
-                    timer: 2000
-                });
-            },
             listarSliders (){
                 let me=this;
                 axios.get('/sliders/comunidad/home').then(function (response) {
@@ -68,7 +59,13 @@
                             'mensaje': titulo
                         }).then(function (response) {
                             me.listarSliders();
-                            me.mensaje('success', '!Felicitaciones¡, pronto serás contactado por Prevención LebenCo.');
+
+                            Vue.$toast.open({
+		                        message: '!Felicitaciones¡, pronto serás contactado por Prevención LebenCo.',
+		                        type: 'success',
+		                        duration: 5000
+		                    });
+
                         }).catch(function (error) {
                             console.log(error);
                         });

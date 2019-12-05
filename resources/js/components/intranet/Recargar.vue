@@ -185,15 +185,6 @@
                 this.totalRows = filteredItems.length
                 this.currentPage = 1
             },
-            mensaje(clase, mensaje) {
-                Swal.fire({
-                    position: 'bottom-end',
-                    type: clase,
-                    title: mensaje,
-                    showConfirmButton: true,
-                    timer: 2000
-                });
-            },
             listarRecargas(){
                 let me=this;
                 axios.get('/ventas/2').then(function (response) {
@@ -243,7 +234,13 @@
                             'id': id
                         }).then(function (response) {
                             me.listarServicios();
-                            me.mensaje('success', 'El Servicio ha sido borrado!');
+
+                            Vue.$toast.open({
+		                        message: 'El sevicios ha sido borrado!',
+		                        type: 'success',
+		                        duration: 5000
+		                    });
+
                         }).catch(function (error) {
                             console.log(error);
                         });

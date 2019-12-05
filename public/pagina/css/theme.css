@@ -1714,7 +1714,7 @@ ul:last-child {
 
     .site-logo a {
         z-index: 1;
-        height: 34px;
+        height: 60px;
         display: inline-block;
         position: relative;
         width: 100%;
@@ -6357,4 +6357,18 @@ form .lost_password {
 
 #error_rut {
     display: none;
+}
+
+.btn-circle {
+    width: 45px;
+    height: 45px;
+    text-align: center;
+    padding: 6px 0;
+    line-height: 1.05;
+    border-radius: 15px;
+    font-size: 30px !important;
+}
+
+.white {
+    color: white !important;
 }

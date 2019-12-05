@@ -40,16 +40,7 @@
             }
         },  
         methods:{
-            mensaje(clase, mensaje) {
-                Swal.fire({
-                    position: 'bottom-end',
-                    type: clase,
-                    title: mensaje,
-                    showConfirmButton: true,
-                    timer: 2000
-                });
-            },
-            listarLogin (){
+             listarLogin (){
                 let me=this;
                 axios.get('/pagina/registro').then(function (response) {
                     me.pagina.mensaje_uno = response.data.pagina.mensaje_uno;

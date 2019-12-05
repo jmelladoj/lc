@@ -28,22 +28,19 @@
             }
         },    
         methods:{
-            mensaje(clase, mensaje) {
-                Swal.fire({
-                    position: 'bottom-end',
-                    type: clase,
-                    title: mensaje,
-                    showConfirmButton: true,
-                    timer: 2000
-                });
-            },
             invitarAmigo(){
                 let me = this;
                 axios.post('/invitar',{
                     'email': me.invitacion.email
                 }).then(function (response) {
                     me.cerrarModal();
-                    me.mensaje(response.data.clase, response.data.mensaje);
+
+                    Vue.$toast.open({
+                        message: response.data.mensaje,
+                        type: response.data.clase,
+                        duration: 5000
+                    });
+
                     this.$destroy();
                 }).catch(function (error) {
                     console.error(error);

@@ -4,15 +4,6 @@
 <script>
     export default {
         methods:{
-            mensaje(clase, mensaje) {
-                Swal.fire({
-                    position: 'bottom-end',
-                    type: clase,
-                    title: mensaje,
-                    showConfirmButton: true,
-                    timer: 2000
-                });
-            },
             solicitarAsesoria(){
                 Swal.fire({
                     title: '¿Deseas solicitar una asesoría?',
@@ -28,7 +19,13 @@
                     if (result.value) {
                         let me = this;
                         axios.post('/solicitar/asesoria').then(function (response) {
-                            me.mensaje(response.data.clase, response.data.mensaje);
+
+                        	Vue.$toast.open({
+		                        message: response.data.mensaje,
+		                        type: response.data.clase,
+		                        duration: 5000
+		                    });
+
                         }).catch(function (error) {
                             console.log(error);
                         });

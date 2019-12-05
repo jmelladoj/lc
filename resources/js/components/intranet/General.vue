@@ -7,6 +7,7 @@
                     <div class="d-flex justify-content-end align-items-right">
                         <sociales></sociales>
                         <b-button @click="actualizarPagina()" class="btn btn-success d-lg-block m-l-15" v-b-tooltip.hover title="Actualiza información general de la página"><i class="fa fa-plus-circle"></i> Actualizar página</b-button>
+                        <b-spinner class="ml-2" variant="success" label="Spinning" v-show="spinner.estado == 1"></b-spinner>
                     </div>                    
                 </b-col>
             </b-row>
@@ -63,19 +64,13 @@
             return {
                 logo: '',
                 favicon: '',
-                footer: ''
+                footer: '',
+                spinner: {
+                    estado: 0
+                }
             }
         },
         methods:{
-            mensaje(clase, mensaje) {
-                Swal.fire({
-                    position: 'bottom-end',
-                    type: clase,
-                    title: mensaje,
-                    showConfirmButton: true,
-                    timer: 1000
-                });
-            },
             listarGeneral (){
                 let me=this;
                 axios.get('/general').then(function (response) {
@@ -91,6 +86,8 @@
                 let me = this;
 
                 let formData = new FormData();
+
+                this.spinner.estado = 1;
 
                 let logo = document.querySelector('#logo');
                 formData.append('logo', logo.files[0]);
@@ -114,14 +111,13 @@
                 formData.append('derechos', derechos.files[0]);
 
                 axios.post('/general/actualizar',formData).then(function (response) {
-                    Swal.fire({
-                        position: 'bottom-end',
+                    Vue.$toast.open({
+                        message: 'Página actualizada exitosamente',
                         type: 'success',
-                        title: 'Página actualizada exitosamente',
-                        showConfirmButton: true,
-                        timer: 2000
+                        duration: 5000
                     });
 
+                    me.spinner.estado = 0
                     me.listarGeneral()
                 }).catch(function (error) {
                     console.error(error);

@@ -18,7 +18,7 @@
 
     <link rel="icon" type="image/png" href="{{ asset('storage/general/favicon.png') }}">
 
-    <link rel="stylesheet" href="{{ url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
     <div id="app">
@@ -41,19 +41,42 @@
                                     <li class="nav-menu-item"><a href="{{ url('/comunidad') }}" class="{{ (request()->is('comunidad')) ? 'sale-color' : '' }}">Comunidad Pyme</a></li>
                                     <li class="nav-menu-item"><a href="{{ url('/servicios') }}" class="{{ (request()->is('servicios')) ? 'sale-color' : '' }}">Nuestros Servicios</a></li>
                                     <li class="nav-menu-item"><a href="{{ url('/contacto') }}" class="{{ (request()->is('contacto')) ? 'sale-color' : '' }}">Contáctanos</a></li>
-                                    <li class="nav-menu-item"><a target="_blank" href="{{ url('https://www.youtube.com/channel/UC78DsrgVX7KslItHoTuw8uQ?view_as=subscriber') }}" class="sale-color h2"><i class="fa fa-youtube"></i></a></li>
-                                    <li class="nav-menu-item"><a target="_blank" href="{{ url('https://www.facebook.com/prevencion.lebenco.3') }}" class="sale-color h2"><i class="fa fa-facebook"></i></a></li>
-                                    <li class="nav-menu-item"><a target="_blank" href="{{ url('https://www.instagram.com/prevencionlebenco.cl/?hl=es-la') }}" class="sale-color h2"><i class="fa fa-instagram"></i></a></li>
-                                    <li class="nav-menu-item"><a target="_blank" href="{{ url('https://www.linkedin.com/in/prevenci%C3%B3n-lebenco-62b632184/') }}" class="sale-color h2"><i class="fa fa-linkedin"></i></a></li>
+                                    <li class="nav-menu-item">
+                                        <div class="row">
+                                            <a target="_blank" href="{{ url('https://www.youtube.com/channel/UC78DsrgVX7KslItHoTuw8uQ?view_as=subscriber') }}" class="sale-color h2 ml-4 mr-2"><i class="fa fa-youtube"></i></a>
+                                            <a target="_blank" href="{{ url('https://www.facebook.com/prevencion.lebenco.3') }}" class="sale-color h2  ml-2 mr-2"><i class="fa fa-facebook"></i></a>
+                                            <a target="_blank" href="{{ url('https://www.instagram.com/prevencionlebenco.cl/?hl=es-la') }}" class="sale-color h2  ml-2 mr-2"><i class="fa fa-instagram"></i></a>
+                                            <a target="_blank" href="{{ url('https://www.linkedin.com/in/prevenci%C3%B3n-lebenco-62b632184/') }}" class="sale-color h2  ml-2 mr-2"><i class="fa fa-linkedin"></i></a>
+                                        </div>
+                                    </li>
                                 </ul>
                             </div>
 
                             <div class="nav-icons">
                                 <ul>
-                                    <li class="nav-icon-item">                           
-                                        <a href="{{ url('/login') }}" class="nav-icon-trigger" title="Ingresar"><span> @if(Auth::check())  {{ Auth::user()->nombre }} @else Ingresar @endif </span></a>
+                                    <li class="nav-icon-item d-lg-none">
+                                        <div class="nav-icon-trigger menu-mobile-btn active" title="Navigation Menu"><span><i class="fa fa-list"></i></span></div>
                                     </li>
-                                    @auth <li class="nav-icon-item"> <a class="nav-link  waves-effect waves-light" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();"><img src="{{ asset('img/salir.png') }}" height="40"><form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">@csrf</form></a></li> @endauth
+                                    <li class="nav-icon-item">                           
+                                        <a href="{{ url('/login') }}" class="nav-icon-trigger" title="Ingresar">
+                                            <span> 
+                                                @if(Auth::check())  
+                                                    <a href="{{ url('/login') }}" class="btn btn-success btn-circle white">{{ Auth::user()->nombre[0] }}</a>  
+                                                @else  
+                                                    Ingresar
+                                                @endif 
+                                            </span>
+                                        </a>
+                                    </li>
+                                    @auth 
+                                        <li class="nav-icon-item"> 
+                                            <a class="nav-link  waves-effect waves-light" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+                                                <img src="{{ asset('img/salir.png') }}" height="40">
+                                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">@csrf
+                                                </form>
+                                            </a>
+                                        </li> 
+                                    @endauth
                                 </ul>
                             </div>
 

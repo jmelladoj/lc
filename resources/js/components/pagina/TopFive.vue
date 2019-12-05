@@ -171,14 +171,6 @@
             }
         },
         methods:{
-            mensaje(clase, mensaje) {
-                Swal.fire({
-                    type: clase,
-                    title: mensaje,
-                    showConfirmButton: true,
-                    timer: 2000
-                });
-            },
             ocultar(clase){
 
             },
@@ -221,7 +213,13 @@
                 }).then(function (response) {
                     me.listarPymes();
                     me.cerrarModalValoracion();
-                    me.mensaje('success', 'Muchas gracias por tu valoración.');
+
+                    Vue.$toast.open({
+                        message: 'Muchas gracias por tu valoración',
+                        type: 'success',
+                        duration: 5000
+                    });
+
                 }).catch(function (error) {
                     console.error(error);
                 });

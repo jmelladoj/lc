@@ -49,7 +49,7 @@
                                     <button type="button" class="mt-0 btn btn--secondary space--1 btn-sm" @click="formulario = 0" >... Inicia tu sesión</button>
                                 </div>
                             </div>
-                            <p class="large text-justify">Disponemos de herramientas para Pymes, Estudiantes del área, Prevencionistas y Personas encargadas de la prevención.</p> 
+                            <p class="large text-justify">Disponemos de herramientas para Pymes, Estudiantes del área, Personas y Personas encargadas de la prevención.</p> 
                             <p class="form-field-wrapper">
                                 <div class="row">
                                     <div class="col-lg-4 col-md-4 d-flex align-items-center justify-content-center">
@@ -61,7 +61,7 @@
                                     <div class="col-lg-4 col-md-4 d-flex align-items-center justify-content-center">
                                         <div class="custom-control custom-radio">
                                             <input type="radio" id="persona" @change="mostrar_botones_registrate" name="tipo_persona" v-model="usuario_nuevo.tipo_persona" class="custom-control-input" value="1">
-                                            <label class="custom-control-label" for="persona"> Prevencionista</label>
+                                            <label class="custom-control-label" for="persona"> Persona</label>
                                         </div>
                                     </div>
                                     <div class="col-lg-4 col-md-4 d-flex align-items-center justify-content-center">

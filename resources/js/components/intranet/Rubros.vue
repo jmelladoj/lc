@@ -181,15 +181,6 @@
             }
         },
         methods:{
-            mensaje(clase, mensaje) {
-                Swal.fire({
-                    position: 'bottom-end',
-                    type: clase,
-                    title: mensaje,
-                    showConfirmButton: true,
-                    timer: 2000
-                });
-            },
             onFiltered(filteredItems) {
                 this.totalRows = filteredItems.length
                 this.currentPage = 1
@@ -214,7 +205,13 @@
                     me.listarRubros();
                     me.cerrarModal();
                     var mensaje = accion == 1 ? 'Registro agregado exitosamente' : 'Registro actualizado exitosamente';
-                    me.mensaje('success', mensaje);
+                    
+                    Vue.$toast.open({
+                        message: mensaje,
+                        type: 'success',
+                        duration: 5000
+                    });
+
                 }).catch(function (error) {
                     console.error(error);
                 });
@@ -241,7 +238,13 @@
                         }).then(function (response) {
                             var mensaje = accion == 2 ? 'El Rubro ha sido restaurado!' : 'El Rubro ha sido quitado!';
                             me.listarRubros();
-                            me.mensaje('success', mensaje);
+                            
+                            Vue.$toast.open({
+		                        message: mensaje,
+		                        type: 'success',
+		                        duration: 5000
+		                    });
+                            
                         }).catch(function (error) {
                             console.log(error);
                         });

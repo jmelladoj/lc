@@ -40,15 +40,6 @@
             }
         },  
         methods:{
-            mensaje(clase, mensaje) {
-                Swal.fire({
-                    position: 'bottom-end',
-                    type: clase,
-                    title: mensaje,
-                    showConfirmButton: true,
-                    timer: 2000
-                });
-            },
             listarComunidad (){
                 let me=this;
                 axios.get('/pagina/comunidad').then(function (response) {

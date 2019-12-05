@@ -176,15 +176,6 @@
             }
         },
         methods:{
-            mensaje(clase, mensaje) {
-                Swal.fire({
-                    position: 'bottom-end',
-                    type: clase,
-                    title: mensaje,
-                    showConfirmButton: true,
-                    timer: 2000
-                });
-            },
             onFiltered(filteredItems) {
                 this.totalRows = filteredItems.length
                 this.currentPage = 1
@@ -209,7 +200,13 @@
                     me.listarTips();
                     me.cerrarModal();
                     var mensaje = accion == 1 ? 'Registro agregado exitosamente' : 'Registro actualizado exitosamente';
-                    me.mensaje('success', mensaje);
+                    
+                    Vue.$toast.open({
+                        message: mensaje,
+                        type: 'success',
+                        duration: 5000
+                    });
+
                 }).catch(function (error) {
                     console.error(error);
                 });
@@ -232,7 +229,13 @@
                             'id': id
                         }).then(function (response) {
                             me.listarTips();
-                            me.mensaje('success', 'El tip ha sido quitado!');
+                            
+                            Vue.$toast.open({
+		                        message: 'El tip ha sido quitado!',
+		                        type: 'success',
+		                        duration: 5000
+		                    });
+
                         }).catch(function (error) {
                             console.log(error);
                         });

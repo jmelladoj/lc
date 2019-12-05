@@ -237,15 +237,6 @@
             }
         },
         methods:{
-            mensaje(clase, mensaje) {
-                Swal.fire({
-                    position: 'bottom-end',
-                    type: clase,
-                    title: mensaje,
-                    showConfirmButton: true,
-                    timer: 2000
-                });
-            },
             onFiltered(filteredItems) {
                 this.totalRows = filteredItems.length
                 this.currentPage = 1
@@ -298,7 +289,13 @@
                     me.listarSorteos();
                     me.cerrarModal();
                     var mensaje = accion == 1 ? 'Registro agregado exitosamente' : 'Registro actualizado exitosamente';
-                    me.mensaje('success', mensaje);
+                    
+                    Vue.$toast.open({
+                        message: mensaje,
+                        type: 'success',
+                        duration: 5000
+                    });
+
                 }).catch(function (error) {
                     console.error(error);
                 });
@@ -321,7 +318,13 @@
                             'id': id
                         }).then(function (response) {
                             me.listarSorteos();
-                            me.mensaje('success', 'El Sorteo ha sido borrado!');
+
+                            Vue.$toast.open({
+		                        message: 'El sorteo ha sido borrado!',
+		                        type: 'success',
+		                        duration: 5000
+		                    });
+
                         }).catch(function (error) {
                             console.log(error);
                         });
@@ -345,7 +348,13 @@
                         axios.post('/sorteo/concursar',{
                             'id': id
                         }).then(function (response) {
-                            me.mensaje(response.data.clase, response.data.mensaje);
+
+                        	Vue.$toast.open({
+		                        message: response.data.mensaje,
+		                        type: response.data.clase,
+		                        duration: 5000
+		                    });
+
                         }).catch(function (error) {
                             console.log(error);
                         });

@@ -289,15 +289,6 @@
             }
         },
         methods:{
-            mensaje(clase, mensaje) {
-                Swal.fire({
-                    position: 'bottom-end',
-                    type: clase,
-                    title: mensaje,
-                    showConfirmButton: true,
-                    timer: 2000
-                });
-            },
             onFiltered(filteredItems) {
                 this.totalRows = filteredItems.length
                 this.currentPage = 1
@@ -353,7 +344,12 @@
                     me.listarDocumentos();
                     me.cerrarModal();
                     var mensaje = accion == 1 ? 'Registro agregado exitosamente' : 'Registro actualizado exitosamente';
-                    me.mensaje('success', mensaje);
+                   
+                    Vue.$toast.open({
+                        message: mensaje,
+                        type: 'success',
+                        duration: 5000
+                    });
                 }).catch(function (error) {
                     console.error(error);
                 });
@@ -376,7 +372,13 @@
                             'id': id
                         }).then(function (response) {
                             me.listarDocumentos();
-                            me.mensaje('success', 'El Documento ha sido borrado!');
+
+                            Vue.$toast.open({
+		                        message: 'El documento ha sido borrado!',
+		                        type: 'success',
+		                        duration: 5000
+		                    });
+
                         }).catch(function (error) {
                             console.log(error);
                         });
@@ -399,7 +401,12 @@
                         let me = this;
                         axios.get('/documento/descargar/' + id).then(function (response) {         
                             if(response.data.clase == 'success'){
-                                me.mensaje('success', 'El Documento se descargara pronto!');
+
+                            	Vue.$toast.open({
+			                        message: 'El dcoumento se descargara pronto!',
+			                        type: 'success',
+			                        duration: 5000
+			                    });
                                 
                                 const link = document.createElement('a');
                                 link.href = '/storage/' + response.data.documento.documento_url;
@@ -407,7 +414,12 @@
                                 document.body.appendChild(link);
                                 link.click();
                             } else {
-                                me.mensaje(response.data.clase, response.data.mensaje);
+
+                            	Vue.$toast.open({
+			                        message: response.data.mensaje,
+			                        type: response.data.clase,
+			                        duration: 5000
+			                    });
                             }              
                             
                         }).catch(function (error) {

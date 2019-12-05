@@ -322,15 +322,6 @@
             }
         },
         methods:{
-            mensaje(clase, mensaje) {
-                Swal.fire({
-                    position: 'bottom-end',
-                    type: clase,
-                    title: mensaje,
-                    showConfirmButton: true,
-                    timer: 1000
-                });
-            },
             onFiltered(filteredItems) {
                 this.totalRows = filteredItems.length
                 this.currentPage = 1
@@ -385,7 +376,12 @@
                     me.listarSliders();
                     me.cerrarModal();
                     var mensaje = accion == 1 ? 'Registro agregado exitosamente' : 'Registro actualizado exitosamente';
-                    me.mensaje('success', mensaje);
+
+                    Vue.$toast.open({
+                        message: mensaje,
+                        type: 'success',
+                        duration: 5000
+                    });
                 }).catch(function (error) {
                     console.error(error);
                 });
@@ -405,7 +401,13 @@
                 }).then(function (response) {
                     me.listarSliders();
                     me.cerrarModalUbicaciones();
-                    me.mensaje('success', 'Registro actualizado exitosamente');
+
+                    Vue.$toast.open({
+                        message: 'Registro actualizado exitosamente',
+                        type: 'success',
+                        duration: 5000
+                    });
+
                 }).catch(function (error) {
                     console.error(error);
                 });
@@ -428,7 +430,13 @@
                             'id': id
                         }).then(function (response) {
                             me.listarSliders();
-                            me.mensaje('success', 'El Slider ha sido borrado!');
+
+                            Vue.$toast.open({
+                                message: 'El Slider ha sido borrado!',
+                                type: 'success',
+                                duration: 5000
+                            });
+
                         }).catch(function (error) {
                             console.log(error);
                         });

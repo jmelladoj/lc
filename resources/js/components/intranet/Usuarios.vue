@@ -92,7 +92,7 @@
                                 </template>
 
                                 <template v-slot:cell(tipo)="data">
-                                    <label v-if="data.item.tipo_persona == 1"> Prevencionista </label>
+                                    <label v-if="data.item.tipo_persona == 1"> Persona </label>
                                     <label v-else-if="data.item.tipo_persona == 2"> Pyme </label>
                                     <label v-else-if="data.item.tipo_persona == 3"> Estudiante </label>
                                 </template>
@@ -350,15 +350,6 @@
             }
         },
         methods:{
-            mensaje(clase, mensaje) {
-                Swal.fire({
-                    position: 'bottom-end',
-                    type: clase,
-                    title: mensaje,
-                    showConfirmButton: true,
-                    timer: 2000
-                });
-            },
             onFiltered(filteredItems) {
                 this.totalRows = filteredItems.length
                 this.currentPage = 1
@@ -387,7 +378,13 @@
                     me.listarUsuarios();
                     me.cerrarModal();
                     var mensaje = accion == 1 ? 'Registro agregado exitosamente' : 'Registro actualizado exitosamente';
-                    me.mensaje('success', mensaje);
+                    
+                    Vue.$toast.open({
+                        message: mensaje,
+                        type: 'success',
+                        duration: 5000
+                    });
+
                 }).catch(function (error) {
                     console.error(error);
                 });
@@ -404,7 +401,14 @@
                 }).then(function (response) {
                     me.listarUsuarios();
                     me.cerrarModalSaldo();
-                    me.mensaje('success', 'Posición actualizada exitosamente');
+
+                    Vue.$toast.open({
+                        message: mensaje,
+                        type: 'Posición actualizada exitosamente!',
+                        duration: 5000
+                    });
+
+
                 }).catch(function (error) {
                     console.error(error);
                 });
@@ -418,7 +422,13 @@
                 }).then(function (response) {
                     me.listarUsuarios();
                     me.cerrarModalSaldo();
-                    me.mensaje('success', 'Saldo actualizado exitosamente');
+
+                    Vue.$toast.open({
+                        message: 'Saldo actualizado exitosamente!',
+                        type: 'success',
+                        duration: 5000
+                    });
+
                 }).catch(function (error) {
                     console.error(error);
                 });
@@ -445,7 +455,13 @@
                         }).then(function (response) {
                             var mensaje = accion == 2 ? 'El usuario ha sido restaurado!' : 'El usuario ha sido quitado!';
                             me.listarUsuarios();
-                            me.mensaje('success', mensaje);
+                            
+                            Vue.$toast.open({
+		                        message: mensaje,
+		                        type: 'success',
+		                        duration: 5000
+		                    });
+
                         }).catch(function (error) {
                             console.log(error);
                         });
@@ -474,7 +490,13 @@
                         }).then(function (response) {
                             var mensaje = accion == 2 ? 'El usuario ha sido quitado de la black list!' : 'El usuario ha sido añadido a la black list!';
                             me.listarUsuarios();
-                            me.mensaje('success', mensaje);
+                            
+                            Vue.$toast.open({
+		                        message: mensaje,
+		                        type: 'success',
+		                        duration: 5000
+		                    });
+                            
                         }).catch(function (error) {
                             console.log(error);
                         });

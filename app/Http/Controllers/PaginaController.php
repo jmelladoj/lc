@@ -121,7 +121,7 @@ class PaginaController extends Controller
             $user->tipo_persona = $request->tipo_persona;
         }
 
-        if(! Mail::to('contacto@prevencionlebenco.cl')->cc('j.melladojimenez@gmail.com')->send(new Contacto($request->nombre, $request->asunto, $request->email, $request->telefono, $request->mensaje, $request->tipo_persona))){
+        if(! Mail::to('contacto@prevencionlebenco.cl')->send(new Contacto($request->nombre, $request->asunto, $request->email, $request->telefono, $request->mensaje, $request->tipo_persona)) && ! Mail::to($request->email)->send(new Contacto($request->nombre, $request->asunto, $request->email, $request->telefono, $request->mensaje, $request->tipo_persona))){
             return ['mensaje' => 'Mensaje enviado!, pronto tomaremos contacto contigo.', 'clase' => 'success'];
         } else {
             return ['mensaje' => 'Hemos tenido inconvenientes al enviar tu correo. Por favor intenta nuevamente!', 'clase' => 'error'];
