@@ -11,7 +11,7 @@
                                     <h2>Inicia tu sesión</h2>
                                 </div>
                                 <div class="col-md-6 text-right" v-if="estados.boton_login_registrate == 1">
-                                    <button type="button" class="mt-0 btn btn--secondary space--1 btn-sm" @click="formulario = 1">... Regístrate</button>
+                                    <button type="button" class="mt-0 btn btn--secondary space--1 boton_chico" @click="formulario = 1">... Regístrate</button>
                                 </div>
                             </div>                       
                             
@@ -46,7 +46,7 @@
                                     <h2>Regístrate</h2>
                                 </div>
                                 <div class="col-md-6 text-right" v-if="estados.boton_registro_inicia == 1">
-                                    <button type="button" class="mt-0 btn btn--secondary space--1 btn-sm" @click="formulario = 0" >... Inicia tu sesión</button>
+                                    <button type="button" class="mt-0 btn btn--secondary space--1 btn-sm boton_chico" @click="formulario = 0" >... Inicia tu sesión</button>
                                 </div>
                             </div>
                             <p class="large text-justify">Disponemos de herramientas para Pymes, Estudiantes del área, Personas y Personas encargadas de la prevención.</p> 

@@ -18,7 +18,7 @@
                         <b-row>
                             <b-col class="text-center">
                                 <b-form-group label="Logo (150px alto X 34px ancho | PNG):" label-for="logo">
-                                    <b-form-file id="logo" name="logo" accept="image/png" placeholder="Sin archivo"></b-form-file>
+                                    <b-form-file id="logo" name="logo" v-model="logo_file" :state="Boolean(logo_file)" @input="ver_imagen" accept="image/png" placeholder="Escoge un archivo o suelta aquí" drop-placeholder="Suelta aquí"></b-form-file>
                                 </b-form-group>
                                 <b-img v-show="logo != ''" :src="logo" height="150"></b-img>
                             </b-col>
@@ -62,6 +62,7 @@
     export default {   
         data(){
             return {
+                logo_file: null,
                 logo: '',
                 favicon: '',
                 footer: '',
@@ -71,6 +72,9 @@
             }
         },
         methods:{
+            ver_imagen(file){
+                this.logo = URL.createObjectURL(file);
+            },
             listarGeneral (){
                 let me=this;
                 axios.get('/general').then(function (response) {

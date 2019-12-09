@@ -15,13 +15,7 @@
 
     <section class="sec-padding">
         <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <p>
-                        Denifir como se mostrara el contenido
-                    </p>
-                </div>
-            </div>
+            <politicas></politicas>
         </div>
     </section>
 @endsection

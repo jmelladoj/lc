@@ -71,6 +71,8 @@ class CreateUsersTable extends Migration
             $table->integer('mailing')->nullable()->default(0);
             $table->integer('saldo')->default(1000);
             $table->boolean('lista_negra')->default(false);
+            $table->boolean('top_five')->default(false);
+            
             $table->string('url_perfil')->default('img/perfil.svg');
 
             $table->unsignedBigInteger('comuna_id')->nullable()->default(NULL);

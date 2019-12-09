@@ -29,7 +29,7 @@
                                 </div>
                                 <div class="form-field-wrapper col-md-6">
                                     <ValidationProvider name="teléfono" rules="required|numeric|digits:9" v-slot="{ errors }">
-                                        <input @keyup="cambiar_estado" v-model="usuario.telefono" class="input--lg form-full" placeholder="Ingresa tu número telefónico para ser contactado Ej. 56 9 8745 432" size="30" aria-required="true" required="" type="text">
+                                        <input @keyup="cambiar_estado" v-model="usuario.telefono" class="input--lg form-full" placeholder="Ingresa tu número telefónico para ser contactado" size="30" aria-required="true" required="" type="text">
                                         <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
                                     </ValidationProvider>
                                 </div>

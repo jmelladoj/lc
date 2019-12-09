@@ -35,6 +35,8 @@ import { rutInputDirective } from 'vue-dni';
 import VueRouter from 'vue-router';
 import router from './routes.js';
 import VueToast from 'vue-toast-notification';
+
+
 import 'vue-toast-notification/dist/index.css';
 
 Vue.directive('rut', rutInputDirective);
@@ -52,6 +54,7 @@ Vue.component('ValidationProvider', ValidationProvider);
 Vue.component('ValidationObserver', ValidationObserver);
 Vue.component('Swatches', Swatches);
 Vue.component('tinymce', tinymce);
+
 
 Vue.use(BootstrapVue);
 Vue.use(VueRouter);
@@ -85,6 +88,7 @@ Vue.component('sliders-comunidad-pyme', require('./components/pagina/SlidersComu
 Vue.component('busqueda', require('./components/pagina/Busqueda.vue').default);
 Vue.component('iniciar-sesion', require('./components/pagina/IniciarSesion.vue').default);
 Vue.component('contacto', require('./components/pagina/Contacto.vue').default);
+Vue.component('politicas', require('./components/pagina/Politicas.vue').default);
 
 //Intranet
 Vue.component('general', require('./components/intranet/General.vue').default);

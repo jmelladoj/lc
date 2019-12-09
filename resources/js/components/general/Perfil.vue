@@ -3,7 +3,12 @@
         <b-col cols="4">
             <b-card>
                 <center class="mt-1">
-                    <ValidationObserver ref="observer_foto_perfil">           
+                    <ValidationObserver ref="observer_foto_perfil"> 
+                        <b-form-group>
+                            <div class="custom-control custom-checkbox">
+                                <b-form-checkbox v-model="usuario.top_five">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ¡Quiero ser aparecer en el top five!</b-form-checkbox>
+                            </div>
+                        </b-form-group >          
                         <img v-bind:src="usuario.url_perfil" alt="Imagen de usuario" class="img-circle" width="150">
                         <b-form-group  class="mt-3 mb-3">
                             <ValidationProvider name="imagen" rules="required|image" v-slot="{ errors, validate }">
@@ -493,7 +498,8 @@
                     ultimo_trabajo: '',
                     ultimo_empresa: '',
                     rubro_empresa: '',
-                    organismo_administrador_empresa: 0
+                    organismo_administrador_empresa: 0,
+                    top_five: false
                 },
                 categoria: {
                     nombre: '',
@@ -631,6 +637,7 @@
                     me.usuario.ultimo_empresa = response.data.usuario.ultimo_empresa;
                     me.usuario.rubro_empresa = response.data.usuario.rubro_empresa;
                     me.usuario.organismo_administrador_empresa = response.data.usuario.organismo_administrador_empresa;
+                    me.usuario.top_five = response.data.usuario.top_five;
 
 
                     //Datos categoria
@@ -695,7 +702,8 @@
                     'ultimo_trabajo': me.usuario.ultimo_trabajo,
                     'ultimo_empresa': me.usuario.ultimo_empresa,
                     'rubro_empresa': me.usuario.rubro_empresa,
-                    'organismo_administrador_empresa': me.usuario.organismo_administrador_empresa
+                    'organismo_administrador_empresa': me.usuario.organismo_administrador_empresa,
+                    'top_five': me.usuario.top_five
                     
                 }).then(function (response) {
                     me.listarUsuario();

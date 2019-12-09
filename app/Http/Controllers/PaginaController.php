@@ -6,6 +6,7 @@ use App\CategoriaDocumento;
 use App\Mail\Contacto;
 use App\Notifications\Alerta;
 use App\Pagina;
+use App\General;
 use App\Servicio;
 use App\User;
 use Illuminate\Http\Request;
@@ -60,7 +61,8 @@ class PaginaController extends Controller
     }
 
     public function indexHomePoliticas(Request $request){
-        return view('politicas');
+        $pagina = General::find(1);
+        return view('politicas')->with(compact('pagina'));
     }
 
     public function indexHomeBusqueda($id){
