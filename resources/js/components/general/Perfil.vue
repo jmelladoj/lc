@@ -4,7 +4,7 @@
             <b-card>
                 <center class="mt-1">
                     <ValidationObserver ref="observer_foto_perfil"> 
-                        <b-form-group>
+                        <b-form-group v-show="tipo_usuario_logeado == 2">
                             <div class="custom-control custom-checkbox">
                                 <b-form-checkbox v-model="usuario.top_five">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ¡Quiero ser aparecer en el top five!</b-form-checkbox>
                             </div>

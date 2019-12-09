@@ -38,19 +38,19 @@
             <ul id="sidebarnav" v-show="ubicacion == 1">
                 <li class="nav-small-cap">--- Menú</li>
                 <li>
-                    <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fa fa-folder-o" aria-hidden="true"></i><span class="hide-menu">Contenido </span></a>
+                    <a class="has-arrow waves-effect waves-dark" @click="menu=1" href="javascript:void(0)" aria-expanded="false"><i class="fa fa-folder-o" aria-hidden="true"></i><span class="hide-menu">Contenido </span></a>
                     <ul aria-expanded="false" class="collapse">
-                        <li @click="menu=0"><a href="javascript:void(0)">Categorías</a></li>
                         <li @click="menu=1"><a href="javascript:void(0)">Documentos aprobados</a></li>
+                        <li @click="menu=0"><a href="javascript:void(0)">Categorías</a></li>
                         <li @click="menu=2"><a href="javascript:void(0)">Documentos pendientes</a></li>
                     </ul>
                 </li>
                 <li>
-                    <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fa fa-users" aria-hidden="true"></i><span class="hide-menu">Clientes </span></a>
+                    <a class="has-arrow waves-effect waves-dark" @click="menu=5" href="javascript:void(0)" aria-expanded="false"><i class="fa fa-users" aria-hidden="true"></i><span class="hide-menu">Clientes </span></a>
                     <ul aria-expanded="false" class="collapse">
-                        <li @click="menu=3"><a href="javascript:void(0)">Categorías USUARIO</a></li>
-                        <li @click="menu=4"><a href="javascript:void(0)">Prefesiones y rubros</a></li>
                         <li @click="menu=5"><a href="javascript:void(0)">Usuarios del sistema</a></li>
+                        <li @click="menu=3"><a href="javascript:void(0)">Categorías usuario</a></li>
+                        <li @click="menu=4"><a href="javascript:void(0)">Prefesiones y rubros</a></li>
                     </ul>
                 </li>
                 <li>

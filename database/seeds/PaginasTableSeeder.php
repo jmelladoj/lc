@@ -1,5 +1,6 @@
 <?php
 
+use App\General;
 use App\Pagina;
 use Illuminate\Database\Seeder;
 
@@ -33,5 +34,9 @@ class PaginasTableSeeder extends Seeder
             ['id' => 4,
              'nombre' => 'Login']
         );
+
+        General::create([
+            'id' => 1
+        ]);
     }
 }

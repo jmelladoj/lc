@@ -10,8 +10,9 @@
                                 <div class="col-md-6">
                                     <h2>Inicia tu sesión</h2>
                                 </div>
-                                <div class="col-md-6 text-right" v-if="estados.boton_login_registrate == 1">
-                                    <button type="button" class="mt-0 btn btn--secondary space--1 boton_chico" @click="formulario = 1">... Regístrate</button>
+                                <div class="col-md-6 text-right">
+                                    <button type="button" class="mt-0 btn btn--secondary space--1 btn-sm boton_login" @click="limpiar_login" v-show="estados.boton_login_inicia == 1">Limpiar</button>
+                                    <button type="button" class="mt-0 btn btn--secondary space--1 boton_login" @click="formulario = 1" v-if="estados.boton_login_registrate == 1">... Regístrate</button>
                                 </div>
                             </div>                       
                             
@@ -45,8 +46,9 @@
                                 <div class="col-md-6">
                                     <h2>Regístrate</h2>
                                 </div>
-                                <div class="col-md-6 text-right" v-if="estados.boton_registro_inicia == 1">
-                                    <button type="button" class="mt-0 btn btn--secondary space--1 btn-sm boton_chico" @click="formulario = 0" >... Inicia tu sesión</button>
+                                <div class="col-md-6 text-right">
+                                    <button type="button" class="mt-0 btn btn--secondary space--1 btn-sm boton_login" @click="limpiar_registro" v-show="estados.boton_registro_registrarse == 1">Limpiar</button>
+                                    <button type="button" class="mt-0 btn btn--secondary space--1 btn-sm boton_login" @click="formulario = 0" v-if="estados.boton_registro_inicia == 1">... Inicia tu sesión</button>
                                 </div>
                             </div>
                             <p class="large text-justify">Disponemos de herramientas para Pymes, Estudiantes del área, Personas y Personas encargadas de la prevención.</p> 
@@ -206,6 +208,23 @@
                     this.estados.boton_registro_inicia = 0;
                     this.estados.boton_registro_registrarse = 1;
                 }
+            },
+            limpiar_registro(){
+                this.usuario_nuevo.tipo_persona = 0;
+                this.usuario_nuevo.nombre = '';
+                this.usuario_nuevo.run = '';
+                this.usuario_nuevo.email = '';
+                this.usuario_nuevo.clave_uno = '';
+                this.usuario_nuevo.clave_dos = '';
+                this.usuario_nuevo.mailing = false;
+
+                this.mostrar_botones_registrate();
+            },
+            limpiar_login(){
+                this.usuario_login.run = '';
+                this.usuario_login.password = '';
+
+                this.mostrar_botones_login();
             }
         },
         mounted(){
@@ -214,3 +233,11 @@
         }
     }
 </script>
+
+<style>
+    .boton_login {
+        border-bottom-right-radius: 40px !important;
+        color:  #1E2F13 !important;
+        background-color: #E8ECD1 !important;
+    }
+</style>

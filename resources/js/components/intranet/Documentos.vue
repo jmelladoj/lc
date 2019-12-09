@@ -129,68 +129,44 @@
                     <b-form>
                         <b-row>
                             <b-col>
-                                <b-form-group label="Título">
+                                <b-form-group>
                                     <ValidationProvider name="titulo" rules="required|min:3" v-slot="{ errors }">
-                                        <b-form-input type="text" v-model="documento.titulo"></b-form-input>
+                                        <b-form-input type="text" v-model="documento.titulo" placeholder="Título"></b-form-input>
                                         <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
                                     </ValidationProvider>
                                 </b-form-group>
                             </b-col>
                             <b-col v-if="tipo_usuario < 3">
-                                <b-form-group label="Valor">
+                                <b-form-group>
                                     <ValidationProvider name="Valor" rules="required|numeric|min_value:0" v-slot="{ errors }">
-                                        <b-form-input type="number" v-model="documento.valor"></b-form-input>
+                                        <b-form-input type="number" v-model="documento.valor" placeholder="Valor" ></b-form-input>
                                         <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
                                     </ValidationProvider>
                                 </b-form-group>
                             </b-col>
                         </b-row>
 
-                        <b-form-group label="Descripción">
+                        <b-form-group>
                             <ValidationProvider name="Descripción" rules="required|min:3" v-slot="{ errors }">
-                                <b-form-textarea v-model="documento.descripcion"  rows="3" max-rows="6"></b-form-textarea>
+                                <b-form-textarea v-model="documento.descripcion"  rows="3" max-rows="6" placeholder="Descripción"></b-form-textarea>
                                 <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
                             </ValidationProvider>
                         </b-form-group>
 
                         <b-row>
                             <b-col v-if="tipo_usuario < 3">
-                                <b-form-group label="Código">
+                                <b-form-group  class="mb-2">
                                     <ValidationProvider name="código" rules="required|min:3" v-slot="{ errors }">
-                                        <b-form-input type="text" v-model="documento.codigo"></b-form-input>
-                                        <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
-                                    </ValidationProvider>
-                                </b-form-group>
-                            </b-col>
-                            <b-col v-if="tipo_usuario < 3">
-                                <b-form-group label="Código Interno">
-                                    <ValidationProvider name="código interno" rules="required|min:3" v-slot="{ errors }">
-                                        <b-form-input type="text" v-model="documento.codigo_interno"></b-form-input>
-                                        <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
-                                    </ValidationProvider>
-                                </b-form-group>
-                            </b-col>
-                        </b-row>
-
-                        <b-row>
-                            <b-col v-if="tipo_usuario < 3">
-                                <b-form-group label="Clasificación">
-                                    <ValidationProvider name="clasificación" rules="required|oneOf:1,2,3" v-slot="{ errors }">
-                                        <b-form-select v-model="documento.clasificacion" class="mb-3">
-                                            <option :value="0">Seleccionar una opción</option>
-                                            <option :value="1">1 Estrella (s)</option>
-                                            <option :value="2">2 Estrella (s)</option>
-                                            <option :value="3">3 Estrella (s)</option>
-                                        </b-form-select>
+                                        <b-form-input type="text" v-model="documento.codigo" placeholder="Código"></b-form-input>
                                         <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
                                     </ValidationProvider>
                                 </b-form-group>
                             </b-col>
                             <b-col>
-                                <b-form-group label="Categoría">
+                                <b-form-group class="mb-2">
                                     <ValidationProvider name="categoria" rules="required:min_value:1" v-slot="{ errors }">
                                         <b-form-select v-model="documento.categoria_id" class="mb-3">
-                                            <option :value="0">Seleccionar una opción</option>
+                                            <option :value="0">Seleccionar una categoría</option>
                                             <option v-for="(categoria,index) in categorias" :key="index" :value="categoria.id" v-text="categoria.nombre"></option>
                                         </b-form-select>
                                         <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
@@ -199,22 +175,22 @@
                             </b-col>
                         </b-row>
 
-                        <b-form-group label="Documento">
+                        <b-form-group>
                             <ValidationProvider name="documento" rules="required|ext:pdf,docx,xlsx,mp4,pptx,mp3" v-slot="{ errors, validate }">
-                                <b-form-file id="documento" name="documento" accept=".pdf,.docx,.xlsx,.mp4,.pptx,.mp3" placeholder="Sin archivo" @input="validate"></b-form-file>
+                                <b-form-file id="documento" name="documento" accept=".pdf,.docx,.xlsx,.mp4,.pptx,.mp3" placeholder="Documento" @input="validate"></b-form-file>
                                 <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
                             </ValidationProvider>
                         </b-form-group> 
 
-                        <b-form-group label="Vista previa de uno">
+                        <b-form-group>
                             <ValidationProvider name="vista previa" v-slot="{ errors, validate }">
-                                <b-form-file id="documento_uno" name="documento_uno" accept="image/*" placeholder="Sin archivo" @change="validate"></b-form-file>
+                                <b-form-file id="documento_uno" name="documento_uno" accept="image/*" placeholder="Vista previa uno" @change="validate"></b-form-file>
                                 <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
                             </ValidationProvider>
                         </b-form-group>
 
-                        <b-form-group label="Vista previa de dos">
-                            <b-form-file id="documento_dos" name="documento_dos" accept="image/*" placeholder="Sin archivo"></b-form-file>
+                        <b-form-group>
+                            <b-form-file id="documento_dos" name="documento_dos" accept="image/*" placeholder="Vista previa dos"></b-form-file>
                         </b-form-group>
 
                     </b-form>
@@ -252,10 +228,8 @@
                     titulo: '',
                     descripcion: '',
                     codigo: '',
-                    codigo_interno: '',
                     documento_url: null,
-                    valor: 0,
-                    clasificacion: 0,
+                    valor: null,
                     categoria_id: 0,
                     estado: this.tipo_documento
                 },
@@ -333,10 +307,8 @@
                 formData.append('titulo', this.documento.titulo);
                 formData.append('descripcion', this.documento.descripcion);
                 formData.append('codigo', this.documento.codigo);
-                formData.append('codigo_interno', this.documento.codigo_interno);
                 formData.append('documento_url', this.documento.documento_url);
                 formData.append('valor', this.documento.valor);
-                formData.append('clasificacion', this.documento.clasificacion);
                 formData.append('categoria_id', this.documento.categoria_id);
                 formData.append('estado', this.documento.estado);
 
@@ -451,9 +423,7 @@
                     me.documento.titulo = data['titulo'];
                     me.documento.descripcion = data['descripcion'];
                     me.documento.codigo = data['codigo'];
-                    me.documento.codigo_interno = data['codigo_interno'];
                     me.documento.valor = data['valor'];
-                    me.documento.clasificacion = data['clasificacion'];
                     me.documento.categoria_id = data['categorias_documentos_id'];
                 }
 
@@ -464,10 +434,8 @@
                 this.documento.titulo = '';
                 this.documento.descripcion = '';
                 this.documento.codigo = '';
-                this.documento.codigo_interno = '';
                 this.documento.documento_url = null;
-                this.documento.valor = 0;
-                this.documento.clasificacion = 0;
+                this.documento.valor = null;
                 this.documento.categoria_id = 0;               
             }
         },

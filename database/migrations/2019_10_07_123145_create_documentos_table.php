@@ -18,10 +18,8 @@ class CreateDocumentosTable extends Migration
             $table->string('titulo');
             $table->text('descripcion');
             $table->string('codigo')->nullable()->default('');
-            $table->string('codigo_interno')->nullable()->default('');
             $table->string('documento_url')->nullable()->default('');
             $table->integer('valor')->default(0);
-            $table->integer('clasificacion')->default(0);
             $table->integer('cantidad_descargas')->nullable()->default(0);
             $table->string('extension')->nullable()->default('');
             $table->integer('version')->default('1');

@@ -62,13 +62,11 @@ class DocumentoController extends Controller
             ['titulo' => $request->titulo,
                 'descripcion' => $request->descripcion,
                 'codigo' => $request->codigo,
-                'codigo_interno' => $request->codigo_interno,
                 'valor' => $request->valor,
-                'clasificacion' => $request->clasificacion,
                 'cantidad_descargas' => $request->cantidad_descargas,
                 'categorias_documentos_id' => $request->categoria_id,
                 'estado' => $request->estado,
-                'user_id' => \Auth::user()->id
+                'user_id' => Auth::user()->id
             ]
         );
         

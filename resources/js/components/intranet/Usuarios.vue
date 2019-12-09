@@ -249,7 +249,7 @@
                         <b-row>
                             <b-col>
                                 <b-form-group label="Posición actual">
-                                    <b-form-input type="number" :value="usuario.posicion_actual" ></b-form-input>
+                                    <b-form-input type="number" :value="usuario.posicion_actual" disabled="true"></b-form-input>
                                 </b-form-group>
                             </b-col>
                             <b-col>
