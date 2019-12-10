@@ -22,6 +22,8 @@ class CreateUsersTable extends Migration
             $table->string('password')->nullable();
 
             //Datos top five
+            $table->boolean('comunidad_pyme')->default(false);
+            $table->boolean('top_five')->default(false);
             $table->integer('posicion')->nullable()->default(0);
             $table->integer('likes')->nullable()->default(0);
             $table->integer('dislikes')->nullable()->default(0);
@@ -71,7 +73,6 @@ class CreateUsersTable extends Migration
             $table->integer('mailing')->nullable()->default(0);
             $table->integer('saldo')->default(1000);
             $table->boolean('lista_negra')->default(false);
-            $table->boolean('top_five')->default(false);
             
             $table->string('url_perfil')->default('img/perfil.svg');
 

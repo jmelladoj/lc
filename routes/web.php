@@ -104,6 +104,13 @@ Route::post('/usuario/blacklist/agregar', 'UsuarioController@blacklistAgregar')-
 Route::post('/usuario/blacklist/quitar', 'UsuarioController@blacklistQuitar')->name('Agregar a black list');
 Route::post('/usuario/posicion', 'UsuarioController@posicion')->name('Cambiar posicion');
 
+Route::post('/usuario/tabla/vip/quitar', 'UsuarioController@agregarTablaVip')->name('Tabla VIP');
+Route::post('/usuario/tabla/vip/agregar', 'UsuarioController@quitarTablaVip')->name('Tabla VIP');
+
+Route::post('/usuario/comunidad/quitar', 'UsuarioController@agregarComunidadPyme')->name('Tabla comunidad pyme');
+Route::post('/usuario/comunidad/agregar', 'UsuarioController@quitarComunidadPyme')->name('Tabla comunidad pyme');
+
+
 //Rutas de sliders
 Route::get('/sorteos/{tipo}', 'SorteoController@index')->name('Listar Sorteos');
 Route::post('/sorteo/crear/actualizar', 'SorteoController@crearOactualizar')->name('Crear o Actualizar Sorteos');

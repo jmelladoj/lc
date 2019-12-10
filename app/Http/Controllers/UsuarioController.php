@@ -172,6 +172,34 @@ class UsuarioController extends Controller
         );
     }
 
+    public function agregarTablaVip(Request $request){
+        User::updateOrCreate(
+            ['id' => $request->id],
+            ['top_five' => false]
+        );
+    }
+
+    public function quitarTablaVip(Request $request){
+        User::updateOrCreate(
+            ['id' => $request->id],
+            ['top_five' => false]
+        );
+    }
+
+    public function agregarComunidadPyme(Request $request){
+        User::updateOrCreate(
+            ['id' => $request->id],
+            ['comunidad_pyme' => false]
+        );
+    }
+
+    public function quitarComunidadPyme(Request $request){
+        User::updateOrCreate(
+            ['id' => $request->id],
+            ['comunidad_pyme' => false]
+        );
+    }
+
     public function solicitarDocumento(Request $request){
         if(! Mail::to('prueba@prevencionlebenco.cl')->cc('j.melladojimenez@gmail.com')->send(new InvitarAmigo(Auth::user(), $request->email))){
             return ['mensaje' => 'Invitación enviada!, gracias por compartir nuestra comunidad Prevención LebenCo.', 'clase' => 'success'];

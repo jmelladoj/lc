@@ -15009,7 +15009,7 @@ input.quantity[type=number]::-webkit-outer-spin-button {
 /*------------------------------------------------------------*/
 .my-account-box {
     border: 1px solid rgba(0,0,0,0.07);
-    padding: 30px;
+    padding: 70px;
 }
 
 .my-account-box-selected {

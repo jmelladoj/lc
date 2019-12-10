@@ -33,8 +33,8 @@
                             <p class="form-field-wrapper form-row" v-if="estados.boton_login_inicia == 1">
                                 <button type="button" class="btn btn--lg btn--secondary" name="login" value="Log in" @click="ingresar">Ingresar</button>
                             </p>
-                            <p class="form-field-wrapper lost_password">
-                                <a href="#" class="sale-color">Olvide mi clave</a>
+                            <p class="form-field-wrapper lost_password mb-5">
+                                <b-button v-b-modal.recuperar_cuenta class="mt-0 btn btn--secondary space--1 btn-sm boton_login">Recuperar mi cuenta</b-button>
                             </p>
                         </form>
                     </div>
@@ -119,6 +119,22 @@
                         </form>
                     </div>
                 </div>
+
+                <ValidationObserver ref="observer_servicio" v-slot="{ valid }">
+                    <b-modal ref="recuperar_cuenta" id="recuperar_cuenta" title="Recuperar mi cuenta">
+                        <b-form-group label="Ingresa el corre asociado a tu cuenta">
+                            <ValidationProvider name="correo" rules="required|min:3|email" v-slot="{ errors }">
+                                <b-form-input type="text" v-model="recuperar_cuenta.email"></b-form-input>
+                                <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
+                            </ValidationProvider>
+                        </b-form-group>
+
+                        <template slot="modal-footer">
+                            <b-button size="md" variant="success" :disabled="!valid">Recuperar mi cuenta</b-button>
+                            <b-button size="md" variant="danger" @click="cerrar_modal"> Cerrar </b-button>
+                        </template>
+                    </b-modal>
+                </ValidationObserver>
             </div>
         </div>
     </section>
@@ -149,6 +165,9 @@
                     clave_uno: '',
                     clave_dos: '',
                     mailing: false
+                },
+                recuperar_cuenta: {
+                    email: ''
                 },
                 validationErrors: ''
             }
@@ -225,6 +244,9 @@
                 this.usuario_login.password = '';
 
                 this.mostrar_botones_login();
+            },
+            cerrar_modal(){
+                this.$refs['recuperar_cuenta'].hide()
             }
         },
         mounted(){
