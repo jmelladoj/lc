@@ -30,8 +30,8 @@ class RecuperarContraseña extends Mailable
      */
     public function build()
     {
-        return $this->from('contacto@prevencionlebenco.cl')
-                    ->replyTo('contacto@prevencionlebenco.cl', 'Prueba de mensaje')
+        return $this->from('soporte@prevencionlebenco.cl')
+                    ->replyTo('soporte@prevencionlebenco.cl', 'Prueba de mensaje')
                     ->subject('Prueba desde formulario de recuperar contraseña')
                     ->view('mensajes.recuperar');
     }
