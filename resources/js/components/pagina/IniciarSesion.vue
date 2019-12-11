@@ -28,7 +28,7 @@
                                 <label class="">
                                     <input class="" v-model="usuario_login.remember" type="checkbox">
                                     <span>Recuérdame</span>
-                                </label>
+                                </label>                                
                             </p>
                             <p class="form-field-wrapper form-row" v-if="estados.boton_login_inicia == 1">
                                 <button type="button" class="btn btn--lg btn--secondary" name="login" value="Log in" @click="ingresar">Ingresar</button>
@@ -122,7 +122,7 @@
 
                 <ValidationObserver ref="observer_servicio" v-slot="{ valid }">
                     <b-modal ref="recuperar_cuenta" id="recuperar_cuenta" title="Recuperar mi cuenta">
-                        <b-form-group label="Ingresa el corre asociado a tu cuenta">
+                        <b-form-group label="Ingresa el correo asociado a tu cuenta">
                             <ValidationProvider name="correo" rules="required|min:3|email" v-slot="{ errors }">
                                 <b-form-input type="text" v-model="recuperar_cuenta.email"></b-form-input>
                                 <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>

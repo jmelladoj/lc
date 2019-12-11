@@ -6031,7 +6031,7 @@ input.quantity[type=number]::-webkit-outer-spin-button {
 
 .my-account-box-selected {
     border: 1px solid #8ab733;
-    padding: 30px;
+    padding: 70px;
 }
 
 form .form-row, form .lost_password {

@@ -7,7 +7,7 @@
                     <div class="d-flex justify-content-end align-items-right">
                         <sociales></sociales>
                         <b-button @click="abrirModal(1)" class="btn btn-success d-lg-block m-l-15" v-b-tooltip title="Agrega un usuario a la plataforma"><i class="fa fa-plus-circle"></i> Agregar Usuario</b-button>
-                        <b-button class="btn btn-success d-lg-block m-l-15" v-b-tooltip title="Ordenar tabla vip"><i class="fa fa-list"></i> Tabla VIP</b-button>
+                        <b-button @click="abrirModalTabla()" class="btn btn-success d-lg-block m-l-15" v-b-tooltip title="Ordenar tabla vip"><i class="fa fa-list"></i> Tabla VIP</b-button>
                     </div>                    
                 </b-col>
             </b-row>
@@ -80,80 +80,80 @@
                                     @filtered="onFiltered"
 >
 
-                                <template slot="empty">
-                                    <center><h5>No hay registros para mostrar.</h5></center>
-                                </template>
-
-                                <template slot="emptyfiltered">
-                                    <center><h5>No hay registros que coincidan con su solicitud.</h5></center>
-                                </template>
-
-                                <template v-slot:cell(index)="data">
-                                    {{ data.index + 1 }}
-                                </template>
-
-                                <template v-slot:cell(tipo)="data">
-                                    <label v-if="data.item.tipo_persona == 1"> Persona </label>
-                                    <label v-else-if="data.item.tipo_persona == 2"> Pyme </label>
-                                    <label v-else-if="data.item.tipo_persona == 3"> Estudiante </label>
-                                </template>
-
-                                <template v-slot:cell(acciones)="row">
-                                    <template v-if="row.item.top_five == 1">
-                                        <b-button size="xs" title="Quitar de tabla vip" @click="agregarQuitarTablaVip(row.item.id, 1)" class="btn btn-danger">
-                                            <i class="fa fa-star-o"></i>
-                                        </b-button>
+                                    <template slot="empty">
+                                        <center><h5>No hay registros para mostrar.</h5></center>
                                     </template>
-                                    <template v-else>
-                                        <b-button size="xs" title="Añadir a tabla vip" @click="agregarQuitarTablaVip(row.item.id, 2)" class="btn btn-success">
+
+                                    <template slot="emptyfiltered">
+                                        <center><h5>No hay registros que coincidan con su solicitud.</h5></center>
+                                    </template>
+
+                                    <template v-slot:cell(index)="data">
+                                        {{ data.index + 1 }}
+                                    </template>
+
+                                    <template v-slot:cell(tipo)="data">
+                                        <label v-if="data.item.tipo_persona == 1"> Persona </label>
+                                        <label v-else-if="data.item.tipo_persona == 2"> Pyme </label>
+                                        <label v-else-if="data.item.tipo_persona == 3"> Estudiante </label>
+                                    </template>
+
+                                    <template v-slot:cell(acciones)="row">
+                                        <template v-if="row.item.top_five == 1">
+                                            <b-button size="xs" title="Quitar de tabla vip" @click="agregarQuitarTablaVip(row.item.id, 1)" class="btn btn-danger">
+                                                <i class="fa fa-star-o"></i>
+                                            </b-button>
+                                        </template>
+                                        <template v-else>
+                                            <b-button size="xs" title="Añadir a tabla vip" @click="agregarQuitarTablaVip(row.item.id, 2)" class="btn btn-success">
+                                                <i class="fa fa-star"></i>
+                                            </b-button>
+                                        </template>
+
+                                        <template v-if="row.item.top_five == 1">
+                                            <b-button size="xs" title="Quitar de comunidad pyme" @click="agregarQuitarComunidadPyme(row.item.id, 1)" class="btn btn-danger">
+                                                <i class="fa fa-eye-slash"></i>
+                                            </b-button>
+                                        </template>
+                                        <template v-else>
+                                            <b-button size="xs" title="Añadir a comunidad pyme" @click="agregarQuitarComunidadPyme(row.item.id, 2)" class="btn btn-success">
+                                                <i class="fa fa-eye"></i>
+                                            </b-button>
+                                        </template>
+
+                                        <b-button size="xs" variant="success" title="Agregar a top five" @click="abrirModalPosicion(row.item)">
                                             <i class="fa fa-star"></i>
                                         </b-button>
+                                        
+                                        <b-button size="xs" variant="success" title="Agregar saldo usuario" @click="abrirModalSaldo(row.item)">
+                                            <i class="fa fa-usd"></i>
+                                        </b-button>
+
+                                        <b-button size="xs" variant="warning" title="Actualizar usuario" @click="abrirModal(2, row.item)">
+                                            <i class="fa fa-pencil"></i>
+                                        </b-button>
+
+                                        <template>
+                                            <b-button v-if="row.item.lista_negra" size="xs" variant="warning" title="Quitar de black list" @click="agregarOquitarBlacklist(row.item.id, 2)">
+                                                <i class="fa fa-check"></i>
+                                            </b-button>
+
+                                            <b-button v-else size="xs" variant="danger" title="Añadir a black list" @click="agregarOquitarBlacklist(row.item.id, 1)">
+                                                <i class="fa fa-times"></i>
+                                            </b-button>
+                                        </template>
+                                        
+
+                                        <template>
+                                            <b-button v-if="row.item.deleted_at" size="xs" variant="warning" title="Restaurar usuario" @click="borrarOrestaurar(row.item.id, 2)">
+                                                <i class="fa fa-undo"></i>
+                                            </b-button>
+
+                                            <b-button v-else size="xs" variant="danger" title="Eliminar usuario" @click="borrarOrestaurar(row.item.id, 1)">
+                                                <i class="fa fa-trash"></i>
+                                            </b-button>
+                                        </template>
                                     </template>
-
-                                    <template v-if="row.item.top_five == 1">
-                                        <b-button size="xs" title="Quitar de comunidad pyme" @click="agregarQuitarComunidadPyme(row.item.id, 1)" class="btn btn-danger">
-                                            <i class="fa fa-eye-slash"></i>
-                                        </b-button>
-                                    </template>
-                                    <template v-else>
-                                        <b-button size="xs" title="Añadir a comunidad pyme" @click="agregarQuitarComunidadPyme(row.item.id, 2)" class="btn btn-success">
-                                            <i class="fa fa-eye"></i>
-                                        </b-button>
-                                    </template>
-
-                                    <b-button size="xs" variant="success" title="Agregar a top five" @click="abrirModalPosicion(row.item)">
-                                        <i class="fa fa-star"></i>
-                                    </b-button>
-                                    
-                                    <b-button size="xs" variant="success" title="Agregar saldo usuario" @click="abrirModalSaldo(row.item)">
-                                        <i class="fa fa-usd"></i>
-                                    </b-button>
-
-                                    <b-button size="xs" variant="warning" title="Actualizar usuario" @click="abrirModal(2, row.item)">
-                                        <i class="fa fa-pencil"></i>
-                                    </b-button>
-
-                                    <template>
-                                        <b-button v-if="row.item.lista_negra" size="xs" variant="warning" title="Quitar de black list" @click="agregarOquitarBlacklist(row.item.id, 2)">
-                                            <i class="fa fa-check"></i>
-                                        </b-button>
-
-                                        <b-button v-else size="xs" variant="danger" title="Añadir a black list" @click="agregarOquitarBlacklist(row.item.id, 1)">
-                                            <i class="fa fa-times"></i>
-                                        </b-button>
-                                    </template>
-                                    
-
-                                    <template>
-                                        <b-button v-if="row.item.deleted_at" size="xs" variant="warning" title="Restaurar usuario" @click="borrarOrestaurar(row.item.id, 2)">
-                                            <i class="fa fa-undo"></i>
-                                        </b-button>
-
-                                        <b-button v-else size="xs" variant="danger" title="Eliminar usuario" @click="borrarOrestaurar(row.item.id, 1)">
-                                            <i class="fa fa-trash"></i>
-                                        </b-button>
-                                    </template>
-                                </template>
 
                                 </b-table>
 
@@ -267,50 +267,207 @@
                 </b-modal>
             </ValidationObserver>
 
-            <ValidationObserver ref="observer_posicion" v-slot="{ valid }">
-                <b-modal ref="modal_posicion" :title="modal_posicion.titulo" size="md" no-close-on-backdrop>
+            <ValidationObserver ref="observer_tabla" v-slot="{ valid }">
+                <b-modal ref="modal_tabla" title="Administración tabla VIP" size="lg" no-close-on-backdrop>
                     <b-form>
                         <b-row>
                             <b-col>
-                                <b-form-group label="Posición actual">
-                                    <b-form-input type="number" :value="usuario.posicion_actual" disabled="true"></b-form-input>
+                                <b-form-group>
+                                    <b-form-input v-model="tabla_vip.empresa" type="text" readonly=""s placeholder="Pyme"></b-form-input>
                                 </b-form-group>
                             </b-col>
                             <b-col>
-                                <b-form-group label="Nueva posición">
+                                <b-form-group>
                                     <ValidationProvider name="posición" rules="required|numeric|between:0,10" v-slot="{ errors }">
-                                        <b-form-input type="number" v-model="usuario.posicion"></b-form-input>
+                                        <b-form-select v-model="tabla_vip.posicion" class="mb-3">
+                                            <option :value="null">Estrellas</option>
+                                            <option value="1">1 Estrella(s)</option>
+                                            <option value="2">2 Estrella(s)</option>
+                                            <option value="3">3 Estrella(s)</option>
+                                            <option value="4">4 Estrella(s)</option>
+                                            <option value="5">5 Estrella(s)</option>
+                                        </b-form-select>
+                                        <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
+                                    </ValidationProvider>
+                                </b-form-group>
+                            </b-col>
+                            <b-col>
+                                <b-form-group label="">
+                                    <ValidationProvider name="likes" rules="required|numeric|between:1,100" v-slot="{ errors }">
+                                        <b-form-input type="number" v-model="tabla_vip.likes" placeholder="Likes"></b-form-input>
+                                        <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
+                                    </ValidationProvider>
+                                </b-form-group>
+                            </b-col>
+                            <b-col>
+                                <b-form-group>
+                                    <ValidationProvider name="dislikes" rules="required|numeric|between:1,100" v-slot="{ errors }">
+                                        <b-form-input type="number" v-model="tabla_vip.dislikes" placeholder="Dislikes"></b-form-input>
                                         <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
                                     </ValidationProvider>
                                 </b-form-group>
                             </b-col>
                         </b-row>
                         <b-row>
-                            <b-col>
-                                <b-form-group label="Likes">
-                                    <ValidationProvider name="likes" rules="required|numeric|between:1,100" v-slot="{ errors }">
-                                        <b-form-input type="number" v-model="usuario.likes"></b-form-input>
-                                        <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
-                                    </ValidationProvider>
-                                </b-form-group>
-                            </b-col>
-                            <b-col>
-                                <b-form-group label="Dislikes">
-                                    <ValidationProvider name="dislikes" rules="required|numeric|between:1,100" v-slot="{ errors }">
-                                        <b-form-input type="number" v-model="usuario.dislikes"></b-form-input>
-                                        <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
-                                    </ValidationProvider>
-                                </b-form-group>
-                            </b-col>
+                            <b-form-group>
+                                <b-container fluid class="mb-5">
+                                    <b-row>
+                                        <b-col md="6" class="my-1">
+                                            <b-form-group label-cols-sm="3" label="Filtrar" class="mb-0">
+                                            <b-input-group>
+                                                <b-form-input v-model="filter" placeholder="Escribe para buscar" />
+                                                <b-input-group-append>
+                                                <b-button :disabled="!filter" @click="filter = ''">Limpiar</b-button>
+                                                </b-input-group-append>
+                                            </b-input-group>
+                                            </b-form-group>
+                                        </b-col>
+
+                                        <b-col md="6" class="my-1">
+                                            <b-form-group label-cols-sm="3" label="Ordenar" class="mb-0">
+                                            <b-input-group>
+                                                <b-form-select v-model="sortBy" :options="sortOptions">
+                                                <option slot="first" :value="null">-- nada --</option>
+                                                </b-form-select>
+                                                <b-form-select :disabled="!sortBy" v-model="sortDesc" slot="append">
+                                                <option :value="false">Asc</option> <option :value="true">Desc</option>
+                                                </b-form-select>
+                                            </b-input-group>
+                                            </b-form-group>
+                                        </b-col>
+
+                                        <b-col md="6" class="my-1">
+                                            <b-form-group label-cols-sm="3" label="Dirección" class="mb-0">
+                                            <b-input-group>
+                                                <b-form-select v-model="sortDirection" slot="append">
+                                                <option value="asc">Asc</option> <option value="desc">Desc</option>
+                                                <option value="last">Último</option>
+                                                </b-form-select>
+                                            </b-input-group>
+                                            </b-form-group>
+                                        </b-col>
+
+                                        <b-col md="6" class="my-1">
+                                            <b-form-group label-cols-sm="3" label="Por página" class="mb-0">
+                                            <b-form-select :options="pageOptions" v-model="perPage" />
+                                            </b-form-group>
+                                        </b-col>
+                                    </b-row>
+
+                                    <!-- Main table element -->
+                                    <b-table
+                                        show-empty
+                                        responsive
+                                        striped
+                                        borderless
+                                        outlined
+                                        small
+                                        hover
+                                        :items="items_vip"
+                                        :fields="fields_vip"
+                                        :current-page="currentPage_vip"
+                                        :per-page="perPage_vip"
+                                        :filter="filter_vip"
+                                        :sort-by.sync="sortBy_vip"
+                                        :sort-desc.sync="sortDesc_vip"
+                                        :sort-direction="sortDirection_vip"
+                                        @filtered="onFiltered_vip"
+    >
+
+                                        <template slot="empty">
+                                            <center><h5>No hay registros para mostrar.</h5></center>
+                                        </template>
+
+                                        <template slot="emptyfiltered">
+                                            <center><h5>No hay registros que coincidan con su solicitud.</h5></center>
+                                        </template>
+
+                                        <template v-slot:cell(index)="data">
+                                            {{ data.index + 1 }}
+                                        </template>
+
+                                        <template v-slot:cell(tipo)="data">
+                                            <label v-if="data.item.tipo_persona == 1"> Persona </label>
+                                            <label v-else-if="data.item.tipo_persona == 2"> Pyme </label>
+                                            <label v-else-if="data.item.tipo_persona == 3"> Estudiante </label>
+                                        </template>
+
+                                        <template v-slot:cell(acciones)="row">
+                                            <template v-if="row.item.top_five == 1">
+                                                <b-button size="xs" title="Quitar de tabla vip" @click="agregarQuitarTablaVip(row.item.id, 1)" class="btn btn-danger">
+                                                    <i class="fa fa-star-o"></i>
+                                                </b-button>
+                                            </template>
+                                            <template v-else>
+                                                <b-button size="xs" title="Añadir a tabla vip" @click="agregarQuitarTablaVip(row.item.id, 2)" class="btn btn-success">
+                                                    <i class="fa fa-star"></i>
+                                                </b-button>
+                                            </template>
+
+                                            <template v-if="row.item.top_five == 1">
+                                                <b-button size="xs" title="Quitar de comunidad pyme" @click="agregarQuitarComunidadPyme(row.item.id, 1)" class="btn btn-danger">
+                                                    <i class="fa fa-eye-slash"></i>
+                                                </b-button>
+                                            </template>
+                                            <template v-else>
+                                                <b-button size="xs" title="Añadir a comunidad pyme" @click="agregarQuitarComunidadPyme(row.item.id, 2)" class="btn btn-success">
+                                                    <i class="fa fa-eye"></i>
+                                                </b-button>
+                                            </template>
+
+                                            <b-button size="xs" variant="success" title="Agregar a top five" @click="abrirModalPosicion(row.item)">
+                                                <i class="fa fa-star"></i>
+                                            </b-button>
+                                            
+                                            <b-button size="xs" variant="success" title="Agregar saldo usuario" @click="abrirModalSaldo(row.item)">
+                                                <i class="fa fa-usd"></i>
+                                            </b-button>
+
+                                            <b-button size="xs" variant="warning" title="Actualizar usuario" @click="abrirModal(2, row.item)">
+                                                <i class="fa fa-pencil"></i>
+                                            </b-button>
+
+                                            <template>
+                                                <b-button v-if="row.item.lista_negra" size="xs" variant="warning" title="Quitar de black list" @click="agregarOquitarBlacklist(row.item.id, 2)">
+                                                    <i class="fa fa-check"></i>
+                                                </b-button>
+
+                                                <b-button v-else size="xs" variant="danger" title="Añadir a black list" @click="agregarOquitarBlacklist(row.item.id, 1)">
+                                                    <i class="fa fa-times"></i>
+                                                </b-button>
+                                            </template>
+                                            
+
+                                            <template>
+                                                <b-button v-if="row.item.deleted_at" size="xs" variant="warning" title="Restaurar usuario" @click="borrarOrestaurar(row.item.id, 2)">
+                                                    <i class="fa fa-undo"></i>
+                                                </b-button>
+
+                                                <b-button v-else size="xs" variant="danger" title="Eliminar usuario" @click="borrarOrestaurar(row.item.id, 1)">
+                                                    <i class="fa fa-trash"></i>
+                                                </b-button>
+                                            </template>
+                                        </template>
+
+                                    </b-table>
+
+                                    <b-row>
+                                        <b-col>
+                                            <b-pagination :total-rows="totalRows" :per-page="perPage" v-model="currentPage" class="my-3" align="fill"/>
+                                        </b-col>
+                                    </b-row>
+                                </b-container>
+                            </b-form-group>
                         </b-row>
                     </b-form>
 
                     <template slot="modal-footer">
-                        <b-button :disabled="!valid" size="md" variant="success" @click="cambiarPosiciones()"> Guardar </b-button>
-                        <b-button size="md" variant="danger" @click="cerrarModalSaldo()"> Cerrar </b-button>
+                        <b-button :disabled="!valid" size="md" variant="success"> Guardar </b-button>
+                        <b-button size="md" variant="danger" @click="cerrarModalTabla()"> Cerrar </b-button>
                     </template>
                 </b-modal>
             </ValidationObserver>
+
         </b-container>
 
     </div>
@@ -318,6 +475,7 @@
 
 <script>
     const items = [];
+    const items_vip = [];
 
     export default {
         data() {
@@ -336,6 +494,12 @@
                     likes: 0,
                     dislikes: 0
                 },
+                tabla_vip: {
+                    empresa: null,
+                    posicion: null,
+                    likes: null,
+                    dislikes: null
+                },
                 modal_usuario: {
                     titulo: '',
                     accion: 0
@@ -347,6 +511,7 @@
                     titulo: 'Asignar posición'
                 },
                 items: items,
+                items_vip: items_vip,
                 subusuarios: [],
                 fields: [
                     { key: 'index', label: '#', sortable: true, sortDirection: 'desc', class: 'text-center' },
@@ -356,6 +521,14 @@
                     { key: 'tipo', label: 'TIPO PERSONA', sortable: true, class: 'text-left' },
                     { key: 'acciones', label: 'ACCIONES', sortable: true, class: 'text-center' }
                 ],
+                fields_vip: [
+                    { key: 'index', label: '#', sortable: true, sortDirection: 'desc', class: 'text-center' },
+                    { key: 'nombre', label: 'Pyme', sortable: true, class: 'text-center' },
+                    { key: 'nombre_comuna', label: 'Comuna', sortable: true, class: 'text-center' },
+                    { key: 'nombre_rubro', label: 'Rubro', sortable: true, class: 'text-center' },
+                    { key: 'like', label: 'Likes', sortable: true, class: 'text-center' },
+                    { key: 'dislike', label: 'Dislikes', sortable: true, class: 'text-center' },
+                ],
                 currentPage: 1,
                 perPage: 10,
                 totalRows: 0,
@@ -363,7 +536,15 @@
                 sortBy: null,
                 sortDesc: false,
                 sortDirection: 'asc',
-                filter: null
+                filter: null,
+                currentPage_vip: 1,
+                perPage_vip: 10,
+                totalRows_vip: 0,
+                pageOptions_vip: [10, 25, 50, 100],
+                sortBy_vip: null,
+                sortDesc_vip: false,
+                sortDirection_vip: 'asc',
+                filter_vip: null
             }
         },    
         computed:{
@@ -371,10 +552,19 @@
                 return this.fields.filter(f => f.sortable).map(f => {
                     return { text: f.label, value: f.key }
                 })
+            },
+            sortOptions_vip() {
+                return this.fields_vip.filter(f => f.sortable).map(f => {
+                    return { text: f.label, value: f.key }
+                })
             }
         },
         methods:{
             onFiltered(filteredItems) {
+                this.totalRows = filteredItems.length
+                this.currentPage = 1
+            },
+            onFiltered_vip(filteredItems) {
                 this.totalRows = filteredItems.length
                 this.currentPage = 1
             },
@@ -626,6 +816,12 @@
                 }
 
                 this.$refs['modal_usuario'].show();
+            },
+            abrirModalTabla(){
+                this.$refs['modal_tabla'].show();
+            },
+            cerrarModalTabla(){
+                this.$refs['modal_tabla'].hide();
             },
             abrirModalSaldo(data = []){
                 let me = this;

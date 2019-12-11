@@ -6,7 +6,7 @@
                     <ValidationObserver ref="observer_foto_perfil"> 
                         <b-form-group v-show="tipo_usuario_logeado == 2">
                             <div class="custom-control custom-checkbox">
-                                <b-form-checkbox v-model="usuario.top_five">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ¡Quiero ser aparecer en el top five!</b-form-checkbox>
+                                <b-form-checkbox v-model="usuario.comunidad_pyme">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ¡Quiero ser aparecer en el top five!</b-form-checkbox>
                             </div>
                         </b-form-group >          
                         <img v-bind:src="usuario.url_perfil" alt="Imagen de usuario" class="img-circle" width="150">
@@ -499,7 +499,7 @@
                     ultimo_empresa: '',
                     rubro_empresa: '',
                     organismo_administrador_empresa: 0,
-                    top_five: false
+                    comunidad_pyme: false
                 },
                 categoria: {
                     nombre: '',
@@ -621,7 +621,7 @@
                     me.usuario.software = response.data.usuario.software;
                     me.usuario.experiencia = response.data.usuario.experiencia;
                     me.usuario.amigo = response.data.usuario.amigo;
-                    me.usuario.profesion_id = response.data.usuario.profesion_id == null ? 0 : response.data.usuario.profesion_id;
+                    me.usuario.profesion_id = response.data.usuario.profesion_id == null ? null : response.data.usuario.profesion_id;
                     me.usuario.otro_rubro = response.data.usuario.otro_rubro;
                     me.usuario.porcentaje_terreno = response.data.usuario.porcentaje_terreno;
                     me.usuario.porcentaje_oficina = response.data.usuario.porcentaje_oficina;
@@ -637,7 +637,7 @@
                     me.usuario.ultimo_empresa = response.data.usuario.ultimo_empresa;
                     me.usuario.rubro_empresa = response.data.usuario.rubro_empresa;
                     me.usuario.organismo_administrador_empresa = response.data.usuario.organismo_administrador_empresa;
-                    me.usuario.top_five = response.data.usuario.top_five;
+                    me.usuario.comunidad_pyme = response.data.usuario.comunidad_pyme;
 
 
                     //Datos categoria
@@ -703,7 +703,7 @@
                     'ultimo_empresa': me.usuario.ultimo_empresa,
                     'rubro_empresa': me.usuario.rubro_empresa,
                     'organismo_administrador_empresa': me.usuario.organismo_administrador_empresa,
-                    'top_five': me.usuario.top_five
+                    'comunidad_pyme': me.usuario.comunidad_pyme
                     
                 }).then(function (response) {
                     me.listarUsuario();
