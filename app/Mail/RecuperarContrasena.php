@@ -6,8 +6,9 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
+use App\User;
 
-class RecuperarContraseña extends Mailable
+class RecuperarContrasena extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -16,11 +17,11 @@ class RecuperarContraseña extends Mailable
      *
      * @return void
      */
-     public function __construct(String $nombre, String $email)
+     public function __construct(User $usuario, String $clave)
      {
          //
-         $this->nombre = $nombre;
-         $this->email = $email;
+         $this->usuario = $usuario;
+         $this->clave = $clave;
      }
 
     /**
@@ -33,6 +34,9 @@ class RecuperarContraseña extends Mailable
         return $this->from('soporte@prevencionlebenco.cl')
                     ->replyTo('soporte@prevencionlebenco.cl', 'Prueba de mensaje')
                     ->subject('Prueba desde formulario de recuperar contraseña')
-                    ->view('mensajes.recuperar');
+                    ->view('mensajes.recuperar')
+                    ->with([
+                        'clave' => $this->clave
+                    ]);
     }
 }

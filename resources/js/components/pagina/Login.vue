@@ -57,12 +57,13 @@
                     'mensaje_uno': me.pagina.mensaje_uno,
                     'mensaje_dos': me.pagina.mensaje_dos
                 }).then(function (response) {
-                    Swal.fire({
+
+                    Vue.$toast.open({
+                        message: 'Página actualizada exitosamente',
                         type: 'success',
-                        title: 'Página actualizada exitosamente',
-                        showConfirmButton: true,
-                        timer: 2000
+                        duration: 5000
                     });
+                            
                 }).catch(function (error) {
                     console.error(error);
                 });

@@ -130,7 +130,7 @@
                         </b-form-group>
 
                         <template slot="modal-footer">
-                            <b-button size="md" variant="success" :disabled="!valid">Recuperar mi cuenta</b-button>
+                            <b-button size="md" variant="success" :disabled="!valid" @click="recuperar_password">Recuperar mi cuenta</b-button>
                             <b-button size="md" variant="danger" @click="cerrar_modal"> Cerrar </b-button>
                         </template>
                     </b-modal>
@@ -246,7 +246,30 @@
                 this.mostrar_botones_login();
             },
             cerrar_modal(){
+                this.recuperar_password.email = ""
                 this.$refs['recuperar_cuenta'].hide()
+            },
+            recuperar_password(){
+                let me = this;
+
+                axios.post('/usuario/recuperar/password',{
+                    'correo': me.recuperar_cuenta.email
+                }).then(function (response) {
+                    me.cerrar_modal();
+
+                    Vue.$toast.open({
+                        message: response.data.mensaje,
+                        type: response.data.clase,
+                        duration: 5000
+                    });
+                }).catch(function (error) {
+                    Vue.$toast.open({
+                        message: 'Hemos tenido inconvenientes en tu solicitud. Por favor intenta nuevamente!',
+                        type: 'error',
+                        duration: 5000
+                    });
+                });
+                
             }
         },
         mounted(){

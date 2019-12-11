@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Asesoria;
 use App\Mail\InvitarAmigo;
+use App\Mail\RecuperarContrasena;
 use App\Mail\SolicitarAsesoria;
 use App\Notifications\Asesoria as AppAsesoria;
 use App\User;
@@ -12,6 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class UsuarioController extends Controller
 {
@@ -219,6 +221,21 @@ class UsuarioController extends Controller
             return ['mensaje' => 'Asesoría solicitada!, Dentro de un plazo de 24 horas el equipo de Prevención LebenCo. se contactara contigo.', 'clase' => 'success'];
         } else {
             return ['mensaje' => 'Hemos tenido inconvenientes tu solicitud. Por favor intenta nuevamente!', 'clase' => 'error'];
+        }
+    }
+
+    public function recuperar(Request $request){
+        $usuario = User::where('email', $request->correo)->first();
+        $clave_nueva = Str::random(30);
+
+        $usuario->password = bcrypt($clave_nueva);
+
+        $usuario->save();
+
+        if(!Mail::to($usuario->email)->send(new RecuperarContrasena($usuario, $clave_nueva))){
+            return ['mensaje' => 'Hemos enviado una nueva contraseña a tu email, procura revisar badeja spam.', 'clase' => 'success'];
+        } else {
+            return ['mensaje' => 'Hemos tenido inconvenientes en tu solicitud. Por favor intenta nuevamente!', 'clase' => 'error'];
         }
     }
 }

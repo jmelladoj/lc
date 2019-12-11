@@ -110,6 +110,8 @@ Route::post('/usuario/tabla/vip/agregar', 'UsuarioController@quitarTablaVip')->n
 Route::post('/usuario/comunidad/quitar', 'UsuarioController@agregarComunidadPyme')->name('Tabla comunidad pyme');
 Route::post('/usuario/comunidad/agregar', 'UsuarioController@quitarComunidadPyme')->name('Tabla comunidad pyme');
 
+Route::post('/usuario/recuperar/password', 'UsuarioController@recuperar')->name('Recuperar contraseña');
+
 
 //Rutas de sliders
 Route::get('/sorteos/{tipo}', 'SorteoController@index')->name('Listar Sorteos');

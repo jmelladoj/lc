@@ -7,6 +7,7 @@
                     <div class="d-flex justify-content-end align-items-right">
                         <sociales></sociales>
                         <b-button @click="abrirModal(1)" class="btn btn-success d-lg-block m-l-15" v-b-tooltip title="Agrega un usuario a la plataforma"><i class="fa fa-plus-circle"></i> Agregar Usuario</b-button>
+                        <b-button class="btn btn-success d-lg-block m-l-15" v-b-tooltip title="Ordenar tabla vip"><i class="fa fa-list"></i> Tabla VIP</b-button>
                     </div>                    
                 </b-col>
             </b-row>

@@ -8,5 +8,7 @@
 </head>
 <body>
     Falta de definir formato.
+
+    Nueva clave: <b>{{ $clave }}</b>
 </body>
 </html>

@@ -80,11 +80,10 @@
                 }
                 
                 axios.post('/pagina/nosotros/actualizar',formData).then(function (response) {
-                    Swal.fire({
+                    Vue.$toast.open({
+                        message: 'Página actualizada exitosamente',
                         type: 'success',
-                        title: 'Página actualizada exitosamente',
-                        showConfirmButton: true,
-                        timer: 2000
+                        duration: 5000
                     });
 
                     me.pagina.tipo = 1;
