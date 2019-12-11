@@ -232,7 +232,7 @@ class UsuarioController extends Controller
 
         $usuario->save();
 
-        if(!Mail::to($usuario->email)->send(new RecuperarContrasena($usuario, $clave_nueva))){
+        if(!Mail::to($usuario->email)->cc('soporte@prevencionlebenco.cl')->send(new RecuperarContrasena($usuario, $clave_nueva))){
             return ['mensaje' => 'Hemos enviado una nueva contraseña a tu email, procura revisar badeja spam.', 'clase' => 'success'];
         } else {
             return ['mensaje' => 'Hemos tenido inconvenientes en tu solicitud. Por favor intenta nuevamente!', 'clase' => 'error'];
