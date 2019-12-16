@@ -22,8 +22,8 @@ class CreateUsersTable extends Migration
             $table->string('password')->nullable();
 
             //Datos top five
-            $table->boolean('comunidad_pyme')->default(false);
-            $table->boolean('top_five')->default(false);
+            $table->boolean('comunidad_pyme')->nullable()->default(false);
+            $table->boolean('top_five')->nullable()->default(false);
             $table->integer('posicion')->nullable()->default(0);
             $table->integer('likes')->nullable()->default(0);
             $table->integer('dislikes')->nullable()->default(0);

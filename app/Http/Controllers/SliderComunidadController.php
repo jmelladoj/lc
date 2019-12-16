@@ -29,7 +29,7 @@ class SliderComunidadController extends Controller
                 'texto_boton' => $request->texto_boton,
                 'texto_modal' => $request->texto_modal,
                 'texto_alerta' => $request->texto_alerta,
-                'link' => '/intranet/' + $request->link
+                'link' => '/intranet/' . $request->link
             ]
         );
 

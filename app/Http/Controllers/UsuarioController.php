@@ -226,7 +226,7 @@ class UsuarioController extends Controller
 
     public function recuperar(Request $request){
         $usuario = User::where('email', $request->correo)->first();
-        $clave_nueva = Str::random(30);
+        $clave_nueva = Str::random(10);
 
         $usuario->password = bcrypt($clave_nueva);
 

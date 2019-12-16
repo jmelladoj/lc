@@ -98,6 +98,12 @@
                                         <label v-else-if="data.item.tipo_persona == 3"> Estudiante </label>
                                     </template>
 
+                                    <template v-slot:cell(tipo_user)="data">
+                                        <label v-if="data.item.tipo_usuario == 1"> Administrador </label>
+                                        <label v-else-if="data.item.tipo_usuario == 2"> Co administrador </label>
+                                        <label v-else-if="data.item.tipo_usuario == 3"> Usuario </label>
+                                    </template>
+
                                     <template v-slot:cell(acciones)="row">
                                         <template v-if="row.item.top_five == 1">
                                             <b-button size="xs" title="Quitar de tabla vip" @click="agregarQuitarTablaVip(row.item.id, 1)" class="btn btn-danger">
@@ -371,8 +377,7 @@
                                         :sort-by.sync="sortBy_vip"
                                         :sort-desc.sync="sortDesc_vip"
                                         :sort-direction="sortDirection_vip"
-                                        @filtered="onFiltered_vip"
-    >
+                                        @filtered="onFiltered_vip">
 
                                         <template slot="empty">
                                             <center><h5>No hay registros para mostrar.</h5></center>
@@ -391,6 +396,7 @@
                                             <label v-else-if="data.item.tipo_persona == 2"> Pyme </label>
                                             <label v-else-if="data.item.tipo_persona == 3"> Estudiante </label>
                                         </template>
+
 
                                         <template v-slot:cell(acciones)="row">
                                             <template v-if="row.item.top_five == 1">
@@ -518,6 +524,7 @@
                     { key: 'run', label: 'RUN', sortable: true, class: 'text-left' },
                     { key: 'nombre', label: 'NOMBRE', sortable: true, class: 'text-left' },
                     { key: 'email', label: 'EMAIL', sortable: true, class: 'text-left' },
+                    { key: 'tipo_user', label: 'TIPO USUARIO', sortable: true, class: 'text-left' },
                     { key: 'tipo', label: 'TIPO PERSONA', sortable: true, class: 'text-left' },
                     { key: 'acciones', label: 'ACCIONES', sortable: true, class: 'text-center' }
                 ],

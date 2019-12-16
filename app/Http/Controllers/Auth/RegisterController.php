@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\User;
+use App\Mail\Contacto;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Mail;
 
 class RegisterController extends Controller
 {
@@ -76,12 +78,20 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        
+
+        return $usuario = User::create([
             'run' => $data['run'],
             'nombre' => $data['nombre'],
             'email' => $data['email'],
             'password' => Hash::make($data['clave_dos']),
             'tipo_persona' => $data['tipo_persona']
         ]);
+
+        if(!Mail::to('contacto@prevencionlebenco.cl')->send(new Contacto($usuario->nombre, $usuario->asunto, $usuario->email, $usuario->telefono, $usuario->mensaje, $usuario->tipo_persona)) && ! Mail::to($usuario->email)->send(new Contacto($usuario->nombre, $usuario->asunto, $usuario->email, $usuario->telefono, $usuario->mensaje, $usuario->tipo_persona))){
+            return $usuario;
+        } else {
+            return ['mensaje' => 'Hemos tenido inconvenientes al registrar tu cuenta tu correo. Por favor intenta nuevamente!', 'clase' => 'error'];
+        }
     }
 }

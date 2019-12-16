@@ -7,15 +7,21 @@
                     <form class="Contact-form">
                         <ValidationObserver ref="observer_categoria" v-slot="{ valid }">
                             <div class="row">
-                                <div class="form-field-wrapper col-md-6">
+                                <div class="form-field-wrapper col-md-4">
                                     <ValidationProvider name="nombre" rules="required|min:3|alpha_spaces" v-slot="{ errors }">
                                         <input @keyup="cambiar_estado" v-model="usuario.nombre" class="input--lg form-full" placeholder="Nombre completo o Razón social si eres una Pyme" size="30" aria-required="true" required="" type="text">
                                         <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
                                     </ValidationProvider>
                                 </div>
-                                <div class="form-field-wrapper col-md-6">
+                                <div class="form-field-wrapper col-md-4">
                                     <ValidationProvider name="email" rules="required|email" v-slot="{ errors }">
                                         <input @keyup="cambiar_estado" v-model="usuario.email" class="input--lg form-full" placeholder="Ingresa tu correo electrónico" size="30" aria-required="true" required="" type="email">
+                                        <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
+                                    </ValidationProvider>
+                                </div>
+                                <div class="form-field-wrapper col-md-4">
+                                    <ValidationProvider name="teléfono" rules="required|numeric|digits:9" v-slot="{ errors }">
+                                        <input @keyup="cambiar_estado" v-model="usuario.telefono" class="input--lg form-full" placeholder="Ingresa tu número telefónico Ej: 9 8765 4321" size="30" aria-required="true" required="" type="text">
                                         <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
                                     </ValidationProvider>
                                 </div>
@@ -27,44 +33,55 @@
                                         <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
                                     </ValidationProvider>
                                 </div>
-                                <div class="form-field-wrapper col-md-6">
-                                    <ValidationProvider name="teléfono" rules="required|numeric|digits:9" v-slot="{ errors }">
-                                        <input @keyup="cambiar_estado" v-model="usuario.telefono" class="input--lg form-full" placeholder="Ingresa tu número telefónico para ser contactado" size="30" aria-required="true" required="" type="text">
-                                        <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
-                                    </ValidationProvider>
+                                <div class="form-field-wrapper col-md-6 row">
+                                    <div class="col-lg-4 col-md-4 d-flex align-items-center justify-content-center">
+                                        <div class="custom-control custom-radio">
+                                            <input @change="cambiar_estado" type="radio" id="estudiante" name="tipo_persona" v-model="usuario.tipo_persona" class="custom-control-input" value="3">
+                                            <label class="custom-control-label" for="estudiante"> Estudiante</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 d-flex align-items-center justify-content-center">
+                                        <div class="custom-control custom-radio">
+                                            <input @change="cambiar_estado" type="radio" id="persona" name="tipo_persona" v-model="usuario.tipo_persona" class="custom-control-input" value="1">
+                                            <label class="custom-control-label" for="persona"> Persona</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 d-flex align-items-center justify-content-center">
+                                        <div class="custom-control custom-radio">
+                                            <input @change="cambiar_estado" type="radio" id="empresa" name="tipo_persona" v-model="usuario.tipo_persona" class="custom-control-input" value="2">
+                                            <label class="custom-control-label" for="empresa"> Pyme</label>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="row"> 
                                 <div class="form-field-wrapper col-md-6">
                                     <ValidationProvider name="mensaje" rules="required|min:20" v-slot="{ errors }">
-                                        <b-form-textarea @keyup="cambiar_estado" v-model="usuario.mensaje" class="input--lg form-full" placeholder="Tu consulta es muy importante para nosotros" rows="7" no-resize required></b-form-textarea>
+                                        <b-form-textarea @keyup="cambiar_estado" v-model="usuario.mensaje" class="input--lg form-full" placeholder="Tu consulta es muy importante para nosotros" rows="5" no-resize required></b-form-textarea>
                                         <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
                                     </ValidationProvider>
                                 </div>
                                 <div class="form-field-wrapper col-md-6 mb-0">
-                                    <p class="large text-justify">La comunidad LebenCo. dispone de herramientas para Estudiantes del área, Personas o Personas encargadas de la prevención y nuestras Pymes.</p> 
-                                    <p class="form-field-wrapper">
-                                        <div class="row">
-                                            <div class="col-lg-4 col-md-4 d-flex align-items-center justify-content-center">
-                                                <div class="custom-control custom-radio">
-                                                    <input @change="cambiar_estado" type="radio" id="estudiante" name="tipo_persona" v-model="usuario.tipo_persona" class="custom-control-input" value="3">
-                                                    <label class="custom-control-label" for="estudiante"> Estudiante</label>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="contact-information">
+                                                <div class="form-field-wrapper">
+                                                    <label style="font-size: 13px;">Si necesitas asistencia técnica sobre la plataforma, puedes encontrarnos en</label>
+                                                    <p>
+                                                        <i class="ti-email left"></i>soporte@prevencionlebenco.cl
+                                                    </p>
                                                 </div>
                                             </div>
-                                            <div class="col-lg-4 col-md-4 d-flex align-items-center justify-content-center">
-                                                <div class="custom-control custom-radio">
-                                                    <input @change="cambiar_estado" type="radio" id="persona" name="tipo_persona" v-model="usuario.tipo_persona" class="custom-control-input" value="1">
-                                                    <label class="custom-control-label" for="persona"> Persona</label>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-4 col-md-4 d-flex align-items-center justify-content-center">
-                                                <div class="custom-control custom-radio">
-                                                    <input @change="cambiar_estado" type="radio" id="empresa" name="tipo_persona" v-model="usuario.tipo_persona" class="custom-control-input" value="2">
-                                                    <label class="custom-control-label" for="empresa"> Pyme</label>
+                                            <div class="contact-information">
+                                                <div class="form-field-wrapper">
+                                                    <label style="font-size: 13px;">Para todo lo demás, puedes encontrarnos en</label>
+                                                    <p>
+                                                        <i class="ti-email left"></i>contacto@prevencionlebenco.cl
+                                                    </p>
                                                 </div>
                                             </div>
                                         </div>
-                                    </p>
+                                    </div>
                                     <br>
                                     <div class="row">
                                         <div class="form-field-wrapper col-md-12">
@@ -75,27 +92,6 @@
                             </div>
                         </ValidationObserver>
                     </form>
-                </div>
-            </div>
-            <br>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="contact-information">
-                        <div class="form-field-wrapper">
-                            <label style="font-size: 17px;">Si necesitas asistencia técnica sobre la plataforma, puedes encontrarnos en</label>
-                            <p>
-                                <i class="ti-email left"></i>soporte@prevencionlebenco.cl
-                            </p>
-                        </div>
-                    </div>
-                    <div class="contact-information">
-                        <div class="form-field-wrapper">
-                            <label style="font-size: 17px;">Para todo lo demás, puedes encontrarnos en</label>
-                            <p>
-                                <i class="ti-email left"></i>contacto@prevencionlebenco.cl
-                            </p>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -190,6 +186,12 @@
 <style scoped>
     textarea {
         font-size: 14px !important;
-        height: 100% !important;
+        height: 85% !important;
+        border-color: rgba(0, 0, 0, 0.08) !important;
+    }
+
+    .form-control::placeholder {
+        color: #333 !important;
+        opacity: 0.5;
     }
 </style>

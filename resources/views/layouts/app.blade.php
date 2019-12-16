@@ -95,7 +95,7 @@
 
             {{-- <footer class="{{ request()->is('login') || request()->is('servicios') ? 'footer-absolute bg--dark' : 'footer bg--dark' }}"> --}}
             <footer class="footer bg--dark">
-                @if(!request()->is('login'))
+                @if(!request()->is('login') && !request()->is('contacto'))
                     <section class="footer-widget-area">
                         <div class="container">
                             <div class="row text-dark h-100">

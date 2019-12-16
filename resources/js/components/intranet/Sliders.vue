@@ -170,6 +170,15 @@
                             <ValidationProvider name="redirección" rules="required" v-slot="{ errors }">
                                 <b-form-select v-model="slider.link" class="mb-3">
                                     <option :value="0" selected>Sin redirección</option>
+                                    <option :value="1" selected>Sección mi perfil</option>
+                                    <option :value="2" selected>Sección pide documento</option>
+                                    <option :value="3" selected>Sección sorteos</option>
+                                    <option :value="4" selected>Sección promociones</option>
+                                    <option :value="6" selected>Sección seminarios</option>
+                                    <option :value="7" selected>Sección visitas a terreno</option>
+                                    <option :value="8" selected>Sección recomiéndanos</option>
+                                    <option :value="11" selected>Sección subir documento</option>
+                                    <option :value="12" selected>Sección recargar</option>
                                 </b-form-select>
                                 <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
                             </ValidationProvider>
@@ -179,7 +188,7 @@
                             <ValidationProvider name="segmento de personas" v-slot="{ errors }">
                                 <b-form-select v-model="slider.tipo_persona" class="mb-3">
                                     <option :value="null" selected>Para todos los Clientes</option>
-                                    <option :value="1" selected>Solo para Prenvecionistas</option>
+                                    <option :value="1" selected>Solo para Personas</option>
                                     <option :value="2" selected>Solo para Pymes</option>
                                     <option :value="3" selected>Solo para Estudiantes</option>
                                 </b-form-select>
@@ -465,7 +474,7 @@
                     me.slider.color = data['color'];
                     me.slider.subtexto = data['subtexto'];
                     me.slider.subcolor = data['subcolor'];
-                    me.slider.link = data['link'];
+                    me.slider.link = data['link'].replace('/intranet/', '');
                     me.slider.tipo_persona = data['tipo_persona'];
                     me.slider.url_imagen = 'storage/' + data['url_imagen'];
                 }
