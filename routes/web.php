@@ -38,6 +38,8 @@ Route::get('/usuarios/pymes/{tipo}', 'UsuarioController@indexPymes')->name('List
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('/intranet/{ubicacion}', 'PaginaController@index_intranet')->name('index intranet');
+
 //Rutas de sliders
 Route::get('/sliders', 'SliderController@index')->name('Listar Sliders');
 Route::post('/slider/crear/actualizar', 'SliderController@crearOactualizar')->name('Crear o Actualizar Sliders');

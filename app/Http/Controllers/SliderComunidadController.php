@@ -9,16 +9,16 @@ use Illuminate\Support\Facades\Storage;
 class SliderComunidadController extends Controller
 {
     //
-    public function index(){      
+    public function index(){
         return ['sliders' => SliderComunidad::orderBy('created_at', 'desc')->get()];
     }
 
-    public function indexHome(){      
+    public function indexHome(){
         return ['sliders' => SliderComunidad::orderBy('created_at', 'desc')->get()];
     }
 
     public function crearOactualizar(Request $request){
-        
+
         $slider = SliderComunidad::updateOrCreate(
             ['id' => $request->slider_id],
             [
@@ -29,15 +29,15 @@ class SliderComunidadController extends Controller
                 'texto_boton' => $request->texto_boton,
                 'texto_modal' => $request->texto_modal,
                 'texto_alerta' => $request->texto_alerta,
-                'link' => $request->link
+                'link' => '/intranet/' + $request->link
             ]
         );
 
         if ($request->hasFile('imagen_slider')) {
             if($slider->url_imagen != null) { Storage::disk('public')->delete($slider->url_imagen); }
-            
+
             SliderComunidad::updateOrCreate(['id' => $slider->id], ['url_imagen' => Storage::disk('public')->putFile('sliders_comunidad', $request->file('imagen_slider'))]);
-        }  
+        }
     }
 
     public function eliminar(Request $request){

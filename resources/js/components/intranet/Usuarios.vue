@@ -8,7 +8,7 @@
                         <sociales></sociales>
                         <b-button @click="abrirModal(1)" class="btn btn-success d-lg-block m-l-15" v-b-tooltip title="Agrega un usuario a la plataforma"><i class="fa fa-plus-circle"></i> Agregar Usuario</b-button>
                         <b-button @click="abrirModalTabla()" class="btn btn-success d-lg-block m-l-15" v-b-tooltip title="Ordenar tabla vip"><i class="fa fa-list"></i> Tabla VIP</b-button>
-                    </div>                    
+                    </div>
                 </b-col>
             </b-row>
 
@@ -124,7 +124,7 @@
                                         <b-button size="xs" variant="success" title="Agregar a top five" @click="abrirModalPosicion(row.item)">
                                             <i class="fa fa-star"></i>
                                         </b-button>
-                                        
+
                                         <b-button size="xs" variant="success" title="Agregar saldo usuario" @click="abrirModalSaldo(row.item)">
                                             <i class="fa fa-usd"></i>
                                         </b-button>
@@ -142,7 +142,7 @@
                                                 <i class="fa fa-times"></i>
                                             </b-button>
                                         </template>
-                                        
+
 
                                         <template>
                                             <b-button v-if="row.item.deleted_at" size="xs" variant="warning" title="Restaurar usuario" @click="borrarOrestaurar(row.item.id, 2)">
@@ -167,7 +167,7 @@
                     </b-card>
                 </b-col>
             </b-row>
-            
+
             <ValidationObserver ref="observer_usuario" v-slot="{ valid }">
                 <b-modal ref="modal_usuario" :title="modal_usuario.titulo" size="lg" no-close-on-backdrop>
                     <b-form v-if="modal_usuario.accion == 1">
@@ -273,7 +273,7 @@
                         <b-row>
                             <b-col>
                                 <b-form-group>
-                                    <b-form-input v-model="tabla_vip.empresa" type="text" readonly=""s placeholder="Pyme"></b-form-input>
+                                    <b-form-input v-model="tabla_vip.empresa" type="text" readonly="" placeholder="Pyme"></b-form-input>
                                 </b-form-group>
                             </b-col>
                             <b-col>
@@ -418,7 +418,7 @@
                                             <b-button size="xs" variant="success" title="Agregar a top five" @click="abrirModalPosicion(row.item)">
                                                 <i class="fa fa-star"></i>
                                             </b-button>
-                                            
+
                                             <b-button size="xs" variant="success" title="Agregar saldo usuario" @click="abrirModalSaldo(row.item)">
                                                 <i class="fa fa-usd"></i>
                                             </b-button>
@@ -436,7 +436,7 @@
                                                     <i class="fa fa-times"></i>
                                                 </b-button>
                                             </template>
-                                            
+
 
                                             <template>
                                                 <b-button v-if="row.item.deleted_at" size="xs" variant="warning" title="Restaurar usuario" @click="borrarOrestaurar(row.item.id, 2)">
@@ -488,7 +488,7 @@
                     password: '',
                     tipo_usuario: 0,
                     saldo_actual: 0,
-                    nuevo_saldo: 0, 
+                    nuevo_saldo: 0,
                     posicion: 0,
                     posicion_actual: 0,
                     likes: 0,
@@ -546,7 +546,7 @@
                 sortDirection_vip: 'asc',
                 filter_vip: null
             }
-        },    
+        },
         computed:{
             sortOptions() {
                 return this.fields.filter(f => f.sortable).map(f => {
@@ -592,7 +592,7 @@
                     me.listarUsuarios();
                     me.cerrarModal();
                     var mensaje = accion == 1 ? 'Registro agregado exitosamente' : 'Registro actualizado exitosamente';
-                    
+
                     Vue.$toast.open({
                         message: mensaje,
                         type: 'success',
@@ -669,7 +669,7 @@
                         }).then(function (response) {
                             var mensaje = accion == 2 ? 'El usuario ha sido restaurado!' : 'El usuario ha sido quitado!';
                             me.listarUsuarios();
-                            
+
                             Vue.$toast.open({
 		                        message: mensaje,
 		                        type: 'success',
@@ -704,13 +704,13 @@
                         }).then(function (response) {
                             var mensaje = accion == 2 ? 'El usuario ha sido quitado de la black list!' : 'El usuario ha sido añadido a la black list!';
                             me.listarUsuarios();
-                            
+
                             Vue.$toast.open({
 		                        message: mensaje,
 		                        type: 'success',
 		                        duration: 5000
 		                    });
-                            
+
                         }).catch(function (error) {
                             console.log(error);
                         });
@@ -739,13 +739,13 @@
                         }).then(function (response) {
                             var mensaje = accion == 2 ? 'El usuario ha sido quitado de la tabla vip!' : 'El usuario ha sido añadido a la tabla vip!';
                             me.listarUsuarios();
-                            
+
                             Vue.$toast.open({
 		                        message: mensaje,
 		                        type: 'success',
 		                        duration: 5000
 		                    });
-                            
+
                         }).catch(function (error) {
                             console.log(error);
                         });
@@ -774,13 +774,13 @@
                         }).then(function (response) {
                             var mensaje = accion == 2 ? 'El usuario ha sido quitado de la tabla comunidad pyme!' : 'El usuario ha sido añadido a la tabla comunidad pyme!';
                             me.listarUsuarios();
-                            
+
                             Vue.$toast.open({
 		                        message: mensaje,
 		                        type: 'success',
 		                        duration: 5000
 		                    });
-                            
+
                         }).catch(function (error) {
                             console.log(error);
                         });

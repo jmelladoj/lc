@@ -17,6 +17,12 @@ use Illuminate\Support\Facades\Storage;
 class PaginaController extends Controller
 {
     //
+    public function index_intranet($ubicacion){
+        $redireccion = $ubicacion;
+        $mensaje = 'sin mensaje';
+        return view('home')->with(compact('redireccion', 'mensaje'));
+    }
+
     public function indexHomeNosotros(){
         $pagina = Pagina::find(1);
 
@@ -76,9 +82,9 @@ class PaginaController extends Controller
         if ($request->hasFile('video')){
             $video = $request->file('video');
             $nombre = 'video_nosotros.' . $request->file('video')->getClientOriginalExtension();
-            
+
             if($pagina->video_url != null) { Storage::disk('public')->delete($pagina->video_url); }
-            
+
             $pagina->video_url = Storage::disk('public')->putFileAs(
                 'general', $video, $nombre, 'public'
             );

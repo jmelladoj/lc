@@ -7,7 +7,7 @@
                     <div class="d-flex justify-content-end align-items-right">
                         <sociales></sociales>
                         <b-button @click="abrirModal(1)" class="btn btn-success d-lg-block m-l-15" v-b-tooltip.hover title="Agrega una slider de comunidad a la plataforma"><i class="fa fa-plus-circle"></i> Agregar Slider</b-button>
-                    </div>                    
+                    </div>
                 </b-col>
             </b-row>
 
@@ -118,7 +118,7 @@
                     </b-card>
                 </b-col>
             </b-row>
-            
+
             <ValidationObserver ref="observer_slider" v-slot="{ valid }">
                 <b-modal ref="modal_slider" :title="modal_slider.titulo" no-close-on-backdrop scrollable>
                     <b-form>
@@ -188,6 +188,7 @@
                             <ValidationProvider name="redirección" rules="required" v-slot="{ errors }">
                                 <b-form-select v-model="slider.link" class="mb-3">
                                     <option :value="0" selected>Sin redirección</option>
+                                    <option :value="12" selected>Sección recargar</option>
                                 </b-form-select>
                                 <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
                             </ValidationProvider>
@@ -226,7 +227,7 @@
                     subtexto: '',
                     texto_boton: '',
                     texto_modal: '',
-                    texto_alerta: '', 
+                    texto_alerta: '',
                     color: '#E8ECD1',
                     subcolor: '#E8ECD1',
                     url_imagen: null,
@@ -253,7 +254,7 @@
                 sortDirection: 'asc',
                 filter: null
             }
-        },    
+        },
         computed:{
             sortOptions() {
                 return this.fields.filter(f => f.sortable).map(f => {
@@ -297,7 +298,7 @@
 
                 let imagen_slider = document.querySelector('#imagen_slider');
                 formData.append('imagen_slider', imagen_slider.files[0]);
-                
+
                 formData.append('slider_id', this.slider.id);
                 formData.append('texto_slider', this.slider.texto_slider);
                 formData.append('texto_boton', this.slider.texto_boton);
@@ -312,14 +313,14 @@
                     me.listarSliders();
                     me.cerrarModal();
                     var mensaje = accion == 1 ? 'Registro agregado exitosamente' : 'Registro actualizado exitosamente';
-                    
-                    
+
+
                     Vue.$toast.open({
                         message: mensaje,
                         type: 'success',
                         duration: 5000
                     });
-                    
+
                 }).catch(function (error) {
                     console.error(error);
                 });
@@ -406,7 +407,7 @@
 
 <style>
     .vue-swatches__wrapper {
-        width: auto !important; 
+        width: auto !important;
     }
 
     .vue-swatches__fallback__wrapper {
