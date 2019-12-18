@@ -5,7 +5,7 @@
                 <b-carousel-slide v-for="(slider, index) in sliders" :key="index" :img-src="'storage/' + slider.url_imagen">
                     <h2 class="intro-title" v-text="slider.texto" :style="'color:' + slider.color"></h2>
                     <h4 v-if="slider.subtexto != ''" :style="'color:' + slider.subcolor" v-text="slider.subtexto"></h4>
-                    <a v-show="slider.link.length > 0" :href="slider.link" class="btn btn--primary space--1 btn-sm">Ver más</a>
+                    <a v-show="slider.link != '/intranet/0'" :href="slider.link" class="btn btn--primary space--1 btn-sm">Ver más</a>
                 </b-carousel-slide>
             </b-carousel>
         </div>

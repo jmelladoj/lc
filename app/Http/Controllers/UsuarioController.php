@@ -33,7 +33,7 @@ class UsuarioController extends Controller
     public function indexPymes($tipo){      
         switch ($tipo) {
             case 1:
-                $usuarios = User::where('tipo_persona', 1)->with('comuna')->orderBy('nombre', 'desc')->limit(5)->get();
+                $usuarios = User::where('tipo_persona', 2)->where('top_five', 1)->with('comuna')->orderBy('nombre', 'desc')->limit(5)->get();
 
                 foreach($usuarios as $usuario){
                     $usuario->likes = $usuario->cantidadLike > 0 ? round((100 * $usuario->cantidadLike / ($usuario->cantidadLike + $usuario->cantidadDislike)) ,0) : 0;
@@ -43,7 +43,7 @@ class UsuarioController extends Controller
                 return ['usuarios' => $usuarios];
                 break;
             case 2:
-                $usuarios = User::where('tipo_persona', 1)->with('comuna')->orderBy('nombre', 'desc')->limit(10)->get();
+                $usuarios = User::where('tipo_persona', 2)->where('comunidad_pyme', 1)->with('comuna')->orderBy('nombre', 'desc')->limit(10)->get();
 
                 foreach($usuarios as $usuario){
                     $usuario->likes = $usuario->cantidadLike > 0 ? round((100 * $usuario->cantidadLike / ($usuario->cantidadLike + $usuario->cantidadDislike)) ,0) : 0;
@@ -177,7 +177,7 @@ class UsuarioController extends Controller
     public function agregarTablaVip(Request $request){
         User::updateOrCreate(
             ['id' => $request->id],
-            ['top_five' => false]
+            ['top_five' => true]
         );
     }
 
@@ -191,7 +191,7 @@ class UsuarioController extends Controller
     public function agregarComunidadPyme(Request $request){
         User::updateOrCreate(
             ['id' => $request->id],
-            ['comunidad_pyme' => false]
+            ['comunidad_pyme' => true]
         );
     }
 

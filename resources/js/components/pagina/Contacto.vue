@@ -5,23 +5,23 @@
                 <div class="col-md-12">
                     <h2 class="page-title">Contáctate con nosotros</h2>
                     <form class="Contact-form">
-                        <ValidationObserver ref="observer_categoria" v-slot="{ valid }">
+                        <ValidationObserver ref="observer_contacto" v-slot="{ valid, reset }">
                             <div class="row">
                                 <div class="form-field-wrapper col-md-4">
                                     <ValidationProvider name="nombre" rules="required|min:3|alpha_spaces" v-slot="{ errors }">
-                                        <input @keyup="cambiar_estado" v-model="usuario.nombre" class="input--lg form-full" placeholder="Nombre completo o Razón social si eres una Pyme" size="30" aria-required="true" required="" type="text">
+                                        <input @keyup="cambiar_estado" v-model="usuario.nombre" class="input--lg form-full" placeholder="Nombre completo o Razón social si eres una Pyme" size="30" aria-required="true" type="text">
                                         <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
                                     </ValidationProvider>
                                 </div>
                                 <div class="form-field-wrapper col-md-4">
                                     <ValidationProvider name="email" rules="required|email" v-slot="{ errors }">
-                                        <input @keyup="cambiar_estado" v-model="usuario.email" class="input--lg form-full" placeholder="Ingresa tu correo electrónico" size="30" aria-required="true" required="" type="email">
+                                        <input @keyup="cambiar_estado" v-model="usuario.email" class="input--lg form-full" placeholder="Ingresa tu correo electrónico" size="30" aria-required="true" type="email">
                                         <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
                                     </ValidationProvider>
                                 </div>
                                 <div class="form-field-wrapper col-md-4">
                                     <ValidationProvider name="teléfono" rules="required|numeric|digits:9" v-slot="{ errors }">
-                                        <input @keyup="cambiar_estado" v-model="usuario.telefono" class="input--lg form-full" placeholder="Ingresa tu número telefónico Ej: 9 8765 4321" size="30" aria-required="true" required="" type="text">
+                                        <input @keyup="cambiar_estado" v-model="usuario.telefono" class="input--lg form-full" placeholder="Ingresa tu número telefónico Ej: 9 8765 4321" size="30" aria-required="true" type="text">
                                         <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
                                     </ValidationProvider>
                                 </div>
@@ -29,7 +29,7 @@
                             <div class="row">
                                 <div class="form-field-wrapper col-md-6">
                                     <ValidationProvider name="asunto" rules="required|min:3" v-slot="{ errors }">
-                                        <input @keyup="cambiar_estado" v-model="usuario.asunto" class="input--lg form-full" placeholder="Ingresa el asunto del mensaje" size="30" aria-required="true" required="" type="text">
+                                        <input @keyup="cambiar_estado" v-model="usuario.asunto" class="input--lg form-full" placeholder="Ingresa el asunto del mensaje" size="30" aria-required="true" type="text">
                                         <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
                                     </ValidationProvider>
                                 </div>
@@ -57,7 +57,7 @@
                             <div class="row"> 
                                 <div class="form-field-wrapper col-md-6">
                                     <ValidationProvider name="mensaje" rules="required|min:20" v-slot="{ errors }">
-                                        <b-form-textarea @keyup="cambiar_estado" v-model="usuario.mensaje" class="input--lg form-full" placeholder="Tu consulta es muy importante para nosotros" rows="5" no-resize required></b-form-textarea>
+                                        <b-form-textarea @keyup="cambiar_estado" v-model="usuario.mensaje" class="input--lg form-full" placeholder="Tu consulta es muy importante para nosotros" rows="5" no-resize></b-form-textarea>
                                         <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
                                     </ValidationProvider>
                                 </div>
@@ -85,7 +85,7 @@
                                     <br>
                                     <div class="row">
                                         <div class="form-field-wrapper col-md-12">
-                                            <input v-show="estado_boton == 1" class="submit btn btn--lg btn--primary" value="Enviar mensaje" :disabled="!valid" type="button" @click="contactar">
+                                            <input v-show="estado_boton == 1" class="submit btn btn--lg btn--primary" value="Enviar mensaje" :disabled="!valid" type="button" @click="contactar(); reset">
                                         </div>
                                     </div>
                                 </div>
@@ -165,13 +165,26 @@
 		                        message: response.data.mensaje,
 		                        type: response.data.clase,
 		                        duration: 5000
-		                    });
+                            });
+                            
+                            me.limpiar_formulario()
 
                         }).catch(function (error) {
                             console.log(error);
                         });
                     } else if (result.dismiss === Swal.DismissReason.cancel) {}
                 })
+            },
+            limpiar_formulario(){
+                this.usuario.nombre = '';
+                this.usuario.email = '';
+                this.usuario.asunto = '';
+                this.usuario.telefono = null;
+                this.usuario.mensaje = '';
+                this.usuario.tipo_persona = 0;
+                this.estado_boton = 0;
+
+                this.$refs.observer_contacto.reset()
             }
         },
         mounted() {

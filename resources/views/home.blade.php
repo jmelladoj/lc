@@ -19,7 +19,7 @@
 
 @section('script')
     <script>
-        $(document).ready(function() {
+        $(document).ready(function() { 
             var redireccion = $('#redireccion').val()
 
             if(redireccion){

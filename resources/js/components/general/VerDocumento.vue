@@ -24,7 +24,23 @@
             </p>
         </div>
 
-        <b-modal ref="modal_vista_documento" :title="modal_vista_documento.titulo"  size="lg"  no-close-on-backdrop>
+        <b-modal ref="modal_vista_documento" size="lg"  no-close-on-backdrop>
+            <template v-slot:modal-header>
+                <b-row>
+                    <b-col cols="4">
+                        <img v-bind:src="'../' + documento.imagen" width="40" alt="Imagen de documento" />
+                    </b-col>
+
+                    <b-col cols="8">
+                        <h3 v-text="modal_vista_documento.titulo"></h3>
+                    </b-col>
+                </b-row>
+            </template>
+
+            <template slot="title">
+
+            </template>
+
             <b-form>
                 <b-form-group class="mb-4">
                     <b-form-textarea readonly="" :value="documento.descripcion" no-resize></b-form-textarea>

@@ -289,9 +289,6 @@
                     ]
                 }
             }
-        },
-        updated() {
-            this.listarPymes();
         }
     }
 </script>
