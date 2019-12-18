@@ -5,24 +5,24 @@
 
                 <b-carousel-slide v-for="(slider, index) in sliders" :key="index" :img-src="'storage/' + slider.url_imagen">
                     <h2 class="intro-title" v-text="slider.texto" :style="'color:' + slider.color"></h2>
-                    <a :href="slider.link" class="btn btn--primary space--1 btn-sm" v-if="slider.link != 0">Ver más</a>
+                    <a :href="slider.link" class="btn btn--primary space--1 btn-sm" v-show="slider.link.length > 0">Ver más</a>
                 </b-carousel-slide>
-                
+
             </b-carousel>
         </div>
-    </section>   
+    </section>
 </template>
 
 <script>
     export default {
         props:[
             'ubicacion', 'usuario'
-        ],  
+        ],
         data() {
             return {
                 sliders: []
             }
-        },  
+        },
         methods:{
             listarSlider(){
                 let me=this;
@@ -35,7 +35,7 @@
                         } else {
                             return item.tipo_persona == null;
                         }
-                        
+
                     })
                 })
                 .catch(function (error) {

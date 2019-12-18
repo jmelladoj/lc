@@ -1,20 +1,20 @@
- <template>   
+ <template>
     <section id="intro" class="intro" v-if="sliders.length > 0">
         <div class="item height-400px sm-height-400px">
             <b-carousel  :interval="4000" controls indicators background="rgba(0,0,0,0.6)" img-width="" img-height="600" style="text-shadow: 1px 1px 2px #333;">
                 <b-carousel-slide v-for="(slider, index) in sliders" :key="index" :img-src="'storage/' + slider.url_imagen">
                     <h2 class="intro-title" v-text="slider.texto" :style="'color:' + slider.color"></h2>
                     <h4 v-if="slider.subtexto != ''" :style="'color:' + slider.subcolor" v-text="slider.subtexto"></h4>
-                    <a :href="slider.link" class="btn btn--primary space--1 btn-sm" v-if="slider.link != 0">Ver más</a>
+                    <a v-show="slider.link.length > 0" :href="slider.link" class="btn btn--primary space--1 btn-sm">Ver más</a>
                 </b-carousel-slide>
             </b-carousel>
         </div>
-        
-    </section>   
+
+    </section>
 </template>
 
 <script>
-    export default {  
+    export default {
         props: [
             'usuario'
         ],
@@ -22,7 +22,7 @@
             return {
                 sliders: []
             }
-        },  
+        },
         methods:{
             listarSlidersHome(){
                 let me=this;
@@ -35,7 +35,7 @@
                         } else {
                             return item.tipo_persona == null;
                         }
-                        
+
                     });
                 })
                 .catch(function (error) {
@@ -65,7 +65,7 @@
     .img-fluid{
         height: 600px;
     }
-    
+
     .carousel {
         height: 400px;
     }

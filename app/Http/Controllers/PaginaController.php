@@ -20,7 +20,13 @@ class PaginaController extends Controller
     public function index_intranet($ubicacion){
         $redireccion = $ubicacion;
         $mensaje = 'sin mensaje';
-        return view('home')->with(compact('redireccion', 'mensaje'));
+
+        if(Auth::check()){
+            return view('home')->with(compact('redireccion', 'mensaje'));
+        } else {
+            return redirect('/login');
+        }
+
     }
 
     public function indexHomeNosotros(){
