@@ -37,10 +37,6 @@
                 </b-row>
             </template>
 
-            <template slot="title">
-
-            </template>
-
             <b-form>
                 <b-form-group class="mb-4">
                     <b-form-textarea readonly="" :value="documento.descripcion" no-resize></b-form-textarea>
