@@ -35,7 +35,6 @@ class Contacto extends Mailable
     public function build()
     {
         return $this->from('contacto@prevencionlebenco.cl')
-                    ->replyTo('contacto@prevencionlebenco.cl', 'Prueba de mensaje')
                     ->subject('Prueba desde formulario de contácto')
                     ->view('mensajes.contacto');
     }

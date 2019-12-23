@@ -91,7 +91,7 @@ class RegisterController extends Controller
 
 
 
-        if(!Mail::to('contacto@prevencionlebenco.cl')->send(new Bienvenida($usuario->nombre))){
+        if(!Mail::to($usuario->email)->send(new Bienvenida($usuario->nombre))){
             return $usuario;
         } else {
             return ['mensaje' => 'Hemos tenido inconvenientes al registrar tu cuenta tu correo. Por favor intenta nuevamente!', 'clase' => 'error'];

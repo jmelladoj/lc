@@ -6,6 +6,7 @@ use App\Asesoria;
 use App\Mail\InvitarAmigo;
 use App\Mail\RecuperarContrasena;
 use App\Mail\SolicitarAsesoria;
+use App\Notifications\Alerta;
 use App\Notifications\Asesoria as AppAsesoria;
 use App\User;
 use Carbon\Carbon;
@@ -18,7 +19,7 @@ use Illuminate\Support\Str;
 class UsuarioController extends Controller
 {
     //
-    public function index($tipo){      
+    public function index($tipo){
 
         switch ($tipo) {
             case 1:
@@ -30,7 +31,7 @@ class UsuarioController extends Controller
         }
     }
 
-    public function indexPymes($tipo){      
+    public function indexPymes($tipo){
         switch ($tipo) {
             case 1:
                 $usuarios = User::where('tipo_persona', 2)->where('top_five', 1)->with('comuna')->orderBy('nombre', 'desc')->limit(5)->get();
@@ -58,9 +59,9 @@ class UsuarioController extends Controller
     public function especifico($id){
         return ['usuario' => User::where('id', $id)->with('categoria')->first()];
     }
-    
+
     public function crearOactualizar(Request $request){
-        
+
         $usuario = User::updateOrCreate(
             ['id' => $request->usuario_id],
             [
@@ -118,7 +119,7 @@ class UsuarioController extends Controller
             User::updateOrCreate(['id' => $request->id], ['posicion' => $request->posicion]);
         } else if($request->posicion > 0){
             $usuario_antiguo = User::where('posicion', $request->posicion)->get()->first();
-            
+
 
             if($usuario_antiguo){
                 $usuario_antiguo->posicion = $request->posicion_actual;
@@ -138,7 +139,7 @@ class UsuarioController extends Controller
     public function imagen(Request $request){
         $usuario = User::find($request->usuario_id);
         if($usuario->url_perfil != 'img/perfil.svg') { Storage::disk('public')->delete($usuario->url_perfil); }
-        
+
         if ($request->hasFile('img_perfil')) {
             User::updateOrCreate(['id' => $usuario->id], ['url_perfil' => Storage::disk('public')->putFile('perfiles', $request->file('img_perfil'))]);
         } else {
@@ -232,7 +233,10 @@ class UsuarioController extends Controller
 
         $usuario->save();
 
-        if(!Mail::to($usuario->email)->cc('soporte@prevencionlebenco.cl')->send(new RecuperarContrasena($usuario, $clave_nueva))){
+        $user = User::find(1);
+
+        if(!Mail::to($usuario->email)->send(new RecuperarContrasena($usuario, $clave_nueva))){
+            $user->notify(new Alerta('Contraseña', $usuario, 'fa fa-key', 2));
             return ['mensaje' => 'Hemos enviado una nueva contraseña a tu email, procura revisar badeja spam.', 'clase' => 'success'];
         } else {
             return ['mensaje' => 'Hemos tenido inconvenientes en tu solicitud. Por favor intenta nuevamente!', 'clase' => 'error'];

@@ -30,7 +30,6 @@ class Bienvenida extends Mailable
     public function build()
     {
         return $this->from('contacto@prevencionlebenco.cl')
-                    //->replyTo('contacto@prevencionlebenco.cl', 'Prueba de mensaje')
                     ->subject('Bienvenido')
                     ->view('mensajes.bienvenida');
     }

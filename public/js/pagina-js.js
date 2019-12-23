@@ -1186,8 +1186,9 @@ Object.defineProperty(exports, '__esModule', { value: true });
     var $body = $('body');
 
 
+
     //---------------------------------------------------------------------------------------------------------------------------->
-    //      Site Loader Function  
+    //      Site Loader Function
     //---------------------------------------------------------------------------------------------------------------------------->
     (function () {
         $window.on('load', function () {
@@ -1198,17 +1199,17 @@ Object.defineProperty(exports, '__esModule', { value: true });
     })();
 
     //---------------------------------------------------------------------------------------------------------------------------->
-    //      Header & Sticky Function  
+    //      Header & Sticky Function
     //---------------------------------------------------------------------------------------------------------------------------->
     (function () {
         $document.ready(function () {
             headerHeight();
-    
+
             $("#ingreso").click(function(){
                     $( "#ingreso" ).removeClass( "my-account-box" ).addClass( "my-account-box-selected" );
                     $( "#registro" ).removeClass( "my-account-box-selected" ).addClass( "my-account-box" );
             });
-    
+
             $("#registro").click(function(){
                 $( "#registro" ).removeClass( "my-account-box" ).addClass( "my-account-box-selected" );
                 $( "#ingreso" ).removeClass( "my-account-box-selected" ).addClass( "my-account-box" );
@@ -1261,7 +1262,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
     })();
 
     //---------------------------------------------------------------------------------------------------------------------------->
-    //      Header Hover Function  
+    //      Header Hover Function
     //---------------------------------------------------------------------------------------------------------------------------->
     (function () {
         var headerHover = $('#header, .header').attr("data-header-hover");
@@ -1275,7 +1276,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
     })();
 
     //---------------------------------------------------------------------------------------------------------------------------->
-    //      Navigation Menu 
+    //      Navigation Menu
     //---------------------------------------------------------------------------------------------------------------------------->
     (function () {
         var navMenuLink = $(".nav-menu > ul > li"),
@@ -1285,7 +1286,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
             nav_Mobile_Btn = $(".menu-mobile-btn"),
             nav_menu_wrap = $(".nav-menu");
 
-        // Custom 
+        // Custom
         $('.nav-dropdown .row [class*="col-"] figure').siblings('img').addClass('themeshot-img');
 
         // Dropdown Menu Icon
@@ -1363,7 +1364,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
     })();
 
     //---------------------------------------------------------------------------------------------------------------------------->
-    //      Dropdown Menu  
+    //      Dropdown Menu
     //---------------------------------------------------------------------------------------------------------------------------->
     (function () {
         var trigger = $(".dropdown--trigger"),
@@ -1427,7 +1428,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
     })();
 
     //---------------------------------------------------------------------------------------------------------------------------->
-    //      SearchBar Menu   
+    //      SearchBar Menu
     //---------------------------------------------------------------------------------------------------------------------------->
     (function () {
         var searchMenuBtn = $(".search-menu-btn"),
@@ -1485,7 +1486,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
     })();
 
     //---------------------------------------------------------------------------------------------------------------------------->
-    //      Sidebar Cart Menu   
+    //      Sidebar Cart Menu
     //---------------------------------------------------------------------------------------------------------------------------->
     (function () {
         var cartSidebarBtn = $(".cart-sidebar-btn"),

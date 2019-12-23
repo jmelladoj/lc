@@ -125,20 +125,19 @@ class PaginaController extends Controller
 
     public function contacto(Request $request){
 
+        $email = "";
+
         if(Auth::check()){
             $user = Auth::user();
+            $email = $user->email;
         } else {
-            $user = new User();
-            $user->nombre = $request->nombre;
-            $user->email = $request->email;
-            $user->telefono = $request->telefono;
-            $user->tipo_persona = $request->tipo_persona;
+            $email = $request->email;
         }
 
-        if(!Mail::to('contacto@prevencionlebenco.cl')->send(new Contacto($request->nombre, $request->asunto, $request->email, $request->telefono, $request->mensaje, $request->tipo_persona)) && ! Mail::to($request->email)->send(new Contacto($request->nombre, $request->asunto, $request->email, $request->telefono, $request->mensaje, $request->tipo_persona))){
+        if(!Mail::to($email)->send(new Contacto($request->nombre, $request->asunto, $request->email, $request->telefono, $request->mensaje, $request->tipo_persona))){
             $usuario = User::find(1);
             $usuario->notify(new Alerta('Contacto', User::find(Auth::id()), 'fa fa-envelope', 2));
-            
+
             return ['mensaje' => 'Mensaje enviado!, pronto tomaremos contacto contigo.', 'clase' => 'success'];
         } else {
             return ['mensaje' => 'Hemos tenido inconvenientes al enviar tu correo. Por favor intenta nuevamente!', 'clase' => 'error'];

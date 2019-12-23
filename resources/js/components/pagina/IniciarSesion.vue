@@ -14,9 +14,9 @@
                                     <button type="button" class="mt-0 btn btn--secondary space--1 btn-sm boton_login" @click="limpiar_login" v-show="estados.boton_login_inicia == 1">Limpiar</button>
                                     <button type="button" class="mt-0 btn btn--secondary space--1 boton_login" @click="formulario = 1" v-if="estados.boton_login_registrate == 1">... Regístrate</button>
                                 </div>
-                            </div>                       
-                            
-                            
+                            </div>
+
+
                             <p class="large text-justify">Bienvenido a tu comunidad LebenCo.</p>
                             <p class="form-field-wrapper">
                                 <input class="input--lg form-full" v-rut v-model="usuario_login.run" @keyup="mostrar_botones_login" autocomplete="run" type="text" placeholder="RUN personal o RUT si eres una Pyme" required>
@@ -28,7 +28,7 @@
                                 <label class="">
                                     <input class="" v-model="usuario_login.remember" type="checkbox">
                                     <span>Recuérdame</span>
-                                </label>                                
+                                </label>
                             </p>
                             <p class="form-field-wrapper form-row" v-if="estados.boton_login_inicia == 1">
                                 <button type="button" class="btn btn--lg btn--secondary" name="login" value="Log in" @click="ingresar">Ingresar</button>
@@ -51,7 +51,7 @@
                                     <button type="button" class="mt-0 btn btn--secondary space--1 btn-sm boton_login" @click="formulario = 0" v-if="estados.boton_registro_inicia == 1">... Inicia tu sesión</button>
                                 </div>
                             </div>
-                            <p class="large text-justify">Disponemos de herramientas para Pymes, Estudiantes del área, Personas y Personas encargadas de la prevención.</p> 
+                            <p class="large text-justify">Disponemos de herramientas para Pymes, Estudiantes del área, Personas y Personas encargadas de la prevención.</p>
                             <p class="form-field-wrapper">
                                 <div class="row">
                                     <div class="col-lg-4 col-md-4 d-flex align-items-center justify-content-center">
@@ -80,10 +80,7 @@
                                         <input class="input--lg form-full" @keyup="mostrar_botones_registrate" v-model="usuario_nuevo.nombre" type="text" placeholder="Nombre completo o Razón social" required>
                                     </div>
                                     <div class="col-lg-4 col-md-4">
-                                        <input class="input--lg form-full run_nuevo" @keyup="mostrar_botones_registrate" v-rut v-model="usuario_nuevo.run" type="text" placeholder="RUN personal o RUT si eres una Pyme" required>
-                                        <div id="error_rut" name="error_rut" class="alert alert-danger" role="alert">
-                                            <span>El rut o run ingresado no es válido</span>
-                                        </div>
+                                        <input class="input--lg form-full run_nuevo" @keyup="mostrar_botones_registrate" name="user[rut]" v-rut:live v-model="usuario_nuevo.run" type="text" placeholder="RUN personal o RUT si eres una Pyme" required>
                                     </div>
                                     <div class="col-lg-4 col-md-4">
                                         <input class="input--lg form-full" @keyup="mostrar_botones_registrate" v-model="usuario_nuevo.email" type="email" placeholder="Correo electrónico" required>
@@ -110,10 +107,10 @@
                                             <input class="" v-model="usuario_nuevo.mailing" type="checkbox">
                                             <span>Quiero recibir notificaciones importantes de la comunidad LebenCo.</span>
                                         </label>
-                                    </div>   
+                                    </div>
                                     <div class="col-md-6 text-right" v-if="estados.boton_registro_registrarse == 1">
                                         <button type="button" class="btn btn--lg btn--secondary" @click="registrar">Registrarme</button>
-                                    </div>   
+                                    </div>
                                 </div>
                             </p>
                         </form>
@@ -171,7 +168,7 @@
                 },
                 validationErrors: ''
             }
-        },  
+        },
         methods:{
             ingresar(){
                 let me=this;
@@ -210,7 +207,7 @@
                 if(this.usuario_login.run.length == 0 || this.usuario_login.password.length == 0){
                     this.estados.boton_login_registrate = 1;
                     this.estados.boton_login_inicia = 0;
-                } 
+                }
 
                 if(this.usuario_login.run.length > 0 || this.usuario_login.password.length > 0) {
                     this.estados.boton_login_registrate = 0;
@@ -221,7 +218,7 @@
                 if(this.usuario_nuevo.tipo_persona == 0 || this.usuario_nuevo.nombre.length == 0 || this.usuario_nuevo.run.length == 0 || this.usuario_nuevo.email.length == 0 || this.usuario_nuevo. clave_uno.length == 0 || this.usuario_nuevo.clave_dos.length == 0){
                     this.estados.boton_registro_inicia = 1;
                     this.estados.boton_registro_registrarse = 0;
-                } 
+                }
 
                 if(this.usuario_nuevo.tipo_persona > 0 || this.usuario_nuevo.nombre.length > 0 || this.usuario_nuevo.run.length > 0 || this.usuario_nuevo.email.length > 0 || this.usuario_nuevo.clave_uno.length > 0 || this.usuario_nuevo.clave_dos.length > 0) {
                     this.estados.boton_registro_inicia = 0;
@@ -269,7 +266,7 @@
                         duration: 5000
                     });
                 });
-                
+
             }
         },
         mounted(){

@@ -29,14 +29,21 @@
                 axios.get('/sliders/ubicacion/' + this.ubicacion).then(function (response) {
                     me.sliders = response.data.sliders;
 
-                    me.sliders = me.sliders.filter(function(item){
-                        if(me.usuario != undefined){
-                            return item.tipo_persona == null || parseInt(item.tipo_persona) == me.usuario.tipo_persona;
-                        } else {
-                            return item.tipo_persona == null;
+                    if(me.usuario){
+                        if(me.usuario.tipo_usuario == 3){
+                            me.sliders = me.sliders.filter(function(item){
+                                if(me.usuario != undefined){
+                                    return item.tipo_persona == null || parseInt(item.tipo_persona) == me.usuario.tipo_persona;
+                                } else {
+                                    return item.tipo_persona == null;
+                                }
+                            })
                         }
-
-                    })
+                    } else {
+                        me.sliders = me.sliders.filter(function(item){
+                            return item.tipo_persona == null;
+                        })
+                    }
                 })
                 .catch(function (error) {
                     console.log(error);
