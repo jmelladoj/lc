@@ -32415,6 +32415,7 @@ html body .navbar-dark .mailbox .message-center a .mail-contnet .time {
 .imagen {
     max-height: 250px;
     width: auto;
+    height: 75px !important;
 }
 
 .modal-backdrop {   

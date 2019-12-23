@@ -68,9 +68,12 @@
                     'pago': me.solicitud.pago,
                     'plazo': me.solicitud.plazo
                 }).then(function (response) {
-                    me.cerrarModal();
                     me.mensaje(response.data.clase, response.data.mensaje);
-                    this.$destroy();
+
+                    if(response.data.clase == 'success'){
+                        me.cerrarModal();
+                    }
+
                 }).catch(function (error) {
                     console.error(error);
                 });

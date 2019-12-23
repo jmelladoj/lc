@@ -1,6 +1,6 @@
 <template>
     <li class="nav-item dropdown" v-show="notificaciones.length > 0">
-        <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> {{ notificaciones.length }} <i class="fa fa-bell"></i>
+        <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> {{ total }} <i class="fa fa-bell"></i>
             <div class="notify"> <span class="heartbit"></span> <span class="point"></span> </div>
         </a>
         <div class="dropdown-menu dropdown-menu-right mailbox animated bounceInDown">
@@ -20,12 +20,7 @@
                             </div>
                         </a>
                     </div>
-
-                    <!--<div class="ps__scrollbar-x-rail" style="left: 0px; bottom: 0px;"><div class="ps__scrollbar-x" tabindex="0" style="left: 0px; width: 0px;"></div></div><div class="ps__scrollbar-y-rail" style="top: 0px; right: 0px;"><div class="ps__scrollbar-y" tabindex="0" style="top: 0px; height: 0px;"></div></div></div> -->
                 </li>
-                <!--<li>
-                    <a class="nav-link text-center link" href="javascript:void(0);"> <strong>Check all notifications</strong> <i class="fa fa-angle-right"></i> </a>
-                </li>-->
             </ul>
         </div>
     </li>
@@ -35,7 +30,8 @@
     export default {
         data() {
             return {
-                notificaciones: []
+                notificaciones: [],
+                total: 0
             }
         },    
         methods:{
@@ -45,6 +41,7 @@
             listarNotificaciones (){
                 let me=this;
                 axios.get('/notificaciones/2').then(function (response) {
+                    me.total = response.data.alertas.length;
                     me.notificaciones = response.data.alertas.splice(0, 5);
                 })
                 .catch(function (error) {

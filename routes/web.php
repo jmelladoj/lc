@@ -11,8 +11,11 @@
 |
 */
 
+use App\Pagina;
+
 Route::get('/', function () {
-    return view('welcome');
+    $pagina_nosotros = Pagina::find(1);
+    return view('welcome')->with(compact('pagina_nosotros'));
 });
 
 Auth::routes();

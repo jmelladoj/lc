@@ -17,7 +17,7 @@
                         <b-form-group>
                             <b-container fluid class="mb-5">
                                 <b-row>
-                                    <b-col md="6" class="my-1">
+                                    <b-col md="4" class="my-1">
                                         <b-form-group label-cols-sm="3" label="Filtrar" class="mb-0">
                                         <b-input-group>
                                             <b-form-input v-model="filter" placeholder="Escribe para buscar" />
@@ -28,7 +28,7 @@
                                         </b-form-group>
                                     </b-col>
 
-                                    <b-col md="6" class="my-1">
+                                    <b-col md="4" class="my-1">
                                         <b-form-group label-cols-sm="3" label="Ordenar" class="mb-0">
                                         <b-input-group>
                                             <b-form-select v-model="sortBy" :options="sortOptions">
@@ -41,19 +41,8 @@
                                         </b-form-group>
                                     </b-col>
 
-                                    <b-col md="6" class="my-1">
-                                        <b-form-group label-cols-sm="3" label="Dirección" class="mb-0">
-                                        <b-input-group>
-                                            <b-form-select v-model="sortDirection" slot="append">
-                                            <option value="asc">Asc</option> <option value="desc">Desc</option>
-                                            <option value="last">Último</option>
-                                            </b-form-select>
-                                        </b-input-group>
-                                        </b-form-group>
-                                    </b-col>
-
-                                    <b-col md="6" class="my-1">
-                                        <b-form-group label-cols-sm="3" label="Por página" class="mb-0">
+                                    <b-col md="4" class="my-1">
+                                        <b-form-group label-cols-sm="4" label="Por página" class="mb-0">
                                         <b-form-select :options="pageOptions" v-model="perPage" />
                                         </b-form-group>
                                     </b-col>
@@ -93,6 +82,18 @@
 
                                 <template v-slot:cell(imagen)="data">
                                     <b-img :src="'storage/' + data.item.url_imagen" fluid center alt="Slider" class="imagen"></b-img>
+                                </template>
+
+                                <template v-slot:cell(seccion)="data">
+                                    <label v-if="data.item.link == '/intranet/1'">Sección perfil</label>
+                                    <label v-else-if="data.item.link == '/intranet/2'">Sección solicitar documento</label>
+                                    <label v-else-if="data.item.link == '/intranet/3'">Sección sorteos</label>
+                                    <label v-else-if="data.item.link == '/intranet/4'">Sección promociones</label>
+                                    <label v-else-if="data.item.link == '/intranet/6'">Sección seminarios</label>
+                                    <label v-else-if="data.item.link == '/intranet/7'">Sección terreno</label>
+                                    <label v-else-if="data.item.link == '/intranet/8'">Sección recomiéndanos</label>
+                                    <label v-else-if="data.item.link == '/intranet/11'">Sección subir documento</label>
+                                    <label v-else-if="data.item.link == '/intranet/12'">Sección recargar</label>
                                 </template>
 
                                 <template v-slot:cell(acciones)="row">
@@ -249,9 +250,10 @@
                 items: items,
                 fields: [
                     { key: 'index', label: '#', sortable: true, sortDirection: 'desc', class: 'text-center' },
-                    { key: 'texto', label: 'NOMBRE', sortable: true, class: 'text-left' },
-                    { key: 'imagen', label: 'IMAGEN', sortable: true, class: 'text-center' },
-                    { key: 'acciones', label: 'ACCIONES', sortable: true, class: 'text-center' }
+                    { key: 'texto', label: 'Nombre', sortable: true, class: 'text-left' },
+                    { key: 'seccion', label: 'Sección', sortable: true, class: 'text-left' },
+                    { key: 'imagen', label: 'Imagen', sortable: true, class: 'text-center' },
+                    { key: 'acciones', label: 'Acciones', sortable: true, class: 'text-center' }
                 ],
                 currentPage: 1,
                 perPage: 10,

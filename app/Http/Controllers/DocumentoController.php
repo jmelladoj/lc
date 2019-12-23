@@ -101,10 +101,10 @@ class DocumentoController extends Controller
                 'plazo' => $request->plazo
             ]);
 
-            $usuario = User::find(1);
-            $usuario->notify(new AppSolicitudDocumento('Ha solicitado un documento.', Auth::user(), 'fa fa-search', 1));
+            $user = User::find(1);
+            $user->notify(new AppSolicitudDocumento('Ha solicitado un documento.', Auth::user(), 'fa fa-search', 1));
 
-            if(! Mail::to('prueba@prevencionlebenco.cl')->cc('j.melladojimenez@gmail.com')->send(new SolicitarDocumento(Auth::user(), $request->descripcion, $request->plazo, $request->pago))){
+            if(!Mail::to('contacto@prevencionlebenco.cl')->send(new SolicitarDocumento(Auth::user(), $request->descripcion, $request->plazo, $request->pago))){
                 $usuario->saldo = $usuario->saldo - $request->pago;
                 $usuario->save();
                 return ['mensaje' => '¡Felicitaciones!, pronto serás contactado por Prevención LebenCo.', 'clase' => 'success'];

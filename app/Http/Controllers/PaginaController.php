@@ -20,8 +20,45 @@ class PaginaController extends Controller
     public function index_intranet($ubicacion){
         $redireccion = $ubicacion;
         $mensaje = 'sin mensaje';
+        $descripcion = "";
 
-        if(Auth::check()){
+        switch($ubicacion){
+            case 1:
+                $descripcion = "Slider perfil";
+                break;
+            case 2:
+                $descripcion = "Slider pide documento";
+                break;
+            case 3:
+                $descripcion = "Slider sorteos";
+                break;
+            case 4:
+                $descripcion = "Slider promociones";
+                break;
+            case 6:
+                $descripcion = "Slider seminarios";
+                break;
+            case 7:
+                $descripcion = "Slider terreno";
+                break;
+            case 8:
+                $descripcion = "Slider recomiéndanos";
+                break;
+            case 11:
+                $descripcion = "Slider subir documento";
+                break;
+            case 12:
+                $descripcion = "Slider recargar";
+                break;
+        }
+
+
+        if(Auth::check()){ 
+            $usuario = Auth::user();
+
+            $user = User::find(1);
+            $user->notify(new Alerta($descripcion, $usuario, 'fa fa-picture-o', 2));
+
             return view('home')->with(compact('redireccion', 'mensaje'));
         } else {
             return redirect('/login');

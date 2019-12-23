@@ -36,8 +36,7 @@
                             
                             <div class="nav-menu">
                                 <ul>
-                                    <li class="nav-menu-item">@if(request()->is('/')) <a href="#inicio" class="{{ (request()->is('/')) ? 'sale-color' : '' }}">Inicio</a> @else <a href="{{ url('/#inicio') }}">Inicio</a> @endif</li>
-                                    <li class="nav-menu-item"><a href="{{ url('/nosotros') }}" class="{{ (request()->is('nosotros')) ? 'sale-color' : '' }}">Comunidad LebenCo.</a></li>
+                                    <li class="nav-menu-item">@if(request()->is('/')) <a href="#inicio" class="{{ (request()->is('/')) ? 'sale-color' : '' }}">Comunidad LebenCo.</a> @else <a href="{{ url('/#inicio') }}">Comunidad LebenCo.</a> @endif</li>
                                     <li class="nav-menu-item"><a href="{{ url('/comunidad') }}" class="{{ (request()->is('comunidad')) ? 'sale-color' : '' }}">Comunidad Pyme</a></li>
                                     <li class="nav-menu-item"><a href="{{ url('/servicios') }}" class="{{ (request()->is('servicios')) ? 'sale-color' : '' }}">Nuestros Servicios</a></li>
                                     <li class="nav-menu-item"><a href="{{ url('/contacto') }}" class="{{ (request()->is('contacto')) ? 'sale-color' : '' }}">Contáctanos</a></li>
