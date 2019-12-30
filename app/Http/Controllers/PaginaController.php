@@ -53,7 +53,7 @@ class PaginaController extends Controller
         }
 
 
-        if(Auth::check()){ 
+        if(Auth::check()){
             $usuario = Auth::user();
 
             $user = User::find(1);
@@ -61,7 +61,7 @@ class PaginaController extends Controller
 
             return view('home')->with(compact('redireccion', 'mensaje'));
         } else {
-            return redirect('/login');
+            return view('auth.login')->with(compact('redireccion', 'mensaje'));
         }
 
     }

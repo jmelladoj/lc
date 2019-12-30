@@ -7,7 +7,7 @@
                     <div class="d-flex justify-content-end align-items-right">
                         <sociales></sociales>
                         <b-button @click="abrirModal(1)" class="btn btn-success d-lg-block m-l-15" v-b-tooltip.hover title="Agrega una categoría a la plataforma"><i class="fa fa-plus-circle"></i> Agregar Categoría</b-button>
-                    </div>                    
+                    </div>
                 </b-col>
             </b-row>
 
@@ -78,43 +78,45 @@
                                     :sort-direction="sortDirection"
                                     @filtered="onFiltered">
 
-                                <template slot="empty">
-                                    <center><h5>No hay registros para mostrar.</h5></center>
-                                </template>
-
-                                <template slot="emptyfiltered">
-                                    <center><h5>No hay registros que coincidan con su solicitud.</h5></center>
-                                </template>
-
-                                <template v-slot:cell(index)="data">
-                                    {{ data.index + 1 }}
-                                </template>
-
-                                <template v-slot:cell(acciones)="row">
-                                    <b-button size="xs" variant="success" title="Agregar subcategorías a la categoría" @click="abrirModalCategoria(row.item)">
-                                        <i class="fa fa-plus"></i>
-                                    </b-button>
-
-                                    <b-button size="xs" variant="warning" title="Actualizar información de categoría" @click="abrirModal(2, row.item)">
-                                        <i class="fa fa-pencil"></i>
-                                    </b-button>
-
-                                    <template>
-                                        <b-button v-if="row.item.deleted_at" size="xs" variant="warning" title="Restaurar categoría" @click="borrarOrestaurar(row.item.id, 2)">
-                                            <i class="fa fa-undo"></i>
-                                        </b-button>
-
-                                        <b-button v-else size="xs" variant="danger" title="Eliminar categoría" @click="borrarOrestaurar(row.item.id, 1)">
-                                            <i class="fa fa-trash"></i>
-                                        </b-button>
+                                    <template slot="empty">
+                                        <center><h5>No hay registros para mostrar.</h5></center>
                                     </template>
-                                </template>
+
+                                    <template slot="emptyfiltered">
+                                        <center><h5>No hay registros que coincidan con su solicitud.</h5></center>
+                                    </template>
+
+                                    <template v-slot:cell(index)="data">
+                                        {{ data.index + 1 }}
+                                    </template>
+
+                                    <template v-slot:cell(acciones)="row">
+                                        <b-button size="xs" variant="warning" title="Actualizar información de categoría" @click="abrirModal(2, row.item)">
+                                            <i class="fa fa-pencil"></i>
+                                        </b-button>
+
+                                        <template>
+                                            <b-button v-if="row.item.deleted_at" size="xs" variant="warning" title="Restaurar categoría" @click="borrarOrestaurar(row.item.id, 2)">
+                                                <i class="fa fa-undo"></i>
+                                            </b-button>
+
+                                            <b-button v-else size="xs" variant="danger" title="Eliminar categoría" @click="borrarOrestaurar(row.item.id, 1)">
+                                                <i class="fa fa-trash"></i>
+                                            </b-button>
+                                        </template>
+                                    </template>
 
                                 </b-table>
 
                                 <b-row>
                                     <b-col>
-                                        <b-pagination :total-rows="totalRows" :per-page="perPage" v-model="currentPage" class="my-3" align="fill"/>
+                                        <b-pagination
+                                            :total-rows="totalRows"
+                                            :per-page="perPage"
+                                            v-model="currentPage"
+                                            class="my-3"
+                                            align="fill"
+                                        />
                                     </b-col>
                                 </b-row>
                             </b-container>
@@ -122,7 +124,7 @@
                     </b-card>
                 </b-col>
             </b-row>
-            
+
             <ValidationObserver ref="observer_categoria" v-slot="{ valid }">
                 <b-modal ref="modal_categoria" :title="modal_categoria.titulo" size="lg" no-close-on-backdrop>
                     <b-form>
@@ -236,7 +238,7 @@
                 sortDirection: 'asc',
                 filter: null
             }
-        },    
+        },
         computed:{
             sortOptions() {
                 return this.fields.filter(f => f.sortable).map(f => {
@@ -245,6 +247,9 @@
             }
         },
         methods:{
+            cambiar_pagina(e){
+                console.log(e)
+            },
             onFiltered(filteredItems) {
                 this.totalRows = filteredItems.length
                 this.currentPage = 1
@@ -307,7 +312,7 @@
                         }).then(function (response) {
                             var mensaje = accion == 2 ? 'La Categoría ha sido restaurada!' : 'La Categoría ha sido quitada!';
                             me.listarCategorias();
-                            	
+
 						Vue.$toast.open({
 	                        message: mensaje,
 	                        type: 'success',

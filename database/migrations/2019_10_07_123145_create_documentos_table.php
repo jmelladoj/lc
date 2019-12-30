@@ -19,7 +19,7 @@ class CreateDocumentosTable extends Migration
             $table->text('descripcion');
             $table->string('codigo')->nullable()->default('');
             $table->string('documento_url')->nullable()->default('');
-            $table->integer('valor')->default(0);
+            $table->integer('valor')->nullable()->default(0);
             $table->integer('cantidad_descargas')->nullable()->default(0);
             $table->string('extension')->nullable()->default('');
             $table->integer('version')->default('1');
@@ -28,12 +28,12 @@ class CreateDocumentosTable extends Migration
 
             $table->unsignedBigInteger('categorias_documentos_id');
             $table->foreign('categorias_documentos_id')->references('id')->on('categoria_documentos');
-    
+
             $table->integer('estado')->default(0);
 
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
-            
+
             $table->softDeletes();
             $table->timestamps();
         });

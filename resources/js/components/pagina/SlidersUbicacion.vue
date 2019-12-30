@@ -5,7 +5,7 @@
 
                 <b-carousel-slide v-for="(slider, index) in sliders" :key="index" :img-src="'storage/' + slider.url_imagen">
                     <h2 class="intro-title" v-text="slider.texto" :style="'color:' + slider.color"></h2>
-                    <a :href="slider.link" class="btn btn--primary space--1 btn-sm" v-show="slider.link != '/intranet/0'">Ver más</a>
+                    <button class="btn btn--primary space--1 btn-sm" @click="redireccion(slider.link)" v-show="slider.link != '/intranet/0'">Ver más</button>
                 </b-carousel-slide>
 
             </b-carousel>
@@ -49,6 +49,23 @@
                     console.log(error);
                 });
             }
+        },
+        redireccion(link){
+            var tmp = link.split("");
+            var map = tmp.map(function(current) {
+                if (!isNaN(parseInt(current))) {
+                return current;
+                }
+            });
+
+            var numbers = map.filter(function(value) {
+                return value != undefined;
+            });
+
+
+            axios.get('/intranet/' + numbers.join("")).catch(function (error) {
+                console.log(error);
+            });
         },
         mounted() {
             this.listarSlider();

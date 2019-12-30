@@ -67,7 +67,7 @@
     export default {
         props:[
             'documento', 'autenticado'
-        ],  
+        ],
         data() {
             return {
                 documentos: [],
@@ -76,7 +76,7 @@
                     contenido: ''
                 }
             }
-        },  
+        },
         methods:{
             revisarDocumento(){
                 let me=this;
@@ -113,14 +113,15 @@
                     if (result.value) {
                         let me = this;
 
-                        axios.get('/documento/descargar/' + id).then(function (response) {         
+                        axios.get('/documento/descargar/' + id).then(function (response) {
                             if(response.data.clase == 'success'){
-                            	Vue.$toast.open({
-			                        message: 'El Documento se descargara pronto!',
+
+                                Vue.$toast.open({
+			                        message: 'El Documento se descargara pronto!' + valor,
 			                        type: 'success',
 			                        duration: 5000
-			                    });
-                                
+                                });
+
                                 const link = document.createElement('a');
                                 link.href = '/storage/' + response.data.documento.documento_url;
                                 link.download = response.data.documento.titulo + '.' + response.data.documento.extension;
@@ -132,8 +133,8 @@
 			                        type: response.data.clase,
 			                        duration: 5000
 			                    });
-                            }              
-                            
+                            }
+
                         }).catch(function (error) {
                             console.log(error.response.data);
                         });
@@ -180,7 +181,7 @@
     }
 
     .titulo-documento {
-        color:#1E2F13; 
+        color:#1E2F13;
         font-weight: 500;
     }
 

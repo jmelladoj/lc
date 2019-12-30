@@ -20,9 +20,11 @@ window.Event = new Vue ();
 
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
-const bus = new Vue();
 
-import BootstrapVue from "bootstrap-vue";
+import 'core-js/stable'
+import 'regenerator-runtime/runtime'
+import 'intersection-observer' // Optional
+import BootstrapVue from 'bootstrap-vue'
 import { ValidationProvider, extend, ValidationObserver } from 'vee-validate';
 import * as rules from 'vee-validate/dist/rules';
 import es from 'vee-validate/dist/locale/es';
@@ -56,7 +58,7 @@ Vue.component('Swatches', Swatches);
 Vue.component('tinymce', tinymce);
 
 
-Vue.use(BootstrapVue);
+
 Vue.use(VueRouter);
 Vue.use(VueCarousel);
 Vue.use(VueCurrencyFilter,
@@ -68,6 +70,8 @@ Vue.use(VueCurrencyFilter,
     symbolPosition: 'front',
     symbolSpacing: true
 });
+
+Vue.use(BootstrapVue)
 
 //General
 Vue.component('sociales', require('./components/general/Sociales.vue').default);

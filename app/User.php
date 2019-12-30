@@ -40,6 +40,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    protected $appends = ['nombreComuna', 'nombreRubro'];
 
 
     public function getCantidadLikeAttribute(){
@@ -56,6 +57,18 @@ class User extends Authenticatable
 
     public function comuna(){
         return $this->belongsTo(Comuna::class, 'comuna_id');
+    }
+
+    public function rubro(){
+        return $this->belongsTo(Rubro::class, 'rubro_id');
+    }
+
+    public function getNombreComunaAttribute(){
+        return empty($this->comuna) ? 'Desconocido' : $this->comuna->nombre;
+    }
+
+    public function getNombreRubroAttribute(){
+        return empty($this->rubro) ? 'Desconocido' : $this->rubro->nombre;
     }
 
     public function valoraciones(){

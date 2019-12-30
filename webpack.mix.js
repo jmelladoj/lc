@@ -12,7 +12,7 @@ const mix = require('laravel-mix');
  */
 
 mix.js('resources/js/app.js', 'public/js')
-   .sass('resources/sass/app.scss', 'public/css');
+   .sass('resources/sass/app.scss', 'public/css').version();
 
 mix.styles([
    'public/pagina/css/bootstrap.css',
@@ -58,5 +58,4 @@ mix.styles([
    'public/intranet/node_modules/morrisjs/morris.min.js',
    'public/intranet/js/dashboard1.js'
 ], 'public/js/admin.js').version();
-   
-         
+

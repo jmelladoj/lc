@@ -6,7 +6,7 @@
                 <b-col cols="7">
                     <div class="d-flex justify-content-end align-items-right">
                         <sociales></sociales>
-                    </div>                    
+                    </div>
                 </b-col>
             </b-row>
 
@@ -117,7 +117,7 @@
                     </b-card>
                 </b-col>
             </b-row>
-            
+
         </b-container>
 
     </div>
@@ -147,7 +147,7 @@
                 sortDirection: 'asc',
                 filter: null
             }
-        },    
+        },
         computed:{
             sortOptions() {
                 return this.fields.filter(f => f.sortable).map(f => {
@@ -162,7 +162,7 @@
             },
             listarAsesorias (){
                 let me=this;
-                axios.get('/asesorias').then(function (response) {
+                axios.get('/asesorias/1').then(function (response) {
                     me.items = response.data.asesorias;
                     me.totalRows = me.items.length;
                 })

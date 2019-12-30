@@ -116,7 +116,7 @@
                                             </b-button>
                                         </template>
 
-                                        <template v-if="row.item.top_five == 1">
+                                        <template v-if="row.item.comunidad_pyme == 1">
                                             <b-button size="xs" title="Quitar de comunidad pyme" @click="agregarQuitarComunidadPyme(row.item.id, 1)" class="btn btn-danger">
                                                 <i class="fa fa-eye-slash"></i>
                                             </b-button>
@@ -285,8 +285,8 @@
                             <b-col>
                                 <b-form-group>
                                     <ValidationProvider name="posición" rules="required|numeric|between:0,10" v-slot="{ errors }">
-                                        <b-form-select v-model="tabla_vip.posicion" class="mb-3">
-                                            <option :value="null">Estrellas</option>
+                                        <b-form-select v-model="tabla_vip.posicion" @change="actualizar_usuario_tabla_vip" class="mb-3">
+                                            <option value="0">Estrellas</option>
                                             <option value="1">1 Estrella(s)</option>
                                             <option value="2">2 Estrella(s)</option>
                                             <option value="3">3 Estrella(s)</option>
@@ -300,7 +300,7 @@
                             <b-col>
                                 <b-form-group label="">
                                     <ValidationProvider name="likes" rules="required|numeric|between:1,100" v-slot="{ errors }">
-                                        <b-form-input type="number" v-model="tabla_vip.likes" placeholder="Likes"></b-form-input>
+                                        <b-form-input type="number" v-model="tabla_vip.likes" placeholder="Likes" @keyup="actualizar_usuario_tabla_vip"></b-form-input>
                                         <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
                                     </ValidationProvider>
                                 </b-form-group>
@@ -308,7 +308,7 @@
                             <b-col>
                                 <b-form-group>
                                     <ValidationProvider name="dislikes" rules="required|numeric|between:1,100" v-slot="{ errors }">
-                                        <b-form-input type="number" v-model="tabla_vip.dislikes" placeholder="Dislikes"></b-form-input>
+                                        <b-form-input type="number" v-model="tabla_vip.dislikes" placeholder="Dislikes" disabled=""></b-form-input>
                                         <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
                                     </ValidationProvider>
                                 </b-form-group>
@@ -387,10 +387,6 @@
                                             <center><h5>No hay registros que coincidan con su solicitud.</h5></center>
                                         </template>
 
-                                        <template v-slot:cell(index)="data">
-                                            {{ data.index + 1 }}
-                                        </template>
-
                                         <template v-slot:cell(tipo)="data">
                                             <label v-if="data.item.tipo_persona == 1"> Persona </label>
                                             <label v-else-if="data.item.tipo_persona == 2"> Pyme </label>
@@ -399,60 +395,9 @@
 
 
                                         <template v-slot:cell(acciones)="row">
-                                            <template v-if="row.item.top_five == 1">
-                                                <b-button size="xs" title="Quitar de tabla vip" @click="agregarQuitarTablaVip(row.item.id, 1)" class="btn btn-danger">
-                                                    <i class="fa fa-star-o"></i>
-                                                </b-button>
-                                            </template>
-                                            <template v-else>
-                                                <b-button size="xs" title="Añadir a tabla vip" @click="agregarQuitarTablaVip(row.item.id, 2)" class="btn btn-success">
-                                                    <i class="fa fa-star"></i>
-                                                </b-button>
-                                            </template>
-
-                                            <template v-if="row.item.top_five == 1">
-                                                <b-button size="xs" title="Quitar de comunidad pyme" @click="agregarQuitarComunidadPyme(row.item.id, 1)" class="btn btn-danger">
-                                                    <i class="fa fa-eye-slash"></i>
-                                                </b-button>
-                                            </template>
-                                            <template v-else>
-                                                <b-button size="xs" title="Añadir a comunidad pyme" @click="agregarQuitarComunidadPyme(row.item.id, 2)" class="btn btn-success">
-                                                    <i class="fa fa-eye"></i>
-                                                </b-button>
-                                            </template>
-
-                                            <b-button size="xs" variant="success" title="Agregar a top five" @click="abrirModalPosicion(row.item)">
-                                                <i class="fa fa-star"></i>
-                                            </b-button>
-
-                                            <b-button size="xs" variant="success" title="Agregar saldo usuario" @click="abrirModalSaldo(row.item)">
-                                                <i class="fa fa-usd"></i>
-                                            </b-button>
-
-                                            <b-button size="xs" variant="warning" title="Actualizar usuario" @click="abrirModal(2, row.item)">
+                                            <b-button size="xs" variant="warning" title="Actualizar usuario" @click="actualizar_tabla_vip(row.item)">
                                                 <i class="fa fa-pencil"></i>
                                             </b-button>
-
-                                            <template>
-                                                <b-button v-if="row.item.lista_negra" size="xs" variant="warning" title="Quitar de black list" @click="agregarOquitarBlacklist(row.item.id, 2)">
-                                                    <i class="fa fa-check"></i>
-                                                </b-button>
-
-                                                <b-button v-else size="xs" variant="danger" title="Añadir a black list" @click="agregarOquitarBlacklist(row.item.id, 1)">
-                                                    <i class="fa fa-times"></i>
-                                                </b-button>
-                                            </template>
-
-
-                                            <template>
-                                                <b-button v-if="row.item.deleted_at" size="xs" variant="warning" title="Restaurar usuario" @click="borrarOrestaurar(row.item.id, 2)">
-                                                    <i class="fa fa-undo"></i>
-                                                </b-button>
-
-                                                <b-button v-else size="xs" variant="danger" title="Eliminar usuario" @click="borrarOrestaurar(row.item.id, 1)">
-                                                    <i class="fa fa-trash"></i>
-                                                </b-button>
-                                            </template>
                                         </template>
 
                                     </b-table>
@@ -502,7 +447,7 @@
                 },
                 tabla_vip: {
                     empresa: null,
-                    posicion: null,
+                    posicion: 0,
                     likes: null,
                     dislikes: null
                 },
@@ -529,12 +474,13 @@
                     { key: 'acciones', label: 'ACCIONES', sortable: true, class: 'text-center' }
                 ],
                 fields_vip: [
-                    { key: 'index', label: '#', sortable: true, sortDirection: 'desc', class: 'text-center' },
-                    { key: 'nombre', label: 'Pyme', sortable: true, class: 'text-center' },
-                    { key: 'nombre_comuna', label: 'Comuna', sortable: true, class: 'text-center' },
-                    { key: 'nombre_rubro', label: 'Rubro', sortable: true, class: 'text-center' },
-                    { key: 'like', label: 'Likes', sortable: true, class: 'text-center' },
-                    { key: 'dislike', label: 'Dislikes', sortable: true, class: 'text-center' },
+                    { key: 'posicion', label: '#', sortable: true, sortDirection: 'desc', class: 'text-center' },
+                    { key: 'nombre', label: 'Pyme', sortable: true, class: 'text-left' },
+                    { key: 'nombreComuna', label: 'Comuna', sortable: true, class: 'text-left' },
+                    { key: 'nombreRubro', label: 'Rubro', sortable: true, class: 'text-left' },
+                    { key: 'likes', label: 'Likes', sortable: true, class: 'text-center' },
+                    { key: 'dislikes', label: 'Dislikes', sortable: true, class: 'text-center' },
+                    { key: 'acciones', label: 'Acciones', sortable: true, class: 'text-center' }
                 ],
                 currentPage: 1,
                 perPage: 10,
@@ -585,6 +531,15 @@
                     console.log(error);
                 });
             },
+            listarUsuariosTablaVip(){
+                let me=this;
+                axios.get('/usuarios/tabla/vip').then(function (response) {
+                    me.items_vip = response.data.usuarios;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+            },
             crearOactualizar(accion){
                 let me = this;
 
@@ -605,30 +560,6 @@
                         type: 'success',
                         duration: 5000
                     });
-
-                }).catch(function (error) {
-                    console.error(error);
-                });
-            },
-            cambiarPosiciones(){
-                let me = this;
-
-                axios.post('/usuario/posicion',{
-                    'id': me.usuario.id,
-                    'posicion_actual': me.usuario.posicion_actual,
-                    'posicion': me.usuario.posicion,
-                    'likes': me.usuario.likes,
-                    'dislikes': me.usuario.dislikes
-                }).then(function (response) {
-                    me.listarUsuarios();
-                    me.cerrarModalSaldo();
-
-                    Vue.$toast.open({
-                        message: mensaje,
-                        type: 'Posición actualizada exitosamente!',
-                        duration: 5000
-                    });
-
 
                 }).catch(function (error) {
                     console.error(error);
@@ -725,7 +656,8 @@
                 })
             },
             agregarQuitarTablaVip(id, accion){
-                var mensaje = accion == 2 ? '¿Deseas quitar de la tabla vip al usuario?' : '¿Deseas añadir a la tabla vip el usuario?';
+                var mensaje = accion == 2 ? '¿Deseas agregar a la tabla vip al usuario?' : '¿Deseas quitar de la tabla vip el usuario?';
+
                 Swal.fire({
                     title: mensaje,
                     type: 'warning',
@@ -740,11 +672,11 @@
                     if (result.value) {
                         let me = this;
 
-                        var url = accion == 2 ? '/usuario/tabla/vip/quitar' : '/usuario/tabla/vip/agregar';
+                        var url = accion == 2 ? '/usuario/tabla/vip/agregar' : '/usuario/tabla/vip/quitar';
                         axios.post(url,{
                             'id': id
                         }).then(function (response) {
-                            var mensaje = accion == 2 ? 'El usuario ha sido quitado de la tabla vip!' : 'El usuario ha sido añadido a la tabla vip!';
+                            var mensaje = accion == 2 ? 'El usuario ha sido agregado a la tabla vip!' : 'El usuario ha sido quitado a la tabla vip!';
                             me.listarUsuarios();
 
                             Vue.$toast.open({
@@ -760,7 +692,8 @@
                 })
             },
             agregarQuitarComunidadPyme(id, accion){
-                var mensaje = accion == 2 ? '¿Deseas quitar de la tabla comunidad pyme al usuario?' : '¿Deseas añadir a la tabla comunidad pyme el usuario?';
+                var mensaje = accion == 2 ? '¿Deseas agregar de la tabla comunidad pyme al usuario?' : '¿Deseas quitar de la tabla comunidad pyme el usuario?';
+
                 Swal.fire({
                     title: mensaje,
                     type: 'warning',
@@ -775,11 +708,11 @@
                     if (result.value) {
                         let me = this;
 
-                        var url = accion == 2 ? '/usuario/comunidad/quitar' : '/usuario/comunidad/agregar';
+                        var url = accion == 2 ? '/usuario/comunidad/agregar' : '/usuario/comunidad/quitar';
                         axios.post(url,{
                             'id': id
                         }).then(function (response) {
-                            var mensaje = accion == 2 ? 'El usuario ha sido quitado de la tabla comunidad pyme!' : 'El usuario ha sido añadido a la tabla comunidad pyme!';
+                            var mensaje = accion == 2 ? 'El usuario ha sido agregado a la tabla comunidad pyme!' : 'El usuario ha sido quitado de la tabla comunidad pyme!';
                             me.listarUsuarios();
 
                             Vue.$toast.open({
@@ -825,9 +758,16 @@
                 this.$refs['modal_usuario'].show();
             },
             abrirModalTabla(){
+                this.listarUsuariosTablaVip()
                 this.$refs['modal_tabla'].show();
             },
             cerrarModalTabla(){
+                this.usuario.id = 0
+                this.tabla_vip.empresa = ''
+                this.tabla_vip.posicion = 0
+                this.tabla_vip.likes = null
+                this.tabla_vip.dislikes = null
+
                 this.$refs['modal_tabla'].hide();
             },
             abrirModalSaldo(data = []){
@@ -861,6 +801,47 @@
                 this.usuario.tipo_usuario = '';
                 this.usuario.saldo_actual = 0;
                 this.usuario.nuevo_saldo = 0;
+            },
+            actualizar_tabla_vip(data = []){
+                this.usuario.id = data.id
+                this.tabla_vip.empresa = data.nombre
+                this.tabla_vip.posicion = data.posicion
+                this.tabla_vip.likes = data.likes
+                this.tabla_vip.dislikes = data.dislikes
+
+                this.actualizar_porcentajes()
+            },
+            actualizar_usuario_tabla_vip(){
+                let me = this;
+
+                this.actualizar_porcentajes()
+
+                if(this.tabla_vip.likes > 100){
+                    return false
+                }
+
+                axios.post('/usuario/actualizar/tabla/vip',{
+                    'id': me.usuario.id,
+                    'posicion': me.tabla_vip.posicion,
+                    'likes': me.tabla_vip.likes,
+                    'dislikes': me.tabla_vip.dislikes
+                }).then(function (response) {
+                    me.listarUsuariosTablaVip();
+
+                    Vue.$toast.open({
+                        message: 'Cambio guardado exitosamente!',
+                        type: 'success',
+                        duration: 2000
+                    });
+
+
+                }).catch(function (error) {
+                    console.error(error);
+                });
+            },
+            actualizar_porcentajes(){
+                let porcentaje = 100
+                this.tabla_vip.dislikes = parseInt(porcentaje) - parseInt(this.tabla_vip.likes)
             }
         },
         mounted() {

@@ -51,7 +51,7 @@
                     plazo: 0
                 }
             }
-        },    
+        },
         methods:{
             solicitarDocumento(){
                 let me = this;
@@ -60,14 +60,24 @@
                     'pago': me.solicitud.pago,
                     'plazo': me.solicitud.plazo
                 }).then(function (response) {
-                    me.cerrarModal();
+                    let saldo_usuario = $('#saldo_usuario').val()
+                    saldo_usuario -= me.solicitud.pago
+
+                    console.log(saldo_usuario)
+
+                    $('#saldo_usuario').val(saldo_usuario)
+
+                    $('#saldo').text('');
+                    $('#saldo').text(saldo_usuario);
+
                     Vue.$toast.open({
                         message: response.data.mensaje,
                         type: response.data.clase,
                         duration: 5000
                     });
 
-                    this.$destroy();
+                    me.cerrarModal();
+
                 }).catch(function (error) {
                     console.error(error);
                 });

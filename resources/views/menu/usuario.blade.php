@@ -13,7 +13,7 @@
                 {{-- <li @click="menu=5"><a class="waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fa fa-handshake-o"></i><span class="hide-menu"> BENEFICIOS</span></a></li> --}}
                 <li @click="menu=6"><a class="waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fa fa-calendar"></i><span class="hide-menu"> Seminarios</span></a></li>
                 <li @click="menu=7"><a class="waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fa fa-car"></i><span class="hide-menu"> Visitas a terreno</span></a></li>
-                <li @click="menu=8"><a class="waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fa fa-share-alt"></i><span class="hide-menu"> Recomiéndanos</span></a></li>
+                <recomendar></recomendar>
 
                 <li class="nav-small-cap">--- FEEDBACK</li>
                 {{--  <li @click="menu=9"><a class="waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fa fa-comment"></i><span class="hide-menu"> SUGERENCIAS</span></a></li> --}}
@@ -30,7 +30,7 @@
 </template>
 
 <template v-if="ubicacion == 1 && menu==2">
-    <solicitar-documento></solicitar-documento>
+    <solicitud-documentos></solicitud-documentos>
 </template>
 
 <template v-if="ubicacion == 1 && menu==3">
@@ -49,10 +49,6 @@
     <solicitar-asesoria></solicitar-asesoria>
 </template>
 
-<template v-if="ubicacion == 1 && menu==8">
-    <recomendar></recomendar>
-</template>
-
 <template v-if="ubicacion == 1 && menu==11">
     <documentos :tipo="3" :tipo_documento="0" :titulo="'Comparte tu documento'" :tipo_usuario="{{ Auth::user()->tipo_usuario }}"></documentos>
 </template>
@@ -61,7 +57,7 @@
     <recargas></recargas>
 </template>
 
-    
+
 
 
 

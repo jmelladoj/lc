@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Storage;
 class SeminarioController extends Controller
 {
     //
-    public function index($tipo){  
+    public function index($tipo){
         switch ($tipo) {
             case 1:
                 return ['seminarios' => Seminario::orderBy('created_at', 'desc')->get()];
@@ -24,7 +24,7 @@ class SeminarioController extends Controller
         }
     }
 
-    public function indexParticipantes($id){  
+    public function indexParticipantes($id){
         return ['participantes' => ParticipanteSeminario::where('seminario_id', $id)->with('usuario')->orderBy('created_at', 'desc')->get()];
     }
 
@@ -43,9 +43,9 @@ class SeminarioController extends Controller
 
         if ($request->hasFile('imagen_seminario')) {
             if($seminario->url_imagen != null) { Storage::disk('public')->delete($seminario->url_imagen); }
-            
+
             Seminario::updateOrCreate(['id' => $seminario->id], ['url_imagen' => Storage::disk('public')->putFile('seminarios', $request->file('imagen_seminario'))]);
-        }  
+        }
     }
 
     public function eliminar(Request $request){
@@ -58,12 +58,15 @@ class SeminarioController extends Controller
 
         if($usuario->saldo >= $seminario->valor){
             $seminario->participantes += 1;
-            $seminario->save(); 
+            $seminario->save();
 
             ParticipanteSeminario::create([
                 'user_id' => Auth::id(),
                 'seminario_id' => $request->id
             ]);
+
+            $user = User::find(1);
+            $user->notify(new Alerta('Ha participado en un seminario.', Auth::user(), 'fa fa-calendar', 1));
 
             return ['mensaje' => '¡Felicitaciones!, Te has incrito en el seminario ' . $seminario->titulo, 'clase' => 'success'];
         } else {

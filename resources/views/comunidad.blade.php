@@ -23,11 +23,11 @@
                         {{ $pagina->mensaje_uno }}
                     </p>
                     @guest
-                        <top-five :tipo="1" :logeado="0"></top-five>
+                        <top-five :tipo="2" :logeado="0"></top-five>
                     @else
-                        <top-five :tipo="1" :logeado="1"></top-five>
+                        <top-five :tipo="2" :logeado="1"></top-five>
                     @endguest
-                    
+
                 </div>
             </div>
         </div>
@@ -46,7 +46,7 @@
             </div>
         </div>
     </section>
-    
+
 
     <section class="sec-padding">
         <div class="container">
@@ -56,9 +56,9 @@
                         {{ $pagina->mensaje_dos }}
                     </p>
                     @guest
-                        <top-five :tipo="2" :logeado="0"></top-five>
+                        <top-five :tipo="1" :logeado="0"></top-five>
                     @else
-                        <top-five :tipo="2" :logeado="1"></top-five>
+                        <top-five :tipo="1" :logeado="1"></top-five>
                     @endguest
                 </div>
             </div>

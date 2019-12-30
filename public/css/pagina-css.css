@@ -9013,7 +9013,7 @@ a.text-dark:hover, a.text-dark:focus {
   - Promotion Bar
   - Intro
   - Label Bar
-  
+
 * ELEMENTS
   - Site Loader
   - Dropdown
@@ -9993,6 +9993,11 @@ ul:last-child {
     padding-bottom: 40px;
 }
 
+.sec-padding-contacto {
+    padding-top: 40px;
+    padding-bottom: 60px;
+}
+
 .sec-padding-t {
     padding-top: 90px;
 }
@@ -10185,7 +10190,7 @@ ul:last-child {
 }
 
 /*------------------------------------------------------------
-    Height 
+    Height
 ------------------------------------------------------------*/
 .height-1 {
     min-height: 10vh;
@@ -15142,14 +15147,14 @@ form .lost_password {
 /* Footer Style */
 .footer {
     position: relative;
-    bottom: 0;  
+    bottom: 0;
     width: 100%;
     min-height: 20px;
 }
 
 .footer-absolute {
     position: absolute;
-    bottom: 0;  
+    bottom: 0;
     width: 100%;
     min-height: 20px;
 }
@@ -15328,7 +15333,7 @@ form .lost_password {
     opacity: 0.7;
 }
 
-.modal-backdrop {   
+.modal-backdrop {
     background-color: #CBCFB5;
     /*opacity: 0.9 !important;*/
 }
@@ -15355,6 +15360,7 @@ form .lost_password {
 .white {
     color: white !important;
 }
+
 ﻿/*
  * General
     - Typography

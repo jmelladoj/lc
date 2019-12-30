@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Notifications\Alerta;
 use App\ParticipanteSorteo;
 use App\Sorteo;
 use Carbon\Carbon;
@@ -12,7 +13,7 @@ use Illuminate\Support\Facades\Storage;
 class SorteoController extends Controller
 {
     //
-    public function index($tipo){  
+    public function index($tipo){
         switch ($tipo) {
             case 1:
                 return ['sorteos' => Sorteo::orderBy('created_at', 'desc')->get()];
@@ -37,9 +38,9 @@ class SorteoController extends Controller
 
         if ($request->hasFile('imagen_sorteo')) {
             if($sorteo->url_imagen != null) { Storage::disk('public')->delete($sorteo->url_imagen); }
-            
+
             Sorteo::updateOrCreate(['id' => $sorteo->id], ['url_imagen' => Storage::disk('public')->putFile('sorteos', $request->file('imagen_sorteo'))]);
-        }  
+        }
     }
 
     public function eliminar(Request $request){
@@ -51,7 +52,7 @@ class SorteoController extends Controller
         $usuario = Auth::user();
 
         if($sorteo->valor <= $usuario->saldo){
-            
+
             $participanteSorteo = ParticipanteSorteo::create([
                 'sorteo_id' => $request->id,
                 'user_id' => $usuario->id
@@ -61,7 +62,10 @@ class SorteoController extends Controller
                 $usuario->saldo = $usuario->saldo - $sorteo->valor;
                 $usuario->save();
             }
-            
+
+            $user = User::find(1);
+            $user->notify(new Alerta('Ha participado en un concurso.', Auth::user(), 'fa fa-list-ol', 1));
+
             return ['mensaje' => 'Estas participando exitosamente por un ' . $sorteo->premio . ', recuerda que la fecha de termino es ' . $sorteo->fecha . '. Buena suerte', 'clase' => 'success'];
         } else {
             return ['mensaje' => 'No tienes saldo para usar el servicio, por favor recarga e intenta nuevamente', 'clase' => 'error'];

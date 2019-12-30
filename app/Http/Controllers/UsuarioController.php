@@ -56,6 +56,18 @@ class UsuarioController extends Controller
         }
     }
 
+    public function usuariosTablaVip(){
+        $usuarios = User::where('top_five', 1)->with('comuna')->orderBy('posicion', 'desc')->orderBy('likes', 'desc')->get();
+
+        return ['usuarios' => $usuarios];
+    }
+
+    public function usuariosTablaComunidad(){
+        $usuarios = User::where('comunidad_pyme', 1)->with('comuna')->orderBy('posicion', 'desc')->orderBy('likes', 'desc')->get();
+
+        return ['usuarios' => $usuarios];
+    }
+
     public function especifico($id){
         return ['usuario' => User::where('id', $id)->with('categoria')->first()];
     }
@@ -111,29 +123,13 @@ class UsuarioController extends Controller
 
     }
 
-    public function posicion(Request $request){
+    public function actualizar_usuario_tabla_vip(Request $request){
 
-        $usuario_actual = User::find($request->id);
-
-        if($request->posicion_actual == 0){
-            User::updateOrCreate(['id' => $request->id], ['posicion' => $request->posicion]);
-        } else if($request->posicion > 0){
-            $usuario_antiguo = User::where('posicion', $request->posicion)->get()->first();
-
-
-            if($usuario_antiguo){
-                $usuario_antiguo->posicion = $request->posicion_actual;
-
-                $usuario_actual->posicion = $request->posicion;
-
-                $usuario_actual->save();
-                $usuario_antiguo->save();
-            } else {
-                $usuario_actual->posicion = $request->posicion;
-                $usuario_actual->save();
-            }
-        }
-
+        $usuario = User::find($request->id);
+        $usuario->posicion = $request->posicion;
+        $usuario->likes = $request->likes;
+        $usuario->dislikes = $request->dislikes;
+        $usuario->save();
     }
 
     public function imagen(Request $request){
@@ -178,28 +174,28 @@ class UsuarioController extends Controller
     public function agregarTablaVip(Request $request){
         User::updateOrCreate(
             ['id' => $request->id],
-            ['top_five' => true]
+            ['top_five' => 1]
         );
     }
 
     public function quitarTablaVip(Request $request){
         User::updateOrCreate(
             ['id' => $request->id],
-            ['top_five' => false]
+            ['top_five' => 0]
         );
     }
 
     public function agregarComunidadPyme(Request $request){
         User::updateOrCreate(
             ['id' => $request->id],
-            ['comunidad_pyme' => true]
+            ['comunidad_pyme' => 1]
         );
     }
 
     public function quitarComunidadPyme(Request $request){
         User::updateOrCreate(
             ['id' => $request->id],
-            ['comunidad_pyme' => false]
+            ['comunidad_pyme' => 0]
         );
     }
 
@@ -216,13 +212,7 @@ class UsuarioController extends Controller
         Asesoria::create([ 'user_id' => Auth::id() ]);
 
         $usuario = User::find(1);
-        $usuario->notify(new AppAsesoria('Ha solicitado una asesoría.', Auth::user()->nombre, 'fa fa-car', 2));
-
-        if(! Mail::to('prueba@prevencionlebenco.cl')->cc('j.melladojimenez@gmail.com')->send(new SolicitarAsesoria(Auth::user()))){
-            return ['mensaje' => 'Asesoría solicitada!, Dentro de un plazo de 24 horas el equipo de Prevención LebenCo. se contactara contigo.', 'clase' => 'success'];
-        } else {
-            return ['mensaje' => 'Hemos tenido inconvenientes tu solicitud. Por favor intenta nuevamente!', 'clase' => 'error'];
-        }
+        $usuario->notify(new AppAsesoria('Ha solicitado una asesoría.', Auth::user(), 'fa fa-car', 2));
     }
 
     public function recuperar(Request $request){

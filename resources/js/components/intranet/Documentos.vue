@@ -7,7 +7,7 @@
                     <div class="d-flex justify-content-end align-items-right">
                         <sociales></sociales>
                         <b-button @click="abrirModal(1)" class="btn btn-success d-lg-block m-l-15" v-b-tooltip.hover title="Agrega un documento a la plataforma"><i class="fa fa-plus-circle"></i> Agregar Documento</b-button>
-                    </div>                    
+                    </div>
                 </b-col>
             </b-row>
 
@@ -95,7 +95,7 @@
                                     {{ data.item.categoria.nombre }}
                                 </template>
 
-                                
+
 
                                 <template v-slot:cell(acciones)="row">
                                     <b-button size="xs" variant="success" title="Descargar documento" @click="descargar(row.item.id)">
@@ -123,7 +123,7 @@
                     </b-card>
                 </b-col>
             </b-row>
-            
+
             <ValidationObserver ref="observer_slider" v-slot="{ valid }">
                 <b-modal ref="modal_documento" :title="modal_documento.titulo" size="lg" no-close-on-backdrop scrollable>
                     <b-form>
@@ -180,7 +180,7 @@
                                 <b-form-file id="documento" name="documento" accept=".pdf,.docx,.xlsx,.mp4,.pptx,.mp3" placeholder="Documento" @input="validate"></b-form-file>
                                 <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
                             </ValidationProvider>
-                        </b-form-group> 
+                        </b-form-group>
 
                         <b-form-group>
                             <ValidationProvider name="vista previa" v-slot="{ errors, validate }">
@@ -254,7 +254,7 @@
                 sortDirection: 'asc',
                 filter: null
             }
-        },    
+        },
         computed:{
             sortOptions() {
                 return this.fields.filter(f => f.sortable).map(f => {
@@ -286,7 +286,7 @@
                     console.log(error);
                 });
             },
-            crearOactualizar(accion){ 
+            crearOactualizar(accion){
                 let me = this;
 
                 let formData = new FormData();
@@ -302,13 +302,13 @@
 
                 let documento_dos = document.querySelector('#documento_dos');
                 formData.append('documento_dos', documento_dos.files[0]);
-                
+
                 formData.append('documento_id', this.documento.id);
                 formData.append('titulo', this.documento.titulo);
                 formData.append('descripcion', this.documento.descripcion);
                 formData.append('codigo', this.documento.codigo);
                 formData.append('documento_url', this.documento.documento_url);
-                formData.append('valor', this.documento.valor);
+                formData.append('valor', this.documento.valor == null ? 0 : this.documento.valor);
                 formData.append('categoria_id', this.documento.categoria_id);
                 formData.append('estado', this.documento.estado);
 
@@ -316,7 +316,7 @@
                     me.listarDocumentos();
                     me.cerrarModal();
                     var mensaje = accion == 1 ? 'Registro agregado exitosamente' : 'Registro actualizado exitosamente';
-                   
+
                     Vue.$toast.open({
                         message: mensaje,
                         type: 'success',
@@ -371,7 +371,7 @@
                 }).then((result) => {
                     if (result.value) {
                         let me = this;
-                        axios.get('/documento/descargar/' + id).then(function (response) {         
+                        axios.get('/documento/descargar/' + id).then(function (response) {
                             if(response.data.clase == 'success'){
 
                             	Vue.$toast.open({
@@ -379,7 +379,7 @@
 			                        type: 'success',
 			                        duration: 5000
 			                    });
-                                
+
                                 const link = document.createElement('a');
                                 link.href = '/storage/' + response.data.documento.documento_url;
                                 link.download = response.data.documento.titulo + '.' + response.data.documento.extension;
@@ -392,8 +392,8 @@
 			                        type: response.data.clase,
 			                        duration: 5000
 			                    });
-                            }              
-                            
+                            }
+
                         }).catch(function (error) {
                             console.log(error.response.data);
                         });
@@ -436,7 +436,7 @@
                 this.documento.codigo = '';
                 this.documento.documento_url = null;
                 this.documento.valor = null;
-                this.documento.categoria_id = 0;               
+                this.documento.categoria_id = 0;
             }
         },
         mounted() {

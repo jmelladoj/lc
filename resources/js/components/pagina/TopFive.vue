@@ -51,19 +51,10 @@
                 <center><h5>No hay registros que coincidan con su solicitud.</h5></center>
             </template>
 
-
-            <template v-if="tipo == 1" v-slot:cell(lugar)="data">
-                {{ posiciones[data.index] }}
-            </template>
-
-            <template v-else v-slot:cell(lugar)="data">
-                <center>{{ data.index + 1 }}</center>
-            </template>
-
             <template v-slot:cell(nombre_comuna)="data">
                 {{ data.item.comuna.nombre }}
             </template>
-            
+
             <template v-slot:cell(valoracion)="data">
                 A {{ data.item.likes }} % les gusta esto.
             </template>
@@ -124,8 +115,6 @@
 </template>
 
 <script>
-    const items = [];
-
     export default {
         props: [
             'tipo', 'logeado'
@@ -148,10 +137,7 @@
                 modal_perfil: {
                     titulo: ''
                 },
-                posiciones: [
-                    '1er lugar', '2do lugar', '3er lugar', '4to lugar', '5to lugar'
-                ],
-                items: items,
+                items: [],
                 fields: [],
                 currentPage: 1,
                 perPage: 10,
@@ -162,7 +148,7 @@
                 sortDirection: 'asc',
                 filter: null
             }
-        },    
+        },
         computed:{
             sortOptions() {
                 return this.fields.filter(f => f.sortable).map(f => {
@@ -180,7 +166,10 @@
             },
             listarPymes (){
                 let me=this;
-                axios.get('/usuarios/pymes/' + this.tipo).then(function (response) {
+
+                var url = this.tipo == 2 ? '/usuarios/tabla/vip' : '/usuarios/tabla/comunidad'
+
+                axios.get(url).then(function (response) {
                     me.items = response.data.usuarios;
                     me.totalRows = me.items.length;
                 })
@@ -227,7 +216,7 @@
             abrirModalPerfil(data = []){
                 let me = this;
 
-                me.modal_perfil.titulo = 'Perfil de ' + data['nombre']; 
+                me.modal_perfil.titulo = 'Perfil de ' + data['nombre'];
                 me.usuario.id = data['id'];
 
                 this.$refs['modal_perfil'].show();
@@ -235,7 +224,7 @@
             cerrarModalPerfil(){
                 let me = this;
 
-                me.modal_perfil.titulo = ''; 
+                me.modal_perfil.titulo = '';
                 me.usuario.id = 0;
 
                 this.$refs['modal_perfil'].hide();
@@ -247,31 +236,29 @@
             if(this.logeado == 0){
                 if(this.tipo == 1){
                     this.fields = [
-                        { key: 'lugar', label: 'Posición', sortable: true, sortDirection: 'desc', class: 'text-center' },
-                        { key: 'nombre', label: 'Nombre de la Pyme', sortable: true, class: 'text-center' },
-                        { key: 'nombre_comuna', label: 'Comuna', sortable: true, class: 'text-center' },
-                        { key: 'nombre_rubro', label: 'Rubro', sortable: true, class: 'text-center' },
+                        { key: 'nombre', label: 'Nombre de la Pyme', sortable: true, class: 'text-left' },
+                        { key: 'nombreComuna', label: 'Comuna', sortable: true, class: 'text-left' },
+                        { key: 'nombreRubro', label: 'Rubro', sortable: true, class: 'text-left' },
                         { key: 'perfil', label: 'Perfil', sortable: true, class: 'text-center' },
                         { key: 'valoracion', label: 'Valoración', sortable: true, class: 'text-center' },
                     ]
                 } else {
                     this.fields = [
-                        { key: 'nombre', label: 'Nombre de la Pyme', sortable: true, class: 'text-center' },
-                        { key: 'nombre_comuna', label: 'Comuna', sortable: true, class: 'text-center' },
-                        { key: 'nombre_rubro', label: 'Rubro', sortable: true, class: 'text-center' },
+                        { key: 'nombre', label: 'Nombre de la Pyme', sortable: true, class: 'text-left' },
+                        { key: 'nombreComuna', label: 'Comuna', sortable: true, class: 'text-left' },
+                        { key: 'nombreRubro', label: 'Rubro', sortable: true, class: 'text-left' },
                         { key: 'perfil', label: 'Perfil', sortable: true, class: 'text-center' },
                         { key: 'valoracion', label: 'Valoración', sortable: true, class: 'text-center' },
                     ]
                 }
-                
+
             } else {
 
                 if(this.tipo == 1){
                     this.fields = [
-                        { key: 'lugar', label: 'Posición', sortable: true, sortDirection: 'desc', class: 'text-center' },
-                        { key: 'nombre', label: 'Nombre de la Pyme', sortable: true, class: 'text-center' },
-                        { key: 'nombre_comuna', label: 'Comuna', sortable: true, class: 'text-center' },
-                        { key: 'nombre_rubro', label: 'Rubro', sortable: true, class: 'text-center' },
+                        { key: 'nombre', label: 'Nombre de la Pyme', sortable: true, class: 'text-left' },
+                        { key: 'nombreComuna', label: 'Comuna', sortable: true, class: 'text-left' },
+                        { key: 'nombreRubro', label: 'Rubro', sortable: true, class: 'text-left' },
                         { key: 'perfil', label: 'Perfil', sortable: true, class: 'text-center' },
                         { key: 'valoracion', label: 'Valoración', sortable: true, class: 'text-center' },
                         { key: 'like', label: 'Me gusta', sortable: true, class: 'text-center like' },
@@ -279,9 +266,9 @@
                     ]
                 } else {
                     this.fields = [
-                        { key: 'nombre', label: 'Nombre de la Pyme', sortable: true, class: 'text-center' },
-                        { key: 'nombre_comuna', label: 'Comuna', sortable: true, class: 'text-center' },
-                        { key: 'nombre_rubro', label: 'Rubro', sortable: true, class: 'text-center' },
+                        { key: 'nombre', label: 'Nombre de la Pyme', sortable: true, class: 'text-left' },
+                        { key: 'nombreComuna', label: 'Comuna', sortable: true, class: 'text-left' },
+                        { key: 'nombreRubro', label: 'Rubro', sortable: true, class: 'text-left' },
                         { key: 'perfil', label: 'Perfil', sortable: true, class: 'text-center' },
                         { key: 'valoracion', label: 'Valoración', sortable: true, class: 'text-center' },
                         { key: 'like', label: 'Me gusta', sortable: true, class: 'text-center like' },
@@ -305,7 +292,7 @@
     }
 
     .table-striped tbody tr:nth-of-type(2n+1) {
-        background-color: 
+        background-color:
         rgba(0, 0, 0, 0.05);
     }
 

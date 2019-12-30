@@ -1,5 +1,5 @@
 <template>
-    <section class="sec-padding-login">
+    <section class="sec-padding-contacto">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
@@ -54,7 +54,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row"> 
+                            <div class="row">
                                 <div class="form-field-wrapper col-md-6">
                                     <ValidationProvider name="mensaje" rules="required|min:20" v-slot="{ errors }">
                                         <b-form-textarea @keyup="cambiar_estado" v-model="usuario.mensaje" class="input--lg form-full" placeholder="Tu consulta es muy importante para nosotros" rows="5" no-resize></b-form-textarea>
@@ -154,11 +154,11 @@
                     if (result.value) {
                         let me = this;
                         axios.post('/contacto/generar', {
-                            'nombre': this.usuario.nombre, 
-                            'email': this.usuario.email, 
-                            'asunto': this.usuario.asunto, 
-                            'telefono': this.usuario.telefono, 
-                            'mensaje': this.usuario.mensaje, 
+                            'nombre': this.usuario.nombre,
+                            'email': this.usuario.email,
+                            'asunto': this.usuario.asunto,
+                            'telefono': this.usuario.telefono,
+                            'mensaje': this.usuario.mensaje,
                             'tipo_persona': this.usuario.tipo_persona
                         }).then(function (response) {
                         	Vue.$toast.open({
@@ -166,7 +166,7 @@
 		                        type: response.data.clase,
 		                        duration: 5000
                             });
-                            
+
                             me.limpiar_formulario()
 
                         }).catch(function (error) {

@@ -107,13 +107,16 @@ Route::post('usuario/actualizar/imagen', 'UsuarioController@imagen')->name('Actu
 Route::post('/usuario/saldo', 'UsuarioController@saldo')->name('Agregar saldo');
 Route::post('/usuario/blacklist/agregar', 'UsuarioController@blacklistAgregar')->name('Agregar a black list');
 Route::post('/usuario/blacklist/quitar', 'UsuarioController@blacklistQuitar')->name('Agregar a black list');
-Route::post('/usuario/posicion', 'UsuarioController@posicion')->name('Cambiar posicion');
+Route::post('/usuario/actualizar/tabla/vip', 'UsuarioController@actualizar_usuario_tabla_vip')->name('Actualizar usuario tabla vip');
 
-Route::post('/usuario/tabla/vip/quitar', 'UsuarioController@agregarTablaVip')->name('Tabla VIP');
-Route::post('/usuario/tabla/vip/agregar', 'UsuarioController@quitarTablaVip')->name('Tabla VIP');
+Route::post('/usuario/tabla/vip/quitar', 'UsuarioController@quitarTablaVip')->name('Tabla VIP');
+Route::post('/usuario/tabla/vip/agregar', 'UsuarioController@agregarTablaVip')->name('Tabla VIP');
 
-Route::post('/usuario/comunidad/quitar', 'UsuarioController@agregarComunidadPyme')->name('Tabla comunidad pyme');
-Route::post('/usuario/comunidad/agregar', 'UsuarioController@quitarComunidadPyme')->name('Tabla comunidad pyme');
+Route::post('/usuario/comunidad/quitar', 'UsuarioController@quitarComunidadPyme')->name('Tabla comunidad pyme');
+Route::post('/usuario/comunidad/agregar', 'UsuarioController@agregarComunidadPyme')->name('Tabla comunidad pyme');
+Route::get('/usuarios/tabla/vip', 'UsuarioController@usuariosTablaVip')->name('Usuario Tabla vip');
+Route::get('/usuarios/tabla/comunidad', 'UsuarioController@usuariosTablaComunidad')->name('Usuario Tabla comunidad');
+
 
 Route::post('/usuario/recuperar/password', 'UsuarioController@recuperar')->name('Recuperar contraseña');
 
@@ -137,7 +140,7 @@ Route::get('/solicitudes/documento', 'SolicitudDocumentoController@index')->name
 Route::post('/invitar', 'UsuarioController@solicitarDocumento')->name('Invitar amigo');
 
 
-Route::get('/asesorias', 'AsesoriaController@index')->name('Listar asesorias');
+Route::get('/asesorias/{tipo}', 'AsesoriaController@index')->name('Listar asesorias');
 Route::post('/solicitar/asesoria', 'UsuarioController@solicitarAsesoria')->name('Solicitar Asesoria');
 
 //Rutas de rubros
@@ -186,6 +189,7 @@ Route::post('/venta/carga','VentaController@recargar')->name('Realizar carga');
 
 Route::post('/venta/procesar','VentaController@procesar')->name('Procesar carga');
 Route::post('/venta/finalizar','VentaController@finalizar')->name('Procesar carga');
+
 
 
 

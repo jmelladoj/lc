@@ -1215,6 +1215,14 @@ Object.defineProperty(exports, '__esModule', { value: true });
                 $( "#ingreso" ).removeClass( "my-account-box-selected" ).addClass( "my-account-box" );
             });
 
+            $(".run_nuevo").rut().on('rutInvalido', function(e) {
+                $('#alerta_rut').removeClass('d-none')
+            });
+
+            $(".run_nuevo").rut().on('rutValido', function(e, rut, dv) {
+                $('#alerta_rut').addClass('d-none')
+            });
+
         });
 
         $window.on('resize', function () {

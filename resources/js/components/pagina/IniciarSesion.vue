@@ -80,7 +80,8 @@
                                         <input class="input--lg form-full" @keyup="mostrar_botones_registrate" v-model="usuario_nuevo.nombre" type="text" placeholder="Nombre completo o Razón social" required>
                                     </div>
                                     <div class="col-lg-4 col-md-4">
-                                        <input class="input--lg form-full run_nuevo" @keyup="mostrar_botones_registrate" name="user[rut]" v-rut:live v-model="usuario_nuevo.run" type="text" placeholder="RUN personal o RUT si eres una Pyme" required>
+                                        <input class="input--lg form-full run_nuevo" @keyup="mostrar_botones_registrate" v-rut:live v-model="usuario_nuevo.run" type="text" placeholder="RUN personal o RUT si eres una Pyme" required>
+                                        <span id="alerta_rut" class="d-none"><span class="d-block alert alert-danger m-t-5">Rut o run invalido</span></span>
                                     </div>
                                     <div class="col-lg-4 col-md-4">
                                         <input class="input--lg form-full" @keyup="mostrar_botones_registrate" v-model="usuario_nuevo.email" type="email" placeholder="Correo electrónico" required>
@@ -175,9 +176,15 @@
                 axios.post('/login',{
                     'run': me.usuario_login.run,
                     'password': me.usuario_login.password,
-                    'remember': me.usuario_login.remember
+                    'remember': me.usuario_login.remember,
                 }).then(function (response) {
-                    window.location.href = "/home";
+                    var redireccion = $('#redireccion').val()
+
+                    if(redireccion){
+                        window.location.href = "/intranet/" + redireccion
+                    } else {
+                        window.location.href = "/home";
+                    }
                 })
                 .catch(function (error) {
                     if (error.response.status == 422){
