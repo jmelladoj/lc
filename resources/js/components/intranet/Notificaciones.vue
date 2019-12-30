@@ -12,8 +12,8 @@
                     <div class="message-center ps ps--theme_default" data-ps-id="1f364355-630f-3dc6-d666-9e64a51ae8da">
 
                         <a href="javascript:void(0)" v-for="notificacion in notificaciones" :key="notificacion.id" @click="cambiarMenu()">
-                            <div class="btn btn-warning btn-circle"><i v-bind:class="notificacion.data.clase"></i></div>
-                            <div class="mail-contnet">
+                            <div v-if="notificacion.data.usuario != null" class="btn btn-warning btn-circle"><i v-bind:class="notificacion.data.clase"></i></div>
+                            <div v-if="notificacion.data.usuario != null" class="mail-contnet">
                                 <h5 v-text="notificacion.data.usuario.nombre"></h5> 
                                 <span class="mail-desc" v-text="notificacion.data.mensaje"></span> 
                                 <span class="time" v-text="notificacion.data.created_at"></span> 

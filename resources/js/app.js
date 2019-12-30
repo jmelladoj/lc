@@ -21,9 +21,6 @@ window.Event = new Vue ();
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-import 'core-js/stable'
-import 'regenerator-runtime/runtime'
-import 'intersection-observer' // Optional
 import BootstrapVue from 'bootstrap-vue'
 import { ValidationProvider, extend, ValidationObserver } from 'vee-validate';
 import * as rules from 'vee-validate/dist/rules';

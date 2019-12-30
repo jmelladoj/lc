@@ -173,6 +173,7 @@
                 let me=this;
                 axios.get('/notificaciones/' + this.tipo).then(function (response) {
                     me.items = response.data.alertas;
+                    me.items = me.items.filter(item => item.data.usuario != null)
                     me.totalRows = me.items.length;
                 })
                 .catch(function (error) {
