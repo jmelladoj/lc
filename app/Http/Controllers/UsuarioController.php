@@ -113,7 +113,7 @@ class UsuarioController extends Controller
                 'ultimo_empresa' => $request->ultimo_empresa,
                 'rubro_empresa' => $request->rubro_empresa,
                 'organismo_administrador_empresa' => $request->organismo_administrador_empresa,
-                'top_five' => $request->top_five,
+                'comunidad_pyme' => $request->comunidad_pyme
             ]
         );
 

@@ -28,7 +28,7 @@
                             </div>
                             <div class="row">
                                 <div class="form-field-wrapper col-md-6">
-                                    <ValidationProvider name="asunto" rules="required|min:3" v-slot="{ errors }">
+                                    <ValidationProvider name="asunto" rules="required|min:10" v-slot="{ errors }">
                                         <input @keyup="cambiar_estado" v-model="usuario.asunto" class="input--lg form-full" placeholder="Ingresa el asunto del mensaje" size="30" aria-required="true" type="text">
                                         <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
                                     </ValidationProvider>

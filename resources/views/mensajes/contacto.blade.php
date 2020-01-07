@@ -7,6 +7,24 @@
     <title>Contacto desde pagina web</title>
 </head>
 <body>
-    Falta de definir formato.
+    Datos del remitente: <br><br>
+
+    Remitente: {{ $nombre }}<br>
+    Número: {{ $numero }}<br>
+    Email: {{ $email }}<br>
+    Tipo de persona:
+
+    @if($tipo_persona == 1)
+        Persona
+    @elseif($tipo_persona == 2)
+        Empresa
+    @else
+        Estudiante
+    @endif
+    <br><br>
+
+    Datos del mensaje: <br>
+    Asunto: {{ $asunto }} <br>
+    Mensaje: {{ $mensaje }}
 </body>
 </html>

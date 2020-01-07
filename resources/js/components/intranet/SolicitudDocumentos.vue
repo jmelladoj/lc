@@ -224,13 +224,17 @@
                     'pago': me.solicitud.pago,
                     'plazo': me.solicitud.plazo
                 }).then(function (response) {
-                    let saldo_usuario = $('#saldo_usuario').val()
-                    saldo_usuario -= me.solicitud.pago
+                    if(response.data.clase != 'error'){
+                        let saldo_usuario = $('#saldo_usuario').val()
+                        saldo_usuario -= me.solicitud.pago
 
-                    $('#saldo_usuario').val(saldo_usuario)
+                        $('#saldo_usuario').val(saldo_usuario)
 
-                    $('#saldo').text('');
-                    $('#saldo').text(saldo_usuario);
+                        $('#saldo').text('');
+                        $('#saldo').text(saldo_usuario);
+
+                        me.limpiar_datos_modal()
+                    }
 
                     Vue.$toast.open({
                         message: response.data.mensaje,

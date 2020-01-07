@@ -303,7 +303,7 @@
     .boton_chico {
         padding-top: 0px !important;
         padding-bottom: 0px !important;
-        border-bottom-right-radius: 40px !important;
+        border-radius: 10px 10px 10px 10px !important;
         color:  #1E2F13 !important;
         background-color: #E8ECD1 !important;
         font-size: 14px !important;

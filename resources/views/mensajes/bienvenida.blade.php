@@ -7,6 +7,10 @@
     <title>Bienvenida</title>
 </head>
 <body>
-    Falta de definir formato.
+    Hola {{ $usuario->nombre }}, gracias por unirte a nuestra comunidad.
+
+    @if($usuario->mailing == 1)
+        Pronto te estaremos enviado información.
+    @endif
 </body>
 </html>

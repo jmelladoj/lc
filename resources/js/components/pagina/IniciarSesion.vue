@@ -1,7 +1,6 @@
 <template>
     <section class="sec-padding-login mt-5 mb-5">
         <div class="container">
-            <errores :errors="validationErrors" v-if="validationErrors"> </errores>
             <div class="row">
                 <div class="offset-md-2 col-md-8" v-show="formulario == 0">
                     <div class="my-account-box mb-4" id="ingreso" name="ingreso">
@@ -19,10 +18,12 @@
 
                             <p class="large text-justify">Bienvenido a tu comunidad LebenCo.</p>
                             <p class="form-field-wrapper">
-                                <input class="input--lg form-full" v-rut v-model="usuario_login.run" @keyup="mostrar_botones_login" autocomplete="run" type="text" placeholder="RUN personal o RUT si eres una Pyme" required>
+                                <input class="input--lg form-full" v-rut v-model="usuario_login.run" @keyup="mostrar_botones_login" autocomplete="run" type="text" @keyup.enter="ingresar" placeholder="RUN personal o RUT si eres una Pyme" required>
+                                <errores :errors="validationErrors" :campo="'run'" v-if="validationErrors"> </errores>
                             </p>
                             <p class="form-field-wrapper">
                                 <input class="input--lg form-full" v-model="usuario_login.password"  @keyup="mostrar_botones_login" autocomplete="current-password" type="password" @keyup.enter="ingresar" placeholder="Ingresa tu clave" required>
+                                <errores :errors="validationErrors" :campo="'password'" v-if="validationErrors"> </errores>
                             </p>
                             <p class="form-field-wrapper">
                                 <label class="">
@@ -51,40 +52,46 @@
                                     <button type="button" class="mt-0 btn btn--secondary space--1 btn-sm boton_login" @click="formulario = 0" v-if="estados.boton_registro_inicia == 1">... Inicia tu sesión</button>
                                 </div>
                             </div>
+
                             <p class="large text-justify">Disponemos de herramientas para Pymes, Estudiantes del área, Personas y Personas encargadas de la prevención.</p>
+
                             <p class="form-field-wrapper">
                                 <div class="row">
                                     <div class="col-lg-4 col-md-4 d-flex align-items-center justify-content-center">
                                         <div class="custom-control custom-radio">
-                                            <input type="radio" id="estudiante" @change="mostrar_botones_registrate" name="tipo_persona" v-model="usuario_nuevo.tipo_persona" class="custom-control-input" value="3">
+                                            <input type="radio" id="estudiante" @change="mostrar_botones_registrate" name="tipo_persona" v-model="usuario_nuevo.tipo_persona" class="custom-control-input" value="3" />
                                             <label class="custom-control-label" for="estudiante"> Estudiante</label>
                                         </div>
                                     </div>
                                     <div class="col-lg-4 col-md-4 d-flex align-items-center justify-content-center">
                                         <div class="custom-control custom-radio">
-                                            <input type="radio" id="persona" @change="mostrar_botones_registrate" name="tipo_persona" v-model="usuario_nuevo.tipo_persona" class="custom-control-input" value="1">
+                                            <input type="radio" id="persona" @change="mostrar_botones_registrate" name="tipo_persona" v-model="usuario_nuevo.tipo_persona" class="custom-control-input" value="1" />
                                             <label class="custom-control-label" for="persona"> Persona</label>
                                         </div>
                                     </div>
                                     <div class="col-lg-4 col-md-4 d-flex align-items-center justify-content-center">
                                         <div class="custom-control custom-radio">
-                                            <input type="radio" id="empresa" @change="mostrar_botones_registrate" name="tipo_persona" v-model="usuario_nuevo.tipo_persona" class="custom-control-input" value="2">
+                                            <input type="radio" id="empresa" @change="mostrar_botones_registrate" name="tipo_persona" v-model="usuario_nuevo.tipo_persona" class="custom-control-input" value="2" />
                                             <label class="custom-control-label" for="empresa"> Pyme</label>
                                         </div>
                                     </div>
                                 </div>
                             </p>
+
                             <p class="form-field-wrapper">
                                 <div class="row">
                                     <div class="col-lg-4 col-md-4">
                                         <input class="input--lg form-full" @keyup="mostrar_botones_registrate" v-model="usuario_nuevo.nombre" type="text" placeholder="Nombre completo o Razón social" required>
+                                        <errores :errors="validationErrors" :campo="'nombre'" v-if="validationErrors"> </errores>
                                     </div>
                                     <div class="col-lg-4 col-md-4">
                                         <input class="input--lg form-full run_nuevo" @keyup="mostrar_botones_registrate" v-rut:live v-model="usuario_nuevo.run" type="text" placeholder="RUN personal o RUT si eres una Pyme" required>
                                         <span id="alerta_rut" class="d-none"><span class="d-block alert alert-danger m-t-5">Rut o run invalido</span></span>
+                                        <errores :errors="validationErrors" :campo="'run'" v-if="validationErrors"> </errores>
                                     </div>
                                     <div class="col-lg-4 col-md-4">
                                         <input class="input--lg form-full" @keyup="mostrar_botones_registrate" v-model="usuario_nuevo.email" type="email" placeholder="Correo electrónico" required>
+                                        <errores :errors="validationErrors" :campo="'email'" v-if="validationErrors"> </errores>
                                     </div>
                                 </div>
                             </p>
@@ -92,9 +99,11 @@
                                 <div class="row">
                                     <div class="col-lg-6 col-md-6">
                                         <input class="input--lg form-full" @keyup="mostrar_botones_registrate" v-model="usuario_nuevo.clave_uno" type="password" placeholder="Crea tu clave (6 caracteres)" required>
+                                        <errores :errors="validationErrors" :campo="'clave_uno'" v-if="validationErrors"> </errores>
                                     </div>
                                     <div class="col-lg-6 col-md-6">
                                         <input class="input--lg form-full" @keyup="mostrar_botones_registrate" v-model="usuario_nuevo.clave_dos" type="password" placeholder="Repite esa clave" required>
+                                        <errores :errors="validationErrors" :campo="'clave_dos'" v-if="validationErrors"> </errores>
                                     </div>
                                 </div>
                             </p>
@@ -173,6 +182,9 @@
         methods:{
             ingresar(){
                 let me=this;
+
+                this.validationErrors = ''
+
                 axios.post('/login',{
                     'run': me.usuario_login.run,
                     'password': me.usuario_login.password,
@@ -194,6 +206,9 @@
             },
             registrar(){
                 let me=this;
+
+                this.validationErrors = ''
+
                 axios.post('/register',{
                     'tipo_persona': me.usuario_nuevo.tipo_persona,
                     'nombre': me.usuario_nuevo.nombre,
@@ -233,6 +248,7 @@
                 }
             },
             limpiar_registro(){
+                this.validationErrors = ''
                 this.usuario_nuevo.tipo_persona = 0;
                 this.usuario_nuevo.nombre = '';
                 this.usuario_nuevo.run = '';
@@ -244,6 +260,7 @@
                 this.mostrar_botones_registrate();
             },
             limpiar_login(){
+                this.validationErrors = ''
                 this.usuario_login.run = '';
                 this.usuario_login.password = '';
 
@@ -285,7 +302,7 @@
 
 <style>
     .boton_login {
-        border-bottom-right-radius: 40px !important;
+        border-radius: 10px 10px 10px 10px !important;
         color:  #1E2F13 !important;
         background-color: #E8ECD1 !important;
     }

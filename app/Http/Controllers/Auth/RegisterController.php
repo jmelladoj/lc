@@ -63,7 +63,7 @@ class RegisterController extends Controller
 
         return Validator::make($data, [
             'run' => ['required', 'string', 'max:255', 'unique:users'],
-            'nombre' => ['required', 'string', 'max:255'],
+            'nombre' => ['required', 'string', 'max:255', 'min:6'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'clave_uno' => ['required','string','min:6'],
             'clave_dos' => ['required','string','min:6','same:clave_uno'],
@@ -79,8 +79,6 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-
-
         $usuario = User::create([
             'run' => $data['run'],
             'nombre' => $data['nombre'],
@@ -89,9 +87,7 @@ class RegisterController extends Controller
             'tipo_persona' => $data['tipo_persona']
         ]);
 
-
-
-        if(!Mail::to($usuario->email)->send(new Bienvenida($usuario->nombre))){
+        if(!Mail::to($usuario->email)->send(new Bienvenida($usuario))){
             return $usuario;
         } else {
             return ['mensaje' => 'Hemos tenido inconvenientes al registrar tu cuenta tu correo. Por favor intenta nuevamente!', 'clase' => 'error'];

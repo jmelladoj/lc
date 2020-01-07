@@ -321,9 +321,9 @@
                                         <b-col md="6" class="my-1">
                                             <b-form-group label-cols-sm="3" label="Filtrar" class="mb-0">
                                             <b-input-group>
-                                                <b-form-input v-model="filter" placeholder="Escribe para buscar" />
+                                                <b-form-input v-model="filter_vip" placeholder="Escribe para buscar" />
                                                 <b-input-group-append>
-                                                <b-button :disabled="!filter" @click="filter = ''">Limpiar</b-button>
+                                                <b-button :disabled="!filter_vip" @click="filter_vip = ''">Limpiar</b-button>
                                                 </b-input-group-append>
                                             </b-input-group>
                                             </b-form-group>
@@ -332,10 +332,10 @@
                                         <b-col md="6" class="my-1">
                                             <b-form-group label-cols-sm="3" label="Ordenar" class="mb-0">
                                             <b-input-group>
-                                                <b-form-select v-model="sortBy" :options="sortOptions">
+                                                <b-form-select v-model="sortBy_vip" :options="sortOptions_vip">
                                                 <option slot="first" :value="null">-- nada --</option>
                                                 </b-form-select>
-                                                <b-form-select :disabled="!sortBy" v-model="sortDesc" slot="append">
+                                                <b-form-select :disabled="!sortBy_vip" v-model="sortDesc_vip" slot="append">
                                                 <option :value="false">Asc</option> <option :value="true">Desc</option>
                                                 </b-form-select>
                                             </b-input-group>
@@ -345,7 +345,7 @@
                                         <b-col md="6" class="my-1">
                                             <b-form-group label-cols-sm="3" label="Dirección" class="mb-0">
                                             <b-input-group>
-                                                <b-form-select v-model="sortDirection" slot="append">
+                                                <b-form-select v-model="sortDirection_vip" slot="append">
                                                 <option value="asc">Asc</option> <option value="desc">Desc</option>
                                                 <option value="last">Último</option>
                                                 </b-form-select>
@@ -355,7 +355,7 @@
 
                                         <b-col md="6" class="my-1">
                                             <b-form-group label-cols-sm="3" label="Por página" class="mb-0">
-                                            <b-form-select :options="pageOptions" v-model="perPage" />
+                                            <b-form-select :options="pageOptions_vip" v-model="perPage_vip" />
                                             </b-form-group>
                                         </b-col>
                                     </b-row>
@@ -385,6 +385,10 @@
 
                                         <template slot="emptyfiltered">
                                             <center><h5>No hay registros que coincidan con su solicitud.</h5></center>
+                                        </template>
+
+                                        <template v-slot:cell(nombre)="row">
+                                            <label  @click="actualizar_tabla_vip(row.item)" v-text="row.item.nombre"></label>
                                         </template>
 
                                         <template v-slot:cell(tipo)="data">
@@ -490,14 +494,15 @@
                 sortDesc: false,
                 sortDirection: 'asc',
                 filter: null,
+                filter_vip: null,
                 currentPage_vip: 1,
                 perPage_vip: 10,
                 totalRows_vip: 0,
                 pageOptions_vip: [10, 25, 50, 100],
                 sortBy_vip: null,
                 sortDesc_vip: false,
-                sortDirection_vip: 'asc',
-                filter_vip: null
+                sortDirection_vip: 'asc'
+
             }
         },
         computed:{

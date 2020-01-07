@@ -48,24 +48,22 @@
                 .catch(function (error) {
                     console.log(error);
                 });
+            },
+            redireccion(link){
+                var tmp = link.split("");
+                var map = tmp.map(function(current) {
+                    if (!isNaN(parseInt(current))) {
+                    return current;
+                    }
+                });
+
+                var numbers = map.filter(function(value) {
+                    return value != undefined;
+                });
+
+                window.location.href = "/intranet/" + numbers.join("")
+
             }
-        },
-        redireccion(link){
-            var tmp = link.split("");
-            var map = tmp.map(function(current) {
-                if (!isNaN(parseInt(current))) {
-                return current;
-                }
-            });
-
-            var numbers = map.filter(function(value) {
-                return value != undefined;
-            });
-
-
-            axios.get('/intranet/' + numbers.join("")).catch(function (error) {
-                console.log(error);
-            });
         },
         mounted() {
             this.listarSlider();

@@ -20,7 +20,11 @@
 @section('script')
     <script>
         $(document).ready(function() {
+            var redireccion = $('#redireccion').val()
 
+            if(redireccion){
+                $('#accion').click()
+            }
         });
     </script>
 @endsection

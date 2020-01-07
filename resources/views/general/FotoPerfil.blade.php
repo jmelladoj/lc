@@ -9,7 +9,7 @@
                 <span class="caret"></span>
             </a>
             <div class="dropdown-menu animated flipInY">
-                <a href="#" class="dropdown-item"><i class="fa fa-user"></i> Mi perfil</a>
+                <a @if(Auth::user()->tipo_usuario == 3) @click="menu=1" @else @click="menu=6" @endif  href="javascript:void(0)" class="dropdown-item"><i class="fa fa-user"></i> Mi perfil</a>
                 <div class="dropdown-divider"></div>
             </div>
         </div>

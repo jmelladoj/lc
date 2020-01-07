@@ -1,14 +1,19 @@
 <template>
     <b-row>
+        <b-col cols="12" v-if="mensaje != undefined">
+            <b-alert variant="success" show>
+                {{ mensaje }}
+            </b-alert>
+        </b-col>
         <b-col cols="4">
             <b-card>
                 <center class="mt-1">
-                    <ValidationObserver ref="observer_foto_perfil"> 
-                        <b-form-group v-show="tipo_usuario_logeado == 2">
+                    <ValidationObserver ref="observer_foto_perfil">
+                        <b-form-group v-show="tipo_usuario_logeado == 3">
                             <div class="custom-control custom-checkbox">
                                 <b-form-checkbox v-model="usuario.comunidad_pyme">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ¡Quiero ser aparecer en el top five!</b-form-checkbox>
                             </div>
-                        </b-form-group >          
+                        </b-form-group >
                         <img v-bind:src="usuario.url_perfil" alt="Imagen de usuario" class="img-circle" width="150">
                         <b-form-group  class="mt-3 mb-3">
                             <ValidationProvider name="imagen" rules="required|image" v-slot="{ errors, validate }">
@@ -378,7 +383,7 @@
                                                 <option :value="1" selected>Mutual</option>
                                                 <option :value="2" selected>ACHS</option>
                                                 <option :value="3" selected>ILS</option>
-                                                <option :value="4" selected>IST</option>                                                       
+                                                <option :value="4" selected>IST</option>
                                             </b-form-select>
                                             <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
                                         </ValidationProvider>
@@ -396,7 +401,7 @@
                                                 <option :value="3" selected>Como asesor FreeLancer</option>
                                                 <option :value="4" selected>¡A la espera de una oportunidad!</option>
                                                 <option :value="5" selected>¡Quiero mi propia empresa!</option>
-                                                
+
                                             </b-form-select>
                                             <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
                                         </ValidationProvider>
@@ -455,7 +460,7 @@
 <script>
     export default {
         props: [
-            'usuario_id', 'tipo_usuario_logeado'
+            'usuario_id', 'tipo_usuario_logeado', 'mensaje'
         ],
         data() {
             return {
@@ -534,7 +539,7 @@
                 comunas: [],
                 profesiones: []
             }
-        },    
+        },
         methods:{
             mostrarLabels(){
                 let me = this;
@@ -547,7 +552,7 @@
                         me.labels.ramo_odiado = '¿Cuál fue tu ramo menos favorito?';
                         me.labels.titulo = '¿Cuál es tu título?';
                         me.labels.fecha_titulo = '¿Cuál es la fecha del certificado de título?';
-                        me.labels.seremi_o_practica = '¿Cuál es la fecha de tu Registro Seremi?';                      
+                        me.labels.seremi_o_practica = '¿Cuál es la fecha de tu Registro Seremi?';
                         me.labels.profesion = '¿Cuál es tu rubro con mayor experiencia?';
                         me.labels.tiempo_experiencia = 'En total, ¿cuántos años haz ejercido?';
                         me.labels.ultimo_trabajo = 'Describe brevemente tu actual o el último cargo y el logro o habilidad que desarrollaste mientras lo ejerces o lo ejerciste.';
@@ -564,7 +569,7 @@
                         me.labels.fecha_titulo = '¿En que fecha obtendrás tu certificado de título?';
                         me.labels.seremi_o_practica = '¿Dónde realizarás tu práctica profesional?';
                         me.labels.profesion = '¿Cuál es el rubro que te llama la atención?';
-                        
+
                         break;
                     case 2:
                         //Pyme
@@ -637,7 +642,7 @@
                     me.usuario.ultimo_empresa = response.data.usuario.ultimo_empresa;
                     me.usuario.rubro_empresa = response.data.usuario.rubro_empresa;
                     me.usuario.organismo_administrador_empresa = response.data.usuario.organismo_administrador_empresa;
-                    me.usuario.comunidad_pyme = response.data.usuario.comunidad_pyme;
+                    me.usuario.comunidad_pyme = response.data.usuario.comunidad_pyme == 1 ? true : false;
 
 
                     //Datos categoria
@@ -704,7 +709,7 @@
                     'rubro_empresa': me.usuario.rubro_empresa,
                     'organismo_administrador_empresa': me.usuario.organismo_administrador_empresa,
                     'comunidad_pyme': me.usuario.comunidad_pyme
-                    
+
                 }).then(function (response) {
                     me.listarUsuario();
 
@@ -727,7 +732,7 @@
                     let img_perfil = document.querySelector('#img_perfil');
                     formData.append('img_perfil', img_perfil.files[0]);
                 }
-                
+
                 formData.append('usuario_id', this.usuario.id);
 
                 axios.post('usuario/actualizar/imagen',formData).then(function (response) {

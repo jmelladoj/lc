@@ -24,9 +24,8 @@
     </div>
 </aside>
 
-
 <template v-if="ubicacion == 1 && menu == 1">
-    <perfil :usuario_id="{{ json_encode(Auth::user()->id) }}" :tipo_usuario_logeado="{{ json_encode(Auth::user()->tipo_usuario) }}"  :mensaje="{{ json_encode($mensaje) }}" ></perfil>
+    <perfil @if(Auth::user()->last_login_at == null && Auth::user()->created_at->format('Y-m-d H:i') == Carbon\Carbon::now()->format('Y-m-d H:i')) :mensaje="'Felicidades! Ya eres parte de nuestra comunidad LebenCo. y para celebrar, te damos un documento de muestra ¡gratis!, búscalo en nuestras secciones.'"  @endif  :usuario_id="{{ json_encode(Auth::user()->id) }}" :tipo_usuario_logeado="{{ json_encode(Auth::user()->tipo_usuario) }}"  :mensaje="{{ json_encode($mensaje) }}" ></perfil>
 </template>
 
 <template v-if="ubicacion == 1 && menu==2">

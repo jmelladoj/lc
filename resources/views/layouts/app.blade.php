@@ -33,7 +33,7 @@
                                     <img src="{{ asset('storage/general/logo.png') }}" class="logo-dark" alt="Logo - Prebención LebenCo." />
                                 </a>
                             </div>
-                            
+
                             <div class="nav-menu">
                                 <ul>
                                     <li class="nav-menu-item">@if(request()->is('/')) <a href="#inicio" class="{{ (request()->is('/')) ? 'sale-color' : '' }}">Comunidad LebenCo.</a> @else <a href="{{ url('/#inicio') }}">Comunidad LebenCo.</a> @endif</li>
@@ -56,25 +56,25 @@
                                     <li class="nav-icon-item d-lg-none">
                                         <div class="nav-icon-trigger menu-mobile-btn active" title="Navigation Menu"><span><i class="fa fa-list"></i></span></div>
                                     </li>
-                                    <li class="nav-icon-item">                           
+                                    <li class="nav-icon-item">
                                         <a href="{{ url('/login') }}" class="nav-icon-trigger" title="Ingresar">
-                                            <span> 
-                                                @if(Auth::check())  
-                                                    <a href="{{ url('/login') }}" class="btn btn-success btn-circle white">{{ Auth::user()->nombre[0] }}</a>  
-                                                @else  
+                                            <span>
+                                                @if(Auth::check())
+                                                    <a href="{{ url('/login') }}" class="btn btn-success btn-circle white">{{ Auth::user()->nombre[0] }}</a>
+                                                @else
                                                     Ingresar
-                                                @endif 
+                                                @endif
                                             </span>
                                         </a>
                                     </li>
-                                    @auth 
-                                        <li class="nav-icon-item"> 
+                                    @auth
+                                        <li class="nav-icon-item">
                                             <a class="nav-link  waves-effect waves-light" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
                                                 <img src="{{ asset('img/salir.png') }}" height="40">
                                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">@csrf
                                                 </form>
                                             </a>
-                                        </li> 
+                                        </li>
                                     @endauth
                                 </ul>
                             </div>
@@ -87,7 +87,7 @@
             <div class="page-container">
                 @yield('content')
             </div>
-        
+
             @if(request()->is('/'))
                 <slider-footer></slider-footer>
             @endif
@@ -145,6 +145,6 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/pagina-js.js') }}"></script>
-    
+
 </body>
 </html>

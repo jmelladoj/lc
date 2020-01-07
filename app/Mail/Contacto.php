@@ -11,12 +11,13 @@ class Contacto extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public $nombre, $email, $asunto, $numero, $mensaje, $tipo_persona;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct(String $nombre, String $asunto, String $email, $numero, String $mensaje, $tipo_persona)
+    public function __construct(String $nombre, String $asunto, String $email, $numero, String $mensaje, String $tipo_persona)
     {
         //
         $this->nombre = $nombre;
@@ -24,7 +25,7 @@ class Contacto extends Mailable
         $this->asunto = $asunto;
         $this->numero = $numero;
         $this->mensaje = $mensaje;
-        $this->tipo_persona = $tipo_persona;
+        $this->tipo_persona;
     }
 
     /**
@@ -34,8 +35,8 @@ class Contacto extends Mailable
      */
     public function build()
     {
-        return $this->from('contacto@prevencionlebenco.cl')
-                    ->subject('Prueba desde formulario de contácto')
+        return $this->from($this->email)
+                    ->subject('Contacto desde página web')
                     ->view('mensajes.contacto');
     }
 }
