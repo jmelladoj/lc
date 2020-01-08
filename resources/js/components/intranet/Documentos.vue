@@ -61,6 +61,7 @@
 
                                 <!-- Main table element -->
                                 <b-table
+                                    id="panel-table"
                                     show-empty
                                     responsive
                                     striped
@@ -115,7 +116,15 @@
 
                                 <b-row>
                                     <b-col>
-                                        <b-pagination :total-rows="totalRows" :per-page="perPage" v-model="currentPage" class="my-3" align="fill"/>
+                                    <b-pagination
+                                    v-model="currentPage"
+                                    :total-rows="totalRows"
+                                    :per-page="perPage"
+                                    align="fill"
+                                    size="sm"
+                                    class="my-0"
+                                    ></b-pagination>
+                                
                                     </b-col>
                                 </b-row>
                             </b-container>

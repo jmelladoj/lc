@@ -18,19 +18,19 @@
                         <b-row>
                             <b-col class="text-center">
                                 <b-form-group label="Logo (150px alto X 34px ancho | PNG):" label-for="logo">
-                                    <b-form-file id="logo" name="logo" v-model="logo_file" :state="Boolean(logo_file)" @input="ver_imagen" accept="image/png" placeholder="Escoge un archivo o suelta aquí" drop-placeholder="Suelta aquí"></b-form-file>
+                                    <b-form-file id="logo" name="logo" v-model="logo_file" @input="ver_imagen_logo" accept="image/png" placeholder="Escoge un archivo o suelta aquí" drop-placeholder="Suelta aquí"></b-form-file>
                                 </b-form-group>
                                 <b-img v-show="logo != ''" :src="logo" height="150"></b-img>
                             </b-col>
                             <b-col class="text-center">
                                 <b-form-group label="Favicon (155px alto X 95px ancho | PNG):" label-for="favicon">
-                                    <b-form-file id="favicon" name="favicon" accept="image/png" placeholder="Sin archivo"></b-form-file>
+                                    <b-form-file id="favicon" name="favicon" @input="ver_imagen_favicon" accept="image/png" placeholder="Escoge un archivo o suelta aquí" drop-placeholder="Suelta aquí"></b-form-file>
                                 </b-form-group>
                                 <b-img v-show="favicon != ''" :src="favicon" height="150"></b-img>
                             </b-col>
                             <b-col class="text-center">
                                 <b-form-group label="Footer (150px alto X 34px ancho | PNG)" label-for="logo_footer">
-                                    <b-form-file id="logo_footer" name="logo_footer" accept="image/png" placeholder="Sin archivo"></b-form-file>
+                                    <b-form-file id="logo_footer" name="logo_footer" @input="ver_imagen_logo_footer" accept="image/png" placeholder="Escoge un archivo o suelta aquí" drop-placeholder="Suelta aquí"></b-form-file>
                                 </b-form-group>
                                 <b-img v-show="footer != ''" :src="footer" height="150"></b-img>
                             </b-col>
@@ -38,16 +38,16 @@
                     </b-card>
                     <b-card title="Documentación">
                         <b-form-group label="Terminos y condiciones" label-for="terminos" label-cols-sm="4">
-                            <b-form-file id="terminos" name="terminos" accept=".pdf" placeholder="Sin archivo"></b-form-file>
+                            <b-form-file id="terminos" name="terminos" accept=".pdf" placeholder="Escoge un archivo o suelta aquí" drop-placeholder="Suelta aquí"></b-form-file>
                         </b-form-group>
                         <b-form-group label="Políticas de privacidad" label-for="privacidad" label-cols-sm="4">
-                            <b-form-file id="privacidad" name="privacidad" accept=".pdf" placeholder="Sin archivo"></b-form-file>
+                            <b-form-file id="privacidad" name="privacidad" accept=".pdf" placeholder="Escoge un archivo o suelta aquí" drop-placeholder="Suelta aquí"></b-form-file>
                         </b-form-group>
                         <b-form-group label="Políticas de satisfacción" label-for="satisfaccion" label-cols-sm="4">
-                            <b-form-file id="satisfaccion" name="satisfaccion" accept=".pdf" placeholder="Sin archivo"></b-form-file>
+                            <b-form-file id="satisfaccion" name="satisfaccion" accept=".pdf" placeholder="Escoge un archivo o suelta aquí" drop-placeholder="Suelta aquí"></b-form-file>
                         </b-form-group>
                         <b-form-group label="Políticas de derecho de autor" label-for="derechos" label-cols-sm="4">
-                            <b-form-file id="derechos" name="derechos" accept=".pdf" placeholder="Sin archivo"></b-form-file>
+                            <b-form-file id="derechos" name="derechos" accept=".pdf" placeholder="Escoge un archivo o suelta aquí" drop-placeholder="Suelta aquí"></b-form-file>
                         </b-form-group>
                     </b-card>
                 </b-col>
@@ -72,8 +72,14 @@
             }
         },
         methods:{
-            ver_imagen(file){
+            ver_imagen_logo(file){
                 this.logo = URL.createObjectURL(file);
+            },
+            ver_imagen_favicon(file){
+                this.favicon = URL.createObjectURL(file);
+            },
+            ver_imagen_logo_footer(file){
+                this.footer = URL.createObjectURL(file);
             },
             listarGeneral (){
                 let me=this;

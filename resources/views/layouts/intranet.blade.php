@@ -5,8 +5,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-     {{-- {!! SEO::generate() !!} --}}
-
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -73,7 +71,15 @@
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/admin.js') }}"></script>
 
-    @yield('script')
+    <script>
+        $(document).ready(function() {
+            var redireccion = $('#redireccion').val()
+
+            if(redireccion){
+                $('#accion').click()
+            }
+        });
+    </script>
 
 </body>
 </html>

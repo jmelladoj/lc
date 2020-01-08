@@ -34,6 +34,7 @@ import { rutInputDirective } from 'vue-dni';
 import VueRouter from 'vue-router';
 import router from './routes.js';
 import VueToast from 'vue-toast-notification';
+import SpellChecker from 'tinymce/plugins/spellchecker';
 
 
 import 'vue-toast-notification/dist/index.css';

@@ -10,7 +10,7 @@
     Hola {{ $usuario->nombre }}, gracias por unirte a nuestra comunidad.
 
     @if($usuario->mailing == 1)
-        Pronto te estaremos enviado información.
+        Pronto te estaremos enviando información.
     @endif
 </body>
 </html>

@@ -8,7 +8,7 @@
                         <ValidationObserver ref="observer_contacto" v-slot="{ valid, reset }">
                             <div class="row">
                                 <div class="form-field-wrapper col-md-4">
-                                    <ValidationProvider name="nombre" rules="required|min:3|alpha_spaces" v-slot="{ errors }">
+                                    <ValidationProvider name="nombre" rules="required|min:6|alpha_spaces" v-slot="{ errors }">
                                         <input @keyup="cambiar_estado" v-model="usuario.nombre" class="input--lg form-full" placeholder="Nombre completo o Razón social si eres una Pyme" size="30" aria-required="true" type="text">
                                         <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
                                     </ValidationProvider>
@@ -119,7 +119,7 @@
         methods:{
             cambiar_estado(){
                 if(!this.usuario){
-                    if(this.usuario.asunto.length > 0 || this.usuario.mensaje.length > 0){
+                    if(this.usuario.asunto.length > 0 || this.usuario.mensaje.length > 0 || this.usuario.tipo_persona > 0){
                         this.estado_boton = 1;
                     } else {
                         this.estado_boton = 0;

@@ -7,6 +7,7 @@
                     <div class="d-flex justify-content-end align-items-right">
                         <sociales></sociales>
                         <b-button @click="actualizarPagina()" class="btn btn-success d-lg-block m-l-15" v-b-tooltip.hover title="Actualiza información de la página nosotros"><i class="fa fa-plus-circle"></i> Actualizar página</b-button>
+                        <b-spinner class="float-left" variant="success" label="Spinning" v-show="spinner.estado == 1"></b-spinner>
                     </div>                    
                 </b-col>
             </b-row>
@@ -26,6 +27,9 @@
                                     <b-form-input v-model="pagina.link" v-if="pagina.tipo == 1"></b-form-input>
                                     <b-form-file id="video" name="video" accept="video/*" placeholder="Sin archivo" v-else></b-form-file>
                                 </b-form-group>
+                            </b-col>
+                            <b-col cols="2">
+                                <b-button v-show="pagina.video_url != null" @click="eliminar_video()" class="btn btn-danger d-lg-block m-l-15" v-b-tooltip.hover title="Eliminar vídeo">Eliminar vídeo</b-button>
                             </b-col>
                         </b-row>
 
@@ -47,12 +51,16 @@
             return {
                 pagina: {
                     contenido: '',
-                    tipo: 1,
-                    link: ''
+                    tipo: 0,
+                    link: '',
+                    video_url: ''
                 },
                 options: {
                     language_url: 'js/es.js',
-                    height: '1000px'
+                    height: '500px'
+                },
+                spinner: {
+                    estado: 0
                 }
             }
         },  
@@ -61,6 +69,7 @@
                 let me=this;
                 axios.get('/pagina/nosotros').then(function (response) {
                     me.pagina.contenido = response.data.contenido;
+                    me.pagina.video_url = response.data.video_url
                 })
                 .catch(function (error) {
                     console.log(error);
@@ -69,14 +78,18 @@
             actualizarPagina(){
                 let me = this;
 
-                let formData = new FormData();
+                this.spinner.estado = 1
 
-                if(this.pagina.link.length > 0){
-                    formData.append('contenido', this.pagina.contenido);
-                    formData.append('link', this.pagina.link);
-                } else {
-                    let video = document.querySelector('#video');
-                    formData.append('video', video.files[0]);
+                let formData = new FormData();
+                formData.append('contenido', this.pagina.contenido);
+                
+                if(this.pagina.tipo > 0){
+                    if(this.pagina.link.length > 0){
+                        formData.append('link', this.pagina.link);
+                    } else {
+                        let video = document.querySelector('#video');
+                        formData.append('video', video.files[0]);
+                    }
                 }
                 
                 axios.post('/pagina/nosotros/actualizar',formData).then(function (response) {
@@ -86,8 +99,20 @@
                         duration: 5000
                     });
 
-                    me.pagina.tipo = 1;
+                    me.pagina.tipo = 0;
                     me.pagina.link = '';
+                    me.spinner.estado = 0
+                }).catch(function (error) {
+                    console.error(error);
+                });
+            },
+            eliminar_video(){
+                axios.post('/pagina/nosotros/eliminar/video',formData).then(function (response) {
+                    Vue.$toast.open({
+                        message: 'Video eliminado exitosamente',
+                        type: 'success',
+                        duration: 5000
+                    });
                 }).catch(function (error) {
                     console.error(error);
                 });

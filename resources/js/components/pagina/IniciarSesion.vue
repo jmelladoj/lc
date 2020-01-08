@@ -18,11 +18,11 @@
 
                             <p class="large text-justify">Bienvenido a tu comunidad LebenCo.</p>
                             <p class="form-field-wrapper">
-                                <input class="input--lg form-full" v-rut v-model="usuario_login.run" @keyup="mostrar_botones_login" autocomplete="run" type="text" @keyup.enter="ingresar" placeholder="RUN personal o RUT si eres una Pyme" required>
+                                <input class="input--lg form-full" v-rut v-model="usuario_login.run" @blur="mostrar_botones_login" @keyup="mostrar_botones_login" autocomplete="run" type="text" @keyup.enter="ingresar" placeholder="RUN personal o RUT si eres una Pyme" required>
                                 <errores :errors="validationErrors" :campo="'run'" v-if="validationErrors"> </errores>
                             </p>
                             <p class="form-field-wrapper">
-                                <input class="input--lg form-full" v-model="usuario_login.password"  @keyup="mostrar_botones_login" autocomplete="current-password" type="password" @keyup.enter="ingresar" placeholder="Ingresa tu clave" required>
+                                <input class="input--lg form-full" v-model="usuario_login.password" @blur="mostrar_botones_login" @keyup="mostrar_botones_login" autocomplete="current-password" type="password" @keyup.enter="ingresar" placeholder="Ingresa tu clave" required>
                                 <errores :errors="validationErrors" :campo="'password'" v-if="validationErrors"> </errores>
                             </p>
                             <p class="form-field-wrapper">
@@ -76,6 +76,7 @@
                                         </div>
                                     </div>
                                 </div>
+                                <errores :errors="validationErrors" :campo="'tipo_persona'" v-if="validationErrors"> </errores>
                             </p>
 
                             <p class="form-field-wrapper">
@@ -256,6 +257,8 @@
                 this.usuario_nuevo.clave_uno = '';
                 this.usuario_nuevo.clave_dos = '';
                 this.usuario_nuevo.mailing = false;
+
+                $('#alerta_rut').addClass('d-none')
 
                 this.mostrar_botones_registrate();
             },

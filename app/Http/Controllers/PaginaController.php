@@ -96,7 +96,7 @@ class PaginaController extends Controller
 
     public function indexNosotros(Request $request)
     {
-        return ['contenido' => Pagina::find(1)->contenido];
+        return ['contenido' => Pagina::find(1)];
     }
 
     public function indexServicios(Request $request)
@@ -177,7 +177,7 @@ class PaginaController extends Controller
             $email = $request->email;
         }
 
-        if(!Mail::to('contacto@prevencionlebenco.cl')->cc($email)->send(new Contacto($request->nombre, $request->asunto, $email, $request->telefono, $request->mensaje, $request->tipo_persona))){
+        if(!Mail::to('contacto@prevencionlebenco.cl')->send(new Contacto($request->nombre, $request->asunto, $email, $request->telefono, $request->mensaje, $request->tipo_persona))){
             $usuario = User::find(1);
             $usuario->notify(new Alerta('Contacto', $user, 'fa fa-envelope', 2));
 

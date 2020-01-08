@@ -84,7 +84,8 @@ class RegisterController extends Controller
             'nombre' => $data['nombre'],
             'email' => $data['email'],
             'password' => Hash::make($data['clave_dos']),
-            'tipo_persona' => $data['tipo_persona']
+            'tipo_persona' => $data['tipo_persona'],
+            'mailing' => $data['mailing']
         ]);
 
         if(!Mail::to($usuario->email)->send(new Bienvenida($usuario))){
