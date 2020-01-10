@@ -72,7 +72,6 @@
                     <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="hide-menu">Feedback </span></a>
                     <ul aria-expanded="false" class="collapse">
                         <li @click="menu=16"><a href="javascript:void(0)">Sugerencías</a></li>
-                        <li @click="menu=17"><a href="javascript:void(0)">Contáctenos</a></li>
                         <li @click="menu=18"><a href="javascript:void(0)">Asesoría y cotiza hoy</a></li>
                         <li @click="menu=19"><a href="javascript:void(0)">Compartir documento</a></li>
                         <li @click="menu=20"><a href="javascript:void(0)">Alertas</a></li>
@@ -189,5 +188,5 @@
 </template>
 
 <template v-if="ubicacion == 1 && menu==23">
-    <alertas :titulo="'Alertas desde contácto'" :tipo="2" ref="componente_alerta"></alertas>
+    <alertas :titulo="'Alertas desde contácto'" :tipo="3" ref="componente_alerta"></alertas>
 </template>

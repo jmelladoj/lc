@@ -34,24 +34,27 @@
                                     </ValidationProvider>
                                 </div>
                                 <div class="form-field-wrapper col-md-6 row">
-                                    <div class="col-lg-4 col-md-4 d-flex align-items-center justify-content-center">
-                                        <div class="custom-control custom-radio">
-                                            <input @change="cambiar_estado" type="radio" id="estudiante" name="tipo_persona" v-model="usuario.tipo_persona" class="custom-control-input" value="3">
-                                            <label class="custom-control-label" for="estudiante"> Estudiante</label>
+                                    <ValidationProvider name="tipo_persona" rules="required|oneOf:1,2,3" v-slot="{ errors }">
+                                        <div class="col-md-4 align-items-center justify-content-center">
+                                            <div class="custom-control custom-radio">
+                                                <input @change="cambiar_estado" type="radio" id="estudiante" name="tipo_persona" v-model="usuario.tipo_persona" class="custom-control-input" value="3">
+                                                <label class="custom-control-label" for="estudiante"> Estudiante</label>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-lg-4 col-md-4 d-flex align-items-center justify-content-center">
-                                        <div class="custom-control custom-radio">
-                                            <input @change="cambiar_estado" type="radio" id="persona" name="tipo_persona" v-model="usuario.tipo_persona" class="custom-control-input" value="1">
-                                            <label class="custom-control-label" for="persona"> Persona</label>
+                                        <div class="col-md-4 align-items-center justify-content-center">
+                                            <div class="custom-control custom-radio">
+                                                <input @change="cambiar_estado" type="radio" id="persona" name="tipo_persona" v-model="usuario.tipo_persona" class="custom-control-input" value="1">
+                                                <label class="custom-control-label" for="persona"> Persona</label>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-lg-4 col-md-4 d-flex align-items-center justify-content-center">
-                                        <div class="custom-control custom-radio">
-                                            <input @change="cambiar_estado" type="radio" id="empresa" name="tipo_persona" v-model="usuario.tipo_persona" class="custom-control-input" value="2">
-                                            <label class="custom-control-label" for="empresa"> Pyme</label>
+                                        <div class="col-md-4 align-items-center justify-content-center">
+                                            <div class="custom-control custom-radio">
+                                                <input @change="cambiar_estado" type="radio" id="empresa" name="tipo_persona" v-model="usuario.tipo_persona" class="custom-control-input" value="2">
+                                                <label class="custom-control-label" for="empresa"> Pyme</label>
+                                            </div>
                                         </div>
-                                    </div>
+                                        <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
+                                    </ValidationProvider>
                                 </div>
                             </div>
                             <div class="row">

@@ -11,7 +11,7 @@
                 <li>
                     <div class="message-center ps ps--theme_default" data-ps-id="1f364355-630f-3dc6-d666-9e64a51ae8da">
 
-                        <a href="javascript:void(0)" v-for="notificacion in notificaciones" :key="notificacion.id" @click="cambiarMenu()">
+                        <a href="javascript:void(0)" v-for="notificacion in notificaciones" :key="notificacion.id" @click="cambiarMenu(notificacion.data.tipo_notificacion)">
                             <div v-if="notificacion.data.usuario != null" class="btn btn-warning btn-circle"><i v-bind:class="notificacion.data.clase"></i></div>
                             <div v-if="notificacion.data.usuario != null" class="mail-contnet">
                                 <h5 v-text="notificacion.data.usuario.nombre"></h5> 
@@ -35,8 +35,13 @@
             }
         },    
         methods:{
-            cambiarMenu(){
-                this.$root.menu=20;
+            cambiarMenu(tipo){
+                if(tipo != 9){
+                    this.$root.menu = 20;
+                } else {
+                    this.$root.menu = 23;
+                }
+                
             },
             listarNotificaciones (){
                 let me=this;

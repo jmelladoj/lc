@@ -35,7 +35,7 @@ class Contacto extends Mailable
      */
     public function build()
     {
-        return $this->from($this->email)
+        return $this->from('contacto@prevencionlebenco.cl')
                     ->subject('Contacto desde página web')
                     ->view('mensajes.contacto');
     }

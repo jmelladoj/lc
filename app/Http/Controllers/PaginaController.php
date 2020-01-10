@@ -171,7 +171,8 @@ class PaginaController extends Controller
             $user = [
                 'nombre' => $request->nombre,
                 'email' => $request->email,
-                'telefono' => $request->telefono
+                'telefono' => $request->telefono,
+                'tipo_usuario' => $request->tipo_persona
             ];
 
             $email = $request->email;
@@ -179,7 +180,7 @@ class PaginaController extends Controller
 
         if(!Mail::to('contacto@prevencionlebenco.cl')->send(new Contacto($request->nombre, $request->asunto, $email, $request->telefono, $request->mensaje, $request->tipo_persona))){
             $usuario = User::find(1);
-            $usuario->notify(new Alerta('Contacto', $user, 'fa fa-envelope', 2));
+            $usuario->notify(new Alerta('Contacto', $user, 'fa fa-envelope', 9));
 
             return ['mensaje' => 'Mensaje enviado!, pronto tomaremos contacto contigo.', 'clase' => 'success'];
         } else {

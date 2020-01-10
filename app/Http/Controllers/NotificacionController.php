@@ -24,6 +24,14 @@ class NotificacionController extends Controller
                 break;
             case 2:
                 return ['alertas' => User::find(1)->unreadNotifications];
+            case 3: 
+                $alertas = User::find(1)->unreadNotifications;
+                
+                $filtrados = $alertas->filter(function ($item, $key) {
+                    return $item->data['tipo_notificacion'] == 9;
+                });
+
+                return ['alertas' => $filtrados];
         }
         
     }

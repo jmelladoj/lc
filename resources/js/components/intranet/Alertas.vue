@@ -141,11 +141,11 @@
                 items: items,
                 fields: [
                     { key: 'index', label: '#', sortable: true, sortDirection: 'desc', class: 'text-center' },
-                    { key: 'contacto', label: 'CONTÁCTO', sortable: true, class: 'text-left' },
-                    { key: 'tipo', label: 'TIPO USUARIO', sortable: true, class: 'text-left' },
-                    { key: 'mensaje', label: 'MENSAJE', sortable: true, class: 'text-left' },
-                    { key: 'created_at', label: 'FECHA SOLICITUD', sortable: true, class: 'text-left' },
-                    { key: 'acciones', label: 'ACCIONES', sortable: true, class: 'text-center' }
+                    { key: 'contacto', label: 'Contacto', sortable: true, class: 'text-left' },
+                    { key: 'tipo', label: 'Tipo cliente', sortable: true, class: 'text-left' },
+                    { key: 'mensaje', label: 'Mensaje', sortable: true, class: 'text-left' },
+                    { key: 'created_at', label: 'Fecha solicitud', sortable: true, class: 'text-left' },
+                    { key: 'acciones', label: 'Acciones', sortable: true, class: 'text-center' }
                 ],
                 currentPage: 1,
                 perPage: 10,
@@ -171,6 +171,7 @@
             },
             listarAlertas (){
                 let me=this;
+
                 axios.get('/notificaciones/' + this.tipo).then(function (response) {
                     me.items = response.data.alertas;
                     me.items = me.items.filter(item => item.data.usuario != null)
