@@ -61,6 +61,7 @@ Route::post('/pagina/comunidad/actualizar', 'PaginaController@actualizarComunida
 Route::post('/pagina/servicios/actualizar', 'PaginaController@actualizarServicios')->name('Actualizar página servicios');
 Route::post('/pagina/login/actualizar', 'PaginaController@actualizarLogin')->name('Actualizar página login');
 Route::post('/pagina/comunidad/alerta', 'PaginaController@alerta')->name('Alertas');
+Route::post('/pagina/video/eliminar', 'PaginaController@eliminar_video')->name('Listar Nosotros');
 
 //Rutas de servicios
 Route::get('/pagina/servicios/intranet', 'ServicioController@index')->name('Listar Servicios');

@@ -73,7 +73,7 @@
                                 <b-col>
                                     <b-form-group label="Email">
                                         <ValidationProvider name="email" rules="required|email" v-slot="{ errors }">
-                                            <b-form-input type="email" v-model="usuario.email" :readonly="tipo_usuario_logeado >= 3"></b-form-input>
+                                            <b-form-input type="email" v-model="usuario.email" :readonly="tipo_usuario_logeado > 2"></b-form-input>
                                             <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
                                         </ValidationProvider>
                                     </b-form-group>
@@ -88,7 +88,7 @@
                                 </b-col>
                             </b-row>
                             <b-row>
-                                <b-col v-show="tipo_usuario_logeado == 3">
+                                <b-col v-if="tipo_usuario_logeado == 3">
                                     <b-form-group label="Fecha de nacimiento">
                                         <ValidationProvider name="fecha de nacimiento" rules="required" v-slot="{ errors }">
                                             <b-form-input type="date" v-model="usuario.fecha_nacimiento" :readonly="tipo_usuario_logeado == 4"></b-form-input>
@@ -106,7 +106,7 @@
                                 </b-col>
                             </b-row>
                             <b-row>
-                                <b-col v-show="tipo_usuario_logeado > 2">
+                                <b-col v-if="tipo_usuario_logeado > 2">
                                     <b-form-group label="Dirección">
                                         <ValidationProvider name="dirección" rules="required" v-slot="{ errors }">
                                             <b-form-input type="text" v-model="usuario.direccion" :readonly="tipo_usuario_logeado == 4"></b-form-input>
@@ -114,7 +114,7 @@
                                         </ValidationProvider>
                                     </b-form-group>
                                 </b-col>
-                                <b-col v-show="tipo_usuario_logeado > 2">
+                                <b-col v-if="tipo_usuario_logeado > 2">
                                     <b-form-group label="Comuna">
                                         <ValidationProvider name="comuna" rules="required" v-slot="{ errors }">
                                             <b-form-select v-model="usuario.comuna_id" :disabled="tipo_usuario_logeado == 4">
@@ -126,7 +126,7 @@
                                     </b-form-group>
                                 </b-col>
                             </b-row>
-                            <b-row  v-show="tipo_usuario_logeado > 2">
+                            <b-row  v-if="tipo_usuario_logeado > 2">
                                 <b-col>
                                     <b-form-group label="Estado civil">
                                         <ValidationProvider name="estado civil" rules="required|alpha_spaces" v-slot="{ errors }">

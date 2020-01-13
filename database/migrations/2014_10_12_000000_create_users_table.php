@@ -16,8 +16,8 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('nombre');
-            $table->string('run');
-            $table->string('email')->unique();
+            $table->string('run')->unique();
+            $table->string('email');
             $table->timestamp('email_verified_at')->nullable()->default(NULL);
             $table->string('password')->nullable();
 
@@ -66,14 +66,14 @@ class CreateUsersTable extends Migration
             $table->string('ultimo_empresa')->nullable()->default(NULL);
             $table->string('rubro_empresa')->nullable()->default(NULL);
             $table->string('organismo_administrador_empresa')->nullable()->default(NULL);
-            
+
 
             $table->integer('tipo_usuario')->nullable()->default(3);
             $table->integer('tipo_persona')->nullable()->default(1);
             $table->integer('mailing')->nullable()->default(0);
             $table->integer('saldo')->default(1000);
             $table->boolean('lista_negra')->default(false);
-            
+
             $table->string('url_perfil')->default('img/perfil.svg');
 
             $table->unsignedBigInteger('comuna_id')->nullable()->default(NULL);
