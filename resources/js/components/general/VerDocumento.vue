@@ -56,8 +56,10 @@
             </b-form>
 
             <template slot="modal-footer">
+                <b-spinner variant="success" label="Spinning" v-show="spinner.estado == 1"></b-spinner>
                 <b-button size="md" variant="success" @click="descargar(documento.id)" v-if="autenticado == 1">{{ documento.valor | currency }} -  Descargar</b-button>
                 <b-button size="md" variant="danger" @click="cerrarModalVistaDocumento()"> Cerrar </b-button>
+                
             </template>
         </b-modal>
     </div>
@@ -74,6 +76,9 @@
                 modal_vista_documento: {
                     titulo: '',
                     contenido: ''
+                },
+                spinner: {
+                    estado: 0
                 }
             }
         },
@@ -113,20 +118,24 @@
                     if (result.value) {
                         let me = this;
 
+                        me.spinner.estado = 1
+
                         axios.get('/documento/descargar/' + id).then(function (response) {
                             if(response.data.clase == 'success'){
 
                                 Vue.$toast.open({
-			                        message: 'El Documento se descargara pronto!' + valor,
+			                        message: 'El Documento se descargara pronto!',
 			                        type: 'success',
 			                        duration: 5000
-                                });
+                                })
 
-                                const link = document.createElement('a');
-                                link.href = '/storage/' + response.data.documento.documento_url;
-                                link.download = response.data.documento.titulo + '.' + response.data.documento.extension;
-                                document.body.appendChild(link);
-                                link.click();
+                                const link = document.createElement('a')
+                                link.href = '/storage/' + response.data.documento.documento_url
+                                link.download = response.data.documento.titulo + '.' + response.data.documento.extension
+                                document.body.appendChild(link)
+                                link.click()
+
+                                me.spinner.estado = 0
                             } else {
                             	Vue.$toast.open({
 			                        message: response.data.mensaje,
@@ -136,7 +145,7 @@
                             }
 
                         }).catch(function (error) {
-                            console.log(error.response.data);
+                            console.log(error);
                         });
 
 
@@ -184,5 +193,4 @@
         color:#1E2F13;
         font-weight: 500;
     }
-
 </style>

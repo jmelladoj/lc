@@ -127,7 +127,7 @@
                 <b-modal ref="modal_categoria" :title="modal_categoria.titulo" no-close-on-backdrop>
                     <b-form>
                         <b-form-group label="Nombre de Categoría">
-                            <ValidationProvider name="nombre" rules="required|min:3|alpha_dash" v-slot="{ errors }">
+                            <ValidationProvider name="nombre" rules="required|min:3" v-slot="{ errors }">
                                 <b-form-input type="text" v-model="categoria.nombre"></b-form-input>
                                 <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
                             </ValidationProvider>

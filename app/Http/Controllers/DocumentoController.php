@@ -19,13 +19,13 @@ class DocumentoController extends Controller
     public function index($tipo){
         switch ($tipo) {
             case 1:
-                return ['documentos' => Documento::where('estado', 1)->with('categoria')->orderBy('created_at', 'desc')->get()];
+                return ['documentos' => Documento::where('estado', 1)->orderBy('created_at', 'desc')->get()];
                 break;
             case 2:
-                return ['documentos' => Documento::where('estado', 0)->with('categoria')->orderBy('created_at', 'desc')->get()];
+                return ['documentos' => Documento::where('estado', 0)->orderBy('created_at', 'desc')->get()];
                 break;
             case 3:
-                return ['documentos' => Documento::where('user_id', Auth::id())->with('categoria')->orderBy('created_at', 'asc')->get()];
+                return ['documentos' => Documento::where('user_id', Auth::id())->orderBy('created_at', 'asc')->get()];
                 break;
         }
     }
@@ -60,7 +60,8 @@ class DocumentoController extends Controller
     public function crearOactualizar(Request $request){
         $documento = Documento::updateOrCreate(
             ['id' => $request->documento_id],
-            ['titulo' => $request->titulo,
+            [
+                'titulo' => $request->titulo,
                 'descripcion' => $request->descripcion,
                 'codigo' => $request->codigo,
                 'valor' => $request->valor,

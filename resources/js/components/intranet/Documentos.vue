@@ -92,12 +92,6 @@
                                     {{ data.index + 1 }}
                                 </template>
 
-                                <template v-slot:cell(nombre_categoria)="data">
-                                    {{ data.item.categoria.nombre }}
-                                </template>
-
-
-
                                 <template v-slot:cell(acciones)="row">
                                     <b-button size="xs" variant="success" title="Descargar documento" @click="descargar(row.item.id)">
                                         <i class="fa fa-file"></i>
@@ -249,9 +243,10 @@
                 items: items,
                 fields: [
                     { key: 'index', label: '#', sortable: true, sortDirection: 'desc', class: 'text-center' },
-                    { key: 'titulo', label: 'NOMBRE', sortable: true, class: 'text-left' },
-                    { key: 'nombre_categoria', label: 'CATEGORÍA', sortable: true, class: 'text-left' },
-                    { key: 'acciones', label: 'ACCIONES', sortable: true, class: 'text-center' }
+                    { key: 'titulo', label: 'Nombre', sortable: true, class: 'text-left' },
+                    { key: 'nombre_categoria', label: 'Categoría', sortable: true, class: 'text-left' },
+                    { key: 'extension_documento', label: 'Tipo de documento', sortable: true, class: 'text-left' },
+                    { key: 'acciones', label: 'Acciones', sortable: true, class: 'text-center' }
                 ],
                 categorias: [],
                 currentPage: 1,
@@ -433,7 +428,7 @@
                     me.documento.descripcion = data['descripcion'];
                     me.documento.codigo = data['codigo'];
                     me.documento.valor = data['valor'];
-                    me.documento.categoria_id = data['categorias_documentos_id'];
+                    me.documento.categoria_id = data['id_categoria'];
                 }
 
                 this.$refs['modal_documento'].show();

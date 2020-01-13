@@ -123,6 +123,7 @@ class PaginaController extends Controller
         $pagina = Pagina::find(1);
 
         if ($request->hasFile('video')){
+            $pagina->video_titulo = $request->file('video')->getClientOriginalName();
             $video = $request->file('video');
             $nombre = 'video_nosotros.' . $request->file('video')->getClientOriginalExtension();
 
@@ -133,6 +134,7 @@ class PaginaController extends Controller
             );
         } else {
             $pagina->video_url = $request->link;
+            $pagina->video_titulo = $request->link;
         }
 
         if($request->contenido != null || $request->contenido != ''){
@@ -186,5 +188,15 @@ class PaginaController extends Controller
         } else {
             return ['mensaje' => 'Hemos tenido inconvenientes al enviar tu correo. Por favor intenta nuevamente!', 'clase' => 'error'];
         }
+    }
+
+    public function eliminar_video(){
+        $pagina = Pagina::find(1);
+
+        if($pagina->video_url != null) { Storage::disk('public')->delete($pagina->video_url); }
+
+        $pagina->video_url = null;
+        $pagina->video_titulo = 'Sin vídeo.';
+        $pagina->save();
     }
 }

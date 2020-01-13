@@ -312,4 +312,8 @@
     .table thead th {
         font-size: 18px !important;
     }
+
+    .redondear {
+        border-radius: 10px 10px 10px 10px !important;
+    }
 </style>

@@ -15,7 +15,6 @@
                                 </div>
                             </div>
 
-
                             <p class="large text-justify">Bienvenido a tu comunidad LebenCo.</p>
                             <p class="form-field-wrapper">
                                 <input class="input--lg form-full" v-rut:live v-model="usuario_login.run" @blur="mostrar_botones_login" @keyup="mostrar_botones_login" autocomplete="run" type="text" @keyup.enter="ingresar" placeholder="RUN personal o RUT si eres una Pyme" required>

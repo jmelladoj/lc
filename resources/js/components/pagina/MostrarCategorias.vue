@@ -7,11 +7,11 @@
             </div>
         </div>
         <div class="container">
-            <div class="row">
-                <div class="col-lg-3 col-m-3" v-for="(categoria, index) in categorias" :key="index">
-                    <a v-bind:href="'/busqueda/' + categoria.id" class="btn btn--primary space--button btn-block" v-text="categoria.nombre"></a>
-                </div>
-            </div>
+            <b-row class="justify-content-md-center">
+                <b-col cols="3" class="mb-2" v-for="(categoria, index) in categorias" :key="index">
+                    <a v-bind:href="'/busqueda/' + categoria.id" class="redondear btn btn--primary space--button btn-block" v-text="categoria.nombre"></a>
+                </b-col>
+            </b-row>
         </div>
     </section>
 </template>

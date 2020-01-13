@@ -18,7 +18,7 @@
                         <b-form-group>
                             <b-container fluid class="mb-5">
                                 <b-row>
-                                    <b-col md="6" class="my-1">
+                                    <b-col md="4" class="my-1">
                                         <b-form-group label-cols-sm="3" label="Filtrar" class="mb-0">
                                         <b-input-group>
                                             <b-form-input v-model="filter" placeholder="Escribe para buscar" />
@@ -29,7 +29,7 @@
                                         </b-form-group>
                                     </b-col>
 
-                                    <b-col md="6" class="my-1">
+                                    <b-col md="4" class="my-1">
                                         <b-form-group label-cols-sm="3" label="Ordenar" class="mb-0">
                                         <b-input-group>
                                             <b-form-select v-model="sortBy" :options="sortOptions">
@@ -42,18 +42,7 @@
                                         </b-form-group>
                                     </b-col>
 
-                                    <b-col md="6" class="my-1">
-                                        <b-form-group label-cols-sm="3" label="Dirección" class="mb-0">
-                                        <b-input-group>
-                                            <b-form-select v-model="sortDirection" slot="append">
-                                            <option value="asc">Asc</option> <option value="desc">Desc</option>
-                                            <option value="last">Último</option>
-                                            </b-form-select>
-                                        </b-input-group>
-                                        </b-form-group>
-                                    </b-col>
-
-                                    <b-col md="6" class="my-1">
+                                    <b-col md="4" class="my-1">
                                         <b-form-group label-cols-sm="3" label="Por página" class="mb-0">
                                         <b-form-select :options="pageOptions" v-model="perPage" />
                                         </b-form-group>
@@ -126,10 +115,6 @@
                                                 <i class="fa fa-eye"></i>
                                             </b-button>
                                         </template>
-
-                                        <b-button size="xs" variant="success" title="Agregar a top five" @click="abrirModalPosicion(row.item)">
-                                            <i class="fa fa-star"></i>
-                                        </b-button>
 
                                         <b-button size="xs" variant="success" title="Agregar saldo usuario" @click="abrirModalSaldo(row.item)">
                                             <i class="fa fa-usd"></i>
@@ -278,14 +263,14 @@
                     <b-form>
                         <b-row>
                             <b-col>
-                                <b-form-group>
+                                <b-form-group label="Cliente">
                                     <b-form-input v-model="tabla_vip.empresa" type="text" readonly="" placeholder="Pyme"></b-form-input>
                                 </b-form-group>
                             </b-col>
                             <b-col>
-                                <b-form-group>
+                                <b-form-group label="Categoría">
                                     <ValidationProvider name="posición" rules="required|numeric|between:0,10" v-slot="{ errors }">
-                                        <b-form-select v-model="tabla_vip.posicion" @change="actualizar_usuario_tabla_vip" class="mb-3">
+                                        <b-form-select v-model="tabla_vip.posicion" @change="actualizar_usuario_tabla_vip">
                                             <option value="0">Estrellas</option>
                                             <option value="1">1 Estrella(s)</option>
                                             <option value="2">2 Estrella(s)</option>
@@ -293,32 +278,32 @@
                                             <option value="4">4 Estrella(s)</option>
                                             <option value="5">5 Estrella(s)</option>
                                         </b-form-select>
-                                        <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
+                                        <span v-show="errors[0]"><span class="d-block alert alert-danger">{{ errors[0] }}</span></span>
                                     </ValidationProvider>
                                 </b-form-group>
                             </b-col>
                             <b-col>
-                                <b-form-group label="">
+                                <b-form-group label="Likes">
                                     <ValidationProvider name="likes" rules="required|numeric|between:1,100" v-slot="{ errors }">
                                         <b-form-input type="number" v-model="tabla_vip.likes" placeholder="Likes" @keyup="actualizar_usuario_tabla_vip"></b-form-input>
-                                        <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
+                                        <span v-show="errors[0]"><span class="d-block alert alert-danger">{{ errors[0] }}</span></span>
                                     </ValidationProvider>
                                 </b-form-group>
                             </b-col>
                             <b-col>
-                                <b-form-group>
+                                <b-form-group label="Dislikes">
                                     <ValidationProvider name="dislikes" rules="required|numeric|between:1,100" v-slot="{ errors }">
                                         <b-form-input type="number" v-model="tabla_vip.dislikes" placeholder="Dislikes" disabled=""></b-form-input>
-                                        <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
+                                        <span v-show="errors[0]"><span class="d-block alert alert-danger">{{ errors[0] }}</span></span>
                                     </ValidationProvider>
                                 </b-form-group>
                             </b-col>
                         </b-row>
                         <b-row>
                             <b-form-group>
-                                <b-container fluid class="mb-5">
+                                <b-container fluid>
                                     <b-row>
-                                        <b-col md="6" class="my-1">
+                                        <b-col md="4" class="my-1">
                                             <b-form-group label-cols-sm="3" label="Filtrar" class="mb-0">
                                             <b-input-group>
                                                 <b-form-input v-model="filter_vip" placeholder="Escribe para buscar" />
@@ -329,7 +314,7 @@
                                             </b-form-group>
                                         </b-col>
 
-                                        <b-col md="6" class="my-1">
+                                        <b-col md="4" class="my-1">
                                             <b-form-group label-cols-sm="3" label="Ordenar" class="mb-0">
                                             <b-input-group>
                                                 <b-form-select v-model="sortBy_vip" :options="sortOptions_vip">
@@ -342,7 +327,7 @@
                                             </b-form-group>
                                         </b-col>
 
-                                        <b-col md="6" class="my-1">
+                                        <b-col md="4" class="my-1">
                                             <b-form-group label-cols-sm="3" label="Dirección" class="mb-0">
                                             <b-input-group>
                                                 <b-form-select v-model="sortDirection_vip" slot="append">
@@ -353,11 +338,6 @@
                                             </b-form-group>
                                         </b-col>
 
-                                        <b-col md="6" class="my-1">
-                                            <b-form-group label-cols-sm="3" label="Por página" class="mb-0">
-                                            <b-form-select :options="pageOptions_vip" v-model="perPage_vip" />
-                                            </b-form-group>
-                                        </b-col>
                                     </b-row>
 
                                     <!-- Main table element -->
@@ -470,12 +450,12 @@
                 subusuarios: [],
                 fields: [
                     { key: 'index', label: '#', sortable: true, sortDirection: 'desc', class: 'text-center' },
-                    { key: 'run', label: 'RUN', sortable: true, class: 'text-left' },
-                    { key: 'nombre', label: 'NOMBRE', sortable: true, class: 'text-left' },
-                    { key: 'email', label: 'EMAIL', sortable: true, class: 'text-left' },
-                    { key: 'tipo_user', label: 'TIPO USUARIO', sortable: true, class: 'text-left' },
-                    { key: 'tipo', label: 'TIPO PERSONA', sortable: true, class: 'text-left' },
-                    { key: 'acciones', label: 'ACCIONES', sortable: true, class: 'text-center' }
+                    { key: 'run', label: 'Run', sortable: true, class: 'text-left' },
+                    { key: 'nombre', label: 'Nombre', sortable: true, class: 'text-left' },
+                    { key: 'email', label: 'Email', sortable: true, class: 'text-left' },
+                    { key: 'tipo_user', label: 'Tipo usuario', sortable: true, class: 'text-left' },
+                    { key: 'tipo', label: 'Tipo persona', sortable: true, class: 'text-left' },
+                    { key: 'acciones', label: 'Acciones', sortable: true, class: 'text-center' }
                 ],
                 fields_vip: [
                     { key: 'posicion', label: '#', sortable: true, sortDirection: 'desc', class: 'text-center' },
