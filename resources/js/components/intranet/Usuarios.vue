@@ -7,7 +7,7 @@
                     <div class="d-flex justify-content-end align-items-right">
                         <sociales></sociales>
                         <b-button @click="abrirModal(1)" class="btn btn-success d-lg-block m-l-15" v-b-tooltip title="Agrega un usuario a la plataforma"><i class="fa fa-plus-circle"></i> Agregar Usuario</b-button>
-                        <b-button @click="abrirModalTabla()" class="btn btn-success d-lg-block m-l-15" v-b-tooltip title="Ordenar tabla vip"><i class="fa fa-list"></i> Tabla VIP</b-button>
+                        <b-button @click="ir_tabla_vip()" class="btn btn-success d-lg-block m-l-15" v-b-tooltip title="Ir a tabla vip"><i class="fa fa-list"></i> Ir a tabla VIP</b-button>
                     </div>
                 </b-col>
             </b-row>
@@ -257,152 +257,6 @@
                     </template>
                 </b-modal>
             </ValidationObserver>
-
-            <ValidationObserver ref="observer_tabla" v-slot="{ valid }">
-                <b-modal ref="modal_tabla" title="Administración tabla VIP" size="lg" no-close-on-backdrop>
-                    <b-form>
-                        <b-row>
-                            <b-col>
-                                <b-form-group label="Cliente">
-                                    <b-form-input v-model="tabla_vip.empresa" type="text" readonly="" placeholder="Pyme"></b-form-input>
-                                </b-form-group>
-                            </b-col>
-                            <b-col>
-                                <b-form-group label="Categoría">
-                                    <ValidationProvider name="posición" rules="required|numeric|between:0,10" v-slot="{ errors }">
-                                        <b-form-select v-model="tabla_vip.posicion" @change="actualizar_usuario_tabla_vip">
-                                            <option value="0">Estrellas</option>
-                                            <option value="1">1 Estrella(s)</option>
-                                            <option value="2">2 Estrella(s)</option>
-                                            <option value="3">3 Estrella(s)</option>
-                                            <option value="4">4 Estrella(s)</option>
-                                            <option value="5">5 Estrella(s)</option>
-                                        </b-form-select>
-                                        <span v-show="errors[0]"><span class="d-block alert alert-danger">{{ errors[0] }}</span></span>
-                                    </ValidationProvider>
-                                </b-form-group>
-                            </b-col>
-                            <b-col>
-                                <b-form-group label="Likes">
-                                    <ValidationProvider name="likes" rules="required|numeric|between:1,100" v-slot="{ errors }">
-                                        <b-form-input type="number" v-model="tabla_vip.likes" placeholder="Likes" @keyup="actualizar_usuario_tabla_vip"></b-form-input>
-                                        <span v-show="errors[0]"><span class="d-block alert alert-danger">{{ errors[0] }}</span></span>
-                                    </ValidationProvider>
-                                </b-form-group>
-                            </b-col>
-                            <b-col>
-                                <b-form-group label="Dislikes">
-                                    <ValidationProvider name="dislikes" rules="required|numeric|between:1,100" v-slot="{ errors }">
-                                        <b-form-input type="number" v-model="tabla_vip.dislikes" placeholder="Dislikes" disabled=""></b-form-input>
-                                        <span v-show="errors[0]"><span class="d-block alert alert-danger">{{ errors[0] }}</span></span>
-                                    </ValidationProvider>
-                                </b-form-group>
-                            </b-col>
-                        </b-row>
-                        <b-row>
-                            <b-form-group>
-                                <b-container fluid>
-                                    <b-row>
-                                        <b-col md="4" class="my-1">
-                                            <b-form-group label-cols-sm="3" label="Filtrar" class="mb-0">
-                                            <b-input-group>
-                                                <b-form-input v-model="filter_vip" placeholder="Escribe para buscar" />
-                                                <b-input-group-append>
-                                                <b-button :disabled="!filter_vip" @click="filter_vip = ''">Limpiar</b-button>
-                                                </b-input-group-append>
-                                            </b-input-group>
-                                            </b-form-group>
-                                        </b-col>
-
-                                        <b-col md="4" class="my-1">
-                                            <b-form-group label-cols-sm="3" label="Ordenar" class="mb-0">
-                                            <b-input-group>
-                                                <b-form-select v-model="sortBy_vip" :options="sortOptions_vip">
-                                                <option slot="first" :value="null">-- nada --</option>
-                                                </b-form-select>
-                                                <b-form-select :disabled="!sortBy_vip" v-model="sortDesc_vip" slot="append">
-                                                <option :value="false">Asc</option> <option :value="true">Desc</option>
-                                                </b-form-select>
-                                            </b-input-group>
-                                            </b-form-group>
-                                        </b-col>
-
-                                        <b-col md="4" class="my-1">
-                                            <b-form-group label-cols-sm="3" label="Dirección" class="mb-0">
-                                            <b-input-group>
-                                                <b-form-select v-model="sortDirection_vip" slot="append">
-                                                <option value="asc">Asc</option> <option value="desc">Desc</option>
-                                                <option value="last">Último</option>
-                                                </b-form-select>
-                                            </b-input-group>
-                                            </b-form-group>
-                                        </b-col>
-
-                                    </b-row>
-
-                                    <!-- Main table element -->
-                                    <b-table
-                                        show-empty
-                                        responsive
-                                        striped
-                                        borderless
-                                        outlined
-                                        small
-                                        hover
-                                        :items="items_vip"
-                                        :fields="fields_vip"
-                                        :current-page="currentPage_vip"
-                                        :per-page="perPage_vip"
-                                        :filter="filter_vip"
-                                        :sort-by.sync="sortBy_vip"
-                                        :sort-desc.sync="sortDesc_vip"
-                                        :sort-direction="sortDirection_vip"
-                                        @filtered="onFiltered_vip">
-
-                                        <template slot="empty">
-                                            <center><h5>No hay registros para mostrar.</h5></center>
-                                        </template>
-
-                                        <template slot="emptyfiltered">
-                                            <center><h5>No hay registros que coincidan con su solicitud.</h5></center>
-                                        </template>
-
-                                        <template v-slot:cell(nombre)="row">
-                                            <label  @click="actualizar_tabla_vip(row.item)" v-text="row.item.nombre"></label>
-                                        </template>
-
-                                        <template v-slot:cell(tipo)="data">
-                                            <label v-if="data.item.tipo_persona == 1"> Persona </label>
-                                            <label v-else-if="data.item.tipo_persona == 2"> Pyme </label>
-                                            <label v-else-if="data.item.tipo_persona == 3"> Estudiante </label>
-                                        </template>
-
-
-                                        <template v-slot:cell(acciones)="row">
-                                            <b-button size="xs" variant="warning" title="Actualizar usuario" @click="actualizar_tabla_vip(row.item)">
-                                                <i class="fa fa-pencil"></i>
-                                            </b-button>
-                                        </template>
-
-                                    </b-table>
-
-                                    <b-row>
-                                        <b-col>
-                                            <b-pagination :total-rows="totalRows" :per-page="perPage" v-model="currentPage" class="my-3" align="fill"/>
-                                        </b-col>
-                                    </b-row>
-                                </b-container>
-                            </b-form-group>
-                        </b-row>
-                    </b-form>
-
-                    <template slot="modal-footer">
-                        <b-button :disabled="!valid" size="md" variant="success"> Guardar </b-button>
-                        <b-button size="md" variant="danger" @click="cerrarModalTabla()"> Cerrar </b-button>
-                    </template>
-                </b-modal>
-            </ValidationObserver>
-
         </b-container>
 
     </div>
@@ -410,7 +264,6 @@
 
 <script>
     const items = [];
-    const items_vip = [];
 
     export default {
         data() {
@@ -429,12 +282,6 @@
                     likes: 0,
                     dislikes: 0
                 },
-                tabla_vip: {
-                    empresa: null,
-                    posicion: 0,
-                    likes: null,
-                    dislikes: null
-                },
                 modal_usuario: {
                     titulo: '',
                     accion: 0
@@ -446,7 +293,6 @@
                     titulo: 'Asignar posición'
                 },
                 items: items,
-                items_vip: items_vip,
                 subusuarios: [],
                 fields: [
                     { key: 'index', label: '#', sortable: true, sortDirection: 'desc', class: 'text-center' },
@@ -457,15 +303,6 @@
                     { key: 'tipo', label: 'Tipo persona', sortable: true, class: 'text-left' },
                     { key: 'acciones', label: 'Acciones', sortable: true, class: 'text-center' }
                 ],
-                fields_vip: [
-                    { key: 'posicion', label: '#', sortable: true, sortDirection: 'desc', class: 'text-center' },
-                    { key: 'nombre', label: 'Pyme', sortable: true, class: 'text-left' },
-                    { key: 'nombreComuna', label: 'Comuna', sortable: true, class: 'text-left' },
-                    { key: 'nombreRubro', label: 'Rubro', sortable: true, class: 'text-left' },
-                    { key: 'likes', label: 'Likes', sortable: true, class: 'text-center' },
-                    { key: 'dislikes', label: 'Dislikes', sortable: true, class: 'text-center' },
-                    { key: 'acciones', label: 'Acciones', sortable: true, class: 'text-center' }
-                ],
                 currentPage: 1,
                 perPage: 10,
                 totalRows: 0,
@@ -474,25 +311,11 @@
                 sortDesc: false,
                 sortDirection: 'asc',
                 filter: null,
-                filter_vip: null,
-                currentPage_vip: 1,
-                perPage_vip: 10,
-                totalRows_vip: 0,
-                pageOptions_vip: [10, 25, 50, 100],
-                sortBy_vip: null,
-                sortDesc_vip: false,
-                sortDirection_vip: 'asc'
-
             }
         },
         computed:{
             sortOptions() {
                 return this.fields.filter(f => f.sortable).map(f => {
-                    return { text: f.label, value: f.key }
-                })
-            },
-            sortOptions_vip() {
-                return this.fields_vip.filter(f => f.sortable).map(f => {
                     return { text: f.label, value: f.key }
                 })
             }
@@ -502,24 +325,11 @@
                 this.totalRows = filteredItems.length
                 this.currentPage = 1
             },
-            onFiltered_vip(filteredItems) {
-                this.totalRows = filteredItems.length
-                this.currentPage = 1
-            },
             listarUsuarios(){
                 let me=this;
                 axios.get('/usuarios/1').then(function (response) {
                     me.items = response.data.usuarios;
                     me.totalRows = me.items.length;
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
-            },
-            listarUsuariosTablaVip(){
-                let me=this;
-                axios.get('/usuarios/tabla/vip').then(function (response) {
-                    me.items_vip = response.data.usuarios;
                 })
                 .catch(function (error) {
                     console.log(error);
@@ -742,18 +552,8 @@
 
                 this.$refs['modal_usuario'].show();
             },
-            abrirModalTabla(){
-                this.listarUsuariosTablaVip()
-                this.$refs['modal_tabla'].show();
-            },
-            cerrarModalTabla(){
-                this.usuario.id = 0
-                this.tabla_vip.empresa = ''
-                this.tabla_vip.posicion = 0
-                this.tabla_vip.likes = null
-                this.tabla_vip.dislikes = null
-
-                this.$refs['modal_tabla'].hide();
+            ir_tabla_vip(){
+                this.$root.menu = 24
             },
             abrirModalSaldo(data = []){
                 let me = this;
@@ -787,47 +587,6 @@
                 this.usuario.saldo_actual = 0;
                 this.usuario.nuevo_saldo = 0;
             },
-            actualizar_tabla_vip(data = []){
-                this.usuario.id = data.id
-                this.tabla_vip.empresa = data.nombre
-                this.tabla_vip.posicion = data.posicion
-                this.tabla_vip.likes = data.likes
-                this.tabla_vip.dislikes = data.dislikes
-
-                this.actualizar_porcentajes()
-            },
-            actualizar_usuario_tabla_vip(){
-                let me = this;
-
-                this.actualizar_porcentajes()
-
-                if(this.tabla_vip.likes > 100){
-                    return false
-                }
-
-                axios.post('/usuario/actualizar/tabla/vip',{
-                    'id': me.usuario.id,
-                    'posicion': me.tabla_vip.posicion,
-                    'likes': me.tabla_vip.likes,
-                    'dislikes': me.tabla_vip.dislikes
-                }).then(function (response) {
-                    me.listarUsuariosTablaVip();
-
-                    Vue.$toast.open({
-                        message: 'Cambio guardado exitosamente!',
-                        type: 'success',
-                        duration: 2000
-                    });
-
-
-                }).catch(function (error) {
-                    console.error(error);
-                });
-            },
-            actualizar_porcentajes(){
-                let porcentaje = 100
-                this.tabla_vip.dislikes = parseInt(porcentaje) - parseInt(this.tabla_vip.likes)
-            }
         },
         mounted() {
             this.listarUsuarios();

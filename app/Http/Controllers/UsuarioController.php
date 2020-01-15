@@ -157,6 +157,10 @@ class UsuarioController extends Controller
         $usuario->save();
     }
 
+    public function saldo_disponible(){
+        return ['saldo_disponible' => Auth::user()->saldo];
+    }
+
     public function blacklistAgregar(Request $request){
         User::updateOrCreate(
             ['id' => $request->id],

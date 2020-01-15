@@ -1,7 +1,7 @@
 <template> 
     <section class="sec-padding">
         <div class="container">
-            <carousel :per-page="6" :autoplay="true" :paginationActiveColor="'#3F8A24'" :loop="true">
+            <carousel :per-page="6" :autoplay="true" :paginationActiveColor="'#8ab733'" :loop="true">
                 <slide>
                     <div class="brand-item">
                         <a href="https://www.achs.cl" target="__blank">

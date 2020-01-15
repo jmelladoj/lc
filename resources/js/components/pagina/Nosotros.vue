@@ -112,6 +112,7 @@
                     me.pagina.tipo = 0;
                     me.pagina.link = '';
                     me.listarNosotros();
+                    me.listarVideo();
                     me.spinner.estado = 0
                 }).catch(function (error) {
                     console.error(error);

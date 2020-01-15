@@ -120,6 +120,7 @@ Vue.component('seminarios', require('./components/intranet/Seminarios.vue').defa
 Vue.component('interes', require('./components/intranet/Interes.vue').default);
 Vue.component('alertas', require('./components/intranet/Alertas.vue').default);
 Vue.component('recargas', require('./components/intranet/Recargar.vue').default);
+Vue.component('tabla-vip', require('./components/intranet/TablaVip.vue').default);
 
 
 

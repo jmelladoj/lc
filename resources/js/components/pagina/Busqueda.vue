@@ -14,13 +14,13 @@
 
         <section class="sec-padding">
             <div class="container">
-                <div class="row">
-                    <div v-show="documentos.length > 0" class="col-md-2 product-item mb-4" v-for="documento in documentos"  :key="documento.id">
+                <b-row class="justify-content-md-center">
+                    <b-col xs="6" sm="6" md="2" lg="2" v-show="documentos.length > 0" class="product-item mb-4" v-for="documento in documentos"  :key="documento.id">
                         <ver-documento :documento="documento" :autenticado="autenticado"></ver-documento>
-                    </div>
-
+                    </b-col>
+    
                     <div class="col-md-12" v-if="documentos.length == 0"><h4 class="text-center">Sin resultados.</h4></div>
-                </div>
+                </b-row>
             </div>
         </section>
     </div>

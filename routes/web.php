@@ -106,6 +106,7 @@ Route::post('/usuario/eliminar', 'UsuarioController@eliminar')->name('Eliminar u
 Route::post('usuario/actualizar/imagen', 'UsuarioController@imagen')->name('Actualizar foto de usuario');
 
 Route::post('/usuario/saldo', 'UsuarioController@saldo')->name('Agregar saldo');
+Route::get('/usuario/saldo/disponible', 'UsuarioController@saldo_disponible')->name('Obtener saldo disponible');
 Route::post('/usuario/blacklist/agregar', 'UsuarioController@blacklistAgregar')->name('Agregar a black list');
 Route::post('/usuario/blacklist/quitar', 'UsuarioController@blacklistQuitar')->name('Agregar a black list');
 Route::post('/usuario/actualizar/tabla/vip', 'UsuarioController@actualizar_usuario_tabla_vip')->name('Actualizar usuario tabla vip');

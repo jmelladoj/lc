@@ -26,15 +26,16 @@
 
         <b-modal ref="modal_vista_documento" size="lg"  no-close-on-backdrop>
             <template v-slot:modal-header>
-                <b-row>
-                    <b-col cols="4">
-                        <img v-bind:src="'../' + documento.imagen" width="40" alt="Imagen de documento" />
-                    </b-col>
 
-                    <b-col cols="8">
+                    <div class="col-md-2">
+                        <img v-bind:src="'../' + documento.imagen" width="40" alt="Imagen de documento" />
+                    </div>
+                    <div class="col-md-6">
                         <h3 v-text="modal_vista_documento.titulo"></h3>
-                    </b-col>
-                </b-row>
+                    </div>
+                    <div class="col-md-4">
+                        <h4>Saldo disponible: {{ saldo_disponible | currency }}</h4>
+                    </div>
             </template>
 
             <b-form>
@@ -58,6 +59,7 @@
             <template slot="modal-footer">
                 <b-spinner variant="success" label="Spinning" v-show="spinner.estado == 1"></b-spinner>
                 <b-button size="md" variant="success" @click="descargar(documento.id)" v-if="autenticado == 1">{{ documento.valor | currency }} -  Descargar</b-button>
+                <a class="btn btn-success btn-md text-white" href="/login" v-else>{{ documento.valor | currency }} -  Descargar</a>
                 <b-button size="md" variant="danger" @click="cerrarModalVistaDocumento()"> Cerrar </b-button>
                 
             </template>
@@ -79,10 +81,20 @@
                 },
                 spinner: {
                     estado: 0
-                }
+                },
+                saldo_disponible: 0
             }
         },
         methods:{
+            obtener_saldo_usuario(){
+                let me = this
+                axios.get('/usuario/saldo/disponible').then(function (response) {
+                    me.saldo_disponible = response.data.saldo_disponible;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+            },
             revisarDocumento(){
                 let me=this;
 
@@ -136,6 +148,7 @@
                                 link.click()
 
                                 me.spinner.estado = 0
+                                me.obtener_saldo_usuario()
                             } else {
                             	Vue.$toast.open({
 			                        message: response.data.mensaje,
@@ -153,6 +166,9 @@
                 })
             }
         },
+        mounted() {
+            this.obtener_saldo_usuario()
+        }
     }
 </script>
 

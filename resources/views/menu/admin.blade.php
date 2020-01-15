@@ -50,7 +50,8 @@
                     <ul aria-expanded="false" class="collapse">
                         <li @click="menu=5"><a href="javascript:void(0)">Usuarios del sistema</a></li>
                         <li @click="menu=3"><a href="javascript:void(0)">Categorías usuario</a></li>
-                        <li @click="menu=4"><a href="javascript:void(0)">Prefesiones y rubros</a></li>
+                        <li @click="menu=4"><a href="javascript:void(0)">Profesiones y rubros</a></li>
+                        <li @click="menu=24"><a href="javascript:void(0)">Tabla VIP</a></li>
                     </ul>
                 </li>
                 <li>
@@ -190,3 +191,9 @@
 <template v-if="ubicacion == 1 && menu==23">
     <alertas :titulo="'Alertas desde contácto'" :tipo="3" ref="componente_alerta"></alertas>
 </template>
+
+<template v-if="ubicacion == 1 && menu==24">
+    <tabla-vip></tabla-vip>
+</template>
+
+
