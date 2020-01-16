@@ -92,6 +92,11 @@
                                     {{ data.index + 1 }}
                                 </template>
 
+                                <template v-slot:cell(valor)="data">
+                                    {{ data.item.valor | currency }}
+                                </template>
+
+
                                 <template v-slot:cell(acciones)="row">
                                     <b-button size="xs" variant="success" title="Descargar documento" @click="descargar(row.item.id)">
                                         <i class="fa fa-file"></i>
@@ -118,7 +123,7 @@
                                     size="sm"
                                     class="my-0"
                                     ></b-pagination>
-                                
+
                                     </b-col>
                                 </b-row>
                             </b-container>
@@ -245,6 +250,7 @@
                     { key: 'index', label: '#', sortable: true, sortDirection: 'desc', class: 'text-center' },
                     { key: 'titulo', label: 'Nombre', sortable: true, class: 'text-left' },
                     { key: 'nombre_categoria', label: 'Categoría', sortable: true, class: 'text-left' },
+                    { key: 'valor', label: 'Valor', sortable: true, class: 'text-left' },
                     { key: 'extension_documento', label: 'Tipo de documento', sortable: true, class: 'text-left' },
                     { key: 'acciones', label: 'Acciones', sortable: true, class: 'text-center' }
                 ],

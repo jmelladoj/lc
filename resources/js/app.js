@@ -42,6 +42,14 @@ import 'vue-toast-notification/dist/index.css';
 Vue.directive('rut', rutInputDirective);
 Vue.use(VueToast);
 
+Vue.use(VueCurrencyFilter,{
+    symbol : '$',
+    thousandsSeparator: '.',
+    fractionCount: 0,
+    fractionSeparator: ',',
+    symbolPosition: 'front',
+    symbolSpacing: true
+})
 
 for (let rule in rules) {
     extend(rule, {
