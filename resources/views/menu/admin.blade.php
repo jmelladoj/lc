@@ -40,9 +40,9 @@
                 <li>
                     <a class="has-arrow waves-effect waves-dark" @click="menu=1" href="javascript:void(0)" aria-expanded="false"><i class="fa fa-folder-o" aria-hidden="true"></i><span class="hide-menu">Contenido </span></a>
                     <ul aria-expanded="false" class="collapse">
-                        <li @click="menu=1"><a href="javascript:void(0)">Documentos aprobados</a></li>
+                        <boton-documentos-aprobados></boton-documentos-aprobados>
                         <li @click="menu=0"><a href="javascript:void(0)">Categorías</a></li>
-                        <li @click="menu=2"><a href="javascript:void(0)">Documentos pendientes</a></li>
+                        <boton-documentos-pendientes></boton-documentos-pendientes>
                     </ul>
                 </li>
                 <li>
@@ -185,11 +185,11 @@
 </template>
 
 <template v-if="ubicacion == 1 && menu==20">
-    <alertas :titulo="'Alertas'" :tipo="1" ref="componente_alerta"></alertas>
+    <alertas ref="componente_alerta"></alertas>
 </template>
 
 <template v-if="ubicacion == 1 && menu==23">
-    <alertas :titulo="'Alertas desde contácto'" :tipo="3" ref="componente_alerta"></alertas>
+    <alertas-contacto ref="componente_alerta"></alertas-contacto>
 </template>
 
 <template v-if="ubicacion == 1 && menu==24">

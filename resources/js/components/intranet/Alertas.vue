@@ -2,7 +2,7 @@
     <div class="page-wrapper">
         <b-container fluid class="mb-5">
             <b-row class="page-titles">
-                <b-col cols="5" class="align-self-center"><h4 class="text-themecolor" v-text="titulo"></h4></b-col>
+                <b-col cols="5" class="align-self-center"><h4 class="text-themecolor" v-text="'Alertas'"></h4></b-col>
                 <b-col cols="7">
                     <div class="d-flex justify-content-end align-items-right">
                         <sociales></sociales>
@@ -133,9 +133,6 @@
     const items = [];
 
     export default {
-        props: [
-            "titulo", "tipo"
-        ],
         data() {
             return {
                 items: items,
@@ -172,7 +169,7 @@
             listarAlertas (){
                 let me=this;
 
-                axios.get('/notificaciones/' + this.tipo).then(function (response) {
+                axios.get('/notificaciones/1').then(function (response) {
                     me.items = response.data.alertas;
                     me.items = me.items.filter(item => item.data.usuario != null)
                     me.totalRows = me.items.length;

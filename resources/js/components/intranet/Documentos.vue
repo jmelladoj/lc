@@ -244,7 +244,7 @@
                 modal_documento: {
                     titulo: '',
                     accion: 0
-                },
+                }, 
                 items: items,
                 fields: [
                     { key: 'index', label: '#', sortable: true, sortDirection: 'desc', class: 'text-center' },
@@ -447,11 +447,20 @@
                 this.documento.documento_url = null;
                 this.documento.valor = null;
                 this.documento.categoria_id = 0;
+            },
+            obtener_registros_documentos(){
+                this.listarCategorias();
+                this.listarDocumentos();
             }
         },
         mounted() {
-            this.listarCategorias();
-            this.listarDocumentos();
+            let me = this
+            me.obtener_registros_documentos();
+
+            Event.$on('listar_documentos', function () {
+                me.obtener_registros_documentos();
+            })
+            
         }
     }
 </script>

@@ -79,6 +79,10 @@ Vue.use(VueCurrencyFilter,
 
 Vue.use(BootstrapVue)
 
+//Especifico
+Vue.component('boton-documentos-aprobados', require('./components/especifico/OpcionDocumentosAprobados.vue').default);
+Vue.component('boton-documentos-pendientes', require('./components/especifico/OpcionDocumentosPendientes.vue').default);
+
 //General
 Vue.component('sociales', require('./components/general/Sociales.vue').default);
 Vue.component('perfil_usuario', require('./components/general/Perfil.vue').default);
@@ -127,6 +131,7 @@ Vue.component('asesorias', require('./components/intranet/Asesorias.vue').defaul
 Vue.component('seminarios', require('./components/intranet/Seminarios.vue').default);
 Vue.component('interes', require('./components/intranet/Interes.vue').default);
 Vue.component('alertas', require('./components/intranet/Alertas.vue').default);
+Vue.component('alertas-contacto', require('./components/intranet/AlertasContacto.vue').default);
 Vue.component('recargas', require('./components/intranet/Recargar.vue').default);
 Vue.component('tabla-vip', require('./components/intranet/TablaVip.vue').default);
 
