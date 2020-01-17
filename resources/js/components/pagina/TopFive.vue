@@ -15,9 +15,9 @@
             <b-col md="6" class="my-1">
                 <b-form-group class="mb-0">
                 <b-input-group>
-                    <b-form-input v-model="filter" placeholder="Escribe una comuna para buscar" class="altura-form-control"/>
+                    <b-form-input v-model="filter_comuna" placeholder="Escribe una comuna para buscar" class="altura-form-control"/>
                     <b-input-group-append>
-                    <b-button class="boton_chico" size="sm" :disabled="!filter" @click="filter = ''">Limpiar</b-button>
+                    <b-button class="boton_chico" size="sm" :disabled="!filter_comuna" @click="filter_comuna = ''">Limpiar</b-button>
                     </b-input-group-append>
                 </b-input-group>
                 </b-form-group>
@@ -146,7 +146,8 @@
                 sortBy: null,
                 sortDesc: false,
                 sortDirection: 'asc',
-                filter: null
+                filter: null,
+                filter_comuna: null
             }
         },
         computed:{

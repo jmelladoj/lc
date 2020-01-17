@@ -17,7 +17,7 @@
                         <b-form-group>
                             <b-container fluid class="mb-5">
                                 <b-row>
-                                    <b-col md="6" class="my-1">
+                                    <b-col md="4" class="my-1">
                                         <b-form-group label-cols-sm="3" label="Filtrar" class="mb-0">
                                         <b-input-group>
                                             <b-form-input v-model="filter" placeholder="Escribe para buscar" />
@@ -28,7 +28,7 @@
                                         </b-form-group>
                                     </b-col>
 
-                                    <b-col md="6" class="my-1">
+                                    <b-col md="4" class="my-1">
                                         <b-form-group label-cols-sm="3" label="Ordenar" class="mb-0">
                                         <b-input-group>
                                             <b-form-select v-model="sortBy" :options="sortOptions">
@@ -41,19 +41,8 @@
                                         </b-form-group>
                                     </b-col>
 
-                                    <b-col md="6" class="my-1">
-                                        <b-form-group label-cols-sm="3" label="Dirección" class="mb-0">
-                                        <b-input-group>
-                                            <b-form-select v-model="sortDirection" slot="append">
-                                            <option value="asc">Asc</option> <option value="desc">Desc</option>
-                                            <option value="last">Último</option>
-                                            </b-form-select>
-                                        </b-input-group>
-                                        </b-form-group>
-                                    </b-col>
-
-                                    <b-col md="6" class="my-1">
-                                        <b-form-group label-cols-sm="3" label="Por página" class="mb-0">
+                                    <b-col md="4" class="my-1">
+                                        <b-form-group label-cols-sm="4" label="Por página" class="mb-0">
                                         <b-form-select :options="pageOptions" v-model="perPage" />
                                         </b-form-group>
                                     </b-col>
@@ -100,7 +89,17 @@
                             </template>
 
                             <template v-slot:cell(acciones)="row">
+                                <b-button size="xs" variant="info" title="Ver información del documento" @click="abrir_modal_comunicaciones(row.item)">
+                                    <i class="fa fa-info-circle"></i>
+                                </b-button>
 
+                                <b-button size="xs" variant="success" title="Comunicación" @click="abrir_modal_comunicaciones(row.item)">
+                                    <i class="fa fa-plus"></i>
+                                </b-button>
+
+                                <b-button size="xs" variant="warning" title="Editar estado de documento" @click="abrir_modal_comunicaciones(row.item)">
+                                    <i class="fa fa-pencil"></i>
+                                </b-button>
                             </template>
 
                             </b-table>
@@ -159,6 +158,31 @@
         </b-modal>
     </ValidationObserver>
 
+    <ValidationObserver ref="observer_comunicaciones" v-slot="{ valid }">
+        <b-modal ref="modal_comunicaciones" title="Comunicaciones" no-close-on-backdrop scrollable>
+            <b-form>
+                <b-form-group label="Mensajes anteriores">
+                    <ValidationProvider name="requerimiento" rules="required|min:10" v-slot="{ errors }">
+                        <b-form-textarea v-model="solicitud.descripcion" rows="3" max-rows="6"></b-form-textarea>
+                        <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
+                    </ValidationProvider>
+                </b-form-group>
+
+                <b-form-group label="Escríbe acá ...">
+                    <ValidationProvider name="requerimiento" rules="required|min:10" v-slot="{ errors }">
+                        <b-form-textarea v-model="solicitud.descripcion" rows="3" max-rows="6"></b-form-textarea>
+                        <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
+                    </ValidationProvider>
+                </b-form-group>
+            </b-form>
+
+            <template slot="modal-footer">
+                <b-button :disabled="!valid" size="md" variant="success" @click="solicitarDocumento()"> Enviar mensaje </b-button>
+                <b-button size="md" variant="danger" @click="cerrar_modal_ubicacion()"> Cerrar </b-button>
+            </template>
+        </b-modal>
+    </ValidationObserver>
+
     </div>
 </template>
 
@@ -171,11 +195,11 @@
                 items: items,
                 fields: [
                     { key: 'index', label: '#', sortable: true, sortDirection: 'desc', class: 'text-center' },
-                    { key: 'usuario', label: 'USUARIO', sortable: true, class: 'text-left' },
-                    { key: 'descripcion', label: 'SOLICITUD', sortable: true, class: 'text-justify' },
-                    { key: 'plazo', label: 'PLAZO (DÍAS)', sortable: true, class: 'text-left' },
-                    { key: 'pago', label: 'PAGA', sortable: true, class: 'text-left' },
-                    { key: 'acciones', label: 'ACCIONES', sortable: true, class: 'text-center' }
+                    { key: 'usuario', label: 'Usuario', sortable: true, class: 'text-left' },
+                    { key: 'descripcion', label: 'Solicitud', sortable: true, class: 'text-justify' },
+                    { key: 'plazo', label: 'Plazo (días)', sortable: true, class: 'text-left' },
+                    { key: 'pago', label: 'Paga', sortable: true, class: 'text-left' },
+                    { key: 'acciones', label: 'Acciones', sortable: true, class: 'text-center' }
                 ],
                 currentPage: 1,
                 perPage: 10,
@@ -202,6 +226,9 @@
         methods:{
             abrirModal(){
                 this.$refs['modal_solicitud_documento'].show();
+            },
+            abrir_modal_comunicaciones(){
+                this.$refs['modal_comunicaciones'].show();
             },
             onFiltered(filteredItems) {
                 this.totalRows = filteredItems.length
@@ -250,6 +277,9 @@
             },
             cerrarModal(){
                 this.$refs['modal_solicitud_documento'].hide();
+            },
+            cerrar_modal_ubicacion(){
+                this.$refs['modal_comunicaciones'].hide();
             },
             limpiar_datos_modal(){
                 this.solicitud.descripcion = "";

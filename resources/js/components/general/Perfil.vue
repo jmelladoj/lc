@@ -98,8 +98,10 @@
                                 </b-col>
                                 <b-col>
                                     <b-form-group label="Teléfono">
-                                        <ValidationProvider name="teléfono" rules="required|numeric|digits:9" v-slot="{ errors }">
-                                            <b-form-input type="number" v-model="usuario.telefono" :readonly="tipo_usuario_logeado == 4"></b-form-input>
+                                        <ValidationProvider name="teléfono" rules="required|numeric|digits:9" v-slot="{ errors }">                                         
+                                            <b-input-group prepend="+56 9">
+                                                <b-form-input type="number" v-model="usuario.telefono" :readonly="tipo_usuario_logeado == 4"></b-form-input>
+                                            </b-input-group>
                                             <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
                                         </ValidationProvider>
                                     </b-form-group>

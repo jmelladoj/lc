@@ -6,7 +6,7 @@
                 <b-col cols="7">
                     <div class="d-flex justify-content-end align-items-right">
                         <sociales></sociales>
-                        <b-button @click="abrirModal(1)" class="btn btn-success d-lg-block m-l-15" v-b-tooltip title="Agrega un usuario a la plataforma"><i class="fa fa-arrow-left"></i> Volvel a usuarios</b-button>
+                        <b-button @click="$root.menu = 5" class="btn btn-success d-lg-block m-l-15" v-b-tooltip title="Agrega un usuario a la plataforma"><i class="fa fa-arrow-left"></i> Volver a usuarios</b-button>
                     </div>
                 </b-col>
             </b-row>

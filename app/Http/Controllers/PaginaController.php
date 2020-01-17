@@ -174,7 +174,7 @@ class PaginaController extends Controller
                 'nombre' => $request->nombre,
                 'email' => $request->email,
                 'telefono' => $request->telefono,
-                'tipo_usuario' => $request->tipo_persona
+                'tipo_persona' => $request->tipo_persona
             ];
 
             $email = $request->email;
