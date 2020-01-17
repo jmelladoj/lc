@@ -8,7 +8,7 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 window.Swal = require('sweetalert2');
-window.Event = new Vue ();
+window.Evento = new Vue ();
 
 /**
  * The following block of code may be used to automatically register your
@@ -98,6 +98,7 @@ Vue.component('sliders-ubicacion', require('./components/pagina/SlidersUbicacion
 Vue.component('documentos-tipo', require('./components/pagina/DocumentosHome.vue').default);
 Vue.component('nosotros', require('./components/pagina/Nosotros.vue').default);
 Vue.component('top-five', require('./components/pagina/TopFive.vue').default);
+Vue.component('comunidad-tabla', require('./components/pagina/Comunidad.vue').default);
 Vue.component('sliders-comunidad-pyme', require('./components/pagina/SlidersComunidadPyme.vue').default);
 Vue.component('busqueda', require('./components/pagina/Busqueda.vue').default);
 Vue.component('iniciar-sesion', require('./components/pagina/IniciarSesion.vue').default);
@@ -134,6 +135,7 @@ Vue.component('alertas', require('./components/intranet/Alertas.vue').default);
 Vue.component('alertas-contacto', require('./components/intranet/AlertasContacto.vue').default);
 Vue.component('recargas', require('./components/intranet/Recargar.vue').default);
 Vue.component('tabla-vip', require('./components/intranet/TablaVip.vue').default);
+
 
 
 

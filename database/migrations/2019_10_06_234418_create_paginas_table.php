@@ -19,7 +19,7 @@ class CreatePaginasTable extends Migration
             $table->longText('contenido')->nullable()->default(null);
             $table->text('mensaje_uno')->nullable()->default(null);
             $table->text('mensaje_dos')->nullable()->default(null);
-            $table->string('video_url')->nullable()->default(null);
+            $table->text('video_url')->nullable()->default(null);
             $table->string('video_titulo')->nullable()->default('Sin vídeo.');
             $table->timestamps();
         });

@@ -14,9 +14,9 @@
                         <a href="javascript:void(0)" v-for="notificacion in notificaciones" :key="notificacion.id" @click="cambiarMenu(notificacion.data.tipo_notificacion)">
                             <div v-if="notificacion.data.usuario != null" class="btn btn-warning btn-circle"><i v-bind:class="notificacion.data.clase"></i></div>
                             <div v-if="notificacion.data.usuario != null" class="mail-contnet">
-                                <h5 v-text="notificacion.data.usuario.nombre"></h5> 
-                                <span class="mail-desc" v-text="notificacion.data.mensaje"></span> 
-                                <span class="time" v-text="notificacion.data.created_at"></span> 
+                                <h5 v-text="notificacion.data.usuario.nombre"></h5>
+                                <span class="mail-desc" v-text="notificacion.data.mensaje"></span>
+                                <span class="time" v-text="notificacion.data.created_at"></span>
                             </div>
                         </a>
                     </div>
@@ -33,7 +33,7 @@
                 notificaciones: [],
                 total: 0
             }
-        },    
+        },
         methods:{
             cambiarMenu(tipo){
                 if(tipo != 9){
@@ -41,7 +41,7 @@
                 } else {
                     this.$root.menu = 23;
                 }
-                
+
             },
             listarNotificaciones (){
                 let me=this;
@@ -75,7 +75,7 @@
         mounted() {
             this.listarNotificaciones();
 
-            Event.$on('marcar', (id) => {
+            Evento.$on('marcar', (id) => {
                 this.listarNotificaciones();
             })
         }

@@ -167,7 +167,7 @@
             listarPymes (){
                 let me=this;
 
-                var url = '/usuarios/tabla/vip'
+                var url = '/usuarios/tabla/comunidad'
 
                 axios.get(url).then(function (response) {
                     me.items = response.data.usuarios;

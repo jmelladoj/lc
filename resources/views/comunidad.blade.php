@@ -56,9 +56,9 @@
                         {{ $pagina->mensaje_dos }}
                     </p>
                     @guest
-                        <top-five :tipo="1" :logeado="0"></top-five>
+                        <comunidad-tabla :tipo="1" :logeado="0"></comunidad-tabla>
                     @else
-                        <top-five :tipo="1" :logeado="1"></top-five>
+                        <comunidad-tabla :tipo="1" :logeado="1"></comunidad-tabla>
                     @endguest
                 </div>
             </div>
