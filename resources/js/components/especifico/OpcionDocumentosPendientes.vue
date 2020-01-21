@@ -14,7 +14,7 @@
         methods:{
             actualizar_datos(){
                 this.$root.menu = 2
-                Event.$emit('listar_documentos')
+                Evento.$emit('listar_documentos')
             }
         }
     }

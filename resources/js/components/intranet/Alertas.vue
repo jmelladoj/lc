@@ -181,7 +181,7 @@
                         duration: 5000
                     });
 
-                    Event.$emit('marcar', id);
+                    Evento.$emit('marcar', id);
                 }).catch(function (error) {
                     console.error(error);
                 });
