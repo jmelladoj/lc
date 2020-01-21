@@ -121,18 +121,24 @@
             <ValidationObserver ref="observer_link" v-slot="{ valid }">
                 <b-modal ref="modal_sitio" :title="modal_sitio.titulo" no-close-on-backdrop scrollable>
                     <b-form>
-                        <b-form-group label="Nombre de sitio de Interés">
+                        <b-form-group label="Nombre de sitio de interés">
                             <ValidationProvider name="nombre" rules="required|min:3" v-slot="{ errors }">
                                 <b-form-input type="text" v-model="sitio.nombre"></b-form-input>
                                 <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
                             </ValidationProvider>
                         </b-form-group>
 
+                        <b-form-group label="Link de sitio de interés">
+                            <ValidationProvider name="link" rules="required|min:3" v-slot="{ errors }">
+                                <b-form-input type="text" v-model="sitio.link"></b-form-input>
+                                <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
+                            </ValidationProvider>
+                        </b-form-group>
 
                         <b-form-group label="Imagen (Rec. 1920px ancho X 1280px alto | JPG, JPEG y PNG)">
                             <ValidationProvider name="imagen" rules="required|image" v-slot="{ errors, validate }">
-                                <b-img  :src="sitio.url_imagen" id="img_sitio" center name="img_sitio" class="imagen"></b-img>
                                 <b-form-file id="imagen_sitio" name="imagen_sitio" accept="image/*" placeholder="Sin archivo" @change="mostrarFoto($event)" @input="validate"></b-form-file>
+                                <b-img :src="sitio.url_imagen" id="img_sitio" center name="img_sitio" class="imagen"></b-img>
                                 <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
                             </ValidationProvider>
                         </b-form-group>
@@ -159,6 +165,7 @@
                 sitio: {
                     id: 0,
                     nombre: '',
+                    link: '',
                     url_imagen: null
                 },
                 modal_sitio: {
@@ -224,6 +231,7 @@
                 
                 formData.append('sitio_id', this.sitio.id);
                 formData.append('nombre', this.sitio.nombre);
+                formData.append('link', this.sitio.link);
 
                 axios.post('sitio/crear/actualizar',formData).then(function (response) {
                     me.listarSitios();
@@ -288,6 +296,7 @@
 
                     me.sitio.id = data['id'];
                     me.sitio.nombre = data['nombre'];
+                    me.sitio.link = data['link'];
                     me.sitio.url_imagen = 'storage/' + data['url_imagen'];
                 }
 
@@ -296,6 +305,7 @@
             limpiarDatosSitios(){
                 this.sitio.id = 0;
                 this.sitio.sitio = '';
+                this.sitio.link = '';
                 this.sitio.url_imagen = null;               
             }
         },

@@ -15,6 +15,9 @@ class CreateInteresTable extends Migration
     {
         Schema::create('interes', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('nombre');
+            $table->string('link');
+            $table->string('url_imagen')->nullable()->default(null);
             $table->timestamps();
         });
     }

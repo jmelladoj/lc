@@ -15,6 +15,7 @@
 
     <sliders-ubicacion :ubicacion="2" @auth :usuario="{{ json_encode(Auth::user()) }}" @endauth></sliders-ubicacion>
     -->
+
     <section class="sec-padding-login">
         <div class="container">
             <div class="row">
