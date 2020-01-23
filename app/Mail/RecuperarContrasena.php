@@ -36,6 +36,7 @@ class RecuperarContrasena extends Mailable
                     ->subject('Prueba desde formulario de recuperar contraseña')
                     ->view('mensajes.recuperar')
                     ->with([
+                        'usuario' => $this->usuario,
                         'clave' => $this->clave
                     ]);
     }

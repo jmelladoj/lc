@@ -90,18 +90,24 @@
                                         <errores :errors="validationErrors" :campo="'run'" v-if="validationErrors"> </errores>
                                     </div>
                                     <div class="col-lg-4 col-md-4">
-                                        <input class="input--lg form-full" @keyup="mostrar_botones_registrate" v-model="usuario_nuevo.email" type="email" placeholder="Correo electrónico" required>
-                                        <errores :errors="validationErrors" :campo="'email'" v-if="validationErrors"> </errores>
+                                        <input class="input--lg form-full run_nuevo" @keyup="mostrar_botones_registrate" v-rut:live v-model="usuario_nuevo.run_confirmacion" type="text" placeholder="RUN personal o RUT si eres una Pyme" required>
+                                        <span id="alerta_rut" class="d-none"><span class="d-block alert alert-danger m-t-5">Rut o run invalido</span></span>
+                                        <errores :errors="validationErrors" :campo="'run_confirmacion'" v-if="validationErrors"> </errores>
                                     </div>
+
                                 </div>
                             </p>
                             <p class="form-field-wrapper">
                                 <div class="row">
-                                    <div class="col-lg-6 col-md-6">
+                                    <div class="col-lg-4 col-md-4">
+                                        <input class="input--lg form-full" @keyup="mostrar_botones_registrate" v-model="usuario_nuevo.email" type="email" placeholder="Correo electrónico" required>
+                                        <errores :errors="validationErrors" :campo="'email'" v-if="validationErrors"> </errores>
+                                    </div>
+                                    <div class="col-lg-4 col-md-4">
                                         <input class="input--lg form-full" @keyup="mostrar_botones_registrate" v-model="usuario_nuevo.clave_uno" type="password" placeholder="Crea tu clave (6 caracteres)" required>
                                         <errores :errors="validationErrors" :campo="'clave_uno'" v-if="validationErrors"> </errores>
                                     </div>
-                                    <div class="col-lg-6 col-md-6">
+                                    <div class="col-lg-4 col-md-4">
                                         <input class="input--lg form-full" @keyup="mostrar_botones_registrate" v-model="usuario_nuevo.clave_dos" type="password" placeholder="Repite esa clave" required>
                                         <errores :errors="validationErrors" :campo="'clave_dos'" v-if="validationErrors"> </errores>
                                     </div>
@@ -168,6 +174,7 @@
                     tipo_persona: 0,
                     nombre: '',
                     run: '',
+                    run_confirmacion: '',
                     email: '',
                     clave_uno: '',
                     clave_dos: '',
@@ -213,6 +220,7 @@
                     'tipo_persona': me.usuario_nuevo.tipo_persona,
                     'nombre': me.usuario_nuevo.nombre,
                     'run': me.usuario_nuevo.run,
+                    'run_confirmacion': me.usuario_nuevo.run_confirmacion,
                     'email': me.usuario_nuevo.email,
                     'clave_uno': me.usuario_nuevo.clave_uno,
                     'clave_dos': me.usuario_nuevo.clave_dos,

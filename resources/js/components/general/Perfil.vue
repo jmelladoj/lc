@@ -4,21 +4,27 @@
             <b-card>
                 <center class="mt-1">
                     <ValidationObserver ref="observer_foto_perfil">
+                        <img v-bind:src="usuario.url_perfil" alt="Imagen de usuario" class="img-circle" width="150">
+
+                        <b-row class="mt-3">
+                            <b-col cols="6">
+                                <ValidationProvider name="imagen" rules="required|image" v-slot="{ errors, validate }">
+                                    <b-form-file v-show="tipo_usuario_logeado < 4" id="img_perfil" ref="file-input" name="img_perfil" accept="image/*" placeholder="Sin archivo" class="input-lg" @change="cambiarFoto(1)" @input="validate"></b-form-file>
+                                    <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
+                                </ValidationProvider>
+                            </b-col>
+                            <b-col cols="6">
+                                <b-form-group v-show="tipo_usuario_logeado < 4">
+                                    <b-button variant="danger" @click="cambiarFoto(2)" class="btn-block"  title="Elimina tu imagen de perfil">Eliminar imagen</b-button>
+                                </b-form-group >
+                            </b-col>
+                        </b-row>
                         <b-form-group v-show="tipo_usuario_logeado == 3">
                             <div class="custom-control custom-checkbox">
                                 <b-form-checkbox v-model="usuario.comunidad_pyme">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ¡Quiero ser aparecer en el top five!</b-form-checkbox>
                             </div>
                         </b-form-group >
-                        <img v-bind:src="usuario.url_perfil" alt="Imagen de usuario" class="img-circle" width="150">
-                        <b-form-group  class="mt-3 mb-3">
-                            <ValidationProvider name="imagen" rules="required|image" v-slot="{ errors, validate }">
-                                <b-form-file v-show="tipo_usuario_logeado < 4" id="img_perfil" ref="file-input" name="img_perfil" accept="image/*" placeholder="Sin archivo" class="input-lg" @change="cambiarFoto(1)" @input="validate"></b-form-file>
-                                <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
-                            </ValidationProvider>
-                        </b-form-group >
-                        <b-form-group v-show="tipo_usuario_logeado < 4">
-                            <b-button variant="danger" @click="cambiarFoto(2)" class="btn-block"  title="Elimina tu imagen de perfil">Eliminar imagen</b-button>
-                        </b-form-group >
+
                         <h4 class="card-title m-t-10" v-text="usuario.nombre"></h4>
                         <h6 class="card-subtitle" v-text="categoria.nombre + ' - ' + categoria.nivel"></h6>
                         <h6 class="card-subtitle" v-if="usuario.tipo_persona == 1"> Persona</h6>

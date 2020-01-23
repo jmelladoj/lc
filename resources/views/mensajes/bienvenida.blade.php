@@ -13,6 +13,12 @@
 
         .icono {
             width: 25%;
+            margin: 10px 10px 10px 10px;
+        }
+
+        .iconos {
+            width: 100%;
+            min-width: 300px;
         }
 
         .activo {
@@ -21,10 +27,12 @@
     </style>
 </head>
 <body>
-
     <center>
         <p>
             <img src="{{ asset('intranet/img_mail/logo.png') }}" height="150" width="auto" />
+        </p>
+        <p>
+            <h3>¡Bienvenid@!</h3>
         </p>
 
         <br><br>
@@ -37,12 +45,28 @@
         <br><br>
 
         <p>
-            <div class="icono">
-                <a target="_blank" href="https://www.youtube.com/channel/UC78DsrgVX7KslItHoTuw8uQ?view_as=subscriber" class="activo"><i class="fa fa-youtube"></i></a>
+            <div class="iconos">
+                <div class="icono">
+                    <a target="_blank" href="https://www.youtube.com/channel/UC78DsrgVX7KslItHoTuw8uQ?view_as=subscriber" class="activo">
+                        <img src="{{ asset('intranet/img_mail/youtube.png') }}" height="50" width="auto" alt="">
+                    </a>
+                </div>
+                <div class="icono">
+                    <a target="_blank" href="https://www.facebook.com/prevencion.lebenco.3" class="activo">
+                        <img src="{{ asset('intranet/img_mail/facebook.png') }}" height="50" width="auto" alt="">
+                    </a>
+                </div>
+                <div class="icono">
+                    <a target="_blank" href="https://www.instagram.com/prevencionlebenco.cl/?hl=es-la" class="activo">
+                        <img src="{{ asset('intranet/img_mail/instagram.png') }}" height="50" width="auto" alt="">
+                    </a>
+                </div>
+                <div class="icono">
+                    <a target="_blank" href="https://www.linkedin.com/in/prevenci%C3%B3n-lebenco-62b632184/" class="activo">
+                        <img src="{{ asset('intranet/img_mail/linkedin.png') }}" height="50" width="auto" alt="">
+                    </a>
+                </div>
             </div>
-            <div class="icono"></div>
-            <div class="icono"></div>
-            <div class="icono"></div>
         </p>
 
         <br><br>

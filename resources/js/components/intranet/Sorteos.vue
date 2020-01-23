@@ -206,6 +206,7 @@
                     { key: 'index', label: '#', sortable: true, sortDirection: 'desc', class: 'text-center' },
                     { key: 'titulo', label: 'Nombre', sortable: true, class: 'text-left' },
                     { key: 'imagen', label: 'Imagen', sortable: true, class: 'text-center' },
+                    { key: 'cantidad_participantes', label: 'Cantidad', sortable: true, class: 'text-center' },
                     { key: 'acciones', label: 'Acciones', sortable: true, class: 'text-center' }
                 ],
                 currentPage: 1,

@@ -129,7 +129,7 @@
 
                         <b-form-group label="Imagen (Rec. 150px ancho X 150px alto | JPG, JPEG y PNG)">
                             <ValidationProvider name="imagen" rules="required|image" v-slot="{ errors, validate }">
-                                <b-img v-if="servicio.imagen_url != null" :src="servicio.imagen_url" fluid id="img_servicio" center name="img_servicio" class="imagen-servicio"></b-img>
+                                <b-img v-if="servicio.imagen_url != null" :src="servicio.imagen_url" fluid id="img_servicio" center name="img_servicio" class="maxima-altura"></b-img>
                                 <b-form-file id="imagen_servicio" name="imagen_servicio" accept="image/*" placeholder="Sin archivo" @change="mostrarFoto($event)" @input="validate"></b-form-file>
                                 <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
                             </ValidationProvider>
@@ -335,3 +335,9 @@
         }
     }
 </script>
+
+<style>
+    .maxima-altura {
+        height: 150px !important;
+    }
+</style>

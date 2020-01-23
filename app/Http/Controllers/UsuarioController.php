@@ -203,8 +203,13 @@ class UsuarioController extends Controller
         );
     }
 
-    public function solicitarDocumento(Request $request){
-        if(! Mail::to('prueba@prevencionlebenco.cl')->cc('j.melladojimenez@gmail.com')->send(new InvitarAmigo(Auth::user(), $request->email))){
+    public function invitar_amigo(Request $request){
+        if(!Mail::to($request->email)->send(new InvitarAmigo(Auth::user(), $request->email))){
+
+            $usuario = User::find(1);
+            $usuario->notify(new AppAsesoria('Ha invitado a un amigo.', Auth::user(), 'fa fa-share-alt', 8));
+
+
             return ['mensaje' => 'Invitación enviada!, gracias por compartir nuestra comunidad Prevención LebenCo.', 'clase' => 'success'];
         } else {
             return ['mensaje' => 'Hemos tenido inconvenientes al generar tu invitación. Por favor intenta nuevamente!', 'clase' => 'error'];

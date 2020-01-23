@@ -7,7 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 class Sorteo extends Model
 {
     //
-    protected $fillable = [
-        'id','titulo', 'valor', 'premio', 'fecha', 'categoria_usuario', 'url_imagen'
-    ];
+    protected $guraded = ['id'];
+
+    protected $appends = ['cantidad_participantes'];
+
+    public function getCantidadparticipantesAttribute(){
+        return $this->hasMany(ParticipanteSorteo::class, 'sorteo_id')->count();
+    }
 }

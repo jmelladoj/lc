@@ -139,7 +139,7 @@ Route::post('/solicitar/documento', 'DocumentoController@solicitarDocumento')->n
 Route::get('/solicitudes/documento', 'SolicitudDocumentoController@index')->name('Listar solicitudes documento');
 
 //Rtuas de mensajes y notificaciones invitar amigo
-Route::post('/invitar', 'UsuarioController@solicitarDocumento')->name('Invitar amigo');
+Route::post('/invitar', 'UsuarioController@invitar_amigo')->name('Invitar amigo');
 
 
 Route::get('/asesorias/{tipo}', 'AsesoriaController@index')->name('Listar asesorias');

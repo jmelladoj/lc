@@ -90,6 +90,16 @@
                                         {{ data.item.usuario.email }}
                                     </template>
 
+                                    <template v-slot:cell(observacion)="row">
+                                        {{ row.item.observacion == null ? 'Sin observación' : row.item.observacion }}
+                                    </template>
+
+                                    <template v-slot:cell(estado)="row">
+                                        <label v-if="row.item.estado == 0">Agendada</label>
+                                        <label v-else-if="row.item.estado == 1">Realizada</label>
+                                        <label v-else-if="row.item.estado == 2">Rechazada</label>
+                                    </template>
+
                                     <template v-slot:cell(acciones)="row">
                                         <b-button size="xs" variant="success" title="Marcar como realizada" @click="estado_asesoria(row.item.id, 1)">
                                             <i class="fa fa-check"></i>
@@ -113,7 +123,7 @@
                 </b-col>
             </b-row>
 
-            <ValidationObserver ref="observer_asesoria" v-slot="{ valid }">
+            <ValidationObserver ref="observer_asesoria">
                 <b-modal ref="modal_asesoria" :title="modal_asesoria.titulo" no-close-on-backdrop>
                     <b-form>
                         <b-form-group label="Observación">
@@ -125,8 +135,8 @@
                     </b-form>
 
                     <template slot="modal-footer">
-                        <b-button :disabled="!valid" v-show="modal_asesoria.accion == 1" size="md" variant="success" @click="crearOactualizar(1)"> Guardar </b-button>
-                        <b-button v-show="modal_asesoria.accion == 2" size="md" variant="warning" @click="crearOactualizar(2)"> Actualizar </b-button>
+                        <b-button v-show="asesoria.estado== 1" size="md" variant="success" @click="crearOactualizar(1)"> Marcar como realizada </b-button>
+                        <b-button v-show="asesoria.estado== 2" size="md" variant="warning" @click="crearOactualizar(2)"> Rechazar </b-button>
                         <b-button size="md" variant="danger" @click="cerrarModal()"> Cerrar </b-button>
                     </template>
                 </b-modal>
@@ -197,7 +207,8 @@
             estado_asesoria(id, accion){
                 this.limpiar_modal_asesoria();
 
-                this.modal_asesoria.titulo = accion == 1 ? 'Marcar asesoría como realizada' : 'Recahzar asesoría';
+                this.modal_asesoria.titulo = accion == 1 ? 'Marcar asesoría como realizada' : 'Rechazar asesoría';
+                this.asesoria.id = id;
                 this.asesoria.estado = accion;
 
                 this.$refs['modal_asesoria'].show();
@@ -217,7 +228,7 @@
                 }).then(function (response) {
                     me.listarAsesorias();
                     me.cerrarModal();
-                    var mensaje = me.asesoria.accion == 1 ? 'Asesoría marcada como realizada' : 'Asesoría rechazada';
+                    var mensaje = me.asesoria.estado == 1 ? 'Asesoría marcada como realizada' : 'Asesoría rechazada';
 
 					Vue.$toast.open({
                         message: mensaje,

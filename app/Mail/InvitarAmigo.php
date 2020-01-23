@@ -12,6 +12,8 @@ class InvitarAmigo extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public $user, $email;
+
     /**
      * Create a new message instance.
      *
@@ -31,6 +33,8 @@ class InvitarAmigo extends Mailable
      */
     public function build()
     {
-        return $this->view('mensajes.invitarAmigo');
+        return $this->from('contacto@prevencionlebenco.cl')
+                    ->subject('Ven a conocer nuestro sitio web')
+                    ->view('mensajes.invitarAmigo');
     }
 }
