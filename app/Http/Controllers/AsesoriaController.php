@@ -18,6 +18,12 @@ class AsesoriaController extends Controller
                 return ['asesorias' => Asesoria::where('user_id', Auth::id())->orderBy('created_at', 'desc')->get()];
                 break;
         }
+    }
 
+    public function estado_asesoria(Request $request){
+        $asesoria = Asesoria::find($request->asesoria_id);
+        $asesoria->observacion = $request->observacion != '' ? $request->observacion : null;
+        $asesoria->estado = $request->estado;
+        $asesoria->save();
     }
 }

@@ -303,7 +303,7 @@
 
                 let formData = new FormData();
 
-                me.spinner.estado = 1; 
+                me.spinner.estado = 1;
                 me.modal_slider.accion = 0;
 
                 let imagen_slider = document.querySelector('#imagen_slider');

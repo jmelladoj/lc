@@ -7,7 +7,7 @@
                     <div class="d-flex justify-content-end align-items-right">
                         <sociales></sociales>
                         <b-button @click="abrirModal(1)" class="btn btn-success d-lg-block m-l-15" v-b-tooltip.hover title="Agrega una categoría a la plataforma"><i class="fa fa-plus-circle"></i> Agregar Categoría</b-button>
-                    </div>                    
+                    </div>
                 </b-col>
             </b-row>
 
@@ -17,7 +17,7 @@
                         <b-form-group>
                             <b-container fluid class="mb-5">
                                 <b-row>
-                                    <b-col md="6" class="my-1">
+                                    <b-col md="4" class="my-1">
                                         <b-form-group label-cols-sm="3" label="Filtrar" class="mb-0">
                                         <b-input-group>
                                             <b-form-input v-model="filter" placeholder="Escribe para buscar" />
@@ -28,7 +28,7 @@
                                         </b-form-group>
                                     </b-col>
 
-                                    <b-col md="6" class="my-1">
+                                    <b-col md="4" class="my-1">
                                         <b-form-group label-cols-sm="3" label="Ordenar" class="mb-0">
                                         <b-input-group>
                                             <b-form-select v-model="sortBy" :options="sortOptions">
@@ -41,19 +41,8 @@
                                         </b-form-group>
                                     </b-col>
 
-                                    <b-col md="6" class="my-1">
-                                        <b-form-group label-cols-sm="3" label="Dirección" class="mb-0">
-                                        <b-input-group>
-                                            <b-form-select v-model="sortDirection" slot="append">
-                                            <option value="asc">Asc</option> <option value="desc">Desc</option>
-                                            <option value="last">Último</option>
-                                            </b-form-select>
-                                        </b-input-group>
-                                        </b-form-group>
-                                    </b-col>
-
-                                    <b-col md="6" class="my-1">
-                                        <b-form-group label-cols-sm="3" label="Por página" class="mb-0">
+                                    <b-col md="4" class="my-1">
+                                        <b-form-group label-cols-sm="4" label="Por página" class="mb-0">
                                         <b-form-select :options="pageOptions" v-model="perPage" />
                                         </b-form-group>
                                     </b-col>
@@ -122,7 +111,7 @@
                     </b-card>
                 </b-col>
             </b-row>
-            
+
             <ValidationObserver ref="observer_categoria" v-slot="{ valid }">
                 <b-modal ref="modal_categoria" :title="modal_categoria.titulo" no-close-on-backdrop>
                     <b-form>
@@ -162,7 +151,7 @@
 
                         <b-form-group>
                             <b-table show-empty responsive striped borderless outlined small hover
-                                :items="subcategorias" 
+                                :items="subcategorias"
                                 :fields="campos">
 
                                 <template slot="empty">
@@ -180,7 +169,7 @@
 
                                     <b-button size="xs" variant="danger" title="Eliminar subcategoría" @click="borrarOrestaurarSubCategoria(row.item.id, 1)">
                                         <i class="fa fa-trash"></i>
-                                    </b-button>         
+                                    </b-button>
                                 </template>
                             </b-table>
                         </b-form-group>
@@ -224,13 +213,14 @@
                 subcategorias: [],
                 fields: [
                     { key: 'index', label: '#', sortable: true, sortDirection: 'desc', class: 'text-center' },
-                    { key: 'nombre', label: 'NOMBRE', sortable: true, class: 'text-left' },
-                    { key: 'acciones', label: 'ACCIONES', sortable: true, class: 'text-center' }
+                    { key: 'nombre', label: 'Nombre', sortable: true, class: 'text-left' },
+                    { key: 'cantidad_documentos', label: 'Cantidad', sortable: true, class: 'text-left' },
+                    { key: 'acciones', label: 'Acciones', sortable: true, class: 'text-center' }
                 ],
                 campos: [
                     { key: 'index', label: '#', class: 'text-center' },
-                    { key: 'nombre', label: 'NOMBRE', class: 'text-left'},
-                    { key: 'acciones', label: 'ACCIONES', class: 'text-center'}
+                    { key: 'nombre', label: 'Nombre', class: 'text-left'},
+                    { key: 'acciones', label: 'Acciones', class: 'text-center'}
                 ],
                 currentPage: 1,
                 perPage: 10,
@@ -241,7 +231,7 @@
                 sortDirection: 'asc',
                 filter: null
             }
-        },    
+        },
         computed:{
             sortOptions() {
                 return this.fields.filter(f => f.sortable).map(f => {
@@ -381,7 +371,7 @@
                 let me = this;
 
                 axios.post('/subcategoria/crear/actualizar',{
-                    'subcategoria_id': me.subcategoria.id, 
+                    'subcategoria_id': me.subcategoria.id,
                     'categoria_id': me.categoria.id,
                     'nombre': me.subcategoria.nombre
                 }).then(function (response) {
@@ -432,7 +422,7 @@
                         }).then(function (response) {
                             var mensaje = accion == 2 ? 'La Subcategoría ha sido restaurada!' : 'La Subcategoría ha sido quitada!';
                             me.listarSubCategorias(me.categoria.id);
-                            
+
                             Vue.$toast.open({
 		                        message: mensaje,
 		                        type: 'success',

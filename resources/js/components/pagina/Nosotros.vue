@@ -37,7 +37,7 @@
                         </b-row>
 
                         <b-form-group>
-                            <tinymce id="d1" v-model="pagina.contenido" :other_options="options"></tinymce>
+                            <tinymce apiKey="5pb70j35mtgqauwus85v88pphv2ig89gwfx0y7s7nhfdd3e8" id="d1" v-model="pagina.contenido" :init="{ plugins: 'spellchecker', menubar: 'tools', toolbar: 'spellchecker', spellchecker_languages: 'English=en,Danish=da,Dutch=nl,Finnish=fi,French=fr_FR,' + 'German=de,Italian=it,Polish=pl,Portuguese=pt_BR,Spanish=es,Swedish=sv' }" :other_options="options"></tinymce>
                         </b-form-group>
                     </b-card>
                 </b-col>
@@ -49,6 +49,8 @@
 </template>
 
 <script>
+    import SpellChecker from 'tinymce/plugins/spellchecker';
+
     export default {
         data() {
             return {
@@ -59,7 +61,7 @@
                     link: ''
                 },
                 options: {
-                    language_url: 'js/es.js',
+                    language_url: 'intranet/js/es_ES.js',
                     height: '500px'
                 },
                 spinner: {
@@ -94,7 +96,7 @@
                 let formData = new FormData()
 
                 formData.append('contenido', this.pagina.contenido);
-                
+
                 if(this.pagina.tipo == 1){
                     formData.append('link', this.pagina.link);
                 } else if(this.pagina.tipo == 2){

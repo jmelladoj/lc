@@ -16,7 +16,7 @@
                         <b-form-group>
                             <b-container fluid class="mb-5">
                                 <b-row>
-                                    <b-col md="6" class="my-1">
+                                    <b-col md="4" class="my-1">
                                         <b-form-group label-cols-sm="3" label="Filtrar" class="mb-0">
                                         <b-input-group>
                                             <b-form-input v-model="filter" placeholder="Escribe para buscar" />
@@ -27,7 +27,7 @@
                                         </b-form-group>
                                     </b-col>
 
-                                    <b-col md="6" class="my-1">
+                                    <b-col md="4" class="my-1">
                                         <b-form-group label-cols-sm="3" label="Ordenar" class="mb-0">
                                         <b-input-group>
                                             <b-form-select v-model="sortBy" :options="sortOptions">
@@ -40,19 +40,8 @@
                                         </b-form-group>
                                     </b-col>
 
-                                    <b-col md="6" class="my-1">
-                                        <b-form-group label-cols-sm="3" label="Dirección" class="mb-0">
-                                        <b-input-group>
-                                            <b-form-select v-model="sortDirection" slot="append">
-                                            <option value="asc">Asc</option> <option value="desc">Desc</option>
-                                            <option value="last">Último</option>
-                                            </b-form-select>
-                                        </b-input-group>
-                                        </b-form-group>
-                                    </b-col>
-
-                                    <b-col md="6" class="my-1">
-                                        <b-form-group label-cols-sm="3" label="Por página" class="mb-0">
+                                    <b-col md="4" class="my-1">
+                                        <b-form-group label-cols-sm="4" label="Por página" class="mb-0">
                                         <b-form-select :options="pageOptions" v-model="perPage" />
                                         </b-form-group>
                                     </b-col>
@@ -102,7 +91,13 @@
                                     </template>
 
                                     <template v-slot:cell(acciones)="row">
+                                        <b-button size="xs" variant="success" title="Marcar como realizada" @click="estado_asesoria(row.item.id, 1)">
+                                            <i class="fa fa-check"></i>
+                                        </b-button>
 
+                                        <b-button size="xs" variant="danger" title="Rechazar" @click="estado_asesoria(row.item.id, 2)">
+                                            <i class="fa fa-remove"></i>
+                                        </b-button>
                                     </template>
 
                                 </b-table>
@@ -118,6 +113,25 @@
                 </b-col>
             </b-row>
 
+            <ValidationObserver ref="observer_asesoria" v-slot="{ valid }">
+                <b-modal ref="modal_asesoria" :title="modal_asesoria.titulo" no-close-on-backdrop>
+                    <b-form>
+                        <b-form-group label="Observación">
+                            <ValidationProvider name="observacion" rules="min:10" v-slot="{ errors }">
+                                <b-form-textarea v-model="asesoria.observacion" rows="3" max-rows="6"></b-form-textarea>
+                                <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
+                            </ValidationProvider>
+                        </b-form-group>
+                    </b-form>
+
+                    <template slot="modal-footer">
+                        <b-button :disabled="!valid" v-show="modal_asesoria.accion == 1" size="md" variant="success" @click="crearOactualizar(1)"> Guardar </b-button>
+                        <b-button v-show="modal_asesoria.accion == 2" size="md" variant="warning" @click="crearOactualizar(2)"> Actualizar </b-button>
+                        <b-button size="md" variant="danger" @click="cerrarModal()"> Cerrar </b-button>
+                    </template>
+                </b-modal>
+            </ValidationObserver>
+
         </b-container>
 
     </div>
@@ -129,14 +143,24 @@
     export default {
         data() {
             return {
+                asesoria: {
+                    id: 0,
+                    observacion: '',
+                    estado: 0
+                },
+                modal_asesoria: {
+                    titulo: ''
+                },
                 items: items,
                 fields: [
                     { key: 'index', label: '#', sortable: true, sortDirection: 'desc', class: 'text-center' },
-                    { key: 'usuario', label: 'USUARIO', sortable: true, class: 'text-left' },
-                    { key: 'telefono', label: 'TELÉFONO', sortable: true, class: 'text-left' },
-                    { key: 'email', label: 'EMAIL', sortable: true, class: 'text-left' },
-                    { key: 'created_at', label: 'FECHA', sortable: true, class: 'text-left' },
-                    { key: 'acciones', label: 'ACCIONES', sortable: true, class: 'text-center' }
+                    { key: 'usuario', label: 'Usuario', sortable: true, class: 'text-left' },
+                    { key: 'telefono', label: 'Teléfono', sortable: true, class: 'text-left' },
+                    { key: 'email', label: 'Email', sortable: true, class: 'text-left' },
+                    { key: 'observacion', label: 'Observación', sortable: true, class: 'text-left' },
+                    { key: 'estado', label: 'Estado', sortable: true, class: 'text-left' },
+                    { key: 'created_at', label: 'Fecha', sortable: true, class: 'text-left' },
+                    { key: 'acciones', label: 'Acciones', sortable: true, class: 'text-center' }
                 ],
                 currentPage: 1,
                 perPage: 10,
@@ -169,6 +193,45 @@
                 .catch(function (error) {
                     console.log(error);
                 });
+            },
+            estado_asesoria(id, accion){
+                this.limpiar_modal_asesoria();
+
+                this.modal_asesoria.titulo = accion == 1 ? 'Marcar asesoría como realizada' : 'Recahzar asesoría';
+                this.asesoria.estado = accion;
+
+                this.$refs['modal_asesoria'].show();
+            },
+            limpiar_modal_asesoria(){
+                this.asesoria.id = 0;
+                this.asesoria.observacion = '';
+                this.asesoria.estado = 0;
+            },
+            crearOactualizar(){
+                let me = this;
+
+                axios.post('asesoria/estado',{
+                    'asesoria_id': me.asesoria.id,
+                    'observacion': me.asesoria.observacion,
+                    'estado': me.asesoria.estado
+                }).then(function (response) {
+                    me.listarAsesorias();
+                    me.cerrarModal();
+                    var mensaje = me.asesoria.accion == 1 ? 'Asesoría marcada como realizada' : 'Asesoría rechazada';
+
+					Vue.$toast.open({
+                        message: mensaje,
+                        type: 'success',
+                        duration: 5000
+                    });
+
+                }).catch(function (error) {
+                    console.error(error);
+                });
+            },
+            cerrarModal(){
+                this.modal_asesoria.titulo = "";
+                this.$refs['modal_asesoria'].hide();
             }
         },
         mounted() {

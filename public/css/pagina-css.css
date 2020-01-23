@@ -3615,7 +3615,7 @@ input[type="button"].btn-block {
 .custom-select:focus {
   border-color: #8ab733;
   outline: 0;
-  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.075), 0 0 5px rgba(128, 189, 255, 0.5);
+  box-shadow: inset 0 1px 2px r#8ab733, 0 0 5px #8ab733;
 }
 
 .custom-select:focus::-ms-value {
@@ -5574,7 +5574,7 @@ button.close {
   background-color: #000;
   border-radius: 0.25rem;
   padding:8px;
-  
+
 }
 
 .popover {
@@ -5922,18 +5922,18 @@ button.close {
 .carousel-control-prev-icon,
 .carousel-control-next-icon {
   display: inline-block;
-  width: 20px;
-  height: 20px;
+  width: 40px;
+  height: 40px;
   background: transparent no-repeat center center;
   background-size: 100% 100%;
 }
 
 .carousel-control-prev-icon {
-  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23fff' viewBox='0 0 8 8'%3E%3Cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3E%3C/svg%3E");
+    background-image: url("../../pagina/img/left.png");
 }
 
 .carousel-control-next-icon {
-  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23fff' viewBox='0 0 8 8'%3E%3Cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3E%3C/svg%3E");
+  background-image: url("../../pagina/img/right.png");
 }
 
 .carousel-indicators {
@@ -8981,6 +8981,7 @@ a.text-dark:hover, a.text-dark:focus {
   }
 }
 /*# sourceMappingURL=bootstrap.css.map */
+
 ﻿@import url('https://fonts.googleapis.com/css?family=Barlow:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i'); /*Google Font Loaded*/
 @import url('https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i'); /*Google Font Loaded*/
 @import url("../pagina/css/icon_font-awesome.css"); /*FontAwesome Icon Font Style*/
@@ -15359,6 +15360,11 @@ form .lost_password {
 
 .white {
     color: white !important;
+}
+
+
+.carousel-indicators .active {
+    background-color: #8AB733 !important;
 }
 
 ﻿/*

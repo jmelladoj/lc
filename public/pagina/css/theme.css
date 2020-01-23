@@ -6377,3 +6377,8 @@ form .lost_password {
 .white {
     color: white !important;
 }
+
+
+.carousel-indicators .active {
+    background-color: #8AB733 !important;
+}

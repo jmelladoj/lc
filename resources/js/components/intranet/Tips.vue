@@ -7,7 +7,7 @@
                     <div class="d-flex justify-content-end align-items-right">
                         <sociales></sociales>
                         <b-button @click="abrirModal(1)" class="btn btn-success d-lg-block m-l-15" v-b-tooltip.hover title="Agrega un tip a la plataforma"><i class="fa fa-plus-circle"></i> Agregar Tip</b-button>
-                    </div>                    
+                    </div>
                 </b-col>
             </b-row>
 
@@ -17,7 +17,7 @@
                         <b-form-group>
                             <b-container fluid class="mb-5">
                                 <b-row>
-                                    <b-col md="6" class="my-1">
+                                    <b-col md="4" class="my-1">
                                         <b-form-group label-cols-sm="3" label="Filtrar" class="mb-0">
                                         <b-input-group>
                                             <b-form-input v-model="filter" placeholder="Escribe para buscar" />
@@ -28,7 +28,7 @@
                                         </b-form-group>
                                     </b-col>
 
-                                    <b-col md="6" class="my-1">
+                                    <b-col md="4" class="my-1">
                                         <b-form-group label-cols-sm="3" label="Ordenar" class="mb-0">
                                         <b-input-group>
                                             <b-form-select v-model="sortBy" :options="sortOptions">
@@ -41,19 +41,8 @@
                                         </b-form-group>
                                     </b-col>
 
-                                    <b-col md="6" class="my-1">
-                                        <b-form-group label-cols-sm="3" label="Dirección" class="mb-0">
-                                        <b-input-group>
-                                            <b-form-select v-model="sortDirection" slot="append">
-                                            <option value="asc">Asc</option> <option value="desc">Desc</option>
-                                            <option value="last">Último</option>
-                                            </b-form-select>
-                                        </b-input-group>
-                                        </b-form-group>
-                                    </b-col>
-
-                                    <b-col md="6" class="my-1">
-                                        <b-form-group label-cols-sm="3" label="Por página" class="mb-0">
+                                    <b-col md="4" class="my-1">
+                                        <b-form-group label-cols-sm="4" label="Por página" class="mb-0">
                                         <b-form-select :options="pageOptions" v-model="perPage" />
                                         </b-form-group>
                                     </b-col>
@@ -102,7 +91,7 @@
                                 </template>
 
                                 </b-table>
-                                
+
                                 <b-row>
                                     <b-col>
                                         <b-pagination :total-rows="totalRows" :per-page="perPage" v-model="currentPage" class="my-3" align="fill"/>
@@ -113,7 +102,7 @@
                     </b-card>
                 </b-col>
             </b-row>
-            
+
             <ValidationObserver ref="observer_tip" v-slot="{ valid }">
                 <b-modal ref="modal_tip" :title="modal_tip.titulo" no-close-on-backdrop>
                     <b-form>
@@ -155,8 +144,8 @@
                 subtips: [],
                 fields: [
                     { key: 'index', label: '#', sortable: true, sortDirection: 'desc', class: 'text-center' },
-                    { key: 'nombre', label: 'NOMBRE', sortable: true, class: 'text-left' },
-                    { key: 'acciones', label: 'ACCIONES', sortable: true, class: 'text-center' }
+                    { key: 'nombre', label: 'Nombre', sortable: true, class: 'text-left' },
+                    { key: 'acciones', label: 'Acciones', sortable: true, class: 'text-center' }
                 ],
                 currentPage: 1,
                 perPage: 10,
@@ -167,7 +156,7 @@
                 sortDirection: 'asc',
                 filter: null
             }
-        },    
+        },
         computed:{
             sortOptions() {
                 return this.fields.filter(f => f.sortable).map(f => {
@@ -200,7 +189,7 @@
                     me.listarTips();
                     me.cerrarModal();
                     var mensaje = accion == 1 ? 'Registro agregado exitosamente' : 'Registro actualizado exitosamente';
-                    
+
                     Vue.$toast.open({
                         message: mensaje,
                         type: 'success',
@@ -229,7 +218,7 @@
                             'id': id
                         }).then(function (response) {
                             me.listarTips();
-                            
+
                             Vue.$toast.open({
 		                        message: 'El tip ha sido quitado!',
 		                        type: 'success',

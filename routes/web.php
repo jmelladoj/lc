@@ -144,6 +144,7 @@ Route::post('/invitar', 'UsuarioController@solicitarDocumento')->name('Invitar a
 
 Route::get('/asesorias/{tipo}', 'AsesoriaController@index')->name('Listar asesorias');
 Route::post('/solicitar/asesoria', 'UsuarioController@solicitarAsesoria')->name('Solicitar Asesoria');
+Route::post('/asesoria/estado', 'AsesoriaController@estado_asesoria')->name('Estado Asesoria');
 
 //Rutas de rubros
 Route::get('/rubros/{tipo}', 'RubroController@index')->name('Listar Rubros');

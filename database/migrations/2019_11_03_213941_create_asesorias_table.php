@@ -16,6 +16,8 @@ class CreateAsesoriasTable extends Migration
         Schema::create('asesorias', function (Blueprint $table) {
             $table->bigIncrements('id');
 
+            $table->text('observacion')->nullable()->default(null);
+            $table->smallInteger('estado')->nullable()->default(0);
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
 

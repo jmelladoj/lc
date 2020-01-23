@@ -7,7 +7,7 @@
                     <div class="d-flex justify-content-end align-items-right">
                         <sociales></sociales>
                         <b-button v-if="tipo_usuario < 3" @click="abrirModal(1)" class="btn btn-success d-lg-block m-l-15" v-b-tooltip.hover title="Agrega una promoción a la plataforma"><i class="fa fa-plus-circle"></i> Agregar Promoción</b-button>
-                    </div>                    
+                    </div>
                 </b-col>
             </b-row>
 
@@ -17,7 +17,7 @@
                         <b-form-group>
                             <b-container fluid class="mb-5">
                                 <b-row>
-                                    <b-col md="6" class="my-1">
+                                    <b-col md="4" class="my-1">
                                         <b-form-group label-cols-sm="3" label="Filtrar" class="mb-0">
                                         <b-input-group>
                                             <b-form-input v-model="filter" placeholder="Escribe para buscar" />
@@ -28,7 +28,7 @@
                                         </b-form-group>
                                     </b-col>
 
-                                    <b-col md="6" class="my-1">
+                                    <b-col md="4" class="my-1">
                                         <b-form-group label-cols-sm="3" label="Ordenar" class="mb-0">
                                         <b-input-group>
                                             <b-form-select v-model="sortBy" :options="sortOptions">
@@ -41,19 +41,8 @@
                                         </b-form-group>
                                     </b-col>
 
-                                    <b-col md="6" class="my-1">
-                                        <b-form-group label-cols-sm="3" label="Dirección" class="mb-0">
-                                        <b-input-group>
-                                            <b-form-select v-model="sortDirection" slot="append">
-                                            <option value="asc">Asc</option> <option value="desc">Desc</option>
-                                            <option value="last">Último</option>
-                                            </b-form-select>
-                                        </b-input-group>
-                                        </b-form-group>
-                                    </b-col>
-
-                                    <b-col md="6" class="my-1">
-                                        <b-form-group label-cols-sm="3" label="Por página" class="mb-0">
+                                    <b-col md="4" class="my-1">
+                                        <b-form-group label-cols-sm="4" label="Por página" class="mb-0">
                                         <b-form-select :options="pageOptions" v-model="perPage" />
                                         </b-form-group>
                                     </b-col>
@@ -119,7 +108,7 @@
                     </b-card>
                 </b-col>
             </b-row>
-            
+
             <ValidationObserver ref="observer_promocion" v-slot="{ valid }">
                 <b-modal ref="modal_promocion" :title="modal_promocion.titulo" no-close-on-backdrop scrollable>
                     <b-form>
@@ -193,9 +182,9 @@
                 items: items,
                 fields: [
                     { key: 'index', label: '#', sortable: true, sortDirection: 'desc', class: 'text-center' },
-                    { key: 'titulo', label: 'NOMBRE', sortable: true, class: 'text-left' },
-                    { key: 'imagen', label: 'IMAGEN', sortable: true, class: 'text-center' },
-                    { key: 'acciones', label: 'ACCIONES', sortable: true, class: 'text-center' }
+                    { key: 'titulo', label: 'Nombre', sortable: true, class: 'text-left' },
+                    { key: 'imagen', label: 'Imagen', sortable: true, class: 'text-center' },
+                    { key: 'acciones', label: 'Acciones', sortable: true, class: 'text-center' }
                 ],
                 currentPage: 1,
                 perPage: 10,
@@ -206,7 +195,7 @@
                 sortDirection: 'asc',
                 filter: null
             }
-        },    
+        },
         computed:{
             sortOptions() {
                 return this.fields.filter(f => f.sortable).map(f => {
@@ -255,7 +244,7 @@
                 let formData = new FormData();
                 let imagen_promocion = document.querySelector('#imagen_promocion');
                 formData.append('imagen_promocion', imagen_promocion.files[0]);
-                
+
                 formData.append('promocion_id', this.promocion.id);
                 formData.append('titulo', this.promocion.titulo);
                 formData.append('fecha', this.promocion.fecha);
@@ -299,7 +288,7 @@
 		                        type: 'success',
 		                        duration: 5000
 		                    });
-                            
+
                         }).catch(function (error) {
                             console.log(error);
                         });
@@ -336,7 +325,7 @@
                 this.promocion.titulo = '';
                 this.promocion.valor = 0;
                 this.promocion.categoria_usuario = null;
-                this.promocion.url_imagen = null;             
+                this.promocion.url_imagen = null;
             }
         },
         mounted() {

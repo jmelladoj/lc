@@ -7,7 +7,7 @@
                     <div class="d-flex justify-content-end align-items-right">
                         <sociales></sociales>
                         <b-button v-if="tipo_usuario < 3" @click="abrirModal(1)" class="btn btn-success d-lg-block m-l-15" v-b-tooltip.hover title="Agrega un sorteo a la plataforma"><i class="fa fa-plus-circle"></i> Agregar Sorteo</b-button>
-                    </div>                    
+                    </div>
                 </b-col>
             </b-row>
 
@@ -17,7 +17,7 @@
                         <b-form-group>
                             <b-container fluid class="mb-5">
                                 <b-row>
-                                    <b-col md="6" class="my-1">
+                                    <b-col md="4" class="my-1">
                                         <b-form-group label-cols-sm="3" label="Filtrar" class="mb-0">
                                         <b-input-group>
                                             <b-form-input v-model="filter" placeholder="Escribe para buscar" />
@@ -28,7 +28,7 @@
                                         </b-form-group>
                                     </b-col>
 
-                                    <b-col md="6" class="my-1">
+                                    <b-col md="4" class="my-1">
                                         <b-form-group label-cols-sm="3" label="Ordenar" class="mb-0">
                                         <b-input-group>
                                             <b-form-select v-model="sortBy" :options="sortOptions">
@@ -41,19 +41,8 @@
                                         </b-form-group>
                                     </b-col>
 
-                                    <b-col md="6" class="my-1">
-                                        <b-form-group label-cols-sm="3" label="Dirección" class="mb-0">
-                                        <b-input-group>
-                                            <b-form-select v-model="sortDirection" slot="append">
-                                            <option value="asc">Asc</option> <option value="desc">Desc</option>
-                                            <option value="last">Último</option>
-                                            </b-form-select>
-                                        </b-input-group>
-                                        </b-form-group>
-                                    </b-col>
-
-                                    <b-col md="6" class="my-1">
-                                        <b-form-group label-cols-sm="3" label="Por página" class="mb-0">
+                                    <b-col md="4" class="my-1">
+                                        <b-form-group label-cols-sm="4" label="Por página" class="mb-0">
                                         <b-form-select :options="pageOptions" v-model="perPage" />
                                         </b-form-group>
                                     </b-col>
@@ -125,7 +114,7 @@
                     </b-card>
                 </b-col>
             </b-row>
-            
+
             <ValidationObserver ref="observer_sorteo" v-slot="{ valid }">
                 <b-modal ref="modal_sorteo" :title="modal_sorteo.titulo" no-close-on-backdrop scrollable>
                     <b-form>
@@ -215,9 +204,9 @@
                 items: items,
                 fields: [
                     { key: 'index', label: '#', sortable: true, sortDirection: 'desc', class: 'text-center' },
-                    { key: 'titulo', label: 'NOMBRE', sortable: true, class: 'text-left' },
-                    { key: 'imagen', label: 'IMAGEN', sortable: true, class: 'text-center' },
-                    { key: 'acciones', label: 'ACCIONES', sortable: true, class: 'text-center' }
+                    { key: 'titulo', label: 'Nombre', sortable: true, class: 'text-left' },
+                    { key: 'imagen', label: 'Imagen', sortable: true, class: 'text-center' },
+                    { key: 'acciones', label: 'Acciones', sortable: true, class: 'text-center' }
                 ],
                 currentPage: 1,
                 perPage: 10,
@@ -228,7 +217,7 @@
                 sortDirection: 'asc',
                 filter: null
             }
-        },    
+        },
         computed:{
             sortOptions() {
                 return this.fields.filter(f => f.sortable).map(f => {
@@ -277,7 +266,7 @@
                 let formData = new FormData();
                 let imagen_sorteo = document.querySelector('#imagen_sorteo');
                 formData.append('imagen_sorteo', imagen_sorteo.files[0]);
-                
+
                 formData.append('sorteo_id', this.sorteo.id);
                 formData.append('titulo', this.sorteo.titulo);
                 formData.append('valor', this.sorteo.valor);
@@ -289,7 +278,7 @@
                     me.listarSorteos();
                     me.cerrarModal();
                     var mensaje = accion == 1 ? 'Registro agregado exitosamente' : 'Registro actualizado exitosamente';
-                    
+
                     Vue.$toast.open({
                         message: mensaje,
                         type: 'success',
@@ -395,7 +384,7 @@
                 this.sorteo.premio = '';
                 this.sorteo.fecha = '';
                 this.sorteo.categoria_usuario = null;
-                this.sorteo.url_imagen = null;             
+                this.sorteo.url_imagen = null;
             }
         },
         mounted() {

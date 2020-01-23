@@ -59,7 +59,7 @@
                 A {{ data.item.likes }} % les gusta esto.
             </template>
 
-            <template v-slot:cell(nombre_rubro)="data">
+            <template v-slot:cell(nombre_rubro)>
                 Sin rubro
             </template>
 
@@ -99,18 +99,18 @@
             </b-modal>
         </ValidationObserver>
 
-        <ValidationObserver ref="observer_usuario" v-slot="{ valid }">
-            <b-modal ref="modal_perfil" :title="modal_perfil.titulo" size="lg" no-close-on-backdrop>
 
-                <b-form>
-                    <perfil_usuario :usuario_id="usuario.id" :tipo_usuario_logeado="4"></perfil_usuario>
-                </b-form>
+        <b-modal ref="modal_perfil" :title="modal_perfil.titulo" size="lg" no-close-on-backdrop>
 
-                <template slot="modal-footer">
-                    <b-button size="md" variant="danger" @click="cerrarModalPerfil()"> Cerrar </b-button>
-                </template>
-            </b-modal>
-        </ValidationObserver>
+            <b-form>
+                <perfil_usuario :usuario_id="usuario.id" :tipo_usuario_logeado="4"></perfil_usuario>
+            </b-form>
+
+            <template slot="modal-footer">
+                <b-button size="md" variant="danger" @click="cerrarModalPerfil()"> Cerrar </b-button>
+            </template>
+        </b-modal>
+
     </b-container>
 </template>
 

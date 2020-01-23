@@ -22050,19 +22050,18 @@ button.close {
 .carousel-control-next-icon,
 .carousel-control-prev-icon {
     display: inline-block;
-    width: 20px;
-    height: 20px;
+    width: 40px;
+    height: 40px;
     background: center center no-repeat;
     background-size: 100% 100%
 }
 
 .carousel-control-prev-icon {
-    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23fff' viewBox='0 0 8 8'%3E%3Cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3E%3C/svg%3E")
-}
+    background-image: url("../../pagina/img/left.png"); }
 
 .carousel-control-next-icon {
-    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23fff' viewBox='0 0 8 8'%3E%3Cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3E%3C/svg%3E")
-}
+    background-image: url("../../pagina/img/right.png");
+    }
 
 .carousel-indicators {
     position: absolute;
@@ -32505,24 +32504,25 @@ html body .navbar-dark .mailbox .message-center a .mail-contnet .time {
     height: 75px !important;
 }
 
-.modal-backdrop {   
+.modal-backdrop {
     background-color: #CBCFB5;
     /*opacity: 0.9 !important;*/
 }
 
-textarea:focus, 
-input:focus, 
-input[type]:focus, 
-.uneditable-input:focus, 
-.custom-select:focus, .custom-file-input:focus{   
-    border-color: rgba(138, 183, 51, 0.8) !important;
-    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(138, 183, 51, 0.6) !important;
+textarea:focus,
+input:focus,
+input[type]:focus,
+.uneditable-input:focus,
+.custom-select:focus, .custom-file-input:focus{
+    border-color: #8ab733 !important;
+    box-shadow: 0 1px 1px #8ab733 inset, 0 0 8px #8ab733 !important;
     outline: 0 none;
 }
 
 .btn-secondary.focus, .btn-secondary:focus, .btn-secondary:not(:disabled):not(.disabled).active:focus, .btn-secondary:not(:disabled):not(.disabled):active:focus, .show > .btn-secondary.dropdown-toggle:focus {
     box-shadow: none;
 }
+
 @import url(https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700);
 /*Theme Colors*/
 /**

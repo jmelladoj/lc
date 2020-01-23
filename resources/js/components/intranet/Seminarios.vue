@@ -7,7 +7,7 @@
                     <div class="d-flex justify-content-end align-items-right">
                         <sociales></sociales>
                         <b-button v-if="tipo_usuario < 3" @click="abrirModal(1)" class="btn btn-success d-lg-block m-l-15" v-b-tooltip.hover title="Agrega un seminario"><i class="fa fa-plus-circle"></i> Agregar Seminario</b-button>
-                    </div>                    
+                    </div>
                 </b-col>
             </b-row>
 
@@ -17,7 +17,7 @@
                         <b-form-group>
                             <b-container fluid class="mb-5">
                                 <b-row>
-                                    <b-col md="6" class="my-1">
+                                    <b-col md="4" class="my-1">
                                         <b-form-group label-cols-sm="3" label="Filtrar" class="mb-0">
                                         <b-input-group>
                                             <b-form-input v-model="filter" placeholder="Escribe para buscar" />
@@ -28,7 +28,7 @@
                                         </b-form-group>
                                     </b-col>
 
-                                    <b-col md="6" class="my-1">
+                                    <b-col md="4" class="my-1">
                                         <b-form-group label-cols-sm="3" label="Ordenar" class="mb-0">
                                         <b-input-group>
                                             <b-form-select v-model="sortBy" :options="sortOptions">
@@ -41,19 +41,8 @@
                                         </b-form-group>
                                     </b-col>
 
-                                    <b-col md="6" class="my-1">
-                                        <b-form-group label-cols-sm="3" label="Dirección" class="mb-0">
-                                        <b-input-group>
-                                            <b-form-select v-model="sortDirection" slot="append">
-                                            <option value="asc">Asc</option> <option value="desc">Desc</option>
-                                            <option value="last">Último</option>
-                                            </b-form-select>
-                                        </b-input-group>
-                                        </b-form-group>
-                                    </b-col>
-
-                                    <b-col md="6" class="my-1">
-                                        <b-form-group label-cols-sm="3" label="Por página" class="mb-0">
+                                    <b-col md="4" class="my-1">
+                                        <b-form-group label-cols-sm="4" label="Por página" class="mb-0">
                                         <b-form-select :options="pageOptions" v-model="perPage" />
                                         </b-form-group>
                                     </b-col>
@@ -125,7 +114,7 @@
                     </b-card>
                 </b-col>
             </b-row>
-            
+
             <ValidationObserver ref="observer_seminario" v-slot="{ valid }">
                 <b-modal ref="modal_seminario" :title="modal_seminario.titulo" size="md" no-close-on-backdrop scrollable>
                     <b-form>
@@ -145,7 +134,7 @@
                                         <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
                                     </ValidationProvider>
                                 </b-form-group>
-                            </b-col> 
+                            </b-col>
                         </b-row>
 
                         <b-row>
@@ -164,7 +153,7 @@
                                         <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
                                     </ValidationProvider>
                                 </b-form-group>
-                            </b-col> 
+                            </b-col>
                         </b-row>
 
                         <b-form-group label="Descripción de seminario">
@@ -174,7 +163,7 @@
                             </ValidationProvider>
                         </b-form-group>
 
-                        
+
                         <b-form-group label="Tipo de persona">
                             <ValidationProvider name="tipo de persona" rules="required|oneOf:1,2,3" v-slot="{ errors }">
                                 <b-form-select v-model="seminario.tipo_persona">
@@ -209,7 +198,7 @@
                     <b-form>
                         <b-form-group>
                             <b-table show-empty responsive striped borderless outlined small hover
-                                :items="participantes" 
+                                :items="participantes"
                                 :fields="campos">
 
                                 <template slot="empty">
@@ -261,7 +250,7 @@
         data() {
             return {
                 seminario: {
-                    id: 0,                  
+                    id: 0,
                     titulo: '',
                     fecha: '',
                     valor: 0,
@@ -281,18 +270,18 @@
                 items: items,
                 fields: [
                     { key: 'index', label: '#', sortable: true, sortDirection: 'desc', class: 'text-center' },
-                    { key: 'titulo', label: 'NOMBRE', sortable: true, class: 'text-left' },
-                    { key: 'fecha', label: 'FECHA', sortable: true, class: 'text-center' },
-                    { key: 'capacidad', label: 'CAPACIDAD', sortable: true, class: 'text-center' },
-                    { key: 'participantes', label: 'PARTICIPANTES', sortable: true, class: 'text-center' },
-                    { key: 'imagen', label: 'IMAGEN', sortable: true, class: 'text-center' },
-                    { key: 'acciones', label: 'ACCIONES', sortable: true, class: 'text-center' }
+                    { key: 'titulo', label: 'Nombre', sortable: true, class: 'text-left' },
+                    { key: 'fecha', label: 'Fecha', sortable: true, class: 'text-center' },
+                    { key: 'capacidad', label: 'Capacidad', sortable: true, class: 'text-center' },
+                    { key: 'participantes', label: 'Participantes', sortable: true, class: 'text-center' },
+                    { key: 'imagen', label: 'Imagen', sortable: true, class: 'text-center' },
+                    { key: 'acciones', label: 'Acciones', sortable: true, class: 'text-center' }
                 ],
                 campos: [
                     { key: 'index', label: '#', class: 'text-center' },
-                    { key: 'usuario', label: 'NOMBRE', class: 'text-left'},
-                    { key: 'telefono', label: 'TELÉFONO', class: 'text-center'},
-                    { key: 'email', label: 'EMAIL', class: 'text-left'}
+                    { key: 'usuario', label: 'Nombre', class: 'text-left'},
+                    { key: 'telefono', label: 'Teléfono', class: 'text-center'},
+                    { key: 'email', label: 'Email', class: 'text-left'}
                 ],
                 currentPage: 1,
                 perPage: 10,
@@ -303,7 +292,7 @@
                 sortDirection: 'asc',
                 filter: null
             }
-        },    
+        },
         computed:{
             sortOptions() {
                 return this.fields.filter(f => f.sortable).map(f => {
@@ -354,7 +343,7 @@
                 let formData = new FormData();
                 let imagen_seminario = document.querySelector('#imagen_seminario');
                 formData.append('imagen_seminario', imagen_seminario.files[0]);
-                
+
                 formData.append('seminario_id', this.seminario.id);
                 formData.append('titulo', this.seminario.titulo);
                 formData.append('fecha', this.seminario.fecha);
@@ -367,7 +356,7 @@
                     me.listarSeminarios();
                     me.cerrarModal();
                     var mensaje = accion == 1 ? 'Registro agregado exitosamente' : 'Registro actualizado exitosamente';
-                    
+
                     Vue.$toast.open({
                         message: mensaje,
                         type: 'success',
@@ -480,7 +469,7 @@
                 this.$refs['modal_participantes'].hide();
             },
             limpiarDatosSeminario(){
-                this.seminario.id = 0;               
+                this.seminario.id = 0;
                 this.seminario.titulo = '';
                 this.seminario.fecha = '';
                 this.seminario.valor = 0;

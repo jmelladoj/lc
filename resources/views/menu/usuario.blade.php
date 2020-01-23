@@ -8,10 +8,12 @@
                 <li @click="menu=1"><a class="waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fa fa-user"></i><span class="hide-menu"> Mi perfil</span></a></li>
                 <li @click="menu=12"><a class="waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fa fa-usd"></i><span class="hide-menu"> Recargar</span></a></li>
                 <li @click="menu=2"><a class="waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fa fa-search"></i><span class="hide-menu"> Pide documento</span></a></li>
-                <li @click="menu=3"><a class="waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fa fa-list-ol"></i><span class="hide-menu"> Sorteos</span></a></li>
-                <li @click="menu=4"><a class="waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fa fa-percent"></i><span class="hide-menu"> Promociones</span></a></li>
+
+                <usuario-sorteos></usuario-sorteos>
+                <usuario-promociones></usuario-promociones>
+                <usuario-seminarios></usuario-seminarios>
                 {{-- <li @click="menu=5"><a class="waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fa fa-handshake-o"></i><span class="hide-menu"> BENEFICIOS</span></a></li> --}}
-                <li @click="menu=6"><a class="waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fa fa-calendar"></i><span class="hide-menu"> Seminarios</span></a></li>
+
                 <li @click="menu=7"><a class="waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fa fa-car"></i><span class="hide-menu"> Visitas a terreno</span></a></li>
                 <recomendar></recomendar>
 
@@ -25,7 +27,7 @@
 </aside>
 
 <template v-if="ubicacion == 1 && menu == 1">
-    <perfil @if(Auth::user()->last_login_at == null && Auth::user()->created_at->format('Y-m-d H:i') == Carbon\Carbon::now()->format('Y-m-d H:i')) :mensaje="'Felicidades! Ya eres parte de nuestra comunidad LebenCo. y para celebrar, te damos un documento de muestra ¡gratis!, búscalo en nuestras secciones.'"  @endif  :usuario_id="{{ json_encode(Auth::user()->id) }}" :tipo_usuario_logeado="{{ json_encode(Auth::user()->tipo_usuario) }}"  :mensaje="{{ json_encode($mensaje) }}" ></perfil>
+    <perfil @if(Auth::user()->last_login_at == null && Auth::user()->created_at->format('Y-m-d H:i') == Carbon\Carbon::now()->format('Y-m-d H:i')) :mensaje="'Felicidades! Ya eres parte de nuestra comunidad LebenCo. y para celebrar, te damos un documento de muestra ¡gratis!, búscalo en nuestras secciones.'"  @endif  :usuario_id="{{ json_encode(Auth::user()->id) }}" :tipo_usuario_logeado="{{ json_encode(Auth::user()->tipo_usuario) }}"></perfil>
 </template>
 
 <template v-if="ubicacion == 1 && menu==2">

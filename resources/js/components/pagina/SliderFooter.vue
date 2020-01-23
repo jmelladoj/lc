@@ -1,5 +1,5 @@
-<template> 
-    <section class="sec-padding">
+<template>
+    <section class="sec-padding" v-show="sitios.length > 0">
         <div class="container">
             <carousel :per-page="6" :autoplay="true" :paginationActiveColor="'#8ab733'" :loop="true">
                 <slide v-for="(sitio, index) in sitios" :key="index">
@@ -15,12 +15,12 @@
 </template>
 
 <script>
-    export default {  
+    export default {
         data() {
             return {
                 sitios: []
             }
-        },  
+        },
         methods:{
             listar_sitios(){
                 let me=this;

@@ -50,18 +50,18 @@ class CategoriasUsuarioTableSeeder extends Seeder
         CategoriaUsuario::create(['nombre' => 'Experto', 'nivel' => 'nivel 35', 'gasto_inicio' => 871251, 'gasto_fin' => 918750, 'color' => '#3f8a24']);
         CategoriaUsuario::create(['nombre' => 'Experto', 'nivel' => 'nivel 36', 'gasto_inicio' => 918751, 'gasto_fin' => 967500, 'color' => '#3f8a24']);
         CategoriaUsuario::create(['nombre' => 'Experto', 'nivel' => 'nivel 37', 'gasto_inicio' => 967501, 'gasto_fin' => 1017500, 'color' => '#3f8a24']);
-        CategoriaUsuario::create(['nombre' => 'Experto PRO', 'nivel' => 'nivel 38', 'gasto_inicio' => 1017501, 'gasto_fin' => 1068750, 'color' => '#d4af37', 'bonificacion' => 4000]);
-        CategoriaUsuario::create(['nombre' => 'Experto PRO', 'nivel' => 'nivel 39', 'gasto_inicio' => 1068751, 'gasto_fin' => 1121250, 'color' => '#d4af37']);
-        CategoriaUsuario::create(['nombre' => 'Experto PRO', 'nivel' => 'nivel 40', 'gasto_inicio' => 1121251, 'gasto_fin' => 1175000, 'color' => '#d4af37']);
-        CategoriaUsuario::create(['nombre' => 'Experto PRO', 'nivel' => 'nivel 41', 'gasto_inicio' => 1175001, 'gasto_fin' => 1230000, 'color' => '#d4af37']);
-        CategoriaUsuario::create(['nombre' => 'Experto PRO', 'nivel' => 'nivel 42', 'gasto_inicio' => 1230001, 'gasto_fin' => 1286250, 'color' => '#d4af37']);
-        CategoriaUsuario::create(['nombre' => 'Experto PRO', 'nivel' => 'nivel 43', 'gasto_inicio' => 1286251, 'gasto_fin' => 1343750, 'color' => '#d4af37']);
-        CategoriaUsuario::create(['nombre' => 'Experto PRO', 'nivel' => 'nivel 44', 'gasto_inicio' => 1343751, 'gasto_fin' => 1402500, 'color' => '#d4af37']);
-        CategoriaUsuario::create(['nombre' => 'Experto PRO', 'nivel' => 'nivel 45', 'gasto_inicio' => 1402501, 'gasto_fin' => 1462500, 'color' => '#d4af37']);
-        CategoriaUsuario::create(['nombre' => 'Experto PRO', 'nivel' => 'nivel 46', 'gasto_inicio' => 1462501, 'gasto_fin' => 1523750, 'color' => '#d4af37']);
-        CategoriaUsuario::create(['nombre' => 'Experto PRO', 'nivel' => 'nivel 47', 'gasto_inicio' => 1523751, 'gasto_fin' => 1586250, 'color' => '#d4af37']);
-        CategoriaUsuario::create(['nombre' => 'Experto PRO', 'nivel' => 'nivel 48', 'gasto_inicio' => 1586251, 'gasto_fin' => 1650000, 'color' => '#d4af37']);
-        CategoriaUsuario::create(['nombre' => 'Experto PRO', 'nivel' => 'nivel 49', 'gasto_inicio' => 1650001, 'gasto_fin' => 1715000, 'color' => '#d4af37']);
-        CategoriaUsuario::create(['nombre' => 'Súper Experto PRO', 'nivel' => 'nivel 50', 'gasto_inicio' => 1715001, 'gasto_fin' => 999999999, 'color' => '#d4af37']);
+        CategoriaUsuario::create(['nombre' => 'Experto pro', 'nivel' => 'nivel 38', 'gasto_inicio' => 1017501, 'gasto_fin' => 1068750, 'color' => '#d4af37', 'bonificacion' => 4000]);
+        CategoriaUsuario::create(['nombre' => 'Experto pro', 'nivel' => 'nivel 39', 'gasto_inicio' => 1068751, 'gasto_fin' => 1121250, 'color' => '#d4af37']);
+        CategoriaUsuario::create(['nombre' => 'Experto pro', 'nivel' => 'nivel 40', 'gasto_inicio' => 1121251, 'gasto_fin' => 1175000, 'color' => '#d4af37']);
+        CategoriaUsuario::create(['nombre' => 'Experto pro', 'nivel' => 'nivel 41', 'gasto_inicio' => 1175001, 'gasto_fin' => 1230000, 'color' => '#d4af37']);
+        CategoriaUsuario::create(['nombre' => 'Experto pro', 'nivel' => 'nivel 42', 'gasto_inicio' => 1230001, 'gasto_fin' => 1286250, 'color' => '#d4af37']);
+        CategoriaUsuario::create(['nombre' => 'Experto pro', 'nivel' => 'nivel 43', 'gasto_inicio' => 1286251, 'gasto_fin' => 1343750, 'color' => '#d4af37']);
+        CategoriaUsuario::create(['nombre' => 'Experto pro', 'nivel' => 'nivel 44', 'gasto_inicio' => 1343751, 'gasto_fin' => 1402500, 'color' => '#d4af37']);
+        CategoriaUsuario::create(['nombre' => 'Experto pro', 'nivel' => 'nivel 45', 'gasto_inicio' => 1402501, 'gasto_fin' => 1462500, 'color' => '#d4af37']);
+        CategoriaUsuario::create(['nombre' => 'Experto pro', 'nivel' => 'nivel 46', 'gasto_inicio' => 1462501, 'gasto_fin' => 1523750, 'color' => '#d4af37']);
+        CategoriaUsuario::create(['nombre' => 'Experto pro', 'nivel' => 'nivel 47', 'gasto_inicio' => 1523751, 'gasto_fin' => 1586250, 'color' => '#d4af37']);
+        CategoriaUsuario::create(['nombre' => 'Experto pro', 'nivel' => 'nivel 48', 'gasto_inicio' => 1586251, 'gasto_fin' => 1650000, 'color' => '#d4af37']);
+        CategoriaUsuario::create(['nombre' => 'Experto pro', 'nivel' => 'nivel 49', 'gasto_inicio' => 1650001, 'gasto_fin' => 1715000, 'color' => '#d4af37']);
+        CategoriaUsuario::create(['nombre' => 'Súper Experto pro', 'nivel' => 'nivel 50', 'gasto_inicio' => 1715001, 'gasto_fin' => 999999999, 'color' => '#d4af37']);
     }
 }

@@ -1,10 +1,5 @@
 <template>
     <b-row>
-        <b-col cols="12" v-if="mensaje != undefined">
-            <b-alert variant="success" show>
-                {{ mensaje }}
-            </b-alert>
-        </b-col>
         <b-col cols="4">
             <b-card>
                 <center class="mt-1">
@@ -98,7 +93,7 @@
                                 </b-col>
                                 <b-col>
                                     <b-form-group label="Teléfono">
-                                        <ValidationProvider name="teléfono" rules="required|numeric|digits:9" v-slot="{ errors }">                                         
+                                        <ValidationProvider name="teléfono" rules="required|numeric|digits:9" v-slot="{ errors }">
                                             <b-input-group prepend="+56 9">
                                                 <b-form-input type="number" v-model="usuario.telefono" :readonly="tipo_usuario_logeado == 4"></b-form-input>
                                             </b-input-group>
@@ -456,6 +451,12 @@
 
             </b-card>
         </b-col>
+        <b-modal v-if="mensaje != undefined" title="Bienvenido" :visible="true" >
+            <p class="my-4">
+                {{ mensaje }}
+            </p>
+        </b-modal>
+
     </b-row>
 </template>
 

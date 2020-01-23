@@ -1,13 +1,13 @@
 <template>
     <div class="page-wrapper">
-        <b-container fluid class="mb-5"> 
+        <b-container fluid class="mb-5">
             <b-row class="page-titles">
                 <b-col cols="5" class="align-self-center"><h4 class="text-themecolor">Sliders generales</h4></b-col>
                 <b-col cols="7">
                     <div class="d-flex justify-content-end align-items-right">
                         <sociales></sociales>
                         <b-button @click="abrirModal(1)" class="btn btn-success d-lg-block m-l-15" v-b-tooltip.hover title="Agrega una slider a la plataforma"><i class="fa fa-plus-circle"></i> Agregar Slider</b-button>
-                    </div>                    
+                    </div>
                 </b-col>
             </b-row>
 
@@ -128,7 +128,7 @@
                     </b-card>
                 </b-col>
             </b-row>
-            
+
             <ValidationObserver ref="observer_slider" v-slot="{ valid }">
                 <b-modal ref="modal_slider" :title="modal_slider.titulo" no-close-on-backdrop scrollable>
                     <b-form>
@@ -207,7 +207,7 @@
                     <template slot="modal-footer">
                         <div class="w-100">
                             <b-spinner class="float-left" variant="success" label="Spinning" v-show="spinner.estado == 1"></b-spinner>
-                        
+
                             <b-button class="float-right" :disabled="!valid || modal_slider.accion == 0" v-show="modal_slider.accion == 1" size="md" variant="success" @click="crearOactualizar(1)"> Guardar </b-button>
                             <b-button class="float-right" v-show="modal_slider.accion == 2" size="md" variant="warning" @click="crearOactualizar(2)"> Actualizar </b-button>
                             <b-button class="float-right" size="md" variant="danger" @click="cerrarModal()"> Cerrar </b-button>
@@ -314,7 +314,7 @@
                 sortDirection: 'asc',
                 filter: null
             }
-        },    
+        },
         computed:{
             sortOptions() {
                 return this.fields.filter(f => f.sortable).map(f => {
@@ -336,7 +336,7 @@
                 this.slider.pagina_nosotros = this.estado_checkbox;
                 this.slider.pagina_contacto = this.estado_checkbox;
                 this.slider.pagina_comunidad = this.estado_checkbox;
-                this.slider.pagina_servicios = this.estado_checkbox;           
+                this.slider.pagina_servicios = this.estado_checkbox;
             }
         },
         methods:{
@@ -372,9 +372,9 @@
                 let imagen_slider = document.querySelector('#imagen_slider');
                 me.spinner.estado = 1;
                 me.modal_slider.accion = 0;
-                
+
                 formData.append('imagen_slider', imagen_slider.files[0]);
-                
+
                 formData.append('slider_id', this.slider.id);
                 formData.append('texto', this.slider.texto);
                 formData.append('color', this.slider.color);
@@ -530,7 +530,7 @@
                 this.slider.pagina_nosotros = false;
                 this.slider.pagina_contacto = false;
                 this.slider.pagina_comunidad = false;
-                this.slider.pagina_servicios = false;               
+                this.slider.pagina_servicios = false;
                 this.estado_checkbox = false;
                 this.texto_checkbox = 'Marcar todos';
             }

@@ -7,7 +7,7 @@
                     <div class="d-flex justify-content-end align-items-right">
                         <sociales></sociales>
                         <b-button @click="abrirModal(1)" class="btn btn-success d-lg-block m-l-15" v-b-tooltip.hover title="Agrega un sitio de interés a la plataforma"><i class="fa fa-plus-circle"></i> Agregar Link de Interés</b-button>
-                    </div>                    
+                    </div>
                 </b-col>
             </b-row>
 
@@ -17,7 +17,7 @@
                         <b-form-group>
                             <b-container fluid class="mb-5">
                                 <b-row>
-                                    <b-col md="6" class="my-1">
+                                    <b-col md="4" class="my-1">
                                         <b-form-group label-cols-sm="3" label="Filtrar" class="mb-0">
                                         <b-input-group>
                                             <b-form-input v-model="filter" placeholder="Escribe para buscar" />
@@ -28,7 +28,7 @@
                                         </b-form-group>
                                     </b-col>
 
-                                    <b-col md="6" class="my-1">
+                                    <b-col md="4" class="my-1">
                                         <b-form-group label-cols-sm="3" label="Ordenar" class="mb-0">
                                         <b-input-group>
                                             <b-form-select v-model="sortBy" :options="sortOptions">
@@ -41,19 +41,8 @@
                                         </b-form-group>
                                     </b-col>
 
-                                    <b-col md="6" class="my-1">
-                                        <b-form-group label-cols-sm="3" label="Dirección" class="mb-0">
-                                        <b-input-group>
-                                            <b-form-select v-model="sortDirection" slot="append">
-                                            <option value="asc">Asc</option> <option value="desc">Desc</option>
-                                            <option value="last">Último</option>
-                                            </b-form-select>
-                                        </b-input-group>
-                                        </b-form-group>
-                                    </b-col>
-
-                                    <b-col md="6" class="my-1">
-                                        <b-form-group label-cols-sm="3" label="Por página" class="mb-0">
+                                    <b-col md="4" class="my-1">
+                                        <b-form-group label-cols-sm="4" label="Por página" class="mb-0">
                                         <b-form-select :options="pageOptions" v-model="perPage" />
                                         </b-form-group>
                                     </b-col>
@@ -117,7 +106,7 @@
                     </b-card>
                 </b-col>
             </b-row>
-            
+
             <ValidationObserver ref="observer_link" v-slot="{ valid }">
                 <b-modal ref="modal_sitio" :title="modal_sitio.titulo" no-close-on-backdrop scrollable>
                     <b-form>
@@ -175,9 +164,9 @@
                 items: items,
                 fields: [
                     { key: 'index', label: '#', sortable: true, sortDirection: 'desc', class: 'text-center' },
-                    { key: 'nombre', label: 'NOMBRE', sortable: true, class: 'text-left' },
-                    { key: 'imagen', label: 'IMAGEN', sortable: true, class: 'text-center' },
-                    { key: 'acciones', label: 'ACCIONES', sortable: true, class: 'text-center' }
+                    { key: 'nombre', label: 'Nombre', sortable: true, class: 'text-left' },
+                    { key: 'imagen', label: 'Imagen', sortable: true, class: 'text-center' },
+                    { key: 'acciones', label: 'Acciones', sortable: true, class: 'text-center' }
                 ],
                 currentPage: 1,
                 perPage: 10,
@@ -188,7 +177,7 @@
                 sortDirection: 'asc',
                 filter: null
             }
-        },    
+        },
         computed:{
             sortOptions() {
                 return this.fields.filter(f => f.sortable).map(f => {
@@ -228,7 +217,7 @@
                 let formData = new FormData();
                 let imagen_sitio = document.querySelector('#imagen_sitio');
                 formData.append('imagen_sitio', imagen_sitio.files[0]);
-                
+
                 formData.append('sitio_id', this.sitio.id);
                 formData.append('nombre', this.sitio.nombre);
                 formData.append('link', this.sitio.link);
@@ -237,7 +226,7 @@
                     me.listarSitios();
                     me.cerrarModal();
                     var mensaje = accion == 1 ? 'Registro agregado exitosamente' : 'Registro actualizado exitosamente';
-                    
+
                     Vue.$toast.open({
                         message: mensaje,
                         type: 'success',
@@ -306,7 +295,7 @@
                 this.sitio.id = 0;
                 this.sitio.sitio = '';
                 this.sitio.link = '';
-                this.sitio.url_imagen = null;               
+                this.sitio.url_imagen = null;
             }
         },
         mounted() {

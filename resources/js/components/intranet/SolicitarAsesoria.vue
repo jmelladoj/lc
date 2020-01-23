@@ -17,7 +17,7 @@
                         <b-form-group>
                             <b-container fluid class="mb-5">
                                 <b-row>
-                                    <b-col md="6" class="my-1">
+                                    <b-col md="4" class="my-1">
                                         <b-form-group label-cols-sm="3" label="Filtrar" class="mb-0">
                                         <b-input-group>
                                             <b-form-input v-model="filter" placeholder="Escribe para buscar" />
@@ -28,7 +28,7 @@
                                         </b-form-group>
                                     </b-col>
 
-                                    <b-col md="6" class="my-1">
+                                    <b-col md="4" class="my-1">
                                         <b-form-group label-cols-sm="3" label="Ordenar" class="mb-0">
                                         <b-input-group>
                                             <b-form-select v-model="sortBy" :options="sortOptions">
@@ -41,19 +41,8 @@
                                         </b-form-group>
                                     </b-col>
 
-                                    <b-col md="6" class="my-1">
-                                        <b-form-group label-cols-sm="3" label="Dirección" class="mb-0">
-                                        <b-input-group>
-                                            <b-form-select v-model="sortDirection" slot="append">
-                                            <option value="asc">Asc</option> <option value="desc">Desc</option>
-                                            <option value="last">Último</option>
-                                            </b-form-select>
-                                        </b-input-group>
-                                        </b-form-group>
-                                    </b-col>
-
-                                    <b-col md="6" class="my-1">
-                                        <b-form-group label-cols-sm="3" label="Por página" class="mb-0">
+                                    <b-col md="4" class="my-1">
+                                        <b-form-group label-cols-sm="4" label="Por página" class="mb-0">
                                         <b-form-select :options="pageOptions" v-model="perPage" />
                                         </b-form-group>
                                     </b-col>
@@ -91,16 +80,14 @@
                                 {{ data.index + 1 }}
                             </template>
 
-                            <template v-slot:cell(usuario)="data">
-                                {{ data.item.usuario.nombre }}
+                            <template v-slot:cell(observacion)="row">
+                                {{ row.item.observacion == null ? 'Sin observación' : row.item.observacion }}
                             </template>
 
-                            <template v-slot:cell(pago)="data">
-                                {{ data.item.valor | currency }}
-                            </template>
-
-                            <template v-slot:cell(acciones)="row">
-
+                            <template v-slot:cell(estado)="row">
+                                <label v-if="row.item.estado == 0">Agendada</label>
+                                <label v-else-if="row.item.estado == 1">Realizada</label>
+                                <label v-else-if="row.item.estado == 2">Rechazada</label>
                             </template>
 
                             </b-table>
@@ -172,7 +159,8 @@
                 fields: [
                     { key: 'index', label: '#', sortable: true, sortDirection: 'desc', class: 'text-center' },
                     { key: 'created_at', label: 'Fecha solicitud', sortable: true, class: 'text-center' },
-                    { key: 'acciones', label: 'ACCIONES', sortable: true, class: 'text-center' }
+                    { key: 'observacion', label: 'Observación', sortable: true, class: 'text-center' },
+                    { key: 'estado', label: 'Estado', sortable: true, class: 'text-center' }
                 ],
                 currentPage: 1,
                 perPage: 10,

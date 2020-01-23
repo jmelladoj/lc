@@ -34,7 +34,7 @@ import { rutInputDirective } from 'vue-dni';
 import VueRouter from 'vue-router';
 import router from './routes.js';
 import VueToast from 'vue-toast-notification';
-import SpellChecker from 'tinymce/plugins/spellchecker';
+
 
 
 import 'vue-toast-notification/dist/index.css';
@@ -135,6 +135,10 @@ Vue.component('alertas', require('./components/intranet/Alertas.vue').default);
 Vue.component('alertas-contacto', require('./components/intranet/AlertasContacto.vue').default);
 Vue.component('recargas', require('./components/intranet/Recargar.vue').default);
 Vue.component('tabla-vip', require('./components/intranet/TablaVip.vue').default);
+Vue.component('usuario-promociones', require('./components/intranet/UsuarioBotonPromociones.vue').default);
+Vue.component('usuario-seminarios', require('./components/intranet/UsuarioBotonSeminarios.vue').default);
+Vue.component('usuario-sorteos', require('./components/intranet/UsuarioBotonSorteos.vue').default);
+
 
 
 
