@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Tip extends Model
 {
     //
-    protected $fillable = [
-        'id','nombre'
+    protected $guarded = [
+        'id'
     ];
 }

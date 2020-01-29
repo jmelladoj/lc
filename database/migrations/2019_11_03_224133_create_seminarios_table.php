@@ -23,6 +23,10 @@ class CreateSeminariosTable extends Migration
             $table->integer('participantes')->nullable()->default(0);
             $table->integer('tipo_persona');
             $table->string('url_imagen')->nullable()->default(null);
+
+            $table->unsignedBigInteger('categorias_usuarios_id')->nullable()->default(null);
+            $table->foreign('categorias_usuarios_id')->references('id')->on('categoria_usuarios');
+
             $table->timestamps();
         });
     }

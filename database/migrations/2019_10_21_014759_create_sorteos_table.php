@@ -19,6 +19,7 @@ class CreateSorteosTable extends Migration
             $table->string('valor');
             $table->string('premio');
             $table->string('fecha');
+            $table->integer('tipo_persona');
 
             $table->string('url_imagen')->nullable()->default(null);
 

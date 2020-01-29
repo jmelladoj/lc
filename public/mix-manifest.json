@@ -1,8 +1,9 @@
 {
-    "/js/app.js": "/js/app.js?id=90d698cab142ba82b5bc",
+    "/js/app.js": "/js/app.js?id=54739a53e8ad65fd86ea",
     "/css/app.css": "/css/app.css?id=4c846542500279484301",
     "/css/pagina-css.css": "/css/pagina-css.css?id=53127cca218aaa867c6b",
-    "/js/pagina-js.js": "/js/pagina-js.js?id=ac5ae52b9537f75e4f82",
-    "/css/admin.css": "/css/admin.css?id=db450e558babf2ba3e11",
-    "/js/admin.js": "/js/admin.js?id=e9c1788ee811b5e8f58c"
+    "/js/pagina-js.js": "/js/pagina-js.js?id=7ebbecb4417eecb7e0a6",
+    "/css/admin.css": "/css/admin.css?id=6da7417c8c4c702b2727",
+    "/js/admin.js": "/js/admin.js?id=e9c1788ee811b5e8f58c",
+    "/vendors~pdfjsWorker.js": "/vendors~pdfjsWorker.js?id=95db1158df303660c9dd"
 }

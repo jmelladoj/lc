@@ -56,23 +56,27 @@
             </template>
 
             <template v-slot:cell(valoracion)="data">
-                A {{ data.item.likes }} % les gusta esto.
+                A {{ data.item.cantidad_like }} % les gusta esto.
             </template>
 
             <template v-slot:cell(nombre_rubro)>
                 Sin rubro
             </template>
 
-            <template v-slot:cell(like)="data">
-                <a href="javascript:void(0)" @click="abrirModalValoracion(1, data.item)"> {{ data.item.likes }} % <i class="ml-1 fa fa-thumbs-up sale-color"></i></a>
+            <template v-slot:cell(cantidad_like)="data">
+                <a href="javascript:void(0)" @click="abrirModalValoracion(1, data.item)"> {{ data.item.cantidad_like }} % <i class="ml-1 fa fa-thumbs-up sale-color"></i></a>
             </template>
 
-            <template v-slot:cell(dislike)="data">
-                <a href="javascript:void(0)" @click="abrirModalValoracion(2, data.item)"> {{ data.item.dislikes }} % <i class="ml-1 fa fa-thumbs-down sale-color"></i></a>
+            <template v-slot:cell(cantidad_dislike)="data">
+                <a href="javascript:void(0)" @click="abrirModalValoracion(2, data.item)"> {{ 100 - data.item.cantidad_like }} % <i class="ml-1 fa fa-thumbs-down sale-color"></i></a>
             </template>
 
             <template v-slot:cell(perfil)="data">
                 <a href="javascript:void(0)" class="h4" title="Ver perfil de usuario" @click="abrirModalPerfil(data.item)"><i class="fa fa-user sale-color"></i></a>
+            </template>
+
+            <template v-slot:cell(perfil)="data">
+                <usuario-tabla-vip :usuario_id="data.item.id"></usuario-tabla-vip>
             </template>
 
         </b-table>
@@ -86,10 +90,6 @@
                             <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
                         </ValidationProvider>
                     </b-form-group>
-
-                    <b-alert variant="warning" class="text-justify" show>
-                        Debes de iniciar sesión en la plataforma para poder votar.
-                    </b-alert>
                 </b-form>
 
                 <template slot="modal-footer">
@@ -98,18 +98,6 @@
                 </template>
             </b-modal>
         </ValidationObserver>
-
-
-        <b-modal ref="modal_perfil" :title="modal_perfil.titulo" size="lg" no-close-on-backdrop>
-
-            <b-form>
-                <perfil_usuario :usuario_id="usuario.id" :tipo_usuario_logeado="4"></perfil_usuario>
-            </b-form>
-
-            <template slot="modal-footer">
-                <b-button size="md" variant="danger" @click="cerrarModalPerfil()"> Cerrar </b-button>
-            </template>
-        </b-modal>
 
     </b-container>
 </template>
@@ -259,8 +247,8 @@
                         { key: 'nombreRubro', label: 'Rubro', sortable: true, class: 'text-left' },
                         { key: 'perfil', label: 'Perfil', sortable: true, class: 'text-center' },
                         { key: 'valoracion', label: 'Valoración', sortable: true, class: 'text-center' },
-                        { key: 'like', label: 'Me gusta', sortable: true, class: 'text-center like' },
-                        { key: 'dislike', label: 'No me gusta', sortable: true, class: 'text-center dislike' }
+                        { key: 'cantidad_like', label: 'Me gusta', sortable: true, class: 'text-center like' },
+                        { key: 'cantidad_dislike', label: 'No me gusta', sortable: true, class: 'text-center dislike' }
                     ]
                 } else {
                     this.fields = [
@@ -269,8 +257,8 @@
                         { key: 'nombreRubro', label: 'Rubro', sortable: true, class: 'text-left' },
                         { key: 'perfil', label: 'Perfil', sortable: true, class: 'text-center' },
                         { key: 'valoracion', label: 'Valoración', sortable: true, class: 'text-center' },
-                        { key: 'like', label: 'Me gusta', sortable: true, class: 'text-center like' },
-                        { key: 'dislike', label: 'No me gusta', sortable: true, class: 'text-center dislike' }
+                        { key: 'cantidad_like', label: 'Me gusta', sortable: true, class: 'text-center like' },
+                        { key: 'cantidad_dislike', label: 'No me gusta', sortable: true, class: 'text-center dislike' }
                     ]
                 }
             }

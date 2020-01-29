@@ -176,9 +176,19 @@
                             </ValidationProvider>
                         </b-form-group>
 
+                        <b-form-group label="¿A qué usuarios va dirigido?">
+                            <ValidationProvider name="categorias usuario" rules="" v-slot="{ errors }">
+                                <b-form-select v-model="seminario.categoria_usuario" class="mb-3">
+                                    <option :value="null">Todos</option>
+                                    <option v-for="(categoria, index) in categorias" :key="index" :value="categoria.id" v-text="categoria.nombre + ' ' + categoria.nivel"></option>
+                                </b-form-select>
+                                <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
+                            </ValidationProvider>
+                        </b-form-group>
+
                         <b-form-group label="Imagen (Rec. 1920px ancho X 1280px alto | JPG, JPEG y PNG)">
                             <ValidationProvider name="imagen" rules="required|image" v-slot="{ errors, validate }">
-                                <b-img  :src="seminario.url_imagen"  id="img_seminario" center name="img_seminario" class="imagen"></b-img>
+                                <b-img v-show="!seminario.url_imagen" :src="seminario.url_imagen"  id="img_seminario" center name="img_seminario" class="imagen"></b-img>
                                 <b-form-file id="imagen_seminario" name="imagen_seminario" accept="image/*" placeholder="Sin archivo" @change="mostrarFoto($event)" @input="validate"></b-form-file>
                                 <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
                             </ValidationProvider>
@@ -241,14 +251,13 @@
 </template>
 
 <script>
-    const items = [];
-
     export default {
         props:[
             'tipo_usuario', 'tipo'
         ],
         data() {
             return {
+                categorias: [],
                 seminario: {
                     id: 0,
                     titulo: '',
@@ -257,6 +266,7 @@
                     capacidad: 0,
                     descripcion: '',
                     tipo_persona: 0,
+                    categoria_usuario: null,
                     url_imagen: ''
                 },
                 modal_seminario: {
@@ -267,7 +277,7 @@
                     titulo: ''
                 },
                 participantes: [],
-                items: items,
+                items: [],
                 fields: [
                     { key: 'index', label: '#', sortable: true, sortDirection: 'desc', class: 'text-center' },
                     { key: 'titulo', label: 'Nombre', sortable: true, class: 'text-left' },
@@ -316,6 +326,15 @@
                     this.seminario.url_imagen = URL.createObjectURL(e.target.files[0]);
                 }
             },
+            listarCategorias (){
+                let me=this;
+                axios.get('/categorias/usuario').then(function (response) {
+                    me.categorias = response.data.categorias;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+            },
             listarSeminarios (){
                 let me = this;
                 axios.get('/seminarios/' + this.tipo).then(function (response) {
@@ -351,6 +370,7 @@
                 formData.append('capacidad', this.seminario.capacidad);
                 formData.append('descripcion', this.seminario.descripcion);
                 formData.append('tipo_persona', this.seminario.tipo_persona);
+                formData.append('categoria_usuario', this.seminario.categoria_usuario);
 
                 axios.post('seminario/crear/actualizar',formData).then(function (response) {
                     me.listarSeminarios();
@@ -451,8 +471,8 @@
                     me.seminario.valor = data['valor'];
                     me.seminario.capacidad = data['capacidad'];
                     me.seminario.descripcion = data['descripcion'];
-                    me.seminario.categoria_usuario = data['categoria_usuario'];
                     me.seminario.tipo_persona = data['tipo_persona'];
+                    me.seminario.categoria_usuario = data['categorias_usuarios_id'] == null ? null : data['categorias_usuarios_id'];
                 }
 
                 this.$refs['modal_seminario'].show();
@@ -478,10 +498,12 @@
                 this.seminario.categoria_usuario = 0;
                 this.seminario.tipo_persona = 0;
                 this.seminario.url_imagen = '';
+                this.seminario.categoria_usuario = null;
             }
         },
         mounted() {
             this.listarSeminarios();
+            this.listarCategorias();
         }
     }
 </script>

@@ -37,7 +37,8 @@ class SeminarioController extends Controller
                 'valor' => $request->valor,
                 'capacidad' => $request->capacidad,
                 'descripcion' => $request->descripcion,
-                'tipo_persona' => $request->tipo_persona
+                'tipo_persona' => $request->tipo_persona,
+                'categorias_usuarios_id' => $request->categoria_usuario
             ]
         );
 
@@ -66,7 +67,7 @@ class SeminarioController extends Controller
             ]);
 
             $user = User::find(1);
-            $user->notify(new Alerta('Ha participado en un seminario.', Auth::user(), 'fa fa-calendar', 1));
+            $user->notify(new Alerta('Ha participado en un seminario.', Auth::user(), "", 'fa fa-calendar', 1));
 
             return ['mensaje' => '¡Felicitaciones!, Te has incrito en el seminario ' . $seminario->titulo, 'clase' => 'success'];
         } else {

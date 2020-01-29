@@ -139,12 +139,59 @@
                             </ValidationProvider>
                         </b-form-group>
 
+                        <b-row>
+                            <b-col>
+                                <b-form-group label="Tamaño de letra">
+                                    <ValidationProvider name="Tamaño de letra" rules="required" v-slot="{ errors }">
+                                        <b-form-radio v-model="slider.letra_titulo" name="letra_titulo" value="46">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Tamaño título</b-form-radio>
+                                        <b-form-radio v-model="slider.letra_titulo" name="letra_titulo" value="36">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Tamaño sub título</b-form-radio>
+                                        <b-form-radio v-model="slider.letra_titulo" name="letra_titulo" value="20">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Tamaño parrafo</b-form-radio>
+                                        <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
+                                    </ValidationProvider>
+                                </b-form-group>
+                            </b-col>
+                            <b-col>
+                                <b-form-group label="Alineación de texto">
+                                    <ValidationProvider name="Alineación de texto" rules="required" v-slot="{ errors }">
+                                        <b-form-radio v-model="slider.alineacion_titulo" name="alineacion_titulo" value="text-right">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Derecha</b-form-radio>
+                                        <b-form-radio v-model="slider.alineacion_titulo" name="alineacion_titulo" value="text-left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Izquierda</b-form-radio>
+                                        <b-form-radio v-model="slider.alineacion_titulo" name="alineacion_titulo" value="text-center">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Centrado</b-form-radio>
+                                        <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
+                                    </ValidationProvider>
+                                </b-form-group>
+                            </b-col>
+                        </b-row>
+
                         <b-form-group>
                             <ValidationProvider name="subtítulo" rules="min:3" v-slot="{ errors }">
                                 <b-form-input type="text" v-model="slider.subtexto" placeholder="Subtítulo"></b-form-input>
                                 <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
                             </ValidationProvider>
                         </b-form-group>
+
+                        <b-row>
+                            <b-col>
+                                <b-form-group label="Tamaño de letra">
+                                    <ValidationProvider name="Tamaño de letra" rules="required" v-slot="{ errors }">
+                                        <b-form-radio v-model="slider.letra_sub_titulo" name="letra_sub_titulo" value="46">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Tamaño título</b-form-radio>
+                                        <b-form-radio v-model="slider.letra_sub_titulo" name="letra_sub_titulo" value="36">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Tamaño sub título</b-form-radio>
+                                        <b-form-radio v-model="slider.letra_sub_titulo" name="letra_sub_titulo" value="20">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Tamaño parrafo</b-form-radio>
+                                        <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
+                                    </ValidationProvider>
+                                </b-form-group>
+                            </b-col>
+                            <b-col>
+                                <b-form-group label="Alineación de texto">
+                                    <ValidationProvider name="Alineación de texto" rules="required" v-slot="{ errors }">
+                                        <b-form-radio v-model="slider.alineacion_sub_titulo" name="alineacion_sub_titulo" value="text-right">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Derecha</b-form-radio>
+                                        <b-form-radio v-model="slider.alineacion_sub_titulo" name="alineacion_sub_titulo" value="text-left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Izquierda</b-form-radio>
+                                        <b-form-radio v-model="slider.alineacion_sub_titulo" name="alineacion_sub_titulo" value="text-center">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Centrado</b-form-radio>
+                                        <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
+                                    </ValidationProvider>
+                                </b-form-group>
+                            </b-col>
+                        </b-row>
+
 
                         <b-row>
                             <b-col class="text-center">
@@ -287,10 +334,13 @@
                     pagina_nosotros: false,
                     pagina_contacto: false,
                     pagina_comunidad: false,
-                    pagina_servicios: false
+                    pagina_servicios: false,
+                    letra_titulo: '46',
+                    alineacion_titulo: 'text-center',
+                    letra_sub_titulo: '36',
+                    alineacion_sub_titulo: 'text-center'
                 },
                 estado_checkbox: false,
-                texto_checkbox: 'Marcar todos',
                 colors: ['#E8ECD1', '#8AB733', '#3F8A24', '#1E2F13', '#D4AF37', '#D7552A', '#0070C0', '#FFFF99' ,''],
                 modal_slider: {
                     titulo: '',
@@ -320,16 +370,13 @@
                 return this.fields.filter(f => f.sortable).map(f => {
                     return { text: f.label, value: f.key }
                 })
+            },
+            texto_checkbox() {
+                return this.estado_checkbox == true ? 'Desmarcar todos' : 'Marcar todos'
             }
         },
         watch: {
             estado_checkbox: function(){
-                if(this.estado_checkbox == true){
-                    this.texto_checkbox = 'Desmarcar todos';
-                } else {
-                    this.texto_checkbox = 'Marcar todos';
-                }
-
                 this.slider.inicio = this.estado_checkbox;
                 this.slider.descanso_uno = this.estado_checkbox;
                 this.slider.descanso_dos = this.estado_checkbox;
@@ -389,6 +436,11 @@
                 formData.append('pagina_contacto', this.slider.pagina_contacto);
                 formData.append('pagina_comunidad', this.slider.pagina_comunidad);
                 formData.append('pagina_servicios', this.slider.pagina_servicios);
+
+                formData.append('letra_titulo', this.slider.letra_titulo);
+                formData.append('alineacion_titulo', this.slider.alineacion_titulo);
+                formData.append('letra_sub_titulo', this.slider.letra_sub_titulo);
+                formData.append('alineacion_sub_titulo', this.slider.alineacion_sub_titulo);
 
                 axios.post('slider/crear/actualizar',formData).then(function (response) {
                     me.listarSliders();
@@ -478,36 +530,42 @@
                     me.modal_slider.titulo = "Modificar Slider";
                     me.modal_slider.accion = 2;
 
-                    me.slider.id = data['id'];
-                    me.slider.texto = data['texto'];
-                    me.slider.color = data['color'];
-                    me.slider.subtexto = data['subtexto'];
-                    me.slider.subcolor = data['subcolor'];
-                    me.slider.link = data['link'].replace('/intranet/', '');
-                    me.slider.tipo_persona = data['tipo_persona'];
-                    me.slider.url_imagen = 'storage/' + data['url_imagen'];
+                    me.slider.id = data.id;
+                    me.slider.texto = data.texto;
+                    me.slider.color = data.color;
+                    me.slider.subtexto = data.subtexto;
+                    me.slider.subcolor = data.subcolor;
+                    me.slider.link = data.link.replace('/intranet/', '');
+                    me.slider.tipo_persona = data.tipo_persona;
+                    me.slider.url_imagen = 'storage/' + data.url_imagen;
+                    me.slider.letra_titulo = data.letra_titulo
+                    me.slider.alineacion_titulo = data.alineacion_titulo
+                    me.slider.letra_sub_titulo = data.letra_sub_titulo
+                    me.slider.alineacion_sub_titulo = data.alineacion_sub_titulo
                 }
 
                 this.$refs['modal_slider'].show();
             },
             abrirModalUbicaciones(data = []){
                 let me = this;
-                this.limpiarDatosSlider();
+                //this.limpiarDatosSlider();
 
                 this.estado_checkbox = false;
 
-                if(data['inicio'] && data['descanso_uno'] && data['descanso_dos'] && data['pagina_nosotros'] && data['pagina_contacto'] && data['pagina_comunidad'] && data['pagina_servicios']){
+                if(parseInt(data.inicio) == 1 && parseInt(data.descanso_uno) == 1 && parseInt(data.descanso_dos) == 1 && parseInt(data.pagina_nosotros) == 1 && parseInt(data.pagina_contacto) == 1 && parseInt(data.pagina_comunidad) == 1 && parseInt(data.pagina_servicios) == 1){
                     this.estado_checkbox = true;
+                } else {
+                    this.estado_checkbox = false;
                 }
 
-                this.slider.id = data['id'];
-                this.slider.inicio = data['inicio'] == 1 ? true : false;
-                this.slider.descanso_uno = data['descanso_uno'] == 1 ? true : false;
-                this.slider.descanso_dos = data['descanso_dos'] == 1 ? true : false;
-                this.slider.pagina_nosotros = data['pagina_nosotros'] == 1 ? true : false;
-                this.slider.pagina_contacto = data['pagina_contacto'] == 1 ? true : false;
-                this.slider.pagina_comunidad = data['pagina_comunidad'] == 1 ? true : false;
-                this.slider.pagina_servicios = data['pagina_servicios'] == 1 ? true : false;
+                this.slider.id = data.id;
+                this.slider.inicio = parseInt(data.inicio) == 1 ? true : false;
+                this.slider.descanso_uno = parseInt(data.descanso_uno) == 1 ? true : false;
+                this.slider.descanso_dos = parseInt(data.descanso_dos) == 1 ? true : false;
+                this.slider.pagina_nosotros = parseInt(data.pagina_nosotros) == 1 ? true : false;
+                this.slider.pagina_contacto = parseInt(data.pagina_contacto) == 1 ? true : false;
+                this.slider.pagina_comunidad = parseInt(data.pagina_comunidad) == 1 ? true : false;
+                this.slider.pagina_servicios = parseInt(data.pagina_servicios) == 1 ? true : false;
 
                 this.$refs['modal_ubicaciones'].show();
             },
@@ -532,7 +590,10 @@
                 this.slider.pagina_comunidad = false;
                 this.slider.pagina_servicios = false;
                 this.estado_checkbox = false;
-                this.texto_checkbox = 'Marcar todos';
+                this.slider.letra_titulo = '46',
+                this.slider.alineacion_titulo = 'text-center'
+                this.slider.letra_sub_titulo = '36',
+                this.slider.alineacion_sub_titulo = 'text-center'
             }
         },
         mounted() {

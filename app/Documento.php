@@ -15,7 +15,7 @@ class Documento extends Model
     ];
 
     protected $dates = ['deleted_at'];
-    protected $appends = ['nombre_categoria', 'id_categoria', 'extension_documento'];
+    protected $appends = ['nombre_categoria', 'id_categoria', 'extension_documento', 'autor'];
 
     public function getImgAttribute(){
         switch ($this->extension) {
@@ -77,5 +77,9 @@ class Documento extends Model
 
     public function getIdCategoriaAttribute(){
         return $this->categoria != null ? $this->categoria->id : 0;
+    }
+
+    public function getAutorAttribute(){
+        return $this->usuario->nombre;
     }
 }

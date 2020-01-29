@@ -9,15 +9,15 @@ use Illuminate\Support\Facades\Storage;
 class SliderController extends Controller
 {
     //
-    public function index(){      
+    public function index(){
         return ['sliders' => Slider::orderBy('created_at', 'desc')->get()];
     }
 
-    public function indexHome(){      
+    public function indexHome(){
         return ['sliders' => Slider::where('inicio', 1)->orderBy('created_at', 'desc')->get()];
     }
 
-    public function indexUbicacion($ubicacion){  
+    public function indexUbicacion($ubicacion){
         switch ($ubicacion) {
             case 1:
                 $sliders = Slider::where('descanso_uno', 1)->orderBy('created_at', 'desc')->get();
@@ -43,7 +43,7 @@ class SliderController extends Controller
     }
 
     public function crearOactualizar(Request $request){
-        
+
         $slider = Slider::updateOrCreate(
             ['id' => $request->slider_id],
             [
@@ -59,15 +59,19 @@ class SliderController extends Controller
                 'pagina_nosotros' => 1,
                 'pagina_contacto' => 1,
                 'pagina_comunidad' => 1,
-                'pagina_servicios' => 1
+                'pagina_servicios' => 1,
+                'letra_titulo' => $request->letra_titulo,
+                'alineacion_titulo' => $request->alineacion_titulo,
+                'letra_sub_titulo' => $request->letra_sub_titulo,
+                'alineacion_sub_titulo' => $request->alineacion_sub_titulo
             ]
         );
 
         if ($request->hasFile('imagen_slider')) {
             if($slider->url_imagen != null) { Storage::disk('public')->delete($slider->url_imagen); }
-            
+
             Slider::updateOrCreate(['id' => $slider->id], ['url_imagen' => Storage::disk('public')->putFile('sliders', $request->file('imagen_slider'))]);
-        }  
+        }
     }
 
     public function ubicaciones(Request $request){
@@ -79,7 +83,7 @@ class SliderController extends Controller
              'pagina_nosotros' => $request->pagina_nosotros,
              'pagina_contacto' => $request->pagina_contacto,
              'pagina_comunidad' => $request->pagina_comunidad,
-             'pagina_servicios' => $request->pagina_servicios 
+             'pagina_servicios' => $request->pagina_servicios
             ]
         );
     }

@@ -88,6 +88,8 @@ Vue.component('sociales', require('./components/general/Sociales.vue').default);
 Vue.component('perfil_usuario', require('./components/general/Perfil.vue').default);
 Vue.component('ver-documento', require('./components/general/VerDocumento.vue').default);
 Vue.component('errores', require('./components/general/Errores.vue').default);
+Vue.component('usuario-tabla-vip', require('./components/general/PerfilUsuario.vue').default);
+Vue.component('busqueda-documento', require('./components/general/Busqueda.vue').default);
 
 //Pagina
 Vue.component('login', require('./components/pagina/Login.vue').default);
@@ -104,6 +106,8 @@ Vue.component('busqueda', require('./components/pagina/Busqueda.vue').default);
 Vue.component('iniciar-sesion', require('./components/pagina/IniciarSesion.vue').default);
 Vue.component('contacto', require('./components/pagina/Contacto.vue').default);
 Vue.component('politicas', require('./components/pagina/Politicas.vue').default);
+Vue.component('pagina-servicios', require('./components/pagina/PaginaServicios.vue').default);
+Vue.component('home-intranet', require('./components/pagina/HomeIntranet.vue').default);
 
 //Intranet
 Vue.component('general', require('./components/intranet/General.vue').default);
@@ -138,6 +142,8 @@ Vue.component('tabla-vip', require('./components/intranet/TablaVip.vue').default
 Vue.component('usuario-promociones', require('./components/intranet/UsuarioBotonPromociones.vue').default);
 Vue.component('usuario-seminarios', require('./components/intranet/UsuarioBotonSeminarios.vue').default);
 Vue.component('usuario-sorteos', require('./components/intranet/UsuarioBotonSorteos.vue').default);
+Vue.component('escritorio', require('./components/intranet/Escritorio.vue').default);
+Vue.component('resultados-busqueda', require('./components/intranet/ResultadosBusqueda.vue').default);
 
 
 
@@ -156,7 +162,7 @@ const app = new Vue({
     el: '#app',
     data :{
         ubicacion: 1,
-        menu : 1
+        menu : 0
     },
     router
 });

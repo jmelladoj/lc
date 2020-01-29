@@ -29,6 +29,10 @@ class CreateSlidersTable extends Migration
             $table->boolean('pagina_contacto')->default(false);
             $table->boolean('pagina_comunidad')->default(false);
             $table->boolean('pagina_servicios')->default(false);
+            $table->string('letra_titulo')->nullable()->default('46');
+            $table->string('alineacion_titulo')->nullable()->default('text-center');
+            $table->string('letra_sub_titulo')->nullable()->default('36');
+            $table->string('alineacion_sub_titulo')->nullable()->default('text-center');
             $table->softDeletes();
             $table->timestamps();
         });

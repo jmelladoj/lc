@@ -1,13 +1,30 @@
 <template>
-    <pdf :src="'/storage/general/terminos.pdf'"></pdf>
+    <b-row>
+        <pdf v-for="i in numPages" :key="i" :src="src" :page="i" style="display: inline-block; width: 100%" ></pdf>
+    </b-row>
 </template>
 
 <script>
-    import pdf from 'vue-pdf-cdn'
+    import babel from 'babel-runtime/regenerator'
+    import pdf from 'vue-pdf'
+
+    let pdfDocument = pdf.createLoadingTask('/storage/general/terminos.pdf');
 
     export default {
-        components: {  
+        components: {
+            babel,
             pdf
+        },
+        data(){
+            return {
+                src: pdfDocument,
+                numPages: 0
+            }
+        },
+        mounted() {
+            this.src.then(pdf => {
+                this.numPages = pdf.numPages;
+            })
         }
     }
 </script>

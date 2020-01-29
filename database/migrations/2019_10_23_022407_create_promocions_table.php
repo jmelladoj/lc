@@ -17,6 +17,7 @@ class CreatePromocionsTable extends Migration
             $table->bigIncrements('id');
             $table->string('titulo');
             $table->string('fecha');
+            $table->integer('tipo_persona');
 
             $table->string('url_imagen')->nullable()->default(null);
 

@@ -85,13 +85,14 @@
                                         <errores :errors="validationErrors" :campo="'nombre'" v-if="validationErrors"> </errores>
                                     </div>
                                     <div class="col-lg-4 col-md-4">
-                                        <input class="input--lg form-full run_nuevo" @keyup="mostrar_botones_registrate" v-rut:live v-model="usuario_nuevo.run" type="text" placeholder="RUN personal o RUT si eres una Pyme" required>
+                                        <input id="run" class="input--lg form-full run_nuevo" @keyup="mostrar_botones_registrate" v-rut:live v-model="usuario_nuevo.run" type="text" placeholder="RUN personal o RUT si eres una Pyme" required>
                                         <span id="alerta_rut" class="d-none"><span class="d-block alert alert-danger m-t-5">Rut o run invalido</span></span>
                                         <errores :errors="validationErrors" :campo="'run'" v-if="validationErrors"> </errores>
                                     </div>
                                     <div class="col-lg-4 col-md-4">
-                                        <input class="input--lg form-full run_nuevo" @keyup="mostrar_botones_registrate" v-rut:live v-model="usuario_nuevo.run_confirmacion" type="text" placeholder="RUN personal o RUT si eres una Pyme" required>
-                                        <span id="alerta_rut" class="d-none"><span class="d-block alert alert-danger m-t-5">Rut o run invalido</span></span>
+                                        <input id="run_confirmacion" class="input--lg form-full run_nuevo_confirmacion" @keyup="mostrar_botones_registrate" v-rut:live v-model="usuario_nuevo.run_confirmacion" type="text" placeholder="Repite RUN personal o RUT si eres una Pyme" required>
+                                        <span id="alerta_rut_confirmacion" class="d-none"><span class="d-block alert alert-danger m-t-5">Rut o run invalido</span></span>
+                                        <span id="alerta_rut_igual" class="d-none"><span class="d-block alert alert-danger m-t-5">Ambos RUN / RUT deben coincidir.</span></span>
                                         <errores :errors="validationErrors" :campo="'run_confirmacion'" v-if="validationErrors"> </errores>
                                     </div>
 
@@ -104,12 +105,13 @@
                                         <errores :errors="validationErrors" :campo="'email'" v-if="validationErrors"> </errores>
                                     </div>
                                     <div class="col-lg-4 col-md-4">
-                                        <input class="input--lg form-full" @keyup="mostrar_botones_registrate" v-model="usuario_nuevo.clave_uno" type="password" placeholder="Crea tu clave (6 caracteres)" required>
+                                        <input id="clave_uno" class="input--lg form-full" @keyup="mostrar_botones_registrate" v-model="usuario_nuevo.clave_uno" type="password" placeholder="Crea tu clave (6 caracteres)" required>
                                         <errores :errors="validationErrors" :campo="'clave_uno'" v-if="validationErrors"> </errores>
                                     </div>
                                     <div class="col-lg-4 col-md-4">
-                                        <input class="input--lg form-full" @keyup="mostrar_botones_registrate" v-model="usuario_nuevo.clave_dos" type="password" placeholder="Repite esa clave" required>
+                                        <input  id="clave_dos" class="input--lg form-full" @keyup="mostrar_botones_registrate" v-model="usuario_nuevo.clave_dos" type="password" placeholder="Repite esa clave" required>
                                         <errores :errors="validationErrors" :campo="'clave_dos'" v-if="validationErrors"> </errores>
+                                        <span id="alerta_pass_igual" class="d-none"><span class="d-block alert alert-danger m-t-5">Ambas contraseñas deben coincidir.</span></span>
                                     </div>
                                 </div>
                             </p>
@@ -119,7 +121,7 @@
                             <p class="form-field-wrapper">
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <label class="">
+                                        <label class="sale-color">
                                             <input class="" v-model="usuario_nuevo.mailing" type="checkbox">
                                             <span>Quiero recibir notificaciones importantes de la comunidad LebenCo.</span>
                                         </label>
@@ -260,12 +262,18 @@
                 this.usuario_nuevo.tipo_persona = 0;
                 this.usuario_nuevo.nombre = '';
                 this.usuario_nuevo.run = '';
+                this.usuario_nuevo.run_confirmacion = ''
                 this.usuario_nuevo.email = '';
                 this.usuario_nuevo.clave_uno = '';
                 this.usuario_nuevo.clave_dos = '';
                 this.usuario_nuevo.mailing = false;
 
                 $('#alerta_rut').addClass('d-none')
+                $('#alerta_rut_confirmacion').addClass('d-none')
+                $('#alerta_rut_igual').addClass('d-none')
+                $('#alerta_pass_igual').addClass('d-none')
+
+
 
                 this.mostrar_botones_registrate();
             },

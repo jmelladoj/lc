@@ -148,8 +148,20 @@
 
                         <b-form-group label="Imagen (Rec. 1920px ancho X 1280px alto | JPG, JPEG y PNG)">
                             <ValidationProvider name="imagen" rules="required|image" v-slot="{ errors, validate }">
-                                <b-img  :src="sorteo.url_imagen" fluid id="img_sorteo" center name="img_sorteo" class="imagen "></b-img>
+                                <b-img v-show="!sorteo.url_imagen"  :src="sorteo.url_imagen" fluid id="img_sorteo" center name="img_sorteo" class="imagen "></b-img>
                                 <b-form-file id="imagen_sorteo" name="imagen_sorteo" accept="image/*" placeholder="Sin archivo" @change="mostrarFoto($event)" @input="validate"></b-form-file>
+                                <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
+                            </ValidationProvider>
+                        </b-form-group>
+
+                        <b-form-group label="Tipo de persona">
+                            <ValidationProvider name="tipo de persona" rules="required|oneOf:0,1,2,3" v-slot="{ errors }">
+                                <b-form-select v-model="sorteo.tipo_persona">
+                                    <option :value="null">Todos</option>
+                                    <option :value="1">Persona</option>
+                                    <option :value="2">Pyme</option>
+                                    <option :value="3">Estudiante</option>
+                                </b-form-select>
                                 <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
                             </ValidationProvider>
                         </b-form-group>
@@ -158,7 +170,7 @@
                             <ValidationProvider name="categorias usuario" rules="" v-slot="{ errors }">
                                 <b-form-select v-model="sorteo.categoria_usuario" class="mb-3">
                                     <option :value="null">Todos</option>
-                                    <option v-for="(categoria, index) in categorias" :key="index" :value="categoria.id" v-text="categoria.nombre"></option>
+                                    <option v-for="(categoria, index) in categorias" :key="index" :value="categoria.id" v-text="categoria.nombre + ' ' + categoria.nivel"></option>
                                 </b-form-select>
                                 <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
                             </ValidationProvider>
@@ -194,7 +206,8 @@
                     premio: '',
                     fecha: '',
                     url_imagen: '',
-                    categoria_usuario: null
+                    categoria_usuario: null,
+                    tipo_persona: 0
                 },
                 modal_sorteo: {
                     titulo: '',
@@ -274,6 +287,8 @@
                 formData.append('premio', this.sorteo.premio);
                 formData.append('fecha', this.sorteo.fecha);
                 formData.append('categoria_usuario', this.sorteo.categoria_usuario);
+                formData.append('tipo_persona', this.sorteo.tipo_persona);
+
 
                 axios.post('sorteo/crear/actualizar',formData).then(function (response) {
                     me.listarSorteos();
@@ -372,7 +387,8 @@
                     me.sorteo.valor = data['valor'];
                     me.sorteo.premio = data['premio'];
                     me.sorteo.fecha = data['fecha'];
-                    me.sorteo.categoria_usuario = data['categoria_usuario'] == null ? null : data['categoria_usuario'];
+                    me.sorteo.tipo_persona = data['tipo_persona']
+                    me.sorteo.categoria_usuario = data['categorias_usuarios_id'] == null ? null : data['categorias_usuarios_id'];
                     me.sorteo.url_imagen = 'storage/' + data['url_imagen'];
                 }
 
@@ -384,6 +400,7 @@
                 this.sorteo.valor = 0;
                 this.sorteo.premio = '';
                 this.sorteo.fecha = '';
+                this.sorteo.tipo_persona = 0
                 this.sorteo.categoria_usuario = null;
                 this.sorteo.url_imagen = null;
             }

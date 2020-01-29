@@ -25,6 +25,7 @@
     },
     "dependencies": {
         "@babel/polyfill": "^7.7.0",
+        "babel-runtime": "^6.26.0",
         "bootstrap-vue": "^2.2.0",
         "core-js": "^3.6.1",
         "intersection-observer": "^0.7.0",

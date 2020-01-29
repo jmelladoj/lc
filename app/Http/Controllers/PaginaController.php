@@ -57,7 +57,7 @@ class PaginaController extends Controller
             $usuario = Auth::user();
 
             $user = User::find(1);
-            $user->notify(new Alerta($descripcion, $usuario, 'fa fa-picture-o', 2));
+            $user->notify(new Alerta($descripcion, $usuario, "", 'fa fa-picture-o', 2));
 
             return view('home')->with(compact('redireccion', 'mensaje'));
         } else {
@@ -104,6 +104,11 @@ class PaginaController extends Controller
         return ['pagina' => Pagina::find(3)];
     }
 
+    public function index_home_usuario(Request $request)
+    {
+        return ['pagina' => Pagina::find(5)];
+    }
+
     public function indexLogin(Request $request)
     {
         return ['pagina' => Pagina::find(4)];
@@ -145,6 +150,19 @@ class PaginaController extends Controller
 
     }
 
+    public function actualizar_home_usuario(Request $request){
+        $pagina = Pagina::find(5);
+        $pagina->contenido =  $request->contenido;
+
+        if ($request->hasFile('imagen')) {
+            if($pagina->video_url != null) { Storage::disk('public')->delete($pagina->video_url); }
+
+            $pagina->video_url = Storage::disk('public')->putFile('general', $request->file('imagen'));
+        }
+
+        $pagina->save();
+    }
+
     public function actualizarComunidad(Request $request){
         Pagina::where('id', 2)->update(['mensaje_uno' => $request->mensaje_uno, 'mensaje_dos' => $request->mensaje_dos]);
     }
@@ -159,7 +177,7 @@ class PaginaController extends Controller
 
     public function alerta(Request $request){
         $usuario = User::find(1);
-        $usuario->notify(new Alerta($request->mensaje, Auth::user(), 'fa fa-exclamation-circle', 1));
+        $usuario->notify(new Alerta($request->mensaje, Auth::user(), "", 'fa fa-exclamation-circle', 1));
     }
 
     public function contacto(Request $request){
@@ -182,7 +200,7 @@ class PaginaController extends Controller
 
         if(!Mail::to('contacto@prevencionlebenco.cl')->send(new Contacto($request->nombre, $request->asunto, $email, $request->telefono, $request->mensaje, $request->tipo_persona))){
             $usuario = User::find(1);
-            $usuario->notify(new Alerta('Contacto', $user, 'fa fa-envelope', 9));
+            $usuario->notify(new Alerta('Contacto', $user, "", 'fa fa-envelope', 9));
 
             return ['mensaje' => 'Mensaje enviado!, pronto tomaremos contacto contigo.', 'clase' => 'success'];
         } else {

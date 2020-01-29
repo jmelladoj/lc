@@ -62,11 +62,17 @@ Route::post('/pagina/servicios/actualizar', 'PaginaController@actualizarServicio
 Route::post('/pagina/login/actualizar', 'PaginaController@actualizarLogin')->name('Actualizar página login');
 Route::post('/pagina/comunidad/alerta', 'PaginaController@alerta')->name('Alertas');
 Route::post('/pagina/video/eliminar', 'PaginaController@eliminar_video')->name('Listar Nosotros');
+Route::get('/pagina/home/usuario', 'PaginaController@index_home_usuario')->name('Listar Nosotros');
+Route::post('pagina/home/usuario/actualizar', 'PaginaController@actualizar_home_usuario')->name('Listar Nosotros');
 
 //Rutas de servicios
 Route::get('/pagina/servicios/intranet', 'ServicioController@index')->name('Listar Servicios');
 Route::post('/pagina/servicio/crear/actualizar', 'ServicioController@crearOactualizar')->name('Crear o Actualizar Servicio');
 Route::post('/pagina/servicio/eliminar', 'ServicioController@eliminar')->name('Borrar Servicio');
+Route::get('/pagina/subservicios/{id}', 'ServicioController@index_subservicios')->name('Listar Servicios');
+Route::post('/pagina/subservicio/crear/actualizar', 'ServicioController@crear_actualizar_sub_servicio')->name('Crear o Actualizar Servicio');
+Route::post('/pagina/subservicio/eliminar', 'ServicioController@eliminar_sub_servicio')->name('Borrar Servicio');
+
 
 //Rutas de categorías
 Route::get('/categorias', 'CategoriaDocumentoController@index')->name('Listar Categorias');
@@ -86,6 +92,7 @@ Route::post('/documento/crear/actualizar', 'DocumentoController@crearOactualizar
 Route::post('/documento/restaurar', 'DocumentoController@restaurar')->name('Resturar Documentos');
 Route::post('/documento/eliminar', 'DocumentoController@eliminar')->name('Borrar Documento');
 Route::get('/documento/descargar/{id}' , 'DocumentoController@descargar')->name('Descargar Documento');
+Route::get('/documentos/busqueda/{busqueda}' , 'DocumentoController@buscar')->name('Buscar Documentos');
 
 //Rutas de categorías de usuario
 Route::get('/categorias/usuario', 'CategoriaUsuarioController@index')->name('Listar Categorias Usuario');
@@ -118,7 +125,8 @@ Route::post('/usuario/comunidad/quitar', 'UsuarioController@quitarComunidadPyme'
 Route::post('/usuario/comunidad/agregar', 'UsuarioController@agregarComunidadPyme')->name('Tabla comunidad pyme');
 Route::get('/usuarios/tabla/vip', 'UsuarioController@usuariosTablaVip')->name('Usuario Tabla vip');
 Route::get('/usuarios/tabla/comunidad', 'UsuarioController@usuariosTablaComunidad')->name('Usuario Tabla comunidad');
-
+Route::post('/usuario/tabla/comunidad', 'UsuarioController@usuario_tabla_comunidad')->name('Usuario Tabla comunidad');
+Route::post('/usuario/tabla/vip', 'UsuarioController@usuario_tabla_vip')->name('Usuario Tabla vip');
 
 Route::post('/usuario/recuperar/password', 'UsuarioController@recuperar')->name('Recuperar contraseña');
 

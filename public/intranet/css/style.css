@@ -2966,7 +2966,11 @@ tbody.collapse.show {
   display: inline-block;
   width: 100%;
   height: calc(2.0625rem + 2px);
-  margin-bottom: 0; }
+  margin-bottom: 0;
+  border-color: #8ab733 !important;
+  box-shadow: 0 1px 1px #8ab733 inset, 0 0 8px #8ab733 !important;
+  outline: 0 none;
+}
 
 .custom-file-input {
   position: relative;
@@ -2976,10 +2980,11 @@ tbody.collapse.show {
   margin: 0;
   opacity: 0; }
   .custom-file-input:focus ~ .custom-file-control {
-    border-color: rgba(0, 0, 0, 0.1);
-    box-shadow: transparent; }
+    border-color: #8ab733;
+    box-shadow: 0 0 0 0.2rem rgba(138, 183, 51, 0.6); }
     .custom-file-input:focus ~ .custom-file-control::before {
-      border-color: rgba(0, 0, 0, 0.1); }
+        border-color: #8ab733;
+        box-shadow: 0 0 0 0.2rem rgba(138, 183, 51, 0.6); }
   .custom-file-input:lang(en) ~ .custom-file-label::after {
     content: "Browse"; }
 

@@ -34,10 +34,11 @@
                         <ul class="navbar-nav mr-auto">
                             <li class="nav-item"> <a class="nav-link nav-toggler d-block d-sm-none waves-effect waves-dark" href="javascript:void(0)"><i class="ti-menu"></i></a> </li>
                             <li class="nav-item"> <a class="nav-link sidebartoggler d-none d-lg-block d-md-block waves-effect waves-dark" href="javascript:void(0)"><i class="icon-menu"></i></a> </li>
+                            <busqueda-documento></busqueda-documento>
                         </ul>
 
                         <ul class="navbar-nav my-lg-0">
-                            <li class="nav-item right-side-toggle btn-info">
+                            <li class="nav-item right-side-toggle btn-success">
                                 <a class="nav-link dropdown-toggle waves-effect waves-dark" aria-expanded="false">
                                     <input type="hidden" id="saldo_usuario" name="saldo_usuario" value="{{ Auth::user()->saldo }}">
                                     <i class="fa fa-usd"></i>

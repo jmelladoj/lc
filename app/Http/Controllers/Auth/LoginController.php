@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\InvitacionUsuario;
+use App\User;
 use Carbon\Carbon;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
@@ -48,6 +50,21 @@ class LoginController extends Controller
         Auth::user()->update([
             'last_login_at' => Carbon::now()->toDateTimeString(),
         ]);
+
+        $invitaciones = InvitacionUsuario::where('user_id', Auth::user()->id)->where('pagada', 0)->get();
+
+        foreach($invitaciones as $item){
+            $user = User::where('email', $item->correo_invitado)->whereNotNull('last_login_at')->first();
+
+            if(!$user){
+                $item->pagada = 1;
+                $item->save();
+
+                Auth::user()->saldo += $item->recompensa;
+                Auth::user()->save();
+            }
+        }
+
     }
 
     public function showLoginForm(Request  $request){

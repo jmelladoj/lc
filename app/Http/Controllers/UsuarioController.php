@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Asesoria;
+use App\InvitacionUsuario;
 use App\Mail\InvitarAmigo;
 use App\Mail\RecuperarContrasena;
 use App\Mail\SolicitarAsesoria;
@@ -78,14 +79,16 @@ class UsuarioController extends Controller
             ['id' => $request->usuario_id],
             [
                 'nombre' => $request->nombre,
+                'nombre_fantasia' => $request->nombre_fantasia,
+                'giro_comercial' => $request->giro_comercial,
                 'run' => $request->run,
                 'email' => $request->email,
                 'tipo_usuario' => $request->tipo_usuario,
                 'tipo_persona' => $request->tipo_persona,
-                'fecha_nacimiento' => Carbon::createFromDate($request->fecha_nacimiento)->format('Y-m-d'),
+                'fecha_nacimiento' => $request->fecha_nacimiento,
                 'telefono' => $request->telefono,
                 'direccion' => $request->direccion,
-                'comuna_id' => $request->comuna_id,
+                'comuna_id' => $request->comuna_id == 0 ? null : $request->comuna_id,
                 'hijos' => $request->hijos,
                 'estado_civil' => $request->estado_civil,
                 'casa_estudio' => $request->casa_estudio,
@@ -113,13 +116,64 @@ class UsuarioController extends Controller
                 'ultimo_empresa' => $request->ultimo_empresa,
                 'rubro_empresa' => $request->rubro_empresa,
                 'organismo_administrador_empresa' => $request->organismo_administrador_empresa,
-                'comunidad_pyme' => $request->comunidad_pyme
+                'comunidad_pyme' => $request->comunidad_pyme,
+                'nombre_facturacion' => $request->nombre_facturacion,
+                'run_facturacion' => $request->run_facturacion,
+                'email_facturacion' => $request->email_facturacion,
+                'nombre_representante_facturacion' => $request->nombre_representante_facturacion,
+                'telefono_facturacion' => $request->telefono_facturacion,
+                'empresa_familiar' => $request->empresa_familiar,
+                'tiempo_funcionamiento' => $request->tiempo_funcionamiento,
+                'cantidad_trabajadores' => $request->cantidad_trabajadores,
+                'tiene_sitio' => $request->tiene_sitio,
+                'sitio_web' => $request->tiene_sitio == 1 ? $request->sitio_web : null,
+                'nombre_contratistas' => $request->nombre_contratistas
             ]
         );
+
+        $usuario = User::find($usuario->id);
+        if($request->usuario_perfil != 0){
+            $usuario->usuario_perfil = 1;
+        }
+
+        if($request->usuario_academico != 0){
+            $usuario->usuario_academico = 1;
+        }
+
+        if($request->usuario_ejercicio != 0){
+            $usuario->usuario_ejercicio = 1;
+        }
+
+        if($request->pyme_comercial != 0){
+            $usuario->pyme_comercial = 1;
+        }
+
+        if($request->pyme_datos != 0){
+            $usuario->pyme_datos = 1;
+        }
+
+        if($request->pyme_facturacion != 0){
+            $usuario->pyme_facturacion = 1;
+        }
+
+
+        $usuario->save();
+
+        if($usuario->usuario_perfil == 1 && $usuario->usuario_academico == 1 && $usuario->usuario_ejercicio == 1){
+            $user = User::find(1);
+            $user->notify(new Alerta('Ha completado su perfil', $user, "", 'fa fa-star', 11));
+        }
+
+        if($usuario->pyme_comercial == 1 && $usuario->pyme_datos == 1 && $usuario->pyme_facturacion == 1){
+            $user = User::find(1);
+            $user->notify(new Alerta('Ha completado su perfil', $user, "", 'fa fa-star', 11));
+        }
 
         if($request->password != ''){
             User::updateOrCreate(['id' => $usuario->id], ['password' => bcrypt($request->password)]);
         }
+
+
 
     }
 
@@ -207,8 +261,12 @@ class UsuarioController extends Controller
         if(!Mail::to($request->email)->send(new InvitarAmigo(Auth::user(), $request->email))){
 
             $usuario = User::find(1);
-            $usuario->notify(new AppAsesoria('Ha invitado a un amigo.', Auth::user(), 'fa fa-share-alt', 8));
+            $usuario->notify(new Alerta('Ha invitado a un amigo.', Auth::user(), $request->email, 'fa fa-share-alt', 8));
 
+            InvitacionUsuario::create([
+                'correo_invitado' => $request->email,
+                'user_id' => Auth::id()
+            ]);
 
             return ['mensaje' => 'Invitación enviada!, gracias por compartir nuestra comunidad Prevención LebenCo.', 'clase' => 'success'];
         } else {
@@ -235,10 +293,32 @@ class UsuarioController extends Controller
         $user = User::find(1);
 
         if(!Mail::to($usuario->email)->send(new RecuperarContrasena($usuario, $clave_nueva))){
-            $user->notify(new Alerta('Contraseña', $usuario, 'fa fa-key', 2));
+            $user->notify(new Alerta('Contraseña', $usuario, "", 'fa fa-key', 2));
             return ['mensaje' => 'Hemos enviado una nueva contraseña a tu email, procura revisar badeja spam.', 'clase' => 'success'];
         } else {
             return ['mensaje' => 'Hemos tenido inconvenientes en tu solicitud. Por favor intenta nuevamente!', 'clase' => 'error'];
+        }
+    }
+
+    public function usuario_tabla_comunidad(Request $request){
+        $usuario = Auth::user();
+        $usuario->comunidad_pyme = $request->accion == 0 ? 1 : 0;
+        $usuario->presiona_tabla_vip = 1;
+        $usuario->save();
+
+        $user = User::find(1);
+        $user->notify(new Alerta('Tabla comunidad', $user, "", 'fa fa-table', 5));
+
+    }
+
+    public function usuario_tabla_vip(Request $request){
+        if($request->accion == 0){
+            $user = User::find(1);
+            $user->notify(new Alerta('Tabla vip', $user, "", 'fa fa-table', 6));
+        } else {
+            $usuario = Auth::user();
+            $usuario->top_five = 0;
+            $usuario->save();
         }
     }
 }

@@ -6,7 +6,7 @@
                 <b-col cols="7">
                     <div class="d-flex justify-content-end align-items-right">
                         <sociales></sociales>
-                    </div>                    
+                    </div>
                 </b-col>
             </b-row>
 
@@ -82,6 +82,10 @@
                                         {{ data.item.data.usuario.nombre + ' - +56 9 ' + data.item.data.usuario.telefono + ' - ' + data.item.data.usuario.email }}
                                     </template>
 
+                                    <template v-slot:cell(invitado)="data">
+                                        {{ !data.item.data.invitado ? data.item.data.invitado : 'Sin invitado' }}
+                                    </template>
+
                                     <template v-slot:cell(mensaje)="data">
                                         {{ data.item.data.mensaje }}
                                     </template>
@@ -112,7 +116,7 @@
                     </b-card>
                 </b-col>
             </b-row>
-            
+
         </b-container>
 
     </div>
@@ -128,6 +132,7 @@
                 fields: [
                     { key: 'index', label: '#', sortable: true, sortDirection: 'desc', class: 'text-center' },
                     { key: 'contacto', label: 'Contacto', sortable: true, class: 'text-left' },
+                    { key: 'invitado', label: 'Invitado', sortable: true, class: 'text-left' },
                     { key: 'tipo', label: 'Tipo cliente', sortable: true, class: 'text-left' },
                     { key: 'mensaje', label: 'Mensaje', sortable: true, class: 'text-left' },
                     { key: 'created_at', label: 'Fecha solicitud', sortable: true, class: 'text-left' },
@@ -142,7 +147,7 @@
                 sortDirection: 'asc',
                 filter: null
             }
-        },    
+        },
         computed:{
             sortOptions() {
                 return this.fields.filter(f => f.sortable).map(f => {

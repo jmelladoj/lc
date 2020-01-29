@@ -106,9 +106,15 @@
             <ValidationObserver ref="observer_tip" v-slot="{ valid }">
                 <b-modal ref="modal_tip" :title="modal_tip.titulo" no-close-on-backdrop>
                     <b-form>
-                        <b-form-group label="Contenido de tip">
+                        <b-form-group label="Título">
                             <ValidationProvider name="tip" rules="required|min:3|alpha_spaces" v-slot="{ errors }">
                                 <b-form-input type="text" v-model="tip.nombre"></b-form-input>
+                                <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
+                            </ValidationProvider>
+                        </b-form-group>
+                        <b-form-group label="Descripción">
+                            <ValidationProvider name="descripción" rules="required|min:20|max:200" v-slot="{ errors }">
+                                <b-form-textarea v-model="tip.descripcion" placeholder="Escribe aquí ..." rows="3" max-rows="6"></b-form-textarea>
                                 <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
                             </ValidationProvider>
                         </b-form-group>
@@ -134,7 +140,8 @@
             return {
                 tip: {
                     id: 0,
-                    nombre: ''
+                    nombre: '',
+                    descripcion: ''
                 },
                 modal_tip: {
                     titulo: '',
@@ -184,7 +191,8 @@
 
                 axios.post('tip/crear/actualizar',{
                     'tip_id': me.tip.id,
-                    'nombre': me.tip.nombre
+                    'nombre': me.tip.nombre,
+                    'descripcion': me.tip.descripcion
                 }).then(function (response) {
                     me.listarTips();
                     me.cerrarModal();
@@ -249,6 +257,7 @@
 
                     me.tip.id = data['id'];
                     me.tip.nombre = data['nombre'];
+                    me.tip.descripcion = data['descripcion']
                 }
 
                 this.$refs['modal_tip'].show();
@@ -256,6 +265,7 @@
             limpiarDatosTip(){
                 this.tip.id = 0;
                 this.tip.nombre = '';
+                this.tip.descripcion = ''
             }
         },
         mounted() {

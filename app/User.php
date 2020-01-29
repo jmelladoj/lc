@@ -40,11 +40,14 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    protected $appends = ['nombreComuna', 'nombreRubro'];
+    protected $appends = ['nombreComuna', 'nombreRubro', 'cantidad_like', 'cantidad_dislike'];
 
 
     public function getCantidadLikeAttribute(){
-        return $this->hasMany(Valoracion::class, 'user_id')->where('tipo_votacion', 1)->count();
+        $valoraciones = $this->valoraciones()->count();
+        $likes = $this->valoraciones()->where('tipo_votacion', 1)->count();
+
+        return $likes > 0 ? ($likes * 100) / $valoraciones : 0;
     }
 
     public function getCantidadDislikeAttribute(){

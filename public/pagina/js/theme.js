@@ -47,11 +47,40 @@
                 $('#alerta_rut').addClass('d-none')
             });
 
+
+            $(".run_nuevo_confirmacion").rut().on('rutInvalido', function(e) {
+                $('#alerta_rut_confirmacion').removeClass('d-none')
+                comparar_rut()
+            });
+
+            $(".run_nuevo_confirmacion").rut().on('rutValido', function(e, rut, dv) {
+                $('#alerta_rut_confirmacion').addClass('d-none')
+                comparar_rut()
+            });
+
+            $('#clave_dos').change(function() {
+                comparar_pass()
+            });
+
         });
 
         $window.on('resize', function () {
             headerHeight();
         });
+
+        function comparar_rut(){
+            var run = $('#run').val()
+            var run_confirmacion = $('#run_confirmacion').val()
+
+            return run === run_confirmacion ? $('#alerta_rut_igual').addClass('d-none') : $('#alerta_rut_igual').removeClass('d-none')
+        }
+
+        function comparar_pass(){
+            var pass_uno = $('#clave_uno').val()
+            var pass_dos = $('#clave_dos').val()
+
+            return pass_uno === pass_dos ? $('#alerta_pass_igual').addClass('d-none') : $('#alerta_pass_igual').removeClass('d-none')
+        }
 
         // Header Height
         function headerHeight() {

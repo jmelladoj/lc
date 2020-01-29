@@ -1,12 +1,14 @@
  <template>
     <section id="intro" class="intro" v-if="sliders.length > 0">
         <div class="item height-400px sm-height-400px">
-            <b-carousel  :interval="4000" controls indicators background="rgba(0,0,0,0.6)" img-width="" img-height="600" style="text-shadow: 1px 1px 2px #333;">
+            <b-carousel  :interval="4000" controls indicators background="rgba(0,0,0,0.6)" img-width="" img-height="200" style="text-shadow: 1px 1px 2px #333;">
+
                 <b-carousel-slide v-for="(slider, index) in sliders" :key="index" :img-src="'storage/' + slider.url_imagen">
-                    <h2 class="intro-title" v-text="slider.texto" :style="'color:' + slider.color"></h2>
-                    <h4 v-if="slider.subtexto != ''" :style="'color:' + slider.subcolor" v-text="slider.subtexto"></h4>
-                    <a v-show="slider.link != '/intranet/0'" :href="slider.link" class="btn btn--primary space--1 btn-sm">Ver más</a>
+                    <h2 class="intro-title" :class="slider.alineacion_titulo" v-text="slider.texto" :style="'color:' + slider.color + ';' + 'font-size:' + slider.letra_titulo + 'px;'"></h2>
+                    <h4 v-if="slider.subtexto != ''" :class="slider.alineacion_sub_titulo" :style="'color:' + slider.subcolor + ';' + 'font-size:' + slider.letra_sub_titulo + 'px;'" v-text="slider.subtexto"></h4>
+                    <button class="btn btn--primary space--1 btn-sm" @click="redireccion(slider.link)" v-show="slider.link != '/intranet/0'">Ver más</button>
                 </b-carousel-slide>
+
             </b-carousel>
         </div>
 
@@ -60,18 +62,22 @@
 <style>
     .carousel-caption {
         position: absolute;
-        right: 0;
-        bottom: 0;
-        left: 0;
+        right: 20%;
+        left: 20%;
         z-index: 10;
-        padding-top: 5%;
-        padding-bottom: 20px;
         text-align: center;
-        top: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        bottom: initial;
+    }
+
+    .carousel-item {
+        max-height: 400px;
     }
 
     .img-fluid{
-        height: 600px;
+        height: 400px;
+        object-fit: cover;
     }
 
     .carousel {

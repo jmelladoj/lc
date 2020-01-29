@@ -10,7 +10,7 @@ class CategoriaDocumento extends Model
     //
     use SoftDeletes;
 
-    protected $guarded = ['id','nombre'];
+    protected $guarded = ['id'];
     protected $appends = ['cantidad_documentos'];
 
     protected $dates = ['deleted_at'];

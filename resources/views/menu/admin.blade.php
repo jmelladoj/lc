@@ -15,7 +15,7 @@
                 </li>
 
                 <li>
-                    <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fa fa-picture-o" aria-hidden="true"></i><span class="hide-menu">Sliders </span></a>
+                    <a @click="menu=1" class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fa fa-picture-o" aria-hidden="true"></i><span class="hide-menu">Sliders </span></a>
                     <ul aria-expanded="false" class="collapse">
                         <li @click="menu=1"><a href="javascript:void(0)">General</a></li>
                         <li @click="menu=8"><a href="javascript:void(0)">Comunidad</a></li>
@@ -29,10 +29,11 @@
                         <li @click="menu=3"><a href="javascript:void(0)">Comunidad Pyme</a></li>
                         <li @click="menu=4"><a href="javascript:void(0)">Servicios</a></li>
                         <li @click="menu=5"><a href="javascript:void(0)">Login</a></li>
+                        <li @click="menu=7"><a href="javascript:void(0)">Home usuario</a></li>
                     </ul>
                 </li>
-                
-                
+
+
             </ul>
 
             <ul id="sidebarnav" v-show="ubicacion == 1">
@@ -64,7 +65,7 @@
                         <li @click="menu=10"><a href="javascript:void(0)">Sorteos</a></li>
                         <li @click="menu=11"><a href="javascript:void(0)">Promociones</a></li>
                         {{--  <li @click="menu=12"><a href="javascript:void(0)">BENEFICIOS</a></li> --}}
-                        <li @click="menu=13"><a href="javascript:void(0)">Seminariosc</a></li>
+                        <li @click="menu=13"><a href="javascript:void(0)">Seminarios</a></li>
                         <li @click="menu=14"><a href="javascript:void(0)">Visitas a terreno</a></li>
                         <li @click="menu=15"><a href="javascript:void(0)">Tips</a></li>
                     </ul>
@@ -121,6 +122,10 @@
     <interes></interes>
 </template>
 
+<template v-if="ubicacion == 0 && menu==7">
+    <home-intranet></home-intranet>
+</template>
+
 <template v-if="ubicacion == 0 && menu==8">
     <sliders-comunidad></sliders-comunidad>
 </template>
@@ -169,7 +174,7 @@
 </template>
 
 <template v-if="ubicacion == 1 && menu==11">
-    <promociones :tipo_usuario="{{ Auth::user()->tipo_usuario }}"></promociones>
+    <promociones :tipo="1" :tipo_usuario="{{ Auth::user()->tipo_usuario }}"></promociones>
 </template>
 
 <template v-if="ubicacion == 1 && menu==13">

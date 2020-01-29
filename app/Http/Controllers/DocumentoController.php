@@ -30,6 +30,10 @@ class DocumentoController extends Controller
         }
     }
 
+    public function buscar($busqueda){
+        return ['documentos', Documento::where('titulo', 'like', '%' . $busqueda . '%')->where('estado', 1)->orderBy('titulo')->get()];
+    }
+
     public function indexHome($tipo){
         switch ($tipo) {
             case 1:
@@ -89,7 +93,7 @@ class DocumentoController extends Controller
 
         if($request->estado == 0){
             $usuario = User::find(1);
-            $usuario->notify(new Alerta('Ha compartido un documento.', Auth::user(), 'fa fa-file', 2));
+            $usuario->notify(new Alerta('Ha compartido un documento.', Auth::user(), "", 'fa fa-file', 2));
         }
     }
     public function eliminar(Request $request){

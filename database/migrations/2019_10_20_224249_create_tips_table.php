@@ -16,6 +16,7 @@ class CreateTipsTable extends Migration
         Schema::create('tips', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('nombre');
+            $table->text('descripcion');
             $table->timestamps();
         });
     }

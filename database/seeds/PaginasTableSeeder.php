@@ -17,7 +17,13 @@ class PaginasTableSeeder extends Seeder
         Pagina::create(
             ['id' => 1,
             'nombre' => 'Nosotros',
-             'contenido' => '<h1 style="text-align:right">Prevenci&oacute;n LebenCo.</h1><p style="text-align:right"><em>&iexcl;m&aacute;s que una biblioteca digital!</em></p><h2 style="text-align:justify">Nuestra misi&oacute;n</h2><p>&nbsp;&nbsp;&nbsp;&nbsp; Reencantar a las personas con el verdadero prop&oacute;sito de la Prevenci&oacute;n de Riesgos Laboral.</p><p style="text-align:justify">&nbsp;</p><h2 style="text-align:justify">Nuestra visi&oacute;n</h2><p style="text-align:justify">&nbsp;&nbsp;&nbsp;&nbsp; Desarrollar una comunidad colaborativa y ocupada de la Prevenci&oacute;n de Riesgos Laboral en Chile.</p><p style="text-align:justify">&nbsp;</p><h2 style="text-align:justify">&iquest;Por qu&eacute; confiar en nosotros?</h2><p style="text-align:justify">&nbsp;&nbsp;&nbsp;&nbsp; Porque nos ocupamos diariamente en identificar las confusiones e incertidumbres que en general las personas tienen respecto a este importante rubro. Por esto, decidimos hacernos presentes y crear una plataforma de comunicaci&oacute;n pensada en facilitar la implementaci&oacute;n de la Prevenci&oacute;n de Riesgos Laborales junto a ti, en tu trabajo y/o empresa.</p><p style="text-align:justify">&iexcl;Vamos!, participe en este desarrollo colectivo pensado para que su Seguridad Laboral, sea parte de todos.</p><p style="text-align:justify">&nbsp;</p><h2 style="text-align:justify">Historia</h2><p style="text-align:justify">&nbsp;&nbsp;&nbsp;&nbsp; Prevenci&oacute;n LebenCo. Nace en 2017 producto de la colaboraci&oacute;n de personas an&oacute;nimas y de las propias experiencias obtenidas del equipo LebenCo. en esta materia. En 2018 se logra sumar a personas y empresas de distintos rubros que aportan valiosos datos e informaci&oacute;n esencial para desarrollar estrategias y contenido de apoyo a la gesti&oacute;n de la Prevenci&oacute;n de Riesgos Laborales.</p><p style="text-align:justify">A principios de 2019 y producto de la colaboraci&oacute;n de m&uacute;ltiples esfuerzos, se concluye el desarrollo de la plataforma web, logrando presentar el primer sitio colaborativo del rubro llamado &ldquo;prevenci&oacute;nlebenco.cl&rdquo;, el cual queremos mejorar y desarrollar junto a ti. &nbsp;</p><p style="text-align:justify">&nbsp;</p><p style="text-align:right">&hellip;Gracias por confiar en nosotros.</p>']
+             'contenido' => '<h4 style="text-align: center;">&iexcl;Nuestro lanzamiento oficial se acerca!</h4>
+             <p style="text-align: center;">Estamos cada vez m&aacute;s cerca y mientras esto sucede les agradecemos a todos los Contratistas y Sub-contratistas por sumarse a este exitoso servicio:</p>
+             <p style="text-align: center;"><strong>Habilitaci&oacute;n de la Pyme con los Documentos Personalizados,</strong></p>
+             <p style="text-align: center;"><strong>para el Ingreso a la Empresa Principal y Cursar el Estado de Pago.</strong></p>
+             <p style="text-align: center;">S&iacute;guenos enviando un correo a <a href="mailto:prevencionista@prevencionlebenco.cl">prevencionista@prevencionlebenco.cl</a></p>
+             <p style="text-align: center;">con tu nombre y N&deg; telef&oacute;nico para contactarnos contigo.</p>
+             <p style="text-align: right;">&nbsp;</p>']
         );
 
         Pagina::create(
@@ -33,6 +39,11 @@ class PaginasTableSeeder extends Seeder
         Pagina::create(
             ['id' => 4,
              'nombre' => 'Login']
+        );
+
+        Pagina::create(
+            ['id' => 5,
+             'nombre' => 'Home usuario intranet']
         );
 
         General::create([

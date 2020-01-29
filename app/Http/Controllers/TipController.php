@@ -8,14 +8,17 @@ use Illuminate\Http\Request;
 class TipController extends Controller
 {
     //
-    public function index(){      
+    public function index(){
         return ['tips' => Tip::orderBy('created_at', 'desc')->get()];
     }
-    
+
     public function crearOactualizar(Request $request){
         Tip::updateOrCreate(
             ['id' => $request->tip_id],
-            ['nombre' => $request->nombre]
+            [
+                'nombre' => $request->nombre,
+                'descripcion' => $request->descripcion
+            ]
         );
     }
 

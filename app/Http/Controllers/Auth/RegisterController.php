@@ -53,7 +53,7 @@ class RegisterController extends Controller
     {
         $messages = [
             'run.unique' => 'Este Run / Rut (según sea Pyme o no) ya está en uso, ¡utiliza otro!.',
-            'run_confirmacion.same' => 'Las run no coinciden.',
+            'run_confirmacion.same' => 'Los run no coinciden.',
             'email.unique' => 'Este correo eléctronico ya está en uso, ¡utiliza otro!.',
             'email.email' => 'El correo electrónico no corresponde con una dirección de email válida.',
             'clave_uno.min' => 'Las claves deben de contener al menos 6 caracteres.',

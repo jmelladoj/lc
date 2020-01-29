@@ -12,17 +12,17 @@ class InvitarAmigo extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $user, $email;
+    public $usuario, $email;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct(User $user, String $email)
+    public function __construct(User $usuario, String $email)
     {
         //
-        $this->user = $user;
+        $this->usuario = $usuario;
         $this->email = $email;
     }
 

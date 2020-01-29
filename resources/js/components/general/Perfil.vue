@@ -19,11 +19,21 @@
                                 </b-form-group >
                             </b-col>
                         </b-row>
-                        <b-form-group v-show="tipo_usuario_logeado == 3">
-                            <div class="custom-control custom-checkbox">
-                                <b-form-checkbox v-model="usuario.comunidad_pyme">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ¡Quiero ser aparecer en el top five!</b-form-checkbox>
-                            </div>
-                        </b-form-group >
+                        <b-row v-show="tipo_usuario_logeado == 3">
+                            <b-col cols="12">
+                                <b-button v-if="tipo_usuario_logeado != 2" :disabled="usuario.usuario_perfil == 0 || usuario.usuario_academico == 0 || usuario.usuario_ejercicio == 0" size="md" variant="success" block @click="comunidad_pyme(usuario.comunidad_pyme)">
+                                    ¡Quiero estar en comunidad pyme!
+                                </b-button>
+                                <b-button v-else :disabled="usuario.pyme_comercial == 0 || usuario.pyme_datos == 0 || usuario.pyme_facturacion == 0" size="md" variant="success" block @click="comunidad_pyme(usuario.comunidad_pyme)">
+                                    ¡Quiero estar en comunidad pyme!
+                                </b-button>
+                            </b-col>
+                            <b-col cols="12">
+                                <b-button :disabled="usuario.presiona_tabla_vip  == 0" size="md" variant="warning" block @click="tabla_vip(usuario.top_five)">
+                                    ¡Quiero estar en el top five!
+                                </b-button>
+                            </b-col>
+                        </b-row>
 
                         <h4 class="card-title m-t-10" v-text="usuario.nombre"></h4>
                         <h6 class="card-subtitle" v-text="categoria.nombre + ' - ' + categoria.nivel"></h6>
@@ -42,7 +52,7 @@
                     <ValidationObserver ref="observer_usuario" v-slot="{ valid }">
                         <b-tab title="Datos personales" active>
                             <b-form-group v-show="tipo_usuario_logeado < 3" label="Tipo de usuario">
-                                <ValidationProvider name="tipo de usuario" rules="required|oneOf:1,2,3" v-slot="{ errors }">
+                                <ValidationProvider name="tipo de usuario" rules="oneOf:1,2,3" v-slot="{ errors }">
                                     <b-form-select v-model="usuario.tipo_usuario">
                                         <option :value="0">Selecciona una opción</option>
                                         <option :value="1">Administrador</option>
@@ -63,7 +73,7 @@
                                 </b-col>
                                 <b-col>
                                     <b-form-group label="Run / rut usuario">
-                                        <ValidationProvider name="run / rut" rules="required|min:3" v-slot="{ errors }">
+                                        <ValidationProvider name="run / rut" rules="min:3" v-slot="{ errors }">
                                             <input type="text" v-rut v-model="usuario.run" class="form-control" :readonly="tipo_usuario_logeado >= 3" />
                                             <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
                                         </ValidationProvider>
@@ -73,7 +83,7 @@
                             <b-row v-show="tipo_usuario_logeado < 4">
                                 <b-col>
                                     <b-form-group label="Email">
-                                        <ValidationProvider name="email" rules="required|email" v-slot="{ errors }">
+                                        <ValidationProvider name="email" rules="email" v-slot="{ errors }">
                                             <b-form-input type="email" v-model="usuario.email" :readonly="tipo_usuario_logeado > 2"></b-form-input>
                                             <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
                                         </ValidationProvider>
@@ -99,7 +109,7 @@
                                 </b-col>
                                 <b-col>
                                     <b-form-group label="Teléfono">
-                                        <ValidationProvider name="teléfono" rules="required|numeric|digits:9" v-slot="{ errors }">
+                                        <ValidationProvider name="teléfono" rules="required|numeric|digits:8" v-slot="{ errors }">
                                             <b-input-group prepend="+56 9">
                                                 <b-form-input type="number" v-model="usuario.telefono" :readonly="tipo_usuario_logeado == 4"></b-form-input>
                                             </b-input-group>
@@ -149,7 +159,7 @@
                             </b-row>
                             <b-row>
                                 <b-col>
-                                    <b-button v-show="tipo_usuario_logeado < 4" :disabled="!valid" @click="actualizar()" class="btn btn-success btn-block" title="Actualiza información de tu perfil">Actualizar mi perfil</b-button>
+                                    <b-button v-show="tipo_usuario_logeado < 4" :disabled="!valid" @click="actualizar(1, 0, 0, 0, 0 ,0)" class="btn btn-success btn-block" title="Actualiza información de tu perfil">Actualizar mi perfil</b-button>
                                 </b-col>
                             </b-row>
                         </b-tab>
@@ -159,7 +169,7 @@
                         <b-tab title="Datos acádemicos">
                             <b-row>
                                 <b-col>
-                                    <b-form-group :label="labels.casa_estudio">
+                                    <b-form-group :label="usuario.tipo_persona == 1 ? '¿Cuál fue tu casa de estudios?' : '¿Cuál es tu casa de estudios?'">
                                         <ValidationProvider name="casa de estudio" rules="required|min:3|alpha_spaces" v-slot="{ errors }">
                                             <b-form-input type="text" v-model="usuario.casa_estudio" :readonly="tipo_usuario_logeado == 4"></b-form-input>
                                             <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
@@ -167,7 +177,7 @@
                                     </b-form-group>
                                 </b-col>
                                 <b-col>
-                                    <b-form-group :label="labels.ramo_favorito">
+                                    <b-form-group :label="usuario.tipo_persona == 1 ? '¿Cuál fue tu ramo favorito?' : '¿Cuál es tu ramo favorito?'">
                                         <ValidationProvider name="ramo favorito" rules="required|min:3" v-slot="{ errors }">
                                             <b-form-input type="text" v-model="usuario.ramo_favorito" :readonly="tipo_usuario_logeado == 4"></b-form-input>
                                             <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
@@ -177,7 +187,7 @@
                             </b-row>
                             <b-row>
                                 <b-col>
-                                    <b-form-group :label="labels.ramo_odiado">
+                                    <b-form-group  :label="usuario.tipo_persona == 1 ? '¿Cuál fue tu ramo menos favorito?' : '¿Cuál es tu ramo favorito?'">
                                         <ValidationProvider name="ramo menos favorito" rules="required|min:3" v-slot="{ errors }">
                                             <b-form-input type="text" v-model="usuario.ramo_odiado" :readonly="tipo_usuario_logeado == 4"></b-form-input>
                                             <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
@@ -185,7 +195,7 @@
                                     </b-form-group>
                                 </b-col>
                                 <b-col>
-                                    <b-form-group :label="labels.titulo">
+                                    <b-form-group  :label="usuario.tipo_persona == 1 ? '¿Cuál es tu título?' : '¿Cuál es el título que obtendrás?'">
                                         <ValidationProvider name="título" rules="required|min:3" v-slot="{ errors }">
                                             <b-form-input type="text" v-model="usuario.titulo" :readonly="tipo_usuario_logeado == 4"></b-form-input>
                                             <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
@@ -195,7 +205,7 @@
                             </b-row>
                             <b-row>
                                 <b-col>
-                                    <b-form-group :label="labels.fecha_titulo">
+                                    <b-form-group  :label="usuario.tipo_persona == 1 ? '¿Cuál es la fecha del certificado de título?' : '¿Cuál es el título que obtendrás?'">
                                         <ValidationProvider name="fecha" rules="required" v-slot="{ errors }">
                                             <b-form-input type="date" v-model="usuario.fecha_titulo" :readonly="tipo_usuario_logeado == 4"></b-form-input>
                                             <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
@@ -203,13 +213,13 @@
                                     </b-form-group>
                                 </b-col>
                                 <b-col>
-                                    <b-form-group v-if="usuario.tipo_persona == 1" :label="labels.seremi_o_practica">
+                                    <b-form-group v-if="usuario.tipo_persona == 1" label="¿Cuál es la fecha de tu Registro Seremi?" >
                                         <ValidationProvider name="fecha" rules="required" v-slot="{ errors }">
                                             <b-form-input type="date" v-model="usuario.seremi_o_practica" :readonly="tipo_usuario_logeado == 4"></b-form-input>
                                             <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
                                         </ValidationProvider>
                                     </b-form-group>
-                                    <b-form-group v-else-if="usuario.tipo_persona == 3" :label="labels.seremi_o_practica">
+                                    <b-form-group v-else-if="usuario.tipo_persona == 3" label="¿Dónde realizarás tu práctica profesional?">
                                         <ValidationProvider name="práctica" rules="required" v-slot="{ errors }">
                                             <b-form-input type="text" v-model="usuario.seremi_o_practica" :readonly="tipo_usuario_logeado == 4"></b-form-input>
                                             <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
@@ -219,7 +229,7 @@
                             </b-row>
                             <b-row>
                                 <b-col>
-                                    <b-form-group :label="labels.software">
+                                    <b-form-group  label="¿Qué tipos de softwares utilizas y cuál es tu nivel de experiencia con ellos?">
                                         <ValidationProvider name="detalle de software" rules="required|min:20|max:200" v-slot="{ errors }">
                                             <b-form-textarea v-model="usuario.software" placeholder="Escribe aquí ..." rows="3" max-rows="6" :readonly="tipo_usuario_logeado == 4"></b-form-textarea>
                                             <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
@@ -227,7 +237,7 @@
                                     </b-form-group>
                                 </b-col>
                                 <b-col>
-                                    <b-form-group :label="labels.experiencia">
+                                    <b-form-group :label="usuario.tipo_persona == 1 ? 'En total, ¿cuántos años haz ejercido?' : 'En total, ¿cuántos tiempo haz ejercido?'">
                                         <ValidationProvider name="detalle de experiencia" rules="required|min:20|max:200" v-slot="{ errors }">
                                             <b-form-textarea v-model="usuario.experiencia" placeholder="Escribe aquí ..." rows="3" max-rows="6" :readonly="tipo_usuario_logeado == 4"></b-form-textarea>
                                             <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
@@ -237,7 +247,7 @@
                             </b-row>
                             <b-row>
                                 <b-col>
-                                    <b-button v-show="tipo_usuario_logeado < 4" :disabled="!valid" @click="actualizar()" class="btn btn-success btn-block" title="Actualiza información de tu perfil">Actualizar mi perfil</b-button>
+                                    <b-button v-show="tipo_usuario_logeado < 4" :disabled="!valid" @click="actualizar(0, 1, 0, 0, 0 ,0)" class="btn btn-success btn-block" title="Actualiza información de tu perfil">Actualizar mi perfil</b-button>
                                 </b-col>
                             </b-row>
                         </b-tab>
@@ -247,7 +257,28 @@
                         <b-tab title="Datos del ejercicio">
                             <b-row>
                                 <b-col>
-                                    <b-form-group :label="labels.amigo">
+                                    <b-form-group label="¿Tienes sitio web?">
+                                        <ValidationProvider name="empresa familiar" rules="required|oneOf:0,1" v-slot="{ errors }">
+                                            <b-form-select v-model="usuario.tiene_sitio" :disabled="tipo_usuario_logeado == 4">
+                                                <option :value="0" selected>No</option>
+                                                <option :value="1">Sí</option>
+                                            </b-form-select>
+                                            <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
+                                        </ValidationProvider>
+                                    </b-form-group>
+                                </b-col>
+                                <b-col>
+                                <b-form-group label="Link">
+                                        <ValidationProvider name="Link" rules="min:3" v-slot="{ errors }">
+                                            <input type="text" v-model="usuario.sitio_web" class="form-control"/>
+                                            <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
+                                        </ValidationProvider>
+                                    </b-form-group>
+                                </b-col>
+                            </b-row>
+                            <b-row>
+                                <b-col>
+                                    <b-form-group label="¿Tienes algún amigo que se relacion con la prevención?. ¡Cuéntanos quién es!">
                                         <ValidationProvider name="amigo" rules="min:20|max:200" v-slot="{ errors }">
                                             <b-form-textarea v-model="usuario.amigo" placeholder="Escribe aquí ..." rows="3" max-rows="6" :readonly="tipo_usuario_logeado == 4"></b-form-textarea>
                                             <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
@@ -257,7 +288,7 @@
                             </b-row>
                             <b-row v-show="usuario.tipo_persona == 3">
                                 <b-col>
-                                    <b-form-group :label="labels.profesion">
+                                    <b-form-group :label="usuario.tipo_persona == 1 ? '¿Cuál es tu rubro con mayor experiencia?' : '¿Cuál es el rubro que te llama la atención?'">
                                         <ValidationProvider name="rubro" rules="required" v-slot="{ errors }">
                                             <b-form-select v-model="usuario.profesion_id" :disabled="tipo_usuario_logeado == 4">
                                                 <option :value="0" selected>Seleccionar una opción</option>
@@ -278,7 +309,7 @@
                             </b-row>
                             <b-row v-show="usuario.tipo_persona == 1">
                                 <b-col>
-                                    <b-form-group :label="labels.profesion">
+                                    <b-form-group label="¿Cuál es tu rubro con mayor experiencia?">
                                         <ValidationProvider name="rubro" rules="required" v-slot="{ errors }">
                                             <b-form-select v-model="usuario.profesion_id" :disabled="tipo_usuario_logeado == 4">
                                                 <option :value="0" selected>Seleccionar una opción</option>
@@ -289,7 +320,7 @@
                                     </b-form-group>
                                 </b-col>
                                 <b-col>
-                                    <b-form-group :label="labels.otro_rubro">
+                                    <b-form-group label="¿Algún otro rubro?">
                                         <ValidationProvider name="otro rubro" rules="required|min:3" v-slot="{ errors }">
                                             <b-form-input type="text" v-model="usuario.otro_rubro" :readonly="tipo_usuario_logeado == 4"></b-form-input>
                                             <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
@@ -297,7 +328,7 @@
                                     </b-form-group>
                                 </b-col>
                                 <b-col>
-                                    <b-form-group :label="labels.tiempo_experiencia">
+                                    <b-form-group label="En total, ¿cuántos años haz ejercido">
                                         <ValidationProvider name="experiencia" rules="required|numeric|min_value:0" v-slot="{ errors }">
                                             <b-form-input type="number" v-model="usuario.tiempo_experiencia" :readonly="tipo_usuario_logeado == 4"></b-form-input>
                                             <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
@@ -307,7 +338,7 @@
                             </b-row>
                             <b-row>
                                 <b-col>
-                                    <b-form-group :label="labels.porcentaje">
+                                    <b-form-group label="¿Cuál es tu preferencia en el ejercicio de la profesión?">
                                         <ValidationProvider name="porcentaje terreno" rules="required|numeric|min_value:0|max_value:100" v-slot="{ errors }">
                                             <b-form-input type="number" v-model="usuario.porcentaje_terreno" placeholder="Porcentaje terreno" @keyup="calcularPorcentajeOficina()" :readonly="tipo_usuario_logeado == 4"></b-form-input>
                                             <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
@@ -325,7 +356,7 @@
                             </b-row>
                             <b-row>
                                 <b-col>
-                                    <b-form-group :label="labels.especializacion">
+                                    <b-form-group label="Descríbe tus especializaciones">
                                         <ValidationProvider name="especialización" rules="min:20|max:200" v-slot="{ errors }">
                                             <b-form-textarea v-model="usuario.especializacion" placeholder="Escribe aquí ..." rows="3" max-rows="6" :readonly="tipo_usuario_logeado == 4"></b-form-textarea>
                                             <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
@@ -335,7 +366,7 @@
                             </b-row>
                             <b-row>
                                 <b-col>
-                                    <b-form-group :label="labels.habilidad_sobresaliente">
+                                    <b-form-group label="Describe brevemente una habilidad sobresaliente">
                                         <ValidationProvider name="habilidad sobresaliente" rules="required|min:3" v-slot="{ errors }">
                                             <b-form-input type="text" v-model="usuario.habilidad_sobresaliente" :readonly="tipo_usuario_logeado == 4"></b-form-input>
                                             <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
@@ -343,7 +374,7 @@
                                     </b-form-group>
                                 </b-col>
                                 <b-col>
-                                    <b-form-group :label="labels.habilidad_mejora">
+                                    <b-form-group label="Describe brevemente una habilidad a mejorar">
                                         <ValidationProvider name="habilidad a mejorar" rules="required|min:3" v-slot="{ errors }">
                                             <b-form-input type="text" v-model="usuario.habilidad_mejora" :readonly="tipo_usuario_logeado == 4"></b-form-input>
                                             <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
@@ -353,7 +384,7 @@
                             </b-row>
                             <b-row v-show="usuario.tipo_persona == 1">
                                 <b-col>
-                                    <b-form-group :label="labels.ultimo_trabajo">
+                                    <b-form-group label="Describe brevemente tu actual o el último cargo y el logro o habilidad que desarrollaste mientras lo ejerces o lo ejerciste.">
                                         <ValidationProvider name="trabajo" rules="required|min:3" v-slot="{ errors }">
                                             <b-form-input type="text" v-model="usuario.ultimo_trabajo" :readonly="tipo_usuario_logeado == 4"></b-form-input>
                                             <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
@@ -361,7 +392,7 @@
                                     </b-form-group>
                                 </b-col>
                                 <b-col>
-                                    <b-form-group :label="labels.ultimo_empresa">
+                                    <b-form-group label="Describe brevemente tu actual o el último cargo y el logro o habilidad que desarrollaste mientras lo ejerces o lo ejerciste.">
                                         <ValidationProvider name="empresa" rules="required|min:3" v-slot="{ errors }">
                                             <b-form-input type="text" v-model="usuario.ultimo_empresa" :readonly="tipo_usuario_logeado == 4"></b-form-input>
                                             <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
@@ -371,7 +402,7 @@
                             </b-row>
                             <b-row v-show="usuario.tipo_persona == 1">
                                 <b-col>
-                                    <b-form-group :label="labels.rubro_empresa">
+                                    <b-form-group label="¿cuál es el rubro principal de esa Empresa?">
                                         <ValidationProvider name="trabajo" rules="required|min:3" v-slot="{ errors }">
                                             <b-form-input type="text" v-model="usuario.rubro_empresa" :readonly="tipo_usuario_logeado == 4"></b-form-input>
                                             <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
@@ -379,7 +410,7 @@
                                     </b-form-group>
                                 </b-col>
                                 <b-col>
-                                    <b-form-group :label="labels.organismo_administrador_empresa">
+                                    <b-form-group label="Describe brevemente tu actual o el último cargo y el logro o habilidad que desarrollaste mientras lo ejerces o lo ejerciste.">
                                         <ValidationProvider name="preferencia laboral" rules="required" v-slot="{ errors }">
                                             <b-form-select v-model="usuario.organismo_administrador_empresa" :disabled="tipo_usuario_logeado == 4">
                                                 <option :value="0" selected>Seleccionar una opción</option>
@@ -395,7 +426,7 @@
                             </b-row>
                             <b-row>
                                 <b-col>
-                                    <b-form-group :label="labels.preferencia_laboral">
+                                    <b-form-group label="¿Cuál es tu preferencia laboral?">
                                         <ValidationProvider name="preferencia laboral" rules="required" v-slot="{ errors }">
                                             <b-form-select v-model="usuario.preferencia_laboral" :disabled="tipo_usuario_logeado == 4">
                                                 <option :value="0" selected>Seleccionar una opción</option>
@@ -411,7 +442,7 @@
                                     </b-form-group>
                                 </b-col>
                                 <b-col>
-                                    <b-form-group :label="labels.emprendimiento">
+                                    <b-form-group label="¿Tienes algún emprendimiento?">
                                         <ValidationProvider name="emprendimiento" rules="required|min:3" v-slot="{ errors }">
                                             <b-form-input type="text" v-model="usuario.emprendimiento" :readonly="tipo_usuario_logeado == 4"></b-form-input>
                                             <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
@@ -421,7 +452,7 @@
                             </b-row>
                             <b-row>
                                 <b-col>
-                                    <b-form-group :label="labels.enterarse">
+                                    <b-form-group label="¿Cómo se enteró del sitio web Prevención LebenCo.?">
                                         <ValidationProvider name="enterarse" rules="required|min:20|max:200" v-slot="{ errors }">
                                             <b-form-textarea v-model="usuario.enterarse" placeholder="Escribe aquí ..." rows="3" max-rows="6" :readonly="tipo_usuario_logeado == 4"></b-form-textarea>
                                             <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
@@ -429,7 +460,7 @@
                                     </b-form-group>
                                 </b-col>
                                 <b-col>
-                                    <b-form-group :label="labels.coaching">
+                                    <b-form-group label="¿Le gustaría obtener coaching para desarrollar su potencial y diferenciarse de sus futuros colegas?">
                                         <ValidationProvider name="coaching" rules="required|min:20|max:200" v-slot="{ errors }">
                                             <b-form-textarea v-model="usuario.coaching" placeholder="Escribe aquí ..." rows="3" max-rows="6" :readonly="tipo_usuario_logeado == 4"></b-form-textarea>
                                             <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
@@ -439,29 +470,255 @@
                             </b-row>
                             <b-row>
                                 <b-col>
-                                    <b-button v-show="tipo_usuario_logeado < 4" :disabled="!valid" @click="actualizar()" class="btn btn-success btn-block" title="Actualiza información de tu perfil">Actualizar mi perfil</b-button>
+                                    <b-button v-show="tipo_usuario_logeado < 4" :disabled="!valid" @click="actualizar(0, 0, 1, 0, 0 ,0)" class="btn btn-success btn-block" title="Actualiza información de tu perfil">Actualizar mi perfil</b-button>
                                 </b-col>
                             </b-row>
                         </b-tab>
                     </ValidationObserver>
                 </b-tabs>
 
-                <b-tabs v-else class="nav nav-tabs profile-tab" content-class="mt-3" fill>
-                    <b-tab title="Datos comerciales" active>
-                        <b-card-text>Tab Contents 1</b-card-text>
-                    </b-tab>
-                    <b-tab title="Datos acádemicos">
-                        <b-card-text>Datos de pyme</b-card-text>
-                    </b-tab>
+                <b-tabs v-else content-class="mt-3">
+                    <ValidationObserver ref="observer_pyme_datos_comerciales" v-slot="{ valid }">
+                        <b-tab title="Datos comerciales" active>
+                            <b-form-group v-show="tipo_usuario_logeado < 3" label="Tipo de usuario">
+                                <ValidationProvider name="tipo de usuario" rules="oneOf:1,2,3" v-slot="{ errors }">
+                                    <b-form-select v-model="usuario.tipo_usuario">
+                                        <option :value="0">Selecciona una opción</option>
+                                        <option :value="1">Administrador</option>
+                                        <option :value="2">Sub administrador</option>
+                                        <option :value="3">Usuario normal</option>
+                                    </b-form-select>
+                                    <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
+                                </ValidationProvider>
+                            </b-form-group>
+                            <b-row>
+                                <b-col>
+                                    <b-form-group label="Nombre razón social">
+                                        <ValidationProvider name="nombre" rules="required|min:3|alpha_spaces" v-slot="{ errors }">
+                                            <b-form-input type="text" v-model="usuario.nombre" :readonly="tipo_usuario_logeado >= 3"></b-form-input>
+                                            <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
+                                        </ValidationProvider>
+                                    </b-form-group>
+                                </b-col>
+                                <b-col>
+                                    <b-form-group label="Rut">
+                                        <ValidationProvider name="run / rut" rules="min:3" v-slot="{ errors }">
+                                            <input type="text" v-rut v-model="usuario.run" class="form-control" :readonly="tipo_usuario_logeado >= 3" />
+                                            <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
+                                        </ValidationProvider>
+                                    </b-form-group>
+                                </b-col>
+                            </b-row>
+                            <b-row>
+                                <b-col>
+                                    <b-form-group label="Nombre de fantasía">
+                                        <ValidationProvider name="nombre de fantasía" rules="required|min:3|alpha_spaces" v-slot="{ errors }">
+                                            <b-form-input type="text" v-model="usuario.nombre_fantasia" :readonly="tipo_usuario_logeado == 4"></b-form-input>
+                                            <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
+                                        </ValidationProvider>
+                                    </b-form-group>
+                                </b-col>
+                                <b-col>
+                                    <b-form-group label="Giro comercial">
+                                        <ValidationProvider name="giro comercial" rules="min:3" v-slot="{ errors }">
+                                            <input type="text" v-model="usuario.giro_comercial" class="form-control" :readonly="tipo_usuario_logeado == 4" />
+                                            <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
+                                        </ValidationProvider>
+                                    </b-form-group>
+                                </b-col>
+                            </b-row>
+                            <b-row v-show="tipo_usuario_logeado < 4">
+                                <b-col>
+                                    <b-form-group label="Email">
+                                        <ValidationProvider name="email" rules="email" v-slot="{ errors }">
+                                            <b-form-input type="email" v-model="usuario.email" :readonly="tipo_usuario_logeado > 2"></b-form-input>
+                                            <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
+                                        </ValidationProvider>
+                                    </b-form-group>
+                                </b-col>
+                                <b-col>
+                                    <b-form-group label="Cambiar contraseña">
+                                        <ValidationProvider name="contraseña" rules="min:6" v-slot="{ errors }">
+                                            <b-form-input type="password" v-model="usuario.password"></b-form-input>
+                                            <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
+                                        </ValidationProvider>
+                                    </b-form-group>
+                                </b-col>
+                            </b-row>
+                            <b-row>
+                                <b-col>
+                                    <b-form-group label="Teléfono">
+                                        <ValidationProvider name="teléfono" rules="required|numeric|digits:8" v-slot="{ errors }">
+                                            <b-input-group prepend="+56 9">
+                                                <b-form-input type="number" v-model="usuario.telefono" :readonly="tipo_usuario_logeado == 4"></b-form-input>
+                                            </b-input-group>
+                                            <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
+                                        </ValidationProvider>
+                                    </b-form-group>
+                                </b-col>
+                                <b-col v-if="tipo_usuario_logeado > 2">
+                                    <b-form-group label="Dirección">
+                                        <ValidationProvider name="dirección" rules="required" v-slot="{ errors }">
+                                            <b-form-input type="text" v-model="usuario.direccion" :readonly="tipo_usuario_logeado == 4"></b-form-input>
+                                            <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
+                                        </ValidationProvider>
+                                    </b-form-group>
+                                </b-col>
+                            </b-row>
+                            <b-row>
+                                <b-col v-if="tipo_usuario_logeado > 2">
+                                    <b-form-group label="Comuna">
+                                        <ValidationProvider name="comuna" rules="required" v-slot="{ errors }">
+                                            <b-form-select v-model="usuario.comuna_id" :disabled="tipo_usuario_logeado == 4">
+                                                <option :value="0" selected>Seleccionar una opción</option>
+                                                <option v-for="(comuna, index) in comunas" :key="index" :value="comuna.id" v-text="comuna.nombre"></option>
+                                            </b-form-select>
+                                            <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
+                                        </ValidationProvider>
+                                    </b-form-group>
+                                </b-col>
+                            </b-row>
+                            <b-row>
+                                <b-col>
+                                    <b-button v-show="tipo_usuario_logeado < 4" :disabled="!valid" @click="actualizar(0, 0, 0, 1, 0 ,0)" class="btn btn-success btn-block" title="Actualiza información de tu perfil">Actualizar mi perfil</b-button>
+                                </b-col>
+                            </b-row>
+                        </b-tab>
+                    </ValidationObserver>
+
+                    <ValidationObserver ref="observer_pyme_datos_pyme" v-slot="{ valid }">
+                        <b-tab title="Datos de su pyme">
+                            <b-row>
+                                <b-col>
+                                    <b-form-group label="¿Tienes sitio web?">
+                                        <ValidationProvider name="empresa familiar" rules="required|oneOf:0,1" v-slot="{ errors }">
+                                            <b-form-select v-model="usuario.tiene_sitio" :disabled="tipo_usuario_logeado == 4">
+                                                <option :value="0" selected>No</option>
+                                                <option :value="1">Sí</option>
+                                            </b-form-select>
+                                            <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
+                                        </ValidationProvider>
+                                    </b-form-group>
+                                </b-col>
+                                <b-col>
+                                <b-form-group label="Link">
+                                        <ValidationProvider name="Link" rules="min:3" v-slot="{ errors }">
+                                            <input type="text" v-model="usuario.sitio_web" class="form-control"/>
+                                            <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
+                                        </ValidationProvider>
+                                    </b-form-group>
+                                </b-col>
+                            </b-row>
+                            <b-row>
+                                <b-col>
+                                    <b-form-group label="¿Es empresa familiar?">
+                                        <ValidationProvider name="empresa familiar" rules="required|oneOf:0,1" v-slot="{ errors }">
+                                            <b-form-select v-model="usuario.empresa_familiar" :disabled="tipo_usuario_logeado == 4">
+                                                <option :value="0" selected>No</option>
+                                                <option :value="1" selected>Sí</option>
+                                            </b-form-select>
+                                            <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
+                                        </ValidationProvider>
+                                    </b-form-group>
+                                </b-col>
+                                <b-col>
+                                    <b-form-group label="Años de funcionamiento">
+                                        <ValidationProvider name="años de funcionamiento" rules="required|numeric|min:0" v-slot="{ errors }">
+                                            <input type="text" v-rut v-model="usuario.tiempo_funcionamiento" class="form-control" :readonly="tipo_usuario_logeado == 4" />
+                                            <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
+                                        </ValidationProvider>
+                                    </b-form-group>
+                                </b-col>
+                            </b-row>
+                            <b-row>
+                                <b-col>
+                                    <b-form-group label="Número de trabajadores">
+                                        <ValidationProvider name="número de trabajadores" rules="required|numeric|min:0" v-slot="{ errors }">
+                                            <input type="text" v-rut v-model="usuario.cantidad_trabajadores" class="form-control" :readonly="tipo_usuario_logeado == 4" />
+                                            <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
+                                        </ValidationProvider>
+                                    </b-form-group>
+                                </b-col>
+                                <b-col>
+                                    <b-form-group label="Nombre de las empresas contratistas">
+                                        <ValidationProvider name="nombre de las empresas contratistas" rules="required|numeric|min:0" v-slot="{ errors }">
+                                            <input type="text" v-model="usuario.nombre_contratistas" class="form-control" :readonly="tipo_usuario_logeado == 4" />
+                                            <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
+                                        </ValidationProvider>
+                                    </b-form-group>
+                                </b-col>
+                            </b-row>
+
+                            <b-row>
+                                <b-col>
+                                    <b-button v-show="tipo_usuario_logeado < 4" :disabled="!valid" @click="actualizar(0, 0, 0, 0, 1 ,0)" class="btn btn-success btn-block" title="Actualiza información de tu perfil">Actualizar mi perfil</b-button>
+                                </b-col>
+                            </b-row>
+                        </b-tab>
+                    </ValidationObserver>
+
+                    <ValidationObserver ref="observer_pyme_datos_facturacion" v-slot="{ valid }">
+                        <b-tab title="Facturación">
+                            <b-row>
+                                <b-col>
+                                    <b-form-group label="Nombre de quien solicita las facturas">
+                                        <ValidationProvider name="nombre" rules="required|min:3|alpha_spaces" v-slot="{ errors }">
+                                            <b-form-input type="text" v-model="usuario.nombre_facturacion" :readonly="tipo_usuario_logeado == 4"></b-form-input>
+                                            <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
+                                        </ValidationProvider>
+                                    </b-form-group>
+                                </b-col>
+                                <b-col>
+                                    <b-form-group label="Rut de quien solicita las facturas">
+                                        <ValidationProvider name="Run" rules="min:3" v-slot="{ errors }">
+                                            <input type="text" v-rut v-model="usuario.run_facturacion" class="form-control" :readonly="tipo_usuario_logeado == 4" />
+                                            <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
+                                        </ValidationProvider>
+                                    </b-form-group>
+                                </b-col>
+                            </b-row>
+                            <b-row v-show="tipo_usuario_logeado < 4">
+                                <b-col>
+                                    <b-form-group label="Email al que se enviaran las facturas">
+                                        <ValidationProvider name="email" rules="email" v-slot="{ errors }">
+                                            <b-form-input type="email" v-model="usuario.email_facturacion" :readonly="tipo_usuario_logeado == 4"></b-form-input>
+                                            <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
+                                        </ValidationProvider>
+                                    </b-form-group>
+                                </b-col>
+                                <b-col>
+                                    <b-form-group label="Nombre completo representante legal">
+                                        <ValidationProvider name="nombre" rules="required|min:3|alpha_spaces" v-slot="{ errors }">
+                                            <b-form-input type="text" v-model="usuario.nombre_representante_facturacion" :readonly="tipo_usuario_logeado == 4"></b-form-input>
+                                            <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
+                                        </ValidationProvider>
+                                    </b-form-group>
+                                </b-col>
+                            </b-row>
+                            <b-row>
+                                <b-col>
+                                    <b-form-group label="Teléfono móvil empresa">
+                                        <ValidationProvider name="teléfono" rules="required|numeric|digits:8" v-slot="{ errors }">
+                                            <b-input-group prepend="+56 9">
+                                                <b-form-input type="number" v-model="usuario.telefono_facturacion" :readonly="tipo_usuario_logeado == 4"></b-form-input>
+                                            </b-input-group>
+                                            <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
+                                        </ValidationProvider>
+                                    </b-form-group>
+                                </b-col>
+                            </b-row>
+                            <b-row>
+                                <b-col>
+                                    <b-button v-show="tipo_usuario_logeado < 4" :disabled="!valid" @click="actualizar(0, 0, 0, 0, 0 ,1)" class="btn btn-success btn-block" title="Actualiza información de tu perfil">Actualizar mi perfil</b-button>
+                                </b-col>
+                            </b-row>
+                        </b-tab>
+                    </ValidationObserver>
                 </b-tabs>
 
             </b-card>
         </b-col>
-        <b-modal v-if="mensaje != undefined" title="Bienvenido" :visible="true" >
-            <p class="my-4">
-                {{ mensaje }}
-            </p>
-        </b-modal>
+
 
     </b-row>
 </template>
@@ -476,6 +733,8 @@
                 usuario: {
                     id: 0,
                     nombre: '',
+                    nombre_fantasia: '',
+                    giro_comercial: '',
                     run: '',
                     email: '',
                     password: '',
@@ -513,7 +772,25 @@
                     ultimo_empresa: '',
                     rubro_empresa: '',
                     organismo_administrador_empresa: 0,
-                    comunidad_pyme: false
+                    comunidad_pyme: false,
+                    nombre_facturacion: '',
+                    run_facturacion: '',
+                    email_facturacion: '',
+                    nombre_representante_facturacion: '',
+                    telefono_facturacion: null,
+                    empresa_familiar: 0,
+                    tiempo_funcionamiento: null,
+                    cantidad_trabajadores: null,
+                    nombre_contratistas: '',
+                    tiene_sitio: 0,
+                    sitio_web: '',
+                    usuario_perfil: 0,
+                    usuario_academico: 0,
+                    usuario_ejercicio: 0,
+                    pyme_comercial: 0,
+                    pyme_datos: 0,
+                    pyme_facturacion: 0,
+                    presiona_tabla_vip: 0
                 },
                 categoria: {
                     nombre: '',
@@ -547,6 +824,11 @@
                 },
                 comunas: [],
                 profesiones: []
+            }
+        },
+        computed: {
+            valido(){
+                return this.$refs.observer_usuario.validate()
             }
         },
         methods:{
@@ -615,12 +897,14 @@
                     //Datos usuario
                     me.usuario.id = response.data.usuario.id;
                     me.usuario.nombre = response.data.usuario.nombre;
+                    me.usuario.nombre_fantasia = response.data.usuario.nombre_fantasia;
+                    me.usuario.giro_comercial = response.data.usuario.giro_comercial;
                     me.usuario.run = response.data.usuario.run;
                     me.usuario.email = response.data.usuario.email;
                     me.usuario.url_perfil = response.data.usuario.url_perfil == 'img/perfil.svg' ?  response.data.usuario.url_perfil : 'storage/' + response.data.usuario.url_perfil;
                     me.usuario.tipo_usuario = response.data.usuario.tipo_usuario;
                     me.usuario.tipo_persona = response.data.usuario.tipo_persona;
-                    me.usuario.fecha_nacimiento = response.data.usuario.id;
+                    me.usuario.fecha_nacimiento = response.data.usuario.fecha_nacimiento;
                     me.usuario.telefono = response.data.usuario.telefono;
                     me.usuario.direccion = response.data.usuario.direccion;
                     me.usuario.comuna_id = response.data.usuario.comuna_id == null ? 0 : response.data.usuario.comuna_id;
@@ -651,7 +935,28 @@
                     me.usuario.ultimo_empresa = response.data.usuario.ultimo_empresa;
                     me.usuario.rubro_empresa = response.data.usuario.rubro_empresa;
                     me.usuario.organismo_administrador_empresa = response.data.usuario.organismo_administrador_empresa;
-                    me.usuario.comunidad_pyme = response.data.usuario.comunidad_pyme == 1 ? true : false;
+                    me.usuario.comunidad_pyme = response.data.usuario.comunidad_pyme == true ? 1 : 0;
+                    me.usuario.top_five = response.data.usuario.top_five == true ? 1 : 0;
+                    me.usuario.nombre_facturacion = response.data.usuario.nombre_facturacion
+                    me.usuario.run_facturacion = response.data.usuario.run_facturacion
+                    me.usuario.email_facturacion = response.data.usuario.email_facturacion
+                    me.usuario.nombre_representante_facturacion = response.data.usuario.nombre_representante_facturacion
+                    me.usuario.telefono_facturacion = response.data.usuario.telefono_facturacion
+                    me.usuario.empresa_familiar = response.data.usuario.empresa_familiar
+                    me.usuario.tiempo_funcionamiento = response.data.usuario.tiempo_funcionamiento
+                    me.usuario.cantidad_trabajadores = response.data.usuario.cantidad_trabajadores
+                    me.usuario.tiene_sitio = response.data.usuario.tiene_sitio
+                    me.usuario.sitio_web = response.data.usuario.sitio_web
+                    me.usuario.nombre_contratistas = response.data.usuario.nombre_contratistas
+                    me.usuario.presiona_tabla_vip = response.data.usuario.presiona_tabla_vip
+
+                    me.usuario.usuario_perfil = response.data.usuario.usuario_perfil
+                    me.usuario.usuario_academico = response.data.usuario.usuario_academico
+                    me.usuario.usuario_ejercicio = response.data.usuario.usuario_ejercicio
+                    me.usuario.pyme_comercial = response.data.usuario.pyme_comercial
+                    me.usuario.pyme_datos = response.data.usuario.pyme_datos
+                    me.usuario.pyme_facturacion = response.data.usuario.pyme_facturacion
+
 
 
                     //Datos categoria
@@ -674,12 +979,14 @@
                     console.log(error);
                 });
             },
-            actualizar(){
+            actualizar(usuario_perfil, usuario_academico, usuario_ejercicio, pyme_comercial, pyme_datos, pyme_facturacion){
                 let me = this;
 
                 axios.post('usuario/crear/actualizar',{
                     'usuario_id': me.usuario.id,
                     'nombre': me.usuario.nombre,
+                    'nombre_fantasia': me.usuario.nombre_fantasia,
+                    'giro_comercial': me.usuario.giro_comercial,
                     'run': me.usuario.run,
                     'email': me.usuario.email,
                     'password': me.usuario.password,
@@ -717,7 +1024,25 @@
                     'ultimo_empresa': me.usuario.ultimo_empresa,
                     'rubro_empresa': me.usuario.rubro_empresa,
                     'organismo_administrador_empresa': me.usuario.organismo_administrador_empresa,
-                    'comunidad_pyme': me.usuario.comunidad_pyme
+                    'comunidad_pyme': me.usuario.comunidad_pyme,
+                    'top_five': me.usuario.top_five,
+                    'nombre_facturacion': me.usuario.nombre_facturacion,
+                    'run_facturacion': me.usuario.run_facturacion,
+                    'email_facturacion': me.usuario.email_facturacion,
+                    'nombre_representante_facturacion': me.usuario.nombre_representante_facturacion,
+                    'telefono_facturacion': me.usuario.telefono_facturacion,
+                    'empresa_familiar': me.usuario.empresa_familiar,
+                    'tiempo_funcionamiento': me.usuario.tiempo_funcionamiento,
+                    'cantidad_trabajadores': me.usuario.cantidad_trabajadores,
+                    'tiene_sitio': me.usuario.tiene_sitio,
+                    'sitio_web': me.usuario.sitio_web,
+                    'nombre_contratistas': me.usuario.nombre_contratistas,
+                    'usuario_perfil': usuario_perfil,
+                    'usuario_academico': usuario_academico,
+                    'usuario_ejercicio': usuario_ejercicio,
+                    'pyme_comercial': pyme_comercial,
+                    'pyme_datos': pyme_datos,
+                    'pyme_facturacion': pyme_facturacion
 
                 }).then(function (response) {
                     me.listarUsuario();
@@ -760,6 +1085,68 @@
                 }).catch(function (error) {
                     console.error(error);
                 });
+            },
+            comunidad_pyme(accion){
+                Swal.fire({
+                    title: accion == 0 ? '¿Deseas aparecer en la tabla comunidad pyme?' : '¿Deseas salir de la tabla comunidad pyme?',
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#8AB733',
+                    cancelButtonColor: '#d7552a',
+                    confirmButtonText: 'Aceptar!',
+                    cancelButtonText: 'Cancelar',
+                    confirmButtonClass: 'btn btn-success',
+                    cancelButtonClass: 'btn btn-danger',
+                }).then((result) => {
+                    if (result.value) {
+                        let me = this;
+                        axios.post('/usuario/tabla/comunidad',{
+                            'accion': accion
+                        }).then(function (response) {
+                            me.listarUsuario();
+
+                            Vue.$toast.open({
+		                        message: accion == 0 ? 'Ya estas en la tabla comunidad pyme!' : 'Ya no estas en la tabla comunidad pyme',
+		                        type: 'success',
+		                        duration: 5000
+		                    });
+
+                        }).catch(function (error) {
+                            console.log(error);
+                        });
+                    } else if (result.dismiss === Swal.DismissReason.cancel) {}
+                })
+            },
+            tabla_vip(accion){
+                Swal.fire({
+                    title: accion == 0 ? '¿Deseas aparecer en la tabla vip?' : '¿Deseas salir de la tabla vip?',
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#8AB733',
+                    cancelButtonColor: '#d7552a',
+                    confirmButtonText: 'Aceptar!',
+                    cancelButtonText: 'Cancelar',
+                    confirmButtonClass: 'btn btn-success',
+                    cancelButtonClass: 'btn btn-danger',
+                }).then((result) => {
+                    if (result.value) {
+                        let me = this;
+                        axios.post('/usuario/tabla/vip',{
+                            'accion': accion
+                        }).then(function (response) {
+                            me.listarUsuario();
+
+                            Vue.$toast.open({
+		                        message: accion == 0 ? 'Hemos procesado tu solicitud, pronto te contactaremos' : 'Ya no estas en la tabla vip',
+		                        type: 'success',
+		                        duration: 5000
+		                    });
+
+                        }).catch(function (error) {
+                            console.log(error);
+                        });
+                    } else if (result.dismiss === Swal.DismissReason.cancel) {}
+                })
             },
             calcularPorcentajeOficina(){
                 this.usuario.porcentaje_oficina = 100 - this.usuario.porcentaje_terreno;

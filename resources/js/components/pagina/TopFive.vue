@@ -72,7 +72,7 @@
             </template>
 
             <template v-slot:cell(perfil)="data">
-                <a href="javascript:void(0)" class="h4" title="Ver perfil de usuario" @click="abrirModalPerfil(data.item)"><i class="fa fa-user sale-color"></i></a>
+                <usuario-tabla-vip :usuario_id="data.item.id"></usuario-tabla-vip>
             </template>
 
         </b-table>
@@ -86,10 +86,6 @@
                             <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
                         </ValidationProvider>
                     </b-form-group>
-
-                    <b-alert variant="warning" class="text-justify" show>
-                        Debes de iniciar sesión en la plataforma para poder votar.
-                    </b-alert>
                 </b-form>
 
                 <template slot="modal-footer">
@@ -98,18 +94,6 @@
                 </template>
             </b-modal>
         </ValidationObserver>
-
-
-        <b-modal ref="modal_perfil" :title="modal_perfil.titulo" size="lg" no-close-on-backdrop>
-
-            <b-form>
-                <perfil_usuario :usuario_id="usuario.id" :tipo_usuario_logeado="4"></perfil_usuario>
-            </b-form>
-
-            <template slot="modal-footer">
-                <b-button size="md" variant="danger" @click="cerrarModalPerfil()"> Cerrar </b-button>
-            </template>
-        </b-modal>
 
     </b-container>
 </template>

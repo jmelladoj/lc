@@ -18,7 +18,7 @@
 
     <link rel="icon" type="image/png" href="{{ asset('storage/general/favicon.png') }}">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
     <div id="app">
@@ -36,8 +36,8 @@
 
                             <div class="nav-menu">
                                 <ul>
-                                    <li class="nav-menu-item">@if(request()->is('/')) <a href="#inicio" class="{{ (request()->is('/')) ? 'sale-color' : '' }}">Comunidad LebenCo.</a> @else <a href="{{ url('/#inicio') }}">Comunidad LebenCo.</a> @endif</li>
-                                    <li class="nav-menu-item"><a href="{{ url('/comunidad') }}" class="{{ (request()->is('comunidad')) ? 'sale-color' : '' }}">Comunidad Pyme</a></li>
+                                    <li class="nav-menu-item">@if(request()->is('/')) <a href="#inicio" class="{{ (request()->is('/')) ? 'sale-color' : '' }}">Bienvenido</a> @else <a href="{{ url('/#inicio') }}">Bienvenido</a> @endif</li>
+                                    <li class="nav-menu-item"><a href="{{ url('/comunidad') }}" class="{{ (request()->is('comunidad')) ? 'sale-color' : '' }}">Comunidad LebenCo.</a></li>
                                     <li class="nav-menu-item"><a href="{{ url('/servicios') }}" class="{{ (request()->is('servicios')) ? 'sale-color' : '' }}">Nuestros Servicios</a></li>
                                     <li class="nav-menu-item"><a href="{{ url('/contacto') }}" class="{{ (request()->is('contacto')) ? 'sale-color' : '' }}">Contáctanos</a></li>
                                     <li class="nav-menu-item">
@@ -54,7 +54,7 @@
                             <div class="nav-icons">
                                 <ul class="mt-2">
                                     <li class="nav-icon-item d-lg-none">
-                                        <div class="nav-icon-trigger menu-mobile-btn active" title="Navigation Menu"><span><i class="fa fa-list"></i></span></div>
+                                        <div class="nav-icon-trigger menu-mobile-btn active" title="Navigation Menu"><span><i class="fa fa-list-ol"></i></span></div>
                                     </li>
                                     <li class="nav-icon-item">
                                         <a href="{{ url('/login') }}" class="nav-icon-trigger" title="Ingresar">

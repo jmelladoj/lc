@@ -11,18 +11,19 @@ class Alerta extends Notification
 {
     use Queueable;
 
-    protected $mensaje, $usuario, $clase, $tipo_notificacion;
+    protected $mensaje, $usuario, $invitado, $clase, $tipo_notificacion;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($mensaje, $usuario, $clase, $tipo_notificacion)
+    public function __construct($mensaje, $usuario, $invitado, $clase, $tipo_notificacion)
     {
         //
         $this->mensaje = $mensaje;
         $this->usuario = $usuario;
+        $this->invitado = $invitado;
         $this->clase = $clase;
         $this->tipo_notificacion = $tipo_notificacion;
     }
@@ -63,6 +64,7 @@ class Alerta extends Notification
         return [
             'mensaje' => $this->mensaje,
             'usuario' => $this->usuario,
+            'invitado' => $this->invitado,
             'clase' => $this->clase,
             'tipo_notificacion' => $this->tipo_notificacion
         ];

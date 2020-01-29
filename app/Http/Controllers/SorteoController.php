@@ -19,7 +19,7 @@ class SorteoController extends Controller
                 return ['sorteos' => Sorteo::orderBy('created_at', 'desc')->get()];
                 break;
             case 2:
-                return ['sorteos' => Sorteo::where('fecha', '>=', Carbon::now()->format('Y-m-d'))->orderBy('fecha', 'desc')->get()];
+                return ['sorteos' => Sorteo::where('fecha', '>=', Carbon::now()->format('Y-m-d'))->where('tipo_persona', Auth::user()->tipo_persona)->orderBy('fecha', 'desc')->get()];
                 break;
         }
     }
@@ -31,7 +31,8 @@ class SorteoController extends Controller
              'valor' => $request->valor,
              'premio' => $request->premio,
              'fecha' => $request->fecha,
-             'categorias_usuarios' => $request->categoria_usuario
+             'tipo_persona' => $request->tipo_persona,
+             'categorias_usuarios_id' => $request->categoria_usuario
             ]
         );
 
@@ -64,7 +65,7 @@ class SorteoController extends Controller
             }
 
             $user = User::find(1);
-            $user->notify(new Alerta('Ha participado en un concurso.', Auth::user(), 'fa fa-list-ol', 1));
+            $user->notify(new Alerta('Ha participado en un concurso.', Auth::user(), "", 'fa fa-list-ol', 1));
 
             return ['mensaje' => 'Estas participando exitosamente por un ' . $sorteo->premio . ', recuerda que la fecha de termino es ' . $sorteo->fecha . '. Buena suerte', 'clase' => 'success'];
         } else {

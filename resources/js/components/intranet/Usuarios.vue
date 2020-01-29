@@ -263,7 +263,6 @@
 </template>
 
 <script>
-    const items = [];
 
     export default {
         data() {
@@ -292,7 +291,7 @@
                 modal_posicion: {
                     titulo: 'Asignar posición'
                 },
-                items: items,
+                items: [],
                 subusuarios: [],
                 fields: [
                     { key: 'index', label: '#', sortable: true, sortDirection: 'desc', class: 'text-center' },

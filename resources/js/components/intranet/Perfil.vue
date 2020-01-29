@@ -6,16 +6,9 @@
                 <b-col cols="7">
                     <div class="d-flex justify-content-end align-items-right">
                         <sociales></sociales>
-                    </div>                    
+                    </div>
                 </b-col>
             </b-row>
-
-
-            <b-form-group v-if="mensaje != 'sin mensaje'">
-                <b-col>
-                    <b-alert variant="warning" show v-text="mensaje">{{ mensaje }}</b-alert>
-                </b-col>
-            </b-form-group>
 
             <perfil_usuario :usuario_id="usuario_id" :tipo_usuario_logeado="tipo_usuario_logeado"></perfil_usuario>
 
@@ -27,7 +20,7 @@
 <script>
     export default {
         props: [
-            'usuario_id', 'tipo_usuario_logeado', 'mensaje'
+            'usuario_id', 'tipo_usuario_logeado'
         ]
     }
 </script>
