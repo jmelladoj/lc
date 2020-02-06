@@ -52,12 +52,16 @@
                 </b-row>
             </b-card>
 
-            <b-row>
+            <b-row v-show="tabla.usuario_id > 0">
                 <b-col>
                     <b-card>
                         <b-form-group>
                             <b-container fluid>
-
+                                <b-row class="mb-2">
+                                    <b-col>
+                                        <b-button @click="abrir_modal_comentarios(1)" class="btn btn-success pull-right" v-b-tooltip.hover title="Agrega una slider a la plataforma"><i class="fa fa-plus-circle"></i> Agregar comentario</b-button>
+                                    </b-col>
+                                </b-row>
                                 <b-row>
                                     <b-col md="4" class="my-1">
                                         <b-form-group label-cols-sm="3" label="Filtrar" class="mb-0">
@@ -114,6 +118,10 @@
                                     :sort-direction="sortDirection_pyme"
                                     @filtered="onFiltered_pyme">
 
+                                    <template v-slot:cell(index)="data">
+                                        {{ data.index + 1 }}
+                                    </template>
+
                                     <template slot="empty">
                                         <center><h5>No hay registros para mostrar.</h5></center>
                                     </template>
@@ -122,20 +130,17 @@
                                         <center><h5>No hay registros que coincidan con su solicitud.</h5></center>
                                     </template>
 
-                                    <template v-slot:cell(nombre)="row">
-                                        <label  @click="actualizar_tabla(row.item)" v-text="row.item.nombre"></label>
+                                    <template v-slot:cell(tipo_votacion)="row">
+                                        <label v-text="row.item.tipo_votacion == 1 ? 'Positivo' : 'Negativo'"></label>
                                     </template>
-
-                                    <template v-slot:cell(tipo)="data">
-                                        <label v-if="data.item.tipo_persona == 1"> Persona </label>
-                                        <label v-else-if="data.item.tipo_persona == 2"> Pyme </label>
-                                        <label v-else-if="data.item.tipo_persona == 3"> Estudiante </label>
-                                    </template>
-
 
                                     <template v-slot:cell(acciones)="row">
-                                        <b-button size="xs" variant="warning" title="Actualizar usuario" @click="actualizar_tabla(row.item)">
+                                        <b-button size="xs" variant="warning" title="Actualizar comentario" @click="abrir_modal_comentarios(2, row.item)">
                                             <i class="fa fa-pencil"></i>
+                                        </b-button>
+
+                                        <b-button size="xs" variant="danger" title="Eliminar comentario" @click="borrar(row.item.id)">
+                                            <i class="fa fa-trash"></i>
                                         </b-button>
                                     </template>
 
@@ -251,6 +256,42 @@
                     </b-card>
                 </b-col>
             </b-row>
+
+            <ValidationObserver ref="observer_comentario" v-slot="{ valid }">
+                <b-modal ref="modal_comentario" :title="modal_comentario.titulo" size="lg" no-close-on-backdrop>
+                    <b-form>
+                        <b-form-group label="Autor de comentario">
+                            <ValidationProvider name="nombre" rules="required|min:3|alpha_spaces" v-slot="{ errors }">
+                                <b-form-input type="text" v-model="comentario.autor"></b-form-input>
+                                <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
+                            </ValidationProvider>
+                        </b-form-group>
+
+                        <b-form-group>
+                            <ValidationProvider name="Tipo de comentario" rules="required" v-slot="{ errors }">
+                                <b-form-select v-model="comentario.tipo_votacion" class="mb-3">
+                                    <option :value="1" selected>Positivo</option>
+                                    <option :value="2" selected>Negativo</option>
+                                </b-form-select>
+                                <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
+                            </ValidationProvider>
+                        </b-form-group>
+
+                        <b-form-group  label="Detalle">
+                            <ValidationProvider name="detalle de software" rules="required|min:20|max:200" v-slot="{ errors }">
+                                <b-form-textarea v-model="comentario.detalle" placeholder="Escribe aquí ..." rows="3" max-rows="6"></b-form-textarea>
+                                <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
+                            </ValidationProvider>
+                        </b-form-group>
+                    </b-form>
+
+                    <template slot="modal-footer">
+                        <b-button :disabled="!valid" v-show="modal_comentario.accion == 1" size="md" variant="success" @click="crear_actualizar_comentario(1)"> Guardar </b-button>
+                        <b-button v-show="modal_comentario.accion == 2" size="md" variant="warning" @click="crear_actualizar_comentario(2)"> Actualizar </b-button>
+                        <b-button size="md" variant="danger" @click="cerrar_modal()"> Cerrar </b-button>
+                    </template>
+                </b-modal>
+            </ValidationObserver>
         </b-container>
     </div>
 </template>
@@ -262,6 +303,16 @@
             return {
                 items: [],
                 items_pyme: [],
+                comentario: {
+                    id: 0,
+                    autor: '',
+                    tipo_votacion: 1,
+                    detalle: ''
+                },
+                modal_comentario: {
+                    titulo: '',
+                    accion: 0
+                },
                 tabla: {
                     usuario_id: 0,
                     empresa: null,
@@ -288,8 +339,9 @@
                 filter: null,
                 fields_pyme: [
                     { key: 'index', label: '#', sortable: true, sortDirection: 'desc', class: 'text-center' },
-                    { key: 'tipo_comentario', label: 'Tipo comentario', sortable: true, class: 'text-left' },
-                    { key: 'comentario', label: 'Comentario', sortable: true, class: 'text-left' },
+                    { key: 'nombre_usuario', label: 'Autor', sortable: true, class: 'text-left' },
+                    { key: 'tipo_votacion', label: 'Tipo comentario', sortable: true, class: 'text-left' },
+                    { key: 'descripcion', label: 'Comentario', sortable: true, class: 'text-left' },
                     { key: 'acciones', label: 'Acciones', sortable: true, class: 'text-center' }
                 ],
                 currentPage_pyme: 1,
@@ -323,6 +375,15 @@
                 this.totalRows = filteredItems.length
                 this.currentPage = 1
             },
+            listar_valoraciones(){
+                let me=this;
+                axios.get('/usuario/valoraciones/' + this.tabla.usuario_id).then(function (response) {
+                    me.items_pyme = response.data.valoraciones;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+            },
             listarUsuariosTablaVip(){
                 let me=this;
                 axios.get('/usuarios/tabla/vip').then(function (response) {
@@ -338,6 +399,8 @@
                 this.tabla.posicion = data.posicion
                 this.tabla.likes = data.likes
                 this.tabla.dislikes = data.dislikes
+
+                this.listar_valoraciones()
 
                 this.actualizar_porcentajes()
             },
@@ -372,7 +435,94 @@
             actualizar_porcentajes(){
                 let porcentaje = 100
                 this.tabla.dislikes = parseInt(porcentaje) - parseInt(this.tabla.likes)
-            }
+            },
+            abrir_modal_comentarios(accion, data = []){
+                let me = this;
+                this.limpiar_datos_comentario();
+
+                if(accion == 1){
+                    me.modal_comentario.titulo = "Agregar comentario";
+                    me.modal_comentario.accion = 1;
+                } else if(accion == 2){
+                    me.modal_comentario.titulo = "Modificar comentario";
+                    me.modal_comentario.accion = 2;
+
+                    me.comentario.id = data.id;
+                    me.comentario.autor = data.nombre_usuario;
+                    me.comentario.tipo_votacion = data.tipo_votacion;
+                    me.comentario.detalle = data.descripcion;
+                }
+
+                this.$refs['modal_comentario'].show();
+            },
+            cerrar_modal(){
+                this.modal_comentario.titulo = "";
+                this.modal_comentario.accion = 0;
+                this.$refs['modal_comentario'].hide();
+            },
+            limpiar_datos_comentario(){
+                this.comentario.id = 0
+                this.comentario.autor = ''
+                this.comentario.tipo_votacion = 1
+                this.comentario.detalle = ''
+            },
+            crear_actualizar_comentario(accion){
+                let me = this;
+
+                axios.post('/valorar/pyme',{
+                    'id': me.comentario.id,
+                    'autor': me.comentario.autor,
+                    'detalle': me.comentario.detalle,
+                    'tipo_votacion': me.comentario.tipo_votacion
+                }).then(function (response) {
+                    me.listar_valoraciones();
+                    me.cerrar_modal();
+                    var mensaje = accion == 1 ? 'Registro agregado exitosamente' : 'Registro actualizado exitosamente';
+
+                    Vue.$toast.open({
+                        message: mensaje,
+                        type: 'success',
+                        duration: 5000
+                    });
+
+                }).catch(function (error) {
+                    console.error(error);
+                });
+            },
+            borrar(id, accion){
+                var mensaje = '¿Deseas borrar el comentario?';
+                Swal.fire({
+                    title: mensaje,
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#8AB733',
+                    cancelButtonColor: '#d7552a',
+                    confirmButtonText: 'Aceptar!',
+                    cancelButtonText: 'Cancelar',
+                    confirmButtonClass: 'btn btn-success',
+                    cancelButtonClass: 'btn btn-danger',
+                }).then((result) => {
+                    if (result.value) {
+                        let me = this;
+
+                        axios.post('/valorar/borrar',{
+                            'id': id
+                        }).then(function (response) {
+                            var mensaje = 'Registro borrado exitosamente';
+                            me.listar_valoraciones();
+
+							Vue.$toast.open({
+		                        message: mensaje,
+		                        type: 'success',
+		                        duration: 5000
+		                    });
+
+                        }).catch(function (error) {
+                            console.log(error);
+                        });
+                    } else if (result.dismiss === Swal.DismissReason.cancel) {}
+                })
+            },
         },
         mounted(){
             this.listarUsuariosTablaVip()

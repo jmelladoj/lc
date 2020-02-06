@@ -10,10 +10,19 @@ class ValoracionController extends Controller
 {
     //
     public function valorar(Request $request){
-        Valoracion::create([
-            'user_id' => Auth::id(),
-            'descripcion' => $request->descripcion,
-            'tipo_votacion' => $request->accion
-        ]);
+        Valoracion::updateOrCreate(
+            [
+                'id' => $request->id],
+            [
+                'nombre_usuario' => $request->autor != '' ? $request->autor : null,
+                'user_id' => Auth::id(),
+                'descripcion' => $request->detalle,
+                'tipo_votacion' => $request->tipo_votacion
+            ]
+        );
+    }
+
+    public function borrar(Request $request){
+        Valoracion::find($request->id)->delete();
     }
 }

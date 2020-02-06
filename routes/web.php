@@ -107,6 +107,8 @@ Route::post('/tip/eliminar', 'TipController@eliminar')->name('Eliminar Tip');
 
 //Rutas de usuarios
 Route::get('/usuarios/{tipo}', 'UsuarioController@index')->name('Listar usuarios');
+Route::get('/usuario/valoraciones/{id}', 'UsuarioController@valoraciones')->name('Listar usuarios');
+
 Route::post('/usuario/crear/actualizar', 'UsuarioController@crearOactualizar')->name('Crear o Actualizar usuarios');
 Route::post('/usuario/restaurar', 'UsuarioController@restaurar')->name('Resturar Usuario');
 Route::post('/usuario/eliminar', 'UsuarioController@eliminar')->name('Eliminar usuario');
@@ -183,6 +185,7 @@ Route::get('/seminario/participantes/{id}', 'SeminarioController@indexParticipan
 
 //Rutas de valoracion
 Route::post('/valorar/pyme', 'ValoracionController@valorar')->name('Valorar Pyme');
+Route::post('/valorar/borrar', 'ValoracionController@borrar')->name('Borrar comentario Pyme');
 
 //Rutas de link de interés
 Route::get('/sitios', 'InteresController@index')->name('Listar sitios de interes');

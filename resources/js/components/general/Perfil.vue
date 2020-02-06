@@ -150,10 +150,20 @@
                                 </b-col>
                                 <b-col>
                                     <b-form-group label="¿Hijos? (rellenar con 0 en caso de que no)">
-                                        <ValidationProvider name="hijos" rules="required|numeric|min:0" v-slot="{ errors }">
-                                            <b-form-input type="number" v-model="usuario.hijos" :readonly="tipo_usuario_logeado == 4"></b-form-input>
-                                            <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
-                                        </ValidationProvider>
+                                        <b-row>
+                                            <b-col>
+                                                <b-form-radio-group id="radio-group-2" v-model="usuario.radio_hijos" name="radio-sub-component">
+                                                    <b-form-radio value="0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;No</b-form-radio>
+                                                    <b-form-radio value="1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sí</b-form-radio>
+                                                </b-form-radio-group>
+                                            </b-col>
+                                            <b-col>
+                                                <ValidationProvider name="hijos" rules="required|numeric|min:0" v-slot="{ errors }">
+                                                    <b-form-input type="number" v-model="usuario.hijos" :readonly="tipo_usuario_logeado == 4" v-show="usuario.radio_hijos == 1"></b-form-input>
+                                                    <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
+                                                </ValidationProvider>
+                                            </b-col>
+                                        </b-row>
                                     </b-form-group>
                                 </b-col>
                             </b-row>
@@ -236,14 +246,6 @@
                                         </ValidationProvider>
                                     </b-form-group>
                                 </b-col>
-                                <b-col>
-                                    <b-form-group :label="usuario.tipo_persona == 1 ? 'En total, ¿cuántos años haz ejercido?' : 'En total, ¿cuántos tiempo haz ejercido?'">
-                                        <ValidationProvider name="detalle de experiencia" rules="required|min:20|max:200" v-slot="{ errors }">
-                                            <b-form-textarea v-model="usuario.experiencia" placeholder="Escribe aquí ..." rows="3" max-rows="6" :readonly="tipo_usuario_logeado == 4"></b-form-textarea>
-                                            <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
-                                        </ValidationProvider>
-                                    </b-form-group>
-                                </b-col>
                             </b-row>
                             <b-row>
                                 <b-col>
@@ -257,8 +259,8 @@
                         <b-tab title="Datos del ejercicio">
                             <b-row>
                                 <b-col>
-                                    <b-form-group label="¿Tienes sitio web?">
-                                        <ValidationProvider name="empresa familiar" rules="required|oneOf:0,1" v-slot="{ errors }">
+                                    <b-form-group label="¿Tienes sitio web o una red social?">
+                                        <ValidationProvider name="sitio web" rules="required|oneOf:0,1" v-slot="{ errors }">
                                             <b-form-select v-model="usuario.tiene_sitio" :disabled="tipo_usuario_logeado == 4">
                                                 <option :value="0" selected>No</option>
                                                 <option :value="1">Sí</option>
@@ -268,19 +270,9 @@
                                     </b-form-group>
                                 </b-col>
                                 <b-col>
-                                <b-form-group label="Link">
+                                <b-form-group label="Pega aquí el link">
                                         <ValidationProvider name="Link" rules="min:3" v-slot="{ errors }">
                                             <input type="text" v-model="usuario.sitio_web" class="form-control"/>
-                                            <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
-                                        </ValidationProvider>
-                                    </b-form-group>
-                                </b-col>
-                            </b-row>
-                            <b-row>
-                                <b-col>
-                                    <b-form-group label="¿Tienes algún amigo que se relacion con la prevención?. ¡Cuéntanos quién es!">
-                                        <ValidationProvider name="amigo" rules="min:20|max:200" v-slot="{ errors }">
-                                            <b-form-textarea v-model="usuario.amigo" placeholder="Escribe aquí ..." rows="3" max-rows="6" :readonly="tipo_usuario_logeado == 4"></b-form-textarea>
                                             <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
                                         </ValidationProvider>
                                     </b-form-group>
@@ -315,14 +307,6 @@
                                                 <option :value="0" selected>Seleccionar una opción</option>
                                                 <option v-for="(profesion, index) in profesiones.filter(p => p.tipo_persona == usuario.tipo_persona)" :key="index" :value="profesion.id" v-text="profesion.nombre"></option>
                                             </b-form-select>
-                                            <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
-                                        </ValidationProvider>
-                                    </b-form-group>
-                                </b-col>
-                                <b-col>
-                                    <b-form-group label="¿Algún otro rubro?">
-                                        <ValidationProvider name="otro rubro" rules="required|min:3" v-slot="{ errors }">
-                                            <b-form-input type="text" v-model="usuario.otro_rubro" :readonly="tipo_usuario_logeado == 4"></b-form-input>
                                             <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
                                         </ValidationProvider>
                                     </b-form-group>
@@ -790,7 +774,8 @@
                     pyme_comercial: 0,
                     pyme_datos: 0,
                     pyme_facturacion: 0,
-                    presiona_tabla_vip: 0
+                    presiona_tabla_vip: 0,
+                    radio_hijos: 0
                 },
                 categoria: {
                     nombre: '',
@@ -956,6 +941,7 @@
                     me.usuario.pyme_comercial = response.data.usuario.pyme_comercial
                     me.usuario.pyme_datos = response.data.usuario.pyme_datos
                     me.usuario.pyme_facturacion = response.data.usuario.pyme_facturacion
+                    me.usuario.radio_hijos = response.data.usuario.hijos > 0 ? 1 : 0
 
 
 
@@ -1008,7 +994,6 @@
                     'experiencia': me.usuario.experiencia,
                     'amigo': me.usuario.amigo,
                     'profesion_id': me.usuario.profesion_id,
-                    'otro_rubro': me.usuario.otro_rubro,
                     'otro_rubro': me.usuario.otro_rubro,
                     'porcentaje_terreno': me.usuario.porcentaje_terreno,
                     'porcentaje_oficina': me.usuario.porcentaje_oficina,
@@ -1160,9 +1145,12 @@
     }
 </script>
 
-<style>
+<style scoped>
     a:hover {
         color: #1E2F13;
     }
 
+    .col-form-label{
+        min-height: calc(1rem + 32px) !important;
+    }
 </style>

@@ -90,6 +90,7 @@ Vue.component('ver-documento', require('./components/general/VerDocumento.vue').
 Vue.component('errores', require('./components/general/Errores.vue').default);
 Vue.component('usuario-tabla-vip', require('./components/general/PerfilUsuario.vue').default);
 Vue.component('busqueda-documento', require('./components/general/Busqueda.vue').default);
+Vue.component('titulo-pagina', require('./components/general/Titulo.vue').default);
 
 //Pagina
 Vue.component('login', require('./components/pagina/Login.vue').default);

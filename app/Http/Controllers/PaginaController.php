@@ -74,8 +74,10 @@ class PaginaController extends Controller
 
     public function indexHomeComunidad(){
         $pagina = Pagina::find(2);
+        $cantidad_vip = User::where('top_five', 1)->get()->count();
+        $cantidad_comunidad = User::where('comunidad_pyme', 1)->get()->count();
 
-        return view('comunidad')->with(compact('pagina'));
+        return view('comunidad')->with(compact('pagina', 'cantidad_vip', 'cantidad_comunidad'));
     }
 
     public function indexHomeServicios(){

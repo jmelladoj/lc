@@ -11,13 +11,14 @@
         }
 
         .icono {
-            width: 25%;
+            width: 80px;
             margin: 10px 10px 10px 10px;
+            float: left;
         }
 
         .iconos {
-            width: 100%;
-            min-width: 300px;
+            width: 400px;
+            height: 60px;
         }
 
         .activo {
@@ -43,30 +44,28 @@
 
         <br><br>
 
-        <p>
-            <div class="iconos">
-                <div class="icono">
-                    <a target="_blank" href="https://www.youtube.com/channel/UC78DsrgVX7KslItHoTuw8uQ?view_as=subscriber" class="activo">
-                        <img src="{{ asset('intranet/img_mail/youtube.png') }}" height="50" width="auto" alt="">
-                    </a>
-                </div>
-                <div class="icono">
-                    <a target="_blank" href="https://www.facebook.com/prevencion.lebenco.3" class="activo">
-                        <img src="{{ asset('intranet/img_mail/facebook.png') }}" height="50" width="auto" alt="">
-                    </a>
-                </div>
-                <div class="icono">
-                    <a target="_blank" href="https://www.instagram.com/prevencionlebenco.cl/?hl=es-la" class="activo">
-                        <img src="{{ asset('intranet/img_mail/instagram.png') }}" height="50" width="auto" alt="">
-                    </a>
-                </div>
-                <div class="icono">
-                    <a target="_blank" href="https://www.linkedin.com/in/prevenci%C3%B3n-lebenco-62b632184/" class="activo">
-                        <img src="{{ asset('intranet/img_mail/linkedin.png') }}" height="50" width="auto" alt="">
-                    </a>
-                </div>
+        <div class="iconos">
+            <div class="icono">
+                <a target="_blank" href="https://www.youtube.com/channel/UC78DsrgVX7KslItHoTuw8uQ?view_as=subscriber" class="activo">
+                    <img src="{{ asset('intranet/img_mail/youtube.png') }}" height="50" width="auto" alt="">
+                </a>
             </div>
-        </p>
+            <div class="icono">
+                <a target="_blank" href="https://www.facebook.com/prevencion.lebenco.3" class="activo">
+                    <img src="{{ asset('intranet/img_mail/facebook.png') }}" height="50" width="auto" alt="">
+                </a>
+            </div>
+            <div class="icono">
+                <a target="_blank" href="https://www.instagram.com/prevencionlebenco.cl/?hl=es-la" class="activo">
+                    <img src="{{ asset('intranet/img_mail/instagram.png') }}" height="50" width="auto" alt="">
+                </a>
+            </div>
+            <div class="icono">
+                <a target="_blank" href="https://www.linkedin.com/in/prevenci%C3%B3n-lebenco-62b632184/" class="activo">
+                    <img src="{{ asset('intranet/img_mail/linkedin.png') }}" height="50" width="auto" alt="">
+                </a>
+            </div>
+        </div>
 
         <br><br>
 
@@ -76,7 +75,7 @@
 
         <br><br>
 
-        <img src="{{ asset('intranet/img_mail/pie.png') }}" height="150" width="auto" />
+        <img src="{{ asset('intranet/img_mail/pie.png') }}" height="80" width="auto" />
     </center>
 </body>
 </html>

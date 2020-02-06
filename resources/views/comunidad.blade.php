@@ -3,66 +3,48 @@
 @section('content')
     <sliders-ubicacion :ubicacion="5" @auth :usuario="{{ json_encode(Auth::user()) }}" @endauth></sliders-ubicacion>
 
-    <section class="breadcrumb">
-        <div class="breadcrumb-content">
+    @if($cantidad_vip > 0)
+        <titulo-pagina titulo="Nuestra comunidad te recomienda"></titulo-pagina>
+
+        <section class="sec-padding">
             <div class="container">
                 <div class="row">
-                    <div class="col-12">
-                        <h2 class="breadcrumb-title">Top five en nuestra comunidad Pyme</h2>
+                    <div class="col-md-12">
+                        <p>
+                            {{ $pagina->mensaje_uno }}
+                        </p>
+                        @guest
+                            <top-five :tipo="2" :logeado="0"></top-five>
+                        @else
+                            <top-five :tipo="2" :logeado="1"></top-five>
+                        @endguest
+
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <section class="sec-padding">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <p>
-                        {{ $pagina->mensaje_uno }}
-                    </p>
-                    @guest
-                        <top-five :tipo="2" :logeado="0"></top-five>
-                    @else
-                        <top-five :tipo="2" :logeado="1"></top-five>
-                    @endguest
-
-                </div>
-            </div>
-        </div>
-    </section>
-
+        </section>
+    @endif
     <sliders-comunidad-pyme  @auth :tipo_persona="{{ Auth::user()->tipo_persona }}" :tipo_usuario="{{ Auth::user()->tipo_usuario }}" @endauth></sliders-comunidad-pyme>
 
-    <section class="breadcrumb">
-        <div class="breadcrumb-content">
+    @if($cantidad_comunidad > 0)
+        <titulo-pagina titulo="Conoce a nuestra comunidad"></titulo-pagina>
+
+        <section class="sec-padding">
             <div class="container">
                 <div class="row">
-                    <div class="col-12">
-                        <h2 class="breadcrumb-title">Nuestra comunidad Pyme</h2>
+                    <div class="col-md-12">
+                        <p>
+                            {{ $pagina->mensaje_dos }}
+                        </p>
+                        @guest
+                            <comunidad-tabla :tipo="1" :logeado="0"></comunidad-tabla>
+                        @else
+                            <comunidad-tabla :tipo="1" :logeado="1"></comunidad-tabla>
+                        @endguest
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-
-
-    <section class="sec-padding">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <p>
-                        {{ $pagina->mensaje_dos }}
-                    </p>
-                    @guest
-                        <comunidad-tabla :tipo="1" :logeado="0"></comunidad-tabla>
-                    @else
-                        <comunidad-tabla :tipo="1" :logeado="1"></comunidad-tabla>
-                    @endguest
-                </div>
-            </div>
-        </div>
-    </section>
+        </section>
+    @endif
 
 @endsection

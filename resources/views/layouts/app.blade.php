@@ -38,7 +38,7 @@
                                 <ul>
                                     <li class="nav-menu-item">@if(request()->is('/')) <a href="#inicio" class="{{ (request()->is('/')) ? 'sale-color' : '' }}">Bienvenido</a> @else <a href="{{ url('/#inicio') }}">Bienvenido</a> @endif</li>
                                     <li class="nav-menu-item"><a href="{{ url('/comunidad') }}" class="{{ (request()->is('comunidad')) ? 'sale-color' : '' }}">Comunidad LebenCo.</a></li>
-                                    <li class="nav-menu-item"><a href="{{ url('/servicios') }}" class="{{ (request()->is('servicios')) ? 'sale-color' : '' }}">Nuestros Servicios</a></li>
+                                    @if($cantidad_servicios > 0)<li class="nav-menu-item"><a href="{{ url('/servicios') }}" class="{{ (request()->is('servicios')) ? 'sale-color' : '' }}">Nuestros Servicios</a></li>@endif
                                     <li class="nav-menu-item"><a href="{{ url('/contacto') }}" class="{{ (request()->is('contacto')) ? 'sale-color' : '' }}">Contáctanos</a></li>
                                     <li class="nav-menu-item">
                                         <div class="row">

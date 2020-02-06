@@ -10,6 +10,7 @@ use App\Mail\SolicitarAsesoria;
 use App\Notifications\Alerta;
 use App\Notifications\Asesoria as AppAsesoria;
 use App\User;
+use App\Valoracion;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -57,10 +58,12 @@ class UsuarioController extends Controller
         }
     }
 
-    public function usuariosTablaVip(){
-        $usuarios = User::where('top_five', 1)->with('comuna')->orderBy('posicion', 'desc')->orderBy('likes', 'desc')->get();
+    public function valoraciones($id){
+        return ['valoraciones' => Valoracion::where('user_id', $id)->orderBy('created_at')->get()];
+    }
 
-        return ['usuarios' => $usuarios];
+    public function usuariosTablaVip(){
+        return ['usuarios' => User::where('top_five', 1)->with('comuna')->orderBy('posicion', 'desc')->orderBy('likes', 'desc')->get()];
     }
 
     public function usuariosTablaComunidad(){
