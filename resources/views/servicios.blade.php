@@ -1,17 +1,19 @@
 @extends('layouts.app')
 
 @section('content')
-    <section class="breadcrumb">
-        <div class="breadcrumb-content">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12">
-                        <h2 class="breadcrumb-title">Nuestros Servicios</h2>
+    @if($cantidad_servicios > 0)
+        <section class="breadcrumb">
+            <div class="breadcrumb-content">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <h2 class="breadcrumb-title">Nuestros Servicios</h2>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+    @endif
 
     <pagina-servicios></pagina-servicios>
 

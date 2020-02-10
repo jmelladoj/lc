@@ -20,7 +20,7 @@
                                     </ValidationProvider>
                                 </div>
                                 <div class="form-field-wrapper col-md-4">
-                                    <ValidationProvider name="teléfono" rules="required|numeric|digits:9" v-slot="{ errors }">
+                                    <ValidationProvider name="teléfono" rules="required|numeric|digits:8" v-slot="{ errors }">
                                         <div class="input-group">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text col-md-12" id="basic-addon1">+ 56 9</span>

@@ -99,6 +99,10 @@ class CreateUsersTable extends Migration
             $table->integer('pyme_datos')->nullable()->default(0);
             $table->integer('pyme_facturacion')->nullable()->default(0);
             $table->integer('presiona_tabla_vip')->nullable()->default(0);
+            $table->integer('situacion_actual')->nullable()->default(0);
+            $table->text('temporada_alta')->nullable()->default(null);
+            $table->text('descripcion_negocio')->nullable()->default(null);
+            $table->text('descripcion_servicio')->nullable()->default(null);
 
             $table->string('url_perfil')->default('img/perfil.svg');
 
