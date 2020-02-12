@@ -53,7 +53,6 @@ class RegisterController extends Controller
     {
         $messages = [
             'run.unique' => 'Este Run / Rut (según sea Pyme o no) ya está en uso, ¡utiliza otro!.',
-            'run_confirmacion.same' => 'Los run no coinciden.',
             'email.unique' => 'Este correo eléctronico ya está en uso, ¡utiliza otro!.',
             'email.email' => 'El correo electrónico no corresponde con una dirección de email válida.',
             'clave_uno.min' => 'Las claves deben de contener al menos 6 caracteres.',
@@ -64,8 +63,7 @@ class RegisterController extends Controller
 
         return Validator::make($data, [
             'run' => ['required', 'string', 'max:255', 'unique:users'],
-            'run_confirmacion' => ['required', 'same:run'],
-            'nombre' => ['required', 'string', 'max:255', 'min:6'],
+            'nombre' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'clave_uno' => ['required','string','min:6'],
             'clave_dos' => ['required','string','min:6','same:clave_uno'],
@@ -81,14 +79,17 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+
+
         $usuario = User::create([
             'run' => $data['run'],
             'nombre' => $data['nombre'],
             'email' => $data['email'],
             'password' => Hash::make($data['clave_dos']),
-            'tipo_persona' => $data['tipo_persona'],
-            'mailing' => $data['mailing']
+            'tipo_persona' => $data['tipo_persona']
         ]);
+
+
 
         if(!Mail::to($usuario->email)->send(new Bienvenida($usuario))){
             return $usuario;

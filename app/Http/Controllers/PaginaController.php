@@ -220,3 +220,6 @@ class PaginaController extends Controller
         $pagina->save();
     }
 }
+
+
+

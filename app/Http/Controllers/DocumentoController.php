@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Documento;
 use App\Mail\SolicitarDocumento;
-use App\Notifications\Alerta;
 use App\Notifications\SolicitudDocumento as AppSolicitudDocumento;
 use App\SolicitudDocumento;
 use App\User;
@@ -16,13 +15,13 @@ use Illuminate\Support\Facades\Mail;
 class DocumentoController extends Controller
 {
     //
-    public function index($tipo){
+    public function index($tipo){      
         switch ($tipo) {
             case 1:
-                return ['documentos' => Documento::where('estado', 1)->orderBy('created_at', 'desc')->get()];
+                return ['documentos' => Documento::where('estado', 1)->with('categoria')->orderBy('created_at', 'desc')->get()];
                 break;
             case 2:
-                return ['documentos' => Documento::where('estado', 0)->orderBy('created_at', 'desc')->get()];
+                return ['documentos' => Documento::where('estado', 0)->with('categoria')->orderBy('created_at', 'desc')->get()];
                 break;
             case 3:
                 return ['documentos' => Documento::where('user_id', Auth::id())->orderBy('created_at', 'asc')->get()];
@@ -30,11 +29,7 @@ class DocumentoController extends Controller
         }
     }
 
-    public function buscar($busqueda){
-        return ['documentos', Documento::where('titulo', 'like', '%' . $busqueda . '%')->where('estado', 1)->orderBy('titulo')->get()];
-    }
-
-    public function indexHome($tipo){
+    public function indexHome($tipo){  
         switch ($tipo) {
             case 1:
                 $documentos = Documento::where('estado', 1)->with('usuario')->orderBy('cantidad_descargas', 'desc')->get();
@@ -53,7 +48,7 @@ class DocumentoController extends Controller
 
     public function indexBusqueda($categoria){
         $documentos = Documento::where('estado', 1)->where('categorias_documentos_id', $categoria)->with('usuario')->orderBy('updated_at', 'asc')->get();
-
+        
         foreach($documentos AS $d){
             $d->imagen = $d->img;
         }
@@ -64,8 +59,7 @@ class DocumentoController extends Controller
     public function crearOactualizar(Request $request){
         $documento = Documento::updateOrCreate(
             ['id' => $request->documento_id],
-            [
-                'titulo' => $request->titulo,
+            ['titulo' => $request->titulo,
                 'descripcion' => $request->descripcion,
                 'codigo' => $request->codigo,
                 'valor' => $request->valor,
@@ -75,26 +69,21 @@ class DocumentoController extends Controller
                 'user_id' => Auth::user()->id
             ]
         );
-
-        if ($request->hasFile('documento')) {
+        
+        if ($request->hasFile('documento')) { 
             $url = Storage::disk('public')->putFile('documentos', $request->file('documento'));
             Documento::updateOrCreate(['id' => $documento->id], ['documento_url' => $url, 'extension' => $request->file('documento')->getClientOriginalExtension(),'version' => $documento->version += 1]);
-        }
+        }  
 
-        if ($request->hasFile('documento_uno')) {
+        if ($request->hasFile('documento_uno')) { 
             $url = Storage::disk('public')->putFile('vista_documentos', $request->file('documento_uno'));
             Documento::updateOrCreate(['id' => $documento->id], ['url_imagen_vista_uno' => $url]);
-        }
+        } 
 
-        if ($request->hasFile('documento_dos')) {
+        if ($request->hasFile('documento_dos')) { 
             $url = Storage::disk('public')->putFile('vista_documentos', $request->file('documento_dos'));
             Documento::updateOrCreate(['id' => $documento->id], ['url_imagen_vista_dos' => $url]);
-        }
-
-        if($request->estado == 0){
-            $usuario = User::find(1);
-            $usuario->notify(new Alerta('Ha compartido un documento.', Auth::user(), "", 'fa fa-file', 2));
-        }
+        } 
     }
     public function eliminar(Request $request){
         Documento::findOrFail($request->id)->delete();
@@ -112,13 +101,16 @@ class DocumentoController extends Controller
                 'plazo' => $request->plazo
             ]);
 
-            $user = User::find(1);
-            $user->notify(new AppSolicitudDocumento('Ha solicitado un documento.', Auth::user(), 'fa fa-search', 1));
-            $usuario->saldo = $usuario->saldo - $request->pago;
-            $usuario->save();
+            $usuario = User::find(1);
+            $usuario->notify(new AppSolicitudDocumento('Ha solicitado un documento.', Auth::user(), 'fa fa-search', 1));
 
-            return ['mensaje' => '¡Felicitaciones!, pronto serás contactado por Prevención LebenCo.', 'clase' => 'success'];
-
+            if(!Mail::to('contacto@prevencionlebenco.cl')->send(new SolicitarDocumento(Auth::user(), $request->descripcion, $request->plazo, $request->pago))){
+                $usuario->saldo = $usuario->saldo - $request->pago;
+                $usuario->save();
+                return ['mensaje' => '¡Felicitaciones!, pronto serás contactado por Prevención LebenCo.', 'clase' => 'success'];
+            } else {
+                return ['mensaje' => 'Hemos tenido inconvenientes al generar tu invitación. Por favor intenta nuevamente!', 'clase' => 'error'];
+            }
         } else {
             return ['mensaje' => 'No tienes saldo para usar el servicio, por favor recarga e intenta nuevamente', 'clase' => 'error'];
         }
@@ -141,6 +133,6 @@ class DocumentoController extends Controller
             return ['documento' => $documento, 'clase' => 'success'];
         } else {
             return ['mensaje' => 'No tienes saldo para usar el servicio, por favor recarga e intenta nuevamente', 'clase' => 'error'];
-        }
+        }        
     }
 }

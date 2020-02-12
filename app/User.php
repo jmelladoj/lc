@@ -22,6 +22,8 @@ class User extends Authenticatable
         'id'
     ];
 
+    protected $appends = ['region'];
+
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -40,18 +42,18 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    protected $appends = ['nombreComuna', 'nombreRubro', 'cantidad_like', 'cantidad_dislike'];
 
 
     public function getCantidadLikeAttribute(){
-        $valoraciones = $this->valoraciones()->count();
-        $likes = $this->valoraciones()->where('tipo_votacion', 1)->count();
-
-        return $likes > 0 ? ($likes * 100) / $valoraciones : 0;
+        return $this->hasMany(Valoracion::class, 'user_id')->where('tipo_votacion', 1)->count();
     }
 
     public function getCantidadDislikeAttribute(){
         return $this->hasMany(Valoracion::class, 'user_id')->where('tipo_votacion', 2)->count();
+    }
+
+    public function getRegionAttribute(){
+        return isset($this->comuna) ? $this->comuna->provincia->region_id : null;
     }
 
     public function categoria(){
@@ -60,18 +62,6 @@ class User extends Authenticatable
 
     public function comuna(){
         return $this->belongsTo(Comuna::class, 'comuna_id');
-    }
-
-    public function rubro(){
-        return $this->belongsTo(Rubro::class, 'rubro_id');
-    }
-
-    public function getNombreComunaAttribute(){
-        return empty($this->comuna) ? 'Desconocido' : $this->comuna->nombre;
-    }
-
-    public function getNombreRubroAttribute(){
-        return empty($this->rubro) ? 'Desconocido' : $this->rubro->nombre;
     }
 
     public function valoraciones(){

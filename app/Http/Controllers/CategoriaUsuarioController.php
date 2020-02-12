@@ -8,10 +8,10 @@ use Illuminate\Http\Request;
 class CategoriaUsuarioController extends Controller
 {
     //
-    public function index(){
-        return ['categorias' => CategoriaUsuario::get()];
+    public function index(){      
+        return ['categorias' => CategoriaUsuario::orderBy('nombre', 'desc')->get()];
     }
-
+    
     public function crearOactualizar(Request $request){
         CategoriaUsuario::updateOrCreate(
             ['id' => $request->categoria_id],

@@ -24,12 +24,6 @@ class NotificacionController extends Controller
                 break;
             case 2:
                 return ['alertas' => User::find(1)->unreadNotifications];
-                break;
-            case 3: 
-                $alertas = User::find(1)->unreadNotifications;
-
-                return ['alertas' => $alertas];
-                break;
         }
         
     }

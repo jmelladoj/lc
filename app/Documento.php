@@ -15,7 +15,6 @@ class Documento extends Model
     ];
 
     protected $dates = ['deleted_at'];
-    protected $appends = ['nombre_categoria', 'id_categoria', 'extension_documento', 'autor'];
 
     public function getImgAttribute(){
         switch ($this->extension) {
@@ -40,29 +39,6 @@ class Documento extends Model
         }
     }
 
-    public function getExtensionDocumentoAttribute(){
-        switch ($this->extension) {
-            case "pdf":
-                return "PDF";
-                break;
-            case "docx":
-                return "Word";
-                break;
-            case "xlsx":
-                return "Excel";
-                break;
-            case "mp4":
-                return "MP4";
-                break;
-            case "pptx":
-                return "PPT";
-                break;
-            case "mp3":
-                return "Mp3";
-                break;
-        }
-    }
-
     public function usuario(){
         return $this->belongsTo(User::class, 'user_id');
     }
@@ -71,15 +47,4 @@ class Documento extends Model
         return $this->belongsTo(CategoriaDocumento::class, 'categorias_documentos_id');
     }
 
-    public function getNombreCategoriaAttribute(){
-        return $this->categoria != null ? $this->categoria->nombre : 'Sin categoría';
-    }
-
-    public function getIdCategoriaAttribute(){
-        return $this->categoria != null ? $this->categoria->id : 0;
-    }
-
-    public function getAutorAttribute(){
-        return $this->usuario->nombre;
-    }
 }

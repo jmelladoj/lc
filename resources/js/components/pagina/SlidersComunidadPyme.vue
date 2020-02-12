@@ -11,9 +11,9 @@
 
                 <b-carousel v-else-if="tipo_persona == 2 || tipo_usuario < 3"  :interval="4000" controls indicators background="rgba(0,0,0,0.6)" img-width="" img-height="200" style="text-shadow: 1px 1px 2px #333;">
                     <b-carousel-slide v-for="(slider, index) in sliders" :key="index" :img-src="'storage/' + slider.url_imagen">
-                        <h2 class="intro-title"  v-text="slider.texto" style="color: #fff"></h2>
-                        <h4 v-if="slider.subtexto != ''" :style="'color:' + slider.subcolor" v-text="slider.subtexto"></h4>
-                        <a v-show="slider.link != '/intranet/0'" :href="slider.link" class="btn btn--primary space--1 btn-sm" v-text="slider.texto_boton"></a>
+                        <h2 class="intro-title" :class="slider.alineacion_titulo" v-text="slider.texto" :style="'color:' + slider.color + ';' + 'font-size:' + slider.letra_titulo + 'px;'"></h2>
+                        <h4 v-if="slider.subtexto != ''" :class="slider.alineacion_sub_titulo" :style="'color:' + slider.subcolor + ';' + 'font-size:' + slider.letra_sub_titulo + 'px;'" v-text="slider.subtexto"></h4>
+                        <button class="btn btn--primary space--1 btn-sm" @click="redireccion(slider.link)" v-show="slider.link != '/intranet/0'">Ver más</button>
                     </b-carousel-slide>
                 </b-carousel>
             </div>

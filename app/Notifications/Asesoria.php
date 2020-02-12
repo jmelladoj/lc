@@ -9,7 +9,7 @@ use Illuminate\Notifications\Notification;
 
 class Asesoria extends Notification
 {
-    protected $mensaje, $usuario, $clase, $tipo;
+    protected $mensaje, $nombre, $clase, $tipo;
 
     use Queueable;
 
@@ -18,13 +18,13 @@ class Asesoria extends Notification
      *
      * @return void
      */
-    public function __construct($mensaje, $usuario, $clase, $tipo_notificacion)
+    public function __construct($mensaje, $nombre, $clase, $tipo)
     {
         //
         $this->mensaje = $mensaje;
-        $this->usuario = $usuario;
+        $this->nombre = $nombre;
         $this->clase = $clase;
-        $this->tipo_notificacion = $tipo_notificacion;
+        $this->tipo = $tipo;
     }
 
     /**
@@ -62,9 +62,9 @@ class Asesoria extends Notification
     {
         return [
             'mensaje' => $this->mensaje,
-            'usuario' => $this->usuario,
+            'nombre' => $this->nombre,
             'clase' => $this->clase,
-            'tipo_notificacion' => $this->tipo_notificacion
+            'tipo' => $this->tipo
         ];
     }
 }

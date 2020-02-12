@@ -24,6 +24,10 @@ class CreateSliderComunidadsTable extends Migration
             $table->string('texto_alerta');
             $table->string('url_imagen')->nullable()->default(null);
             $table->text('link')->nullable()->default(null);
+            $table->string('letra_titulo')->nullable()->default('46');
+            $table->string('alineacion_titulo')->nullable()->default('text-center');
+            $table->string('letra_sub_titulo')->nullable()->default('36');
+            $table->string('alineacion_sub_titulo')->nullable()->default('text-center');
             $table->timestamps();
         });
     }

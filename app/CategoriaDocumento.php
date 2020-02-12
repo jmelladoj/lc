@@ -10,12 +10,9 @@ class CategoriaDocumento extends Model
     //
     use SoftDeletes;
 
-    protected $guarded = ['id'];
-    protected $appends = ['cantidad_documentos'];
+    protected $fillable = [
+        'id','nombre'
+    ];
 
     protected $dates = ['deleted_at'];
-
-    public function getCantidadDocumentosAttribute(){
-        return $this->hasMany(Documento::class, 'categorias_documentos_id')->count();
-    }
 }

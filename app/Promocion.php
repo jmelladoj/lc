@@ -9,7 +9,7 @@ class Promocion extends Model
     //
     protected $table = 'promociones';
 
-    protected $guarded = [
-        'id'
+    protected $fillable = [
+        'id','titulo', 'fecha', 'categoria_usuario', 'url_imagen'
     ];
 }

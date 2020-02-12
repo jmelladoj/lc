@@ -130,11 +130,16 @@ class UsuarioController extends Controller
                 'cantidad_trabajadores' => $request->cantidad_trabajadores,
                 'tiene_sitio' => $request->tiene_sitio,
                 'sitio_web' => $request->tiene_sitio == 1 ? $request->sitio_web : null,
-                'nombre_contratistas' => $request->nombre_contratistas
+                'nombre_contratistas' => $request->nombre_contratistas,
+                'temporada_alta' => $request->temporada_alta,
+                'descripcion_negocio' => $request->descripcion_negocio,
+                'descripcion_servicio' => $request->descripcion_servicio,
+                'otra_forma' => $request->otra_forma
             ]
         );
 
         $usuario = User::find($usuario->id);
+
         if($request->usuario_perfil != 0){
             $usuario->usuario_perfil = 1;
         }
@@ -167,7 +172,7 @@ class UsuarioController extends Controller
             $user->notify(new Alerta('Ha completado su perfil', $user, "", 'fa fa-star', 11));
         }
 
-        if($usuario->pyme_comercial == 1 && $usuario->pyme_datos == 1 && $usuario->pyme_facturacion == 1){
+        if($usuario->pyme_comercial == 1 && $usuario->pyme_datos == 1){
             $user = User::find(1);
             $user->notify(new Alerta('Ha completado su perfil', $user, "", 'fa fa-star', 11));
         }
@@ -176,7 +181,10 @@ class UsuarioController extends Controller
             User::updateOrCreate(['id' => $usuario->id], ['password' => bcrypt($request->password)]);
         }
 
-
+        if($request->coaching == 1 && $usuario->coaching == 0){
+            $user = User::find(1);
+            $user->notify(new Alerta($usuario->tipo_persona != 2 ? 'Coaching' : 'Puntos de vista', $usuario, '', 'fa fa-graduation-cap', 15));
+        }
 
     }
 

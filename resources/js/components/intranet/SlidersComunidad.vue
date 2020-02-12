@@ -1,3 +1,6 @@
+
+text/x-generic SlidersComunidad.vue ( exported SGML document, UTF-8 Unicode text )
+
 <template>
     <div class="page-wrapper">
         <b-container fluid class="mb-5">
@@ -130,12 +133,59 @@
                             </ValidationProvider>
                         </b-form-group>
 
+                        <b-row>
+                            <b-col>
+                                <b-form-group label="Tamaño de letra">
+                                    <ValidationProvider name="Tamaño de letra" rules="required" v-slot="{ errors }">
+                                        <b-form-radio v-model="slider.letra_titulo" name="letra_titulo" value="46">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Tamaño título</b-form-radio>
+                                        <b-form-radio v-model="slider.letra_titulo" name="letra_titulo" value="36">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Tamaño sub título</b-form-radio>
+                                        <b-form-radio v-model="slider.letra_titulo" name="letra_titulo" value="20">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Tamaño parrafo</b-form-radio>
+                                        <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
+                                    </ValidationProvider>
+                                </b-form-group>
+                            </b-col>
+                            <b-col>
+                                <b-form-group label="Alineación de texto">
+                                    <ValidationProvider name="Alineación de texto" rules="required" v-slot="{ errors }">
+                                        <b-form-radio v-model="slider.alineacion_titulo" name="alineacion_titulo" value="text-right">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Derecha</b-form-radio>
+                                        <b-form-radio v-model="slider.alineacion_titulo" name="alineacion_titulo" value="text-left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Izquierda</b-form-radio>
+                                        <b-form-radio v-model="slider.alineacion_titulo" name="alineacion_titulo" value="text-center">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Centrado</b-form-radio>
+                                        <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
+                                    </ValidationProvider>
+                                </b-form-group>
+                            </b-col>
+                        </b-row>
+
                         <b-form-group>
                             <ValidationProvider name="subtítulo" rules="min:3" v-slot="{ errors }">
                                 <b-form-input type="text" v-model="slider.subtexto" placeholder="Subtítulo"></b-form-input>
                                 <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
                             </ValidationProvider>
                         </b-form-group>
+
+                        <b-row>
+                            <b-col>
+                                <b-form-group label="Tamaño de letra">
+                                    <ValidationProvider name="Tamaño de letra" rules="required" v-slot="{ errors }">
+                                        <b-form-radio v-model="slider.letra_sub_titulo" name="letra_sub_titulo" value="46">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Tamaño título</b-form-radio>
+                                        <b-form-radio v-model="slider.letra_sub_titulo" name="letra_sub_titulo" value="36">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Tamaño sub título</b-form-radio>
+                                        <b-form-radio v-model="slider.letra_sub_titulo" name="letra_sub_titulo" value="20">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Tamaño parrafo</b-form-radio>
+                                        <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
+                                    </ValidationProvider>
+                                </b-form-group>
+                            </b-col>
+                            <b-col>
+                                <b-form-group label="Alineación de texto">
+                                    <ValidationProvider name="Alineación de texto" rules="required" v-slot="{ errors }">
+                                        <b-form-radio v-model="slider.alineacion_sub_titulo" name="alineacion_sub_titulo" value="text-right">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Derecha</b-form-radio>
+                                        <b-form-radio v-model="slider.alineacion_sub_titulo" name="alineacion_sub_titulo" value="text-left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Izquierda</b-form-radio>
+                                        <b-form-radio v-model="slider.alineacion_sub_titulo" name="alineacion_sub_titulo" value="text-center">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Centrado</b-form-radio>
+                                        <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
+                                    </ValidationProvider>
+                                </b-form-group>
+                            </b-col>
+                        </b-row>
+
 
                         <b-row>
                             <b-col class="text-center">
@@ -240,7 +290,11 @@
                     color: '#E8ECD1',
                     subcolor: '#E8ECD1',
                     url_imagen: null,
-                    link: 0
+                    link: 0,
+                    letra_titulo: '46',
+                    alineacion_titulo: 'text-center',
+                    letra_sub_titulo: '36',
+                    alineacion_sub_titulo: 'text-center'
                 },
                 colors: ['#E8ECD1', '#8AB733', '#3F8A24', '#1E2F13', '#D4AF37', '#D7552A', '#0070C0', '#FFFF99' ,''],
                 modal_slider: {
@@ -319,6 +373,11 @@
                 formData.append('subcolor', this.slider.subcolor);
                 formData.append('link', this.slider.link);
 
+                formData.append('letra_titulo', this.slider.letra_titulo);
+                formData.append('alineacion_titulo', this.slider.alineacion_titulo);
+                formData.append('letra_sub_titulo', this.slider.letra_sub_titulo);
+                formData.append('alineacion_sub_titulo', this.slider.alineacion_sub_titulo);
+
                 axios.post('/slider/comunidad/crear/actualizar',formData).then(function (response) {
                     me.listarSliders();
                     me.cerrarModal();
@@ -392,6 +451,10 @@
                     me.slider.subcolor = data['subcolor'];
                     me.slider.link = data['link'].replace('/intranet/', '');
                     me.slider.url_imagen = 'storage/' + data['url_imagen'];
+                    me.slider.letra_titulo = data.letra_titulo
+                    me.slider.alineacion_titulo = data.alineacion_titulo
+                    me.slider.letra_sub_titulo = data.letra_sub_titulo
+                    me.slider.alineacion_sub_titulo = data.alineacion_sub_titulo
                 }
 
                 this.$refs['modal_slider'].show();
@@ -407,6 +470,11 @@
                 this.slider.subcolor = '#E8ECD1';
                 this.slider.url_imagen = null;
                 this.slider.link = 0;
+
+                this.slider.letra_titulo = '46',
+                this.slider.alineacion_titulo = 'text-center'
+                this.slider.letra_sub_titulo = '36',
+                this.slider.alineacion_sub_titulo = 'text-center'
             }
         },
         mounted() {
@@ -429,3 +497,4 @@
         width: 30px !important;
     }
 </style>
+

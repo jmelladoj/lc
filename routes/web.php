@@ -171,6 +171,7 @@ Route::post('/rubro/eliminar', 'ProfesionController@eliminar')->name('Borrar Pro
 
 //Rutas de comunas
 Route::get('/comunas', 'ComunaController@index')->name('Listar Comunas');
+Route::get('/regiones', 'ComunaController@index_regiones')->name('Listar regiones');
 
 //Rutas de notificaciones
 Route::get('/notificaciones/{tipo}', 'NotificacionController@index')->name('Listar notificaciones');
