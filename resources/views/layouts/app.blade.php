@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head><meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    
+
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- CSRF Token -->
@@ -105,7 +105,7 @@
                                 </div>
                                 <div class="col-md-4 my-auto">
                                     <div class="footer-widget col-sm-12 col-md-12 col-lg-12 text-center">
-                                        <h6 class="footer-widget-title"><a href="{{ url('/nosotros') }}" class="{{ (request()->is('nosotros')) ? 'sale-color' : 'text-dark' }}" style="opacity: 1;">Comunidad LebenCo.</a></h6>
+                                        <h6 class="footer-widget-title"><a href="{{ url('/comunidad') }}" class="{{ (request()->is('nosotros')) ? 'sale-color' : 'text-dark' }}" style="opacity: 1;">Comunidad LebenCo.</a></h6>
                                     </div>
                                     <div class="footer-widget col-sm-12 col-md-12 col-lg-12 text-center">
                                         <h6 class="footer-widget-title"><a href="{{ url('/servicios') }}" class="{{ (request()->is('servicios')) ? 'sale-color' : 'text-dark' }}" style="opacity: 1;">Nuestros Servicios</a></h6>
@@ -115,9 +115,6 @@
                                     </div>
                                 </div>
                                 <div class="col-md-4 my-auto">
-                                    <div class="footer-widget col-sm-12 col-md-12 col-lg-12 text-center">
-                                        <h6 class="footer-widget-title"><a href="{{ url('/comunidad') }}" class="{{ (request()->is('comunidad')) ? 'sale-color' : 'text-dark' }}" style="opacity: 1;">Comunidad Pyme</a></h6>
-                                    </div>
                                     <div class="footer-widget col-sm-12 col-md-12 col-lg-12 text-center">
                                         <h6 class="footer-widget-title"><a href="{{ url('/contacto') }}" class="text-dark" style="opacity: 1;">Contáctanos</a></h6>
                                     </div>
@@ -133,7 +130,7 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-md-12 text-center text-md-center">
-                                <p class="footer-copyright text-dark">La comunidad LebenCo. agradece tu confianza. ¡Súmate! <br> <a href="https://www.youtube.com/channel/UC78DsrgVX7KslItHoTuw8uQ?view_as=subscriber" target="_blank">© 2019 Prevención LebenCo.</a>, Desarrollado por <a href="https://atupy.cl/sitio/" target="_blank">Atupy</a></p>
+                                <p class="footer-copyright text-dark">El tamaño de tu voluntad, te llevará a la siguiente meta, ¡éxito! <br> <a href="https://www.youtube.com/channel/UC78DsrgVX7KslItHoTuw8uQ?view_as=subscriber" target="_blank">© 2019 Prevención LebenCo.</a>, Desarrollado por <a href="https://atupy.cl/sitio/" target="_blank">Atupy</a></p>
                             </div>
                         </div>
                     </div>

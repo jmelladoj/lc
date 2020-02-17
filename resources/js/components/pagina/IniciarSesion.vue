@@ -15,9 +15,9 @@
                                 </div>
                             </div>
 
-                            <p class="large text-justify">Bienvenido a tu comunidad LebenCo.</p>
+                            <p class="large text-justify">Bienvenido a Comunidad LebenCo.</p>
                             <p class="form-field-wrapper">
-                                <input class="input--lg form-full" v-rut:live v-model="usuario_login.run" @blur="mostrar_botones_login" @keyup="mostrar_botones_login" autocomplete="run" type="text" @keyup.enter="ingresar" placeholder="RUN personal o RUT si eres una Pyme" required>
+                                <input class="input--lg form-full" v-rut:live v-model="usuario_login.run" @blur="mostrar_botones_login" @keyup="mostrar_botones_login" autocomplete="run" type="text" @keyup.enter="ingresar" placeholder="RUN o RUT" required>
                                 <errores :errors="validationErrors" :campo="'run'" v-if="validationErrors"> </errores>
                             </p>
                             <p class="form-field-wrapper">
@@ -52,7 +52,7 @@
                                 </div>
                             </div>
 
-                            <p class="large text-justify">Disponemos de herramientas para Pymes, Estudiantes del área, Personas y Personas encargadas de la prevención.</p>
+                            <p class="large text-justify">Todo comienza con el primer paso de un Estudiante, Trabajador, Emprendedor, Pymes o Empresas.</p>
 
                             <p class="form-field-wrapper">
                                 <div class="row">
@@ -65,13 +65,13 @@
                                     <div class="col-lg-4 col-md-4 d-flex align-items-center justify-content-center">
                                         <div class="custom-control custom-radio">
                                             <input type="radio" id="persona" @change="mostrar_botones_registrate" name="tipo_persona" v-model="usuario_nuevo.tipo_persona" class="custom-control-input" value="1" />
-                                            <label class="custom-control-label" for="persona"> Persona</label>
+                                            <label class="custom-control-label" for="persona"> Persona / Emprendedor</label>
                                         </div>
                                     </div>
                                     <div class="col-lg-4 col-md-4 d-flex align-items-center justify-content-center">
                                         <div class="custom-control custom-radio">
                                             <input type="radio" id="empresa" @change="mostrar_botones_registrate" name="tipo_persona" v-model="usuario_nuevo.tipo_persona" class="custom-control-input" value="2" />
-                                            <label class="custom-control-label" for="empresa"> Pyme</label>
+                                            <label class="custom-control-label" for="empresa"> Pyme / Empresa</label>
                                         </div>
                                     </div>
                                 </div>
@@ -85,12 +85,12 @@
                                         <errores :errors="validationErrors" :campo="'nombre'" v-if="validationErrors"> </errores>
                                     </div>
                                     <div class="col-lg-4 col-md-4">
-                                        <input id="run" class="input--lg form-full run_nuevo" @keyup="mostrar_botones_registrate" v-rut:live v-model="usuario_nuevo.run" type="text" placeholder="RUN personal o RUT si eres una Pyme" required>
+                                        <input id="run" class="input--lg form-full run_nuevo" @keyup="mostrar_botones_registrate" v-rut:live v-model="usuario_nuevo.run" type="text" placeholder="RUN o RUT" required>
                                         <span id="alerta_rut" class="d-none"><span class="d-block alert alert-danger m-t-5">Rut o run invalido</span></span>
                                         <errores :errors="validationErrors" :campo="'run'" v-if="validationErrors"> </errores>
                                     </div>
                                     <div class="col-lg-4 col-md-4">
-                                        <input id="run_confirmacion" class="input--lg form-full run_nuevo_confirmacion" @keyup="mostrar_botones_registrate" v-rut:live v-model="usuario_nuevo.run_confirmacion" type="text" placeholder="Repite RUN personal o RUT si eres una Pyme" required>
+                                        <input id="run_confirmacion" class="input--lg form-full run_nuevo_confirmacion" @keyup="mostrar_botones_registrate" v-rut:live v-model="usuario_nuevo.run_confirmacion" type="text" placeholder="Repite RUN o RUT" required>
                                         <span id="alerta_rut_confirmacion" class="d-none"><span class="d-block alert alert-danger m-t-5">Rut o run invalido</span></span>
                                         <span id="alerta_rut_igual" class="d-none"><span class="d-block alert alert-danger m-t-5">Ambos RUN / RUT deben coincidir.</span></span>
                                         <errores :errors="validationErrors" :campo="'run_confirmacion'" v-if="validationErrors"> </errores>
@@ -116,14 +116,14 @@
                                 </div>
                             </p>
                             <p class="form-field-wrapper text-justify">
-                                Sus datos personales se utilizarán con el fin de respaldar su experiencia en nuestro sitio web, administrar el acceso a su cuenta y para otros fines descritos en <a class="sale-color" href="/politicas" target="_blank">nuestras Políticas </a>, al registrarse usted acepta nuestros términos de uso y condiciones de privacidad, que han sido establecidas por Prevención LebenCo. SpA.
+                                Sus datos personales se utilizarán con el fin de respaldar su experiencia en nuestro sitio web, administrar el acceso a su cuenta y para otros fines descritos en nuestra <a class="sale-color" href="/politicas" target="_blank">Política</a>, al registrarse usted acepta nuestros Términos y condiciones en el uso de nuestros servicios, que han sido establecidos por Prevención LebenCo. SpA
                             </p>
                             <p class="form-field-wrapper">
                                 <div class="row">
                                     <div class="col-md-6">
                                         <label class="sale-color">
                                             <input class="" v-model="usuario_nuevo.mailing" type="checkbox">
-                                            <span>Quiero recibir notificaciones importantes de la comunidad LebenCo.</span>
+                                            <span>Quiero recibir notificaciones importantes de la Comunidad LebenCo.</span>
                                         </label>
                                     </div>
                                     <div class="col-md-6 text-right" v-if="estados.boton_registro_registrarse == 1">

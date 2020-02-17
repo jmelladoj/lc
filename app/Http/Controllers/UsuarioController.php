@@ -134,7 +134,8 @@ class UsuarioController extends Controller
                 'temporada_alta' => $request->temporada_alta,
                 'descripcion_negocio' => $request->descripcion_negocio,
                 'descripcion_servicio' => $request->descripcion_servicio,
-                'otra_forma' => $request->otra_forma
+                'otra_forma' => $request->otra_forma,
+                'situacion_actual' => $request->situacion_actual
             ]
         );
 
@@ -181,10 +182,17 @@ class UsuarioController extends Controller
             User::updateOrCreate(['id' => $usuario->id], ['password' => bcrypt($request->password)]);
         }
 
-        if($request->coaching == 1 && $usuario->coaching == 0){
+        if($request->coaching == 1){
             $user = User::find(1);
-            $user->notify(new Alerta($usuario->tipo_persona != 2 ? 'Coaching' : 'Puntos de vista', $usuario, '', 'fa fa-graduation-cap', 15));
+            $user->notify(new Alerta('Coaching', $usuario, '', 'fa fa-graduation-cap', 15));
         }
+
+        if($request->seremi_o_practica == 1 && $usuario->tipo_persona == 3){
+            $user = User::find(1);
+            $user->notify(new Alerta('Búsqueda práctica', $usuario, '', 'fa fa-graduation-cap', 15));
+        }
+
+
 
     }
 

@@ -61,7 +61,7 @@ class CreateUsersTable extends Migration
             $table->text('especializacion')->nullable()->default(NULL);
             $table->string('habilidad_sobresaliente')->nullable()->default(NULL);
             $table->string('habilidad_mejora')->nullable()->default(NULL);
-            $table->integer('preferencia_laboral')->nullable()->default(0);
+            $table->integer('preferencia_laboral')->nullable()->default(null);
             $table->text('emprendimiento')->nullable()->default(NULL);
             $table->text('enterarse')->nullable()->default(NULL);
             $table->text('coaching')->nullable()->default(NULL);
@@ -99,10 +99,11 @@ class CreateUsersTable extends Migration
             $table->integer('pyme_datos')->nullable()->default(0);
             $table->integer('pyme_facturacion')->nullable()->default(0);
             $table->integer('presiona_tabla_vip')->nullable()->default(0);
-            $table->integer('situacion_actual')->nullable()->default(0);
+            $table->integer('situacion_actual')->nullable()->default(null);
             $table->text('temporada_alta')->nullable()->default(null);
             $table->text('descripcion_negocio')->nullable()->default(null);
             $table->text('descripcion_servicio')->nullable()->default(null);
+            $table->text('otra_forma')->nullable()->default(null);
 
             $table->string('url_perfil')->default('img/perfil.svg');
 

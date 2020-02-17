@@ -9,7 +9,7 @@
                             <div class="row">
                                 <div class="form-field-wrapper col-md-4">
                                     <ValidationProvider name="nombre" rules="required|min:6|alpha_spaces" v-slot="{ errors }">
-                                        <input @keyup="cambiar_estado" v-model="usuario.nombre" class="input--lg form-full" placeholder="Nombre completo o Razón social si eres una Pyme" size="30" aria-required="true" type="text">
+                                        <input @keyup="cambiar_estado" v-model="usuario.nombre" class="input--lg form-full" placeholder="Nombre completo o Razón social" size="30" aria-required="true" type="text">
                                         <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
                                     </ValidationProvider>
                                 </div>
@@ -50,13 +50,13 @@
                                             <div class="col-lg-4 col-md-4 d-flex align-items-center justify-content-center">
                                                 <div class="custom-control custom-radio">
                                                     <input type="radio" id="persona" @change="cambiar_estado" name="tipo_persona" v-model="usuario.tipo_persona" class="custom-control-input" value="1" />
-                                                    <label class="custom-control-label" for="persona"> Persona</label>
+                                                    <label class="custom-control-label" for="persona"> Persona / Emprendedor</label>
                                                 </div>
                                             </div>
                                             <div class="col-lg-4 col-md-4 d-flex align-items-center justify-content-center">
                                                 <div class="custom-control custom-radio">
                                                     <input type="radio" id="empresa" @change="cambiar_estado" name="tipo_persona" v-model="usuario.tipo_persona" class="custom-control-input" value="2" />
-                                                    <label class="custom-control-label" for="empresa"> Pyme</label>
+                                                    <label class="custom-control-label" for="empresa"> Pyme / Empresa</label>
                                                 </div>
                                             </div>
                                         </div>
@@ -76,7 +76,7 @@
                                         <div class="col-md-12">
                                             <div class="contact-information">
                                                 <div class="form-field-wrapper">
-                                                    <label style="font-size: 13px;">Si necesitas asistencia técnica sobre la plataforma, puedes encontrarnos en</label>
+                                                    <label style="font-size: 14px;">Si necesitas asistencia técnica sobre la plataforma, puedes encontrarnos en</label>
                                                     <p>
                                                         <i class="ti-email left"></i>soporte@prevencionlebenco.cl
                                                     </p>
@@ -84,7 +84,7 @@
                                             </div>
                                             <div class="contact-information">
                                                 <div class="form-field-wrapper">
-                                                    <label style="font-size: 13px;">Para todo lo demás, puedes encontrarnos en</label>
+                                                    <label style="font-size: 14px;">Para todo lo demás, puedes encontrarnos en</label>
                                                     <p>
                                                         <i class="ti-email left"></i>contacto@prevencionlebenco.cl
                                                     </p>
@@ -216,5 +216,9 @@
     .form-control::placeholder {
         color: #333 !important;
         opacity: 0.5;
+    }
+
+    .input-group-text {
+        font-size: 14px !important;
     }
 </style>

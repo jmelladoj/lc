@@ -8,13 +8,13 @@ use Illuminate\Http\Request;
 class RubroController extends Controller
 {
     //
-    public function index($tipo){      
+    public function index($tipo){
         switch ($tipo) {
             case 1:
-                return ['rubros' => Rubro::orderBy('nombre', 'desc')->withTrashed()->orderBy('nombre', 'desc')->get()];
+                return ['rubros' => Rubro::orderBy('nombre', 'asc')->withTrashed()->orderBy('nombre', 'desc')->get()];
                 break;
             case 2:
-                return ['rubros' => Rubro::orderBy('nombre', 'desc')->orderBy('nombre', 'desc')->get()];
+                return ['rubros' => Rubro::orderBy('nombre', 'asc')->get()];
                 break;
         }
     }
