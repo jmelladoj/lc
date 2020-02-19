@@ -141,6 +141,11 @@ class UsuarioController extends Controller
 
         $usuario = User::find($usuario->id);
 
+        if($request->descripcion_administrador != null){
+            $usuario->descripcion_administrador = $request->descripcion_administrador;
+        }
+
+
         if($request->usuario_perfil != 0){
             $usuario->usuario_perfil = 1;
         }
@@ -207,12 +212,12 @@ class UsuarioController extends Controller
 
     public function imagen(Request $request){
         $usuario = User::find($request->usuario_id);
-        if($usuario->url_perfil != 'img/perfil.svg') { Storage::disk('public')->delete($usuario->url_perfil); }
+        if($usuario->url_perfil != 'img/perfil.png') { Storage::disk('public')->delete($usuario->url_perfil); }
 
         if ($request->hasFile('img_perfil')) {
             User::updateOrCreate(['id' => $usuario->id], ['url_perfil' => Storage::disk('public')->putFile('perfiles', $request->file('img_perfil'))]);
         } else {
-            User::updateOrCreate(['id' => $usuario->id], ['url_perfil' => 'img/perfil.svg']);
+            User::updateOrCreate(['id' => $usuario->id], ['url_perfil' => 'img/perfil.png']);
         }
     }
 
@@ -339,5 +344,11 @@ class UsuarioController extends Controller
             $usuario->top_five = 0;
             $usuario->save();
         }
+    }
+
+    public function actualizar_Avatar(Request $request){
+        $usuario = User::find(1);
+        $usuario->url_perfil = $request->url_imagen;
+        $usuario->save();
     }
 }

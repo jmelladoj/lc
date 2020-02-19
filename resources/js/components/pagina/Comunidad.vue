@@ -85,7 +85,7 @@
             <b-modal ref="modal_votacion" :title="modal_votacion.titulo" size="md" no-close-on-backdrop>
                 <b-form>
                     <b-form-group v-show="logeado == 1" :label="modal_votacion.accion == 1 ? '¿Qué te ha gustado de la pyme?' : '¿Qué no te ha gustado de la Pyme?'">
-                        <ValidationProvider name="valoración" rules="required|min:20|max:200" v-slot="{ errors }">
+                        <ValidationProvider name="Calificación" rules="required|min:20|max:200" v-slot="{ errors }">
                             <b-form-textarea v-model="valoracion.descripcion" placeholder="Escribe aquí ..." rows="3" max-rows="6"></b-form-textarea>
                             <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
                         </ValidationProvider>
@@ -183,14 +183,14 @@
                 let me = this;
 
                 axios.post('/valorar/pyme',{
-                    'descripcion': me.valoracion.descripcion,
-                    'accion': me.modal_votacion.accion
+                    'detalle': me.valoracion.descripcion,
+                    'tipo_votacion': me.modal_votacion.accion
                 }).then(function (response) {
                     me.listarPymes();
                     me.cerrarModalValoracion();
 
                     Vue.$toast.open({
-                        message: 'Muchas gracias por tu valoración',
+                        message: 'Muchas gracias por tu Calificación',
                         type: 'success',
                         duration: 5000
                     });
@@ -222,19 +222,19 @@
             if(this.logeado == 0){
                 if(this.tipo == 1){
                     this.fields = [
-                        { key: 'nombre', label: 'Nombre de la Pyme', sortable: true, class: 'text-left' },
+                        { key: 'nombre', label: 'Te presentamos a:', sortable: true, class: 'text-left font-weight-bold' },
                         { key: 'nombreComuna', label: 'Comuna', sortable: true, class: 'text-left' },
                         { key: 'nombreRubro', label: 'Rubro', sortable: true, class: 'text-left' },
                         { key: 'perfil', label: 'Perfil', sortable: true, class: 'text-center' },
-                        { key: 'valoracion', label: 'Valoración', sortable: true, class: 'text-center' },
+                        { key: 'valoracion', label: 'Calificación', sortable: true, class: 'text-center' },
                     ]
                 } else {
                     this.fields = [
-                        { key: 'nombre', label: 'Nombre de la Pyme', sortable: true, class: 'text-left' },
+                        { key: 'nombre', label: 'Te presentamos a:', sortable: true, class: 'text-left font-weight-bold' },
                         { key: 'nombreComuna', label: 'Comuna', sortable: true, class: 'text-left' },
                         { key: 'nombreRubro', label: 'Rubro', sortable: true, class: 'text-left' },
                         { key: 'perfil', label: 'Perfil', sortable: true, class: 'text-center' },
-                        { key: 'valoracion', label: 'Valoración', sortable: true, class: 'text-center' },
+                        { key: 'valoracion', label: 'Calificación', sortable: true, class: 'text-center' },
                     ]
                 }
 
@@ -242,21 +242,21 @@
 
                 if(this.tipo == 1){
                     this.fields = [
-                        { key: 'nombre', label: 'Nombre de la Pyme', sortable: true, class: 'text-left' },
+                        { key: 'nombre', label: 'Te presentamos a:', sortable: true, class: 'text-left font-weight-bold' },
                         { key: 'nombreComuna', label: 'Comuna', sortable: true, class: 'text-left' },
                         { key: 'nombreRubro', label: 'Rubro', sortable: true, class: 'text-left' },
                         { key: 'perfil', label: 'Perfil', sortable: true, class: 'text-center' },
-                        { key: 'valoracion', label: 'Valoración', sortable: true, class: 'text-center' },
+                        { key: 'valoracion', label: 'Calificación', sortable: true, class: 'text-center' },
                         { key: 'cantidad_like', label: 'Me gusta', sortable: true, class: 'text-center like' },
                         { key: 'cantidad_dislike', label: 'No me gusta', sortable: true, class: 'text-center dislike' }
                     ]
                 } else {
                     this.fields = [
-                        { key: 'nombre', label: 'Nombre de la Pyme', sortable: true, class: 'text-left' },
+                        { key: 'nombre', label: 'Te presentamos a:', sortable: true, class: 'text-left font-weight-bold' },
                         { key: 'nombreComuna', label: 'Comuna', sortable: true, class: 'text-left' },
                         { key: 'nombreRubro', label: 'Rubro', sortable: true, class: 'text-left' },
                         { key: 'perfil', label: 'Perfil', sortable: true, class: 'text-center' },
-                        { key: 'valoracion', label: 'Valoración', sortable: true, class: 'text-center' },
+                        { key: 'valoracion', label: 'Calificación', sortable: true, class: 'text-center' },
                         { key: 'cantidad_like', label: 'Me gusta', sortable: true, class: 'text-center like' },
                         { key: 'cantidad_dislike', label: 'No me gusta', sortable: true, class: 'text-center dislike' }
                     ]

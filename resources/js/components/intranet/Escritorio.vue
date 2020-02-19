@@ -170,11 +170,15 @@
                 </template>
             </b-modal>
 
-            <b-modal v-if="mensaje != undefined" title="¡Bienvenido!" :visible="true" >
+            <b-modal ref="modal_bienvenida" v-if="mensaje != undefined" title="¡Bienvenido!" :visible="true" >
                 <h2 class="text-center">¡Felicidades!</h2>
                 <p class="my-4 text-justify">
-                    Ya eres parte de nuestra Comunidad Prevención LebenCo. y para celebrar, te damos una recarga inicial para que puedas descargar tu primer documento.
+                    Ya eres parte de nuestra Comunidad Prevención LebenCo. y para celebrar. Tienes una recarga disponible en tu saldo inicial.¡Disfruta!.
                 </p>
+
+                <template slot="modal-footer">
+                    <b-button size="md" variant="success" @click="cerrar_modal_bienvenida()"> ¡Vámos! </b-button>
+                </template>
             </b-modal>
 
         </b-container>
@@ -273,6 +277,9 @@
                 this.modal_tip.descripcion = ''
 
                 this.$refs['modal_tip'].hide();
+            },
+            cerrar_modal_bienvenida(){
+                this.$refs['modal_bienvenida'].hide();
             }
         },
         beforeMount() {

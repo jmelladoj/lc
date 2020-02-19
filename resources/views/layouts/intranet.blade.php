@@ -25,7 +25,7 @@
                     <div class="navbar-header">
                         <a class="navbar-brand" href="{{ url('/') }}">
                             <b>
-                                <img src={{ asset('storage/general/favicon.png') }} alt="homepage" class="dark-logo" height="50">
+                                <img src={{ asset('storage/general/logo_escritorio.png') }} alt="homepage" class="dark-logo" height="50">
                             </b>
                         </a>
                     </div>

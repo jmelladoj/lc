@@ -49,6 +49,11 @@ Route::post('/slider/crear/actualizar', 'SliderController@crearOactualizar')->na
 Route::post('/slider/eliminar', 'SliderController@eliminar')->name('Borrar Slider');
 Route::post('slider/ubicaciones/actualizar', 'SliderController@ubicaciones')->name('Actualizar Ubicaciones');
 
+//Rutas de avatares
+Route::get('/avatares', 'AvatarController@index')->name('Listar avatares');
+Route::post('/avatar/crear/actualizar', 'AvatarController@crearOactualizar')->name('Crear o Actualizar avatares');
+Route::post('/avatar/eliminar', 'AvatarController@eliminar')->name('Borrar avatar');
+
 //Rutas de páginas
 Route::get('/pagina/nosotros', 'PaginaController@indexNosotros')->name('Listar Nosotros');
 Route::get('/pagina/comunidad', 'PaginaController@indexComunidad')->name('Listar Comunidad');
@@ -129,6 +134,8 @@ Route::get('/usuarios/tabla/vip', 'UsuarioController@usuariosTablaVip')->name('U
 Route::get('/usuarios/tabla/comunidad', 'UsuarioController@usuariosTablaComunidad')->name('Usuario Tabla comunidad');
 Route::post('/usuario/tabla/comunidad', 'UsuarioController@usuario_tabla_comunidad')->name('Usuario Tabla comunidad');
 Route::post('/usuario/tabla/vip', 'UsuarioController@usuario_tabla_vip')->name('Usuario Tabla vip');
+Route::post('/usuario/actualizar/avatar', 'UsuarioController@actualizar_Avatar')->name('Usuario avatar');
+
 
 Route::post('/usuario/recuperar/password', 'UsuarioController@recuperar')->name('Recuperar contraseña');
 

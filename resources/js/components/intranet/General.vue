@@ -8,7 +8,7 @@
                         <sociales></sociales>
                         <b-button @click="actualizarPagina()" class="btn btn-success d-lg-block m-l-15" v-b-tooltip.hover title="Actualiza información general de la página"><i class="fa fa-plus-circle"></i> Actualizar página</b-button>
                         <b-spinner class="ml-2" variant="success" label="Spinning" v-show="spinner.estado == 1"></b-spinner>
-                    </div>                    
+                    </div>
                 </b-col>
             </b-row>
 
@@ -34,7 +34,13 @@
                                 </b-form-group>
                                 <b-img v-show="footer != ''" :src="footer" height="150"></b-img>
                             </b-col>
-                        </b-row>                    
+                            <b-col class="text-center">
+                                <b-form-group label="Home (150px alto X 34px ancho | PNG)" label-for="logo_escritorio">
+                                    <b-form-file id="logo_escritorio" name="logo_escritorio" @input="ver_imagen_logo_escritorio" accept="image/png" placeholder="Escoge un archivo o suelta aquí" drop-placeholder="Suelta aquí"></b-form-file>
+                                </b-form-group>
+                                <b-img v-show="escritorio != ''" :src="escritorio" height="150"></b-img>
+                            </b-col>
+                        </b-row>
                     </b-card>
                     <b-card title="Documentación">
                         <b-form-group label="Terminos y condiciones" label-for="terminos" label-cols-sm="4">
@@ -52,20 +58,21 @@
                     </b-card>
                 </b-col>
             </b-row>
-            
+
         </b-container>
 
     </div>
 </template>
 
 <script>
-    export default {   
+    export default {
         data(){
             return {
                 logo_file: null,
                 logo: '',
                 favicon: '',
                 footer: '',
+                escritorio: '',
                 spinner: {
                     estado: 0
                 }
@@ -81,12 +88,16 @@
             ver_imagen_logo_footer(file){
                 this.footer = URL.createObjectURL(file);
             },
+            ver_imagen_logo_escritorio(file){
+                this.escritorio = URL.createObjectURL(file);
+            },
             listarGeneral (){
                 let me=this;
                 axios.get('/general').then(function (response) {
                     me.logo = response.data.general.logo_url != null ? 'storage/' + response.data.general.logo_url : '';
                     me.favicon = response.data.general.favicon_url != null ? 'storage/' + response.data.general.favicon_url : '';
                     me.footer = response.data.general.logo_fot_url != null ? 'storage/' + response.data.general.logo_fot_url : '';
+                    me.escritorio = response.data.general.logo_escritorio_url != null ? 'storage/' + response.data.general.logo_escritorio_url : '';
                 })
                 .catch(function (error) {
                     console.log(error);
@@ -107,6 +118,9 @@
 
                 let logo_footer = document.querySelector('#logo_footer');
                 formData.append('logo_footer', logo_footer.files[0]);
+
+                let logo_escritorio = document.querySelector('#logo_escritorio');
+                formData.append('logo_escritorio', logo_escritorio.files[0]);
 
                 let terminos = document.querySelector('#terminos');
                 formData.append('terminos', terminos.files[0]);

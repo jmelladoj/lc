@@ -145,6 +145,7 @@ Vue.component('usuario-seminarios', require('./components/intranet/UsuarioBotonS
 Vue.component('usuario-sorteos', require('./components/intranet/UsuarioBotonSorteos.vue').default);
 Vue.component('escritorio', require('./components/intranet/Escritorio.vue').default);
 Vue.component('resultados-busqueda', require('./components/intranet/ResultadosBusqueda.vue').default);
+Vue.component('avatares', require('./components/intranet/Avatars.vue').default);
 
 
 

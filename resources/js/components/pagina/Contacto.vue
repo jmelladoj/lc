@@ -221,4 +221,12 @@
     .input-group-text {
         font-size: 14px !important;
     }
+
+    textarea[data-v-25e73d5d] {
+        border-color: #8AB733 !important;
+    }
+
+    .container {
+        max-width: 1240px !important;
+    }
 </style>

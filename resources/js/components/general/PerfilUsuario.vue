@@ -11,7 +11,7 @@
                         <b-card>
                             <center class="mt-1">
                                 <img v-bind:src="usuario.url_perfil" alt="Imagen de usuario" class="img-circle mb-2" width="150">
-                                <p v-show="usuario.posicion > 0">
+                                <p v-show="usuario.posicion > 0" @click="abrirModalValoracion">
                                     <i class="fa fa-star fa-2x text-warning" aria-hidden="true" v-for="index in usuario.posicion" :key="index"></i>
                                 </p>
                                 <p>
@@ -19,7 +19,7 @@
                                 </p>
                                 <hr>
                                 <small class="text-muted">Correo: </small><h6 v-text="usuario.email"></h6><br>
-                                <small v-show="usuario.tiene_sitio == 1" class="text-muted">Sitio web: </small><a v-show="usuario.tiene_sitio == 1" href="javascript:void(0)" @click="redireccion()">{{ usuario.sitio_web }}</a>
+                                <small v-if="usuario.sitio_web" class="text-muted">Sitio web: </small><a v-if="usuario.sitio_web" :href="'../' + usuario.sitio_web" target="_blank">{{ usuario.sitio_web }}</a>
                             </center>
                         </b-card>
 
@@ -29,7 +29,7 @@
                             <b-tabs content-class="mt-3">
                                 <b-tab title="Datos comerciales" active>
                                     <b-form-group>
-                                        <b-form-textarea v-model="usuario.nombre" rows="6" max-rows="6" :readonly="true"></b-form-textarea>
+                                        <b-form-textarea v-model="usuario.descripcion_administrador" rows="6" max-rows="6" :readonly="true"></b-form-textarea>
                                     </b-form-group>
                                     <b-form-group  label="Dirección">
                                         <b-form-input type="text" v-model="usuario.direccion" :readonly="true"></b-form-input>
@@ -50,8 +50,88 @@
                                         </b-col>
                                     </b-row>
                                 </b-tab>
-                                <b-tab title="Comentarios">
 
+                                <b-tab title="Comentarios">
+                                    <b-container fluid>
+                                        <b-row>
+                                            <b-col md="4" class="my-1">
+                                                <b-form-group label-cols-sm="3" label="Filtrar" class="mb-0">
+                                                <b-input-group>
+                                                    <b-form-input v-model="filter_pyme" placeholder="Escribe para buscar" />
+                                                    <b-input-group-append>
+                                                    <b-button :disabled="!filter_pyme" @click="filter_pyme = ''">Limpiar</b-button>
+                                                    </b-input-group-append>
+                                                </b-input-group>
+                                                </b-form-group>
+                                            </b-col>
+
+                                            <b-col md="4" class="my-1">
+                                                <b-form-group label-cols-sm="3" label="Ordenar" class="mb-0">
+                                                <b-input-group>
+                                                    <b-form-select v-model="sortBy_pyme" :options="sortOptions_pyme">
+                                                    <option slot="first" :value="null">-- nada --</option>
+                                                    </b-form-select>
+                                                    <b-form-select :disabled="!sortBy_pyme" v-model="sortDesc_pyme" slot="append">
+                                                    <option :value="false">Asc</option> <option :value="true">Desc</option>
+                                                    </b-form-select>
+                                                </b-input-group>
+                                                </b-form-group>
+                                            </b-col>
+
+                                            <b-col md="4" class="my-1">
+                                                <b-form-group label-cols-sm="3" label="Dirección" class="mb-0">
+                                                <b-input-group>
+                                                    <b-form-select v-model="sortDirection_pyme" slot="append">
+                                                    <option value="asc">Asc</option> <option value="desc">Desc</option>
+                                                    <option value="last">Último</option>
+                                                    </b-form-select>
+                                                </b-input-group>
+                                                </b-form-group>
+                                            </b-col>
+                                        </b-row>
+
+                                        <!-- Main table element -->
+                                        <b-table
+                                            show-empty
+                                            responsive
+                                            striped
+                                            borderless
+                                            outlined
+                                            small
+                                            hover
+                                            :items="items_pyme"
+                                            :fields="fields_pyme"
+                                            :current-page="currentPage_pyme"
+                                            :per-page="perPage_pyme"
+                                            :filter="filter_pyme"
+                                            :sort-by.sync="sortBy_pyme"
+                                            :sort-desc.sync="sortDesc_pyme"
+                                            :sort-direction="sortDirection_pyme"
+                                            @filtered="onFiltered_pyme">
+
+                                            <template v-slot:cell(index)="data">
+                                                {{ data.index + 1 }}
+                                            </template>
+
+                                            <template slot="empty">
+                                                <center><h5>No hay registros para mostrar.</h5></center>
+                                            </template>
+
+                                            <template slot="emptyfiltered">
+                                                <center><h5>No hay registros que coincidan con su solicitud.</h5></center>
+                                            </template>
+
+                                            <template v-slot:cell(tipo_votacion)="row">
+                                                <label v-text="row.item.tipo_votacion == 1 ? 'Positivo' : 'Negativo'"></label>
+                                            </template>
+                                        </b-table>
+
+                                        <b-row>
+                                            <b-col>
+                                                <b-pagination :total-rows="totalRows_pyme" :per-page="perPage_pyme" v-model="currentPage_pyme" class="my-3" align="fill"/>
+                                            </b-col>
+                                        </b-row>
+                                    </b-container>
                                 </b-tab>
                             </b-tabs>
                         </b-card>
@@ -63,6 +143,35 @@
                 <b-button size="md" variant="danger" @click="cerrar_modal_perfil()"> Cerrar </b-button>
             </template>
         </b-modal>
+
+        <ValidationObserver ref="observer_votacion" v-slot="{ valid }">
+            <b-modal ref="modal_votacion" :title="modal_votacion.titulo" size="md" no-close-on-backdrop>
+                <b-form>
+                    <b-form-group label="Tipo de valoración">
+                        <ValidationProvider rules="oneOf:1,2,3" v-slot="{ errors }">
+                            <b-form-select v-model="valoracion.tipo">
+                                <option :value="null">Selecciona una opción</option>
+                                <option :value="1">Positiva</option>
+                                <option :value="2">Negativa</option>
+                            </b-form-select>
+                            <span v-if="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0].replace('{field}', '') }}</span></span>
+                        </ValidationProvider>
+                    </b-form-group>
+
+                    <b-form-group v-if="valoracion.tipo" :label="valoracion.tipo == 1 ? '¿Qué te ha gustado de la pyme?' : '¿Qué no te ha gustado de la Pyme?'">
+                        <ValidationProvider name="Calificación" rules="required|min:20|max:200" v-slot="{ errors }">
+                            <b-form-textarea v-model="valoracion.descripcion" placeholder="Escribe aquí ..." rows="3" max-rows="6"></b-form-textarea>
+                            <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
+                        </ValidationProvider>
+                    </b-form-group>
+                </b-form>
+
+                <template slot="modal-footer">
+                    <b-button :disabled="!valid" size="md" variant="success" @click="enviarValoracion()"> Guardar </b-button>
+                    <b-button size="md" variant="danger" @click="cerrarModalValoracion()"> Cerrar </b-button>
+                </template>
+            </b-modal>
+        </ValidationObserver>
     </div>
 </template>
 <script>
@@ -83,29 +192,112 @@
                     direccion: '',
                     telefono: null,
                     comuna: '',
-                    tiene_sitio: 0,
-                    sitio_web: ''
+                    sitio_web: '',
+                    descripcion_administrador: ''
                 },
                 modal_perfil: {
                     titulo: ''
+                },
+                items_pyme: [],
+                fields_pyme: [
+                    { key: 'index', label: '#', sortable: true, sortDirection: 'desc', class: 'text-center' },
+                    { key: 'nombre_usuario', label: 'Autor', sortable: true, class: 'text-left' },
+                    { key: 'tipo_votacion', label: 'Tipo comentario', sortable: true, class: 'text-left' },
+                    { key: 'descripcion', label: 'Comentario', sortable: true, class: 'text-left' }
+                ],
+                currentPage_pyme: 1,
+                perPage_pyme: 10,
+                totalRows_pyme: 0,
+                pageOptions_pyme: [10, 25, 50, 100],
+                sortBy_pyme: null,
+                sortDesc_pyme: false,
+                sortDirection_pyme: 'asc',
+                filter_pyme: null,
+                valoracion: {
+                    descripcion: '',
+                    tipo: null
+                },
+                modal_votacion: {
+                    titulo: '',
+                    accion: 0
                 }
             }
         },
+        computed: {
+            sortOptions_pyme() {
+                return this.fields_pyme.filter(f => f.sortable).map(f => {
+                    return { text: f.label, value: f.key }
+                })
+            }
+        },
         methods: {
+            onFiltered_pyme(filteredItems) {
+                this.totalRows = filteredItems.length
+                this.currentPage = 1
+            },
+            abrirModalValoracion(){
+                let me = this;
+
+                me.valoracion.descripcion = '';
+                me.modal_votacion.titulo = 'Valorando a ' + me.usuario.nombre;
+
+                this.$refs['modal_votacion'].show();
+            },
+            cerrarModalValoracion(){
+                let me = this;
+
+                me.modal_votacion.titulo = '';
+                me.modal_votacion.accion = 0;
+                this.$refs['modal_votacion'].hide();
+            },
+            enviarValoracion (){
+                let me = this;
+
+                axios.post('/valorar/pyme',{
+                    'detalle': me.valoracion.descripcion,
+                    'tipo_votacion': me.valoracion.tipo
+                }).then(function (response) {
+                    me.listar_valoraciones();
+                    me.listar_usuario()
+                    me.cerrarModalValoracion();
+                    me.valoracion.descripcion = ''
+                    me.valoracion.tipo = null
+
+                    Vue.$toast.open({
+                        message: 'Muchas gracias por tu Calificación',
+                        type: 'success',
+                        duration: 5000
+                    });
+
+                }).catch(function (error) {
+                    console.error(error);
+                });
+            },
+            listar_valoraciones(){
+                let me=this;
+                axios.get('/usuario/valoraciones/' + this.usuario_id).then(function (response) {
+                    me.items_pyme = response.data.valoraciones;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+            },
             listar_usuario (){
                 let me = this;
 
                 axios.get('/usuario/' + this.usuario_id).then(function (response) {
                     me.usuario.nombre = response.data.usuario.nombre
                     me.usuario.email = response.data.usuario.email
-                    me.usuario.url_perfil = response.data.usuario.url_perfil == 'img/perfil.svg' ?  response.data.usuario.url_perfil : 'storage/' + response.data.usuario.url_perfil
+                    me.usuario.url_perfil = response.data.usuario.url_perfil == 'img/perfil.png' ?  response.data.usuario.url_perfil : 'storage/' + response.data.usuario.url_perfil
                     me.usuario.posicion = response.data.usuario.posicion
                     me.usuario.likes = response.data.usuario.likes
                     me.usuario.direccion = response.data.usuario.direccion
                     me.usuario.telefono = response.data.usuario.telefono
                     me.usuario.comuna = response.data.usuario.nombreComuna
-                    me.usuario.tiene_sitio = response.data.usuario.tiene_sitio
                     me.usuario.sitio_web = response.data.usuario.sitio_web
+                    me.usuario.descripcion_administrador = response.data.usuario.descripcion_administrador
+
+                    me.listar_valoraciones()
                 })
                 .catch(function (error) {
                     console.log(error);
@@ -138,11 +330,8 @@
                 this.usuario.direccion = ''
                 this.usuario.telefono = null
                 this.usuario.comuna = ''
-                this.usuario.tiene_sitio = 0
                 this.usuario.sitio_web = ''
-            },
-            redireccion(){
-                window.location = this.usuario.sitio_web
+                this.usuario.descripcion_administrador = ''
             }
         }
     }

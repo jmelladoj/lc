@@ -33,6 +33,10 @@
                     </ul>
                 </li>
 
+                <li>
+                    <a @click="menu=9" class="waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fa fa-image" aria-hidden="true"></i><span class="hide-menu">Avatares </span></a>
+                </li>
+
 
             </ul>
 
@@ -130,7 +134,9 @@
     <sliders-comunidad></sliders-comunidad>
 </template>
 
-
+<template v-if="ubicacion == 0 && menu==9">
+    <avatares></avatares>
+</template>
 
 <template v-if="ubicacion == 1 && menu==0">
     <categoria-documentos></categoria-documentos>

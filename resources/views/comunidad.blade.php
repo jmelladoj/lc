@@ -9,10 +9,12 @@
         <section class="sec-padding">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-12">
-                        <p>
+                    <div class="col-md-12 mb-5 text-justify">
+                        <font size="4">
                             {{ $pagina->mensaje_uno }}
-                        </p>
+                        </font>
+                    </div>
+                    <div class="col-md-12">
                         @guest
                             <top-five :tipo="2" :logeado="0"></top-five>
                         @else
@@ -32,10 +34,12 @@
         <section class="sec-padding">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-12">
-                        <p>
+                    <div class="col-md-12 mb-5 text-justify">
+                        <font size="4">
                             {{ $pagina->mensaje_dos }}
-                        </p>
+                        </font>
+                    </div>
+                    <div class="col-md-12">
                         @guest
                             <comunidad-tabla :tipo="1" :logeado="0"></comunidad-tabla>
                         @else

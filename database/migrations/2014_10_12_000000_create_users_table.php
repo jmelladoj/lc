@@ -104,8 +104,10 @@ class CreateUsersTable extends Migration
             $table->text('descripcion_negocio')->nullable()->default(null);
             $table->text('descripcion_servicio')->nullable()->default(null);
             $table->text('otra_forma')->nullable()->default(null);
+            $table->text('descripcion_administrador')->nullable()->default(null);
 
-            $table->string('url_perfil')->default('img/perfil.svg');
+
+            $table->string('url_perfil')->default('img/perfil.png');
 
             $table->unsignedBigInteger('comuna_id')->nullable()->default(NULL);
             $table->foreign('comuna_id')->references('id')->on('comunas');

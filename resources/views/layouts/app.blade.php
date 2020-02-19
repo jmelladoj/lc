@@ -103,7 +103,7 @@
                                         <img src="{{ asset('storage/general/logo_footer.png') }}" class="footer-logo" alt="LebenCO" />
                                     </div>
                                 </div>
-                                <div class="col-md-4 my-auto">
+                                <div class="col-md-4">
                                     <div class="footer-widget col-sm-12 col-md-12 col-lg-12 text-center">
                                         <h6 class="footer-widget-title"><a href="{{ url('/comunidad') }}" class="{{ (request()->is('nosotros')) ? 'sale-color' : 'text-dark' }}" style="opacity: 1;">Comunidad LebenCo.</a></h6>
                                     </div>
@@ -114,7 +114,7 @@
                                         <h6 class="footer-widget-title"><a href="#" class="text-dark" style="opacity: 1;">Trabaja en LebenCo.</a></h6>
                                     </div>
                                 </div>
-                                <div class="col-md-4 my-auto">
+                                <div class="col-md-4">
                                     <div class="footer-widget col-sm-12 col-md-12 col-lg-12 text-center">
                                         <h6 class="footer-widget-title"><a href="{{ url('/contacto') }}" class="text-dark" style="opacity: 1;">Contáctanos</a></h6>
                                     </div>
