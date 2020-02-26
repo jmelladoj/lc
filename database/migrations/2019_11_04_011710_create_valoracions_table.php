@@ -22,6 +22,8 @@ class CreateValoracionsTable extends Migration
             $table->text('descripcion');
             $table->smallInteger('tipo_votacion');
 
+            $table->smallInteger('tipo_usuario_votacion')->nullable()->default(3);
+
             $table->timestamps();
         });
     }

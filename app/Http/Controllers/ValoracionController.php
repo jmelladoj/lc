@@ -14,10 +14,11 @@ class ValoracionController extends Controller
             [
                 'id' => $request->id],
             [
-                'nombre_usuario' => $request->autor != '' ? $request->autor : null,
+                'nombre_usuario' => $request->autor != '' ? $request->autor : Auth::user()->nombre,
                 'user_id' => Auth::id(),
                 'descripcion' => $request->detalle,
-                'tipo_votacion' => $request->tipo_votacion
+                'tipo_votacion' => $request->tipo_votacion,
+                'tipo_usuario_votacion' => Auth::user()->tipo_usuario
             ]
         );
     }

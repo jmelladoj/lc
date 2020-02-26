@@ -8,7 +8,7 @@
         </div>
         <div class="container">
             <b-row class="justify-content-md-center">
-                <b-col cols="3" class="mb-2" v-for="(categoria, index) in categorias" :key="index">
+                <b-col xs="12" md="3" class="mb-2" v-for="(categoria, index) in categorias" :key="index">
                     <a v-bind:href="'/busqueda/' + categoria.id" class="redondear btn btn--primary space--button btn-block" v-text="categoria.nombre"></a>
                 </b-col>
             </b-row>
@@ -17,12 +17,12 @@
 </template>
 
 <script>
-    export default {  
+    export default {
         data() {
             return {
                 categorias: []
             }
-        },  
+        },
         methods:{
             listarCategorias(){
                 let me=this;

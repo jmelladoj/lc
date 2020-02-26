@@ -2261,7 +2261,6 @@ ul:last-child {
         /* Close Icon */
         .nav-icons .nav-icon-item .nav-icon-trigger.menu-mobile-btn.active i:before {
             opacity: 0.6;
-            content: "\e646";
         }
 
         /* Dropdown */
@@ -6382,3 +6381,20 @@ form .lost_password {
 .carousel-indicators .active {
     background-color: #8AB733 !important;
 }
+
+.nav-menu-item {
+    line-height: 90px !important;
+}
+
+@media (max-width:991px) {
+    .nav-menu-item {
+        line-height: 1.7 !important;
+    }
+
+    .carousel-caption h2, h4{
+        font-size: x-large !important;
+    }
+}
+
+
+

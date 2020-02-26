@@ -56,19 +56,19 @@
             </template>
 
             <template v-slot:cell(valoracion)="data">
-                A {{ data.item.likes }} % les gusta esto.
+                A {{ data.item.like_porcentaje_admin }} % les gusta esto.
             </template>
 
             <template v-slot:cell(nombre_rubro)>
                 Sin rubro
             </template>
 
-            <template v-slot:cell(like)="data">
-                <a href="javascript:void(0)" @click="abrirModalValoracion(1, data.item)"> {{ data.item.likes }} % <i class="ml-1 fa fa-thumbs-up sale-color"></i></a>
+            <template v-slot:cell(like_porcentaje_admin)="data">
+                <a href="javascript:void(0)" @click="abrirModalValoracion(1, data.item)"> {{ data.item.like_porcentaje_admin }} % <i class="ml-1 fa fa-thumbs-up sale-color"></i></a>
             </template>
 
-            <template v-slot:cell(dislike)="data">
-                <a href="javascript:void(0)" @click="abrirModalValoracion(2, data.item)"> {{ data.item.dislikes }} % <i class="ml-1 fa fa-thumbs-down sale-color"></i></a>
+            <template v-slot:cell(porcentaje_dislike_vip)="data">
+                <a href="javascript:void(0)" @click="abrirModalValoracion(2, data.item)"> {{ data.item.like_porcentaje_admin > 0 ? 100 - data.item.like_porcentaje_admin : 0 }} % <i class="ml-1 fa fa-thumbs-down sale-color"></i></a>
             </template>
 
             <template v-slot:cell(perfil)="data">
@@ -246,8 +246,8 @@
                         { key: 'nombreRubro', label: 'Rubro', sortable: true, class: 'text-left' },
                         { key: 'perfil', label: 'Perfil', sortable: true, class: 'text-center' },
                         { key: 'valoracion', label: 'Calificación', sortable: true, class: 'text-center' },
-                        { key: 'like', label: 'Me gusta', sortable: true, class: 'text-center like' },
-                        { key: 'dislike', label: 'No me gusta', sortable: true, class: 'text-center dislike' }
+                        { key: 'like_porcentaje_admin', label: 'Me gusta', sortable: true, class: 'text-center like' },
+                        { key: 'porcentaje_dislike_vip', label: 'No me gusta', sortable: true, class: 'text-center dislike' }
                     ]
                 } else {
                     this.fields = [
@@ -256,8 +256,8 @@
                         { key: 'nombreRubro', label: 'Rubro', sortable: true, class: 'text-left' },
                         { key: 'perfil', label: 'Perfil', sortable: true, class: 'text-center' },
                         { key: 'valoracion', label: 'Calificación', sortable: true, class: 'text-center' },
-                        { key: 'like', label: 'Me gusta', sortable: true, class: 'text-center like' },
-                        { key: 'dislike', label: 'No me gusta', sortable: true, class: 'text-center dislike' }
+                        { key: 'like_porcentaje_admin', label: 'Me gusta', sortable: true, class: 'text-center like' },
+                        { key: 'porcentaje_dislike_vip', label: 'No me gusta', sortable: true, class: 'text-center dislike' }
                     ]
                 }
             }

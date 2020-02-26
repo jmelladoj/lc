@@ -43,15 +43,15 @@
                         <b-row v-show="tipo_usuario_logeado == 3">
                             <b-col cols="12">
                                 <b-button v-if="usuario.tipo_persona != 2" :disabled="usuario.usuario_perfil == 0 || usuario.usuario_academico == 0 || usuario.usuario_ejercicio == 0" size="md" variant="success" block @click="comunidad_pyme(usuario.comunidad_pyme)">
-                                    ¡Quiero estar en comunidad pyme!
+                                    ¡Quiero ser conocido!
                                 </b-button>
                                 <b-button v-else :disabled="usuario.pyme_comercial == 0 || usuario.pyme_datos == 0" size="md" variant="success" block @click="comunidad_pyme(usuario.comunidad_pyme)">
-                                    ¡Quiero estar en comunidad pyme!
+                                    ¡Quiero ser conocido!
                                 </b-button>
                             </b-col>
                             <b-col cols="12">
                                 <b-button :disabled="usuario.presiona_tabla_vip  == 0" size="md" variant="warning" block @click="tabla_vip(usuario.top_five)">
-                                    ¡Quiero estar en el top five!
+                                    ¡Quiero ser recomendado!
                                 </b-button>
                             </b-col>
                         </b-row>
@@ -132,7 +132,7 @@
                                 </b-col>
                             </b-row>
                             <b-row>
-                                <b-col v-if="tipo_usuario_logeado == 3">
+                                <b-col>
                                     <b-form-group label="Fecha de nacimiento">
                                         <ValidationProvider rules="required" v-slot="{ errors }">
                                             <b-form-input type="date" v-model="usuario.fecha_nacimiento" :readonly="tipo_usuario_logeado == 4" @change="validar_fecha"></b-form-input>
@@ -140,7 +140,7 @@
                                         </ValidationProvider>
                                     </b-form-group>
                                 </b-col>
-                                <b-col v-if="tipo_usuario_logeado > 2">
+                                <b-col>
                                     <b-form-group label="Dirección">
                                         <ValidationProvider rules="required" v-slot="{ errors }">
                                             <b-form-input type="text" v-model="usuario.direccion" :readonly="tipo_usuario_logeado == 4"></b-form-input>
@@ -150,7 +150,7 @@
                                 </b-col>
                             </b-row>
                             <b-row>
-                                <b-col v-if="tipo_usuario_logeado > 2">
+                                <b-col>
                                     <b-form-group label="Comuna">
                                         <ValidationProvider rules="required" v-slot="{ errors }">
                                             <b-form-select v-model="usuario.comuna_id" :disabled="tipo_usuario_logeado == 4">
@@ -161,7 +161,7 @@
                                         </ValidationProvider>
                                     </b-form-group>
                                 </b-col>
-                                <b-col v-if="tipo_usuario_logeado > 2">
+                                <b-col>
                                     <b-form-group label="Región">
                                         <ValidationProvider rules="required" v-slot="{ errors }">
                                             <b-form-select v-model="usuario.region">
@@ -173,7 +173,7 @@
                                     </b-form-group>
                                 </b-col>
                             </b-row>
-                            <b-row  v-if="tipo_usuario_logeado > 2">
+                            <b-row>
                                 <b-col>
                                     <b-form-group label="Situación sentimental">
                                         <ValidationProvider rules="required" v-slot="{ errors }">
@@ -590,42 +590,6 @@
                     <b-tab title="Comentarios">
                         <b-form-group>
                             <b-container fluid>
-                                <b-row>
-                                    <b-col md="4" class="my-1">
-                                        <b-form-group label-cols-sm="3" label="Filtrar" class="mb-0">
-                                        <b-input-group>
-                                            <b-form-input v-model="filter_pyme" placeholder="Escribe para buscar" />
-                                            <b-input-group-append>
-                                            <b-button :disabled="!filter_pyme" @click="filter_pyme = ''">Limpiar</b-button>
-                                            </b-input-group-append>
-                                        </b-input-group>
-                                        </b-form-group>
-                                    </b-col>
-
-                                    <b-col md="4" class="my-1">
-                                        <b-form-group label-cols-sm="3" label="Ordenar" class="mb-0">
-                                        <b-input-group>
-                                            <b-form-select v-model="sortBy_pyme" :options="sortOptions_pyme">
-                                            <option slot="first" :value="null">-- nada --</option>
-                                            </b-form-select>
-                                            <b-form-select :disabled="!sortBy_pyme" v-model="sortDesc_pyme" slot="append">
-                                            <option :value="false">Asc</option> <option :value="true">Desc</option>
-                                            </b-form-select>
-                                        </b-input-group>
-                                        </b-form-group>
-                                    </b-col>
-
-                                    <b-col md="4" class="my-1">
-                                        <b-form-group label-cols-sm="3" label="Dirección" class="mb-0">
-                                        <b-input-group>
-                                            <b-form-select v-model="sortDirection_pyme" slot="append">
-                                            <option value="asc">Asc</option> <option value="desc">Desc</option>
-                                            <option value="last">Último</option>
-                                            </b-form-select>
-                                        </b-input-group>
-                                        </b-form-group>
-                                    </b-col>
-                                </b-row>
 
                                 <!-- Main table element -->
                                 <b-table
@@ -638,13 +602,7 @@
                                     hover
                                     :items="items_pyme"
                                     :fields="fields_pyme"
-                                    :current-page="currentPage_pyme"
-                                    :per-page="perPage_pyme"
-                                    :filter="filter_pyme"
-                                    :sort-by.sync="sortBy_pyme"
-                                    :sort-desc.sync="sortDesc_pyme"
-                                    :sort-direction="sortDirection_pyme"
-                                    @filtered="onFiltered_pyme">
+                                    sticky-header>
 
                                     <template v-slot:cell(index)="data">
                                         {{ data.index + 1 }}
@@ -662,12 +620,6 @@
                                         <label v-text="row.item.tipo_votacion == 1 ? 'Positivo' : 'Negativo'"></label>
                                     </template>
                                 </b-table>
-
-                                <b-row>
-                                    <b-col>
-                                        <b-pagination :total-rows="totalRows_pyme" :per-page="perPage_pyme" v-model="currentPage_pyme" class="my-3" align="fill"/>
-                                    </b-col>
-                                </b-row>
                             </b-container>
                         </b-form-group>
                     </b-tab>
@@ -747,7 +699,7 @@
                                 </b-col>
                             </b-row>
                             <b-row>
-                                <b-col v-if="tipo_usuario_logeado > 2">
+                                <b-col>
                                     <b-form-group label="Dirección comercial actual">
                                         <ValidationProvider rules="required" v-slot="{ errors }">
                                             <b-form-input type="text" v-model="usuario.direccion" :readonly="tipo_usuario_logeado == 4"></b-form-input>
@@ -757,7 +709,7 @@
                                 </b-col>
                             </b-row>
                             <b-row>
-                                <b-col v-if="tipo_usuario_logeado > 2">
+                                <b-col>
                                     <b-form-group label="Comuna">
                                         <ValidationProvider rules="required" v-slot="{ errors }">
                                             <b-form-select v-model="usuario.comuna_id" :disabled="tipo_usuario_logeado == 4">
@@ -768,7 +720,7 @@
                                         </ValidationProvider>
                                     </b-form-group>
                                 </b-col>
-                                <b-col v-if="tipo_usuario_logeado > 2">
+                                <b-col>
                                     <b-form-group label="Región">
                                         <ValidationProvider rules="required" v-slot="{ errors }">
                                             <b-form-select v-model="usuario.region">
@@ -1008,13 +960,8 @@
                                     hover
                                     :items="items_pyme"
                                     :fields="fields_pyme"
-                                    :current-page="currentPage_pyme"
-                                    :per-page="perPage_pyme"
-                                    :filter="filter_pyme"
-                                    :sort-by.sync="sortBy_pyme"
-                                    :sort-desc.sync="sortDesc_pyme"
-                                    :sort-direction="sortDirection_pyme"
-                                    @filtered="onFiltered_pyme">
+                                    sticky-header>
+
 
                                     <template v-slot:cell(index)="data">
                                         {{ data.index + 1 }}
@@ -1217,7 +1164,7 @@
                     showCancelButton: true,
                     confirmButtonColor: '#8AB733',
                     cancelButtonColor: '#d7552a',
-                    confirmButtonText: 'Aceptar!',
+                    confirmButtonText: 'Aceptar',
                     cancelButtonText: 'Cancelar',
                     confirmButtonClass: 'btn btn-success',
                     cancelButtonClass: 'btn btn-danger',
@@ -1229,6 +1176,8 @@
                             'url_imagen': me.usuario.url_perfil
                         }).then(function (response) {
                             me.listarUsuario();
+
+                            $('#imagen_perfil_usuario').attr("src", 'storage/' + me.usuario.url_perfil);
 
                             me.avatar_actual = 0
 
@@ -1570,13 +1519,13 @@
             },
             comunidad_pyme(accion){
                 Swal.fire({
-                    title: accion == 0 ? '¿Deseas aparecer en la tabla comunidad pyme?' : '¿Deseas salir de la tabla comunidad pyme?',
+                    title: accion == 0 ? '¡Traquilo!, solo se verán tus datos comerciales en forma similar a quieres se encuentran activos, en la sección "Comunidad LebencCo"' : '¿Deseas salir de la tabla comunidad pyme?',
                     type: 'warning',
                     showCancelButton: true,
                     confirmButtonColor: '#8AB733',
                     cancelButtonColor: '#d7552a',
-                    confirmButtonText: 'Aceptar!',
-                    cancelButtonText: 'Cancelar',
+                    confirmButtonText: 'Aceptar',
+                    cancelButtonText: 'Rechazar',
                     confirmButtonClass: 'btn btn-success',
                     cancelButtonClass: 'btn btn-danger',
                 }).then((result) => {
@@ -1588,7 +1537,7 @@
                             me.listarUsuario();
 
                             Vue.$toast.open({
-		                        message: accion == 0 ? 'Ya estas en la tabla comunidad pyme!' : 'Ya no estas en la tabla comunidad pyme',
+		                        message: accion == 0 ? 'Tus datos serán validados antes de acceder a la sección Comunidad LebenCo.' : 'Ya no estas en la tabla comunidad pyme',
 		                        type: 'success',
 		                        duration: 5000
 		                    });
@@ -1606,8 +1555,8 @@
                     showCancelButton: true,
                     confirmButtonColor: '#8AB733',
                     cancelButtonColor: '#d7552a',
-                    confirmButtonText: 'Aceptar!',
-                    cancelButtonText: 'Cancelar',
+                    confirmButtonText: 'Aceptar',
+                    cancelButtonText: 'Rechazar',
                     confirmButtonClass: 'btn btn-success',
                     cancelButtonClass: 'btn btn-danger',
                 }).then((result) => {
@@ -1619,7 +1568,7 @@
                             me.listarUsuario();
 
                             Vue.$toast.open({
-		                        message: accion == 0 ? 'Hemos procesado tu solicitud, pronto te contactaremos' : 'Ya no estas en la tabla vip',
+		                        message: accion == 0 ? 'Pronto serás contactado por el Gerente de Prevención LebenCo.' : 'Ya no estas en la tabla vip',
 		                        type: 'success',
 		                        duration: 5000
 		                    });
@@ -1660,5 +1609,10 @@
 
     .btn-warning:hover {
         color: #212529 !important;
+    }
+
+    .table.b-table > thead > tr > .table-b-table-default, .table.b-table > tbody > tr > .table-b-table-default, .table.b-table > tfoot > tr > .table-b-table-default {
+        color: none !important;
+        background-color: none !important;
     }
 </style>

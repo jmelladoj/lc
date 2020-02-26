@@ -13,9 +13,9 @@
                 </div>
             </div>
         </section>
-    @endif
 
-    <pagina-servicios></pagina-servicios>
+        <pagina-servicios></pagina-servicios>
+    @endif
 
     <sliders-ubicacion :ubicacion="6" @auth :usuario="{{ json_encode(Auth::user()) }}" @endauth></sliders-ubicacion>
 @endsection

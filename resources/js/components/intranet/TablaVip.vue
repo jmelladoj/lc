@@ -34,17 +34,17 @@
                         </b-form-group>
                     </b-col>
                     <b-col>
-                        <b-form-group label="Likes">
-                            <ValidationProvider name="likes" rules="required|numeric|between:1,100" v-slot="{ errors }">
+                        <b-form-group label="N° likes">
+                            <ValidationProvider name="likes" rules="required|numeric|min:0" v-slot="{ errors }">
                                 <b-form-input type="number" v-model="tabla.likes" placeholder="Likes" @keyup="actualizar_usuario_tabla"></b-form-input>
                                 <span v-show="errors[0]"><span class="d-block alert alert-danger">{{ errors[0] }}</span></span>
                             </ValidationProvider>
                         </b-form-group>
                     </b-col>
                     <b-col>
-                        <b-form-group label="Dislikes">
-                            <ValidationProvider name="dislikes" rules="required|numeric|between:1,100" v-slot="{ errors }">
-                                <b-form-input type="number" v-model="tabla.dislikes" placeholder="Dislikes" disabled=""></b-form-input>
+                        <b-form-group label="N° dislikes">
+                            <ValidationProvider name="dislikes" rules="required|numeric|min:0" v-slot="{ errors }">
+                                <b-form-input type="number" v-model="tabla.dislikes" placeholder="Dislikes" @keyup="actualizar_usuario_tabla"></b-form-input>
                                 <span v-show="errors[0]"><span class="d-block alert alert-danger">{{ errors[0] }}</span></span>
                             </ValidationProvider>
                         </b-form-group>
@@ -237,6 +237,14 @@
                                         <label v-else-if="data.item.tipo_persona == 3"> Estudiante </label>
                                     </template>
 
+                                    <template v-slot:cell(like_porcentaje_admin)="row">
+                                        {{ row.item.like_porcentaje_admin }} %
+                                    </template>
+
+                                    <template v-slot:cell(porcentaje_dislike_vip)="row">
+                                        {{ row.item.like_porcentaje_admin > 0 ? 100 - row.item.like_porcentaje_admin : 0}} %
+                                    </template>
+
 
                                     <template v-slot:cell(acciones)="row">
                                         <b-button size="xs" variant="warning" title="Actualizar usuario" @click="actualizar_tabla(row.item)">
@@ -325,8 +333,8 @@
                     { key: 'nombre', label: 'Pyme', sortable: true, class: 'text-left' },
                     { key: 'nombreComuna', label: 'Comuna', sortable: true, class: 'text-left' },
                     { key: 'nombreRubro', label: 'Rubro', sortable: true, class: 'text-left' },
-                    { key: 'likes', label: 'Likes', sortable: true, class: 'text-center' },
-                    { key: 'dislikes', label: 'Dislikes', sortable: true, class: 'text-center' },
+                    { key: 'like_porcentaje_admin', label: 'Likes', sortable: true, class: 'text-center' },
+                    { key: 'porcentaje_dislike_vip', label: 'Dislikes', sortable: true, class: 'text-center' },
                     { key: 'acciones', label: 'Acciones', sortable: true, class: 'text-center' }
                 ],
                 currentPage: 1,
@@ -401,17 +409,9 @@
                 this.tabla.dislikes = data.dislikes
 
                 this.listar_valoraciones()
-
-                this.actualizar_porcentajes()
             },
             actualizar_usuario_tabla(){
                 let me = this;
-
-                this.actualizar_porcentajes()
-
-                if(this.tabla.likes > 100){
-                    return false
-                }
 
                 axios.post('/usuario/actualizar/tabla/vip',{
                     'id': me.tabla.usuario_id,
@@ -431,10 +431,6 @@
                 }).catch(function (error) {
                     console.error(error);
                 });
-            },
-            actualizar_porcentajes(){
-                let porcentaje = 100
-                this.tabla.dislikes = parseInt(porcentaje) - parseInt(this.tabla.likes)
             },
             abrir_modal_comentarios(accion, data = []){
                 let me = this;

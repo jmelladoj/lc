@@ -18,12 +18,12 @@
 
     <link rel="icon" type="image/png" href="{{ asset('storage/general/favicon.png') }}">
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
 </head>
 <body>
     <div id="app">
         <div class="site-wrapper">
-            <header id="header" @if(request()->is('/')) class="header header--dark header--sticky" @else class="header header--sticky header-hover" @endif data-header-hover="true">
+            <header id="header" class="header-nav" data-header-hover="true">
                 <nav id="navigation" class="header-nav">
                     <div class="container-fluid">
                         <div class="row">
@@ -54,7 +54,7 @@
                             <div class="nav-icons">
                                 <ul class="mt-2">
                                     <li class="nav-icon-item d-lg-none">
-                                        <div class="nav-icon-trigger menu-mobile-btn active" title="Navigation Menu"><span><i class="fa fa-list-ol"></i></span></div>
+                                        <div class="nav-icon-trigger menu-mobile-btn" title="Menú de navegación"><span><i class="fa fa-list"></i></span></div>
                                     </li>
                                     <li class="nav-icon-item">
                                         <a href="{{ url('/login') }}" class="nav-icon-trigger" title="Ingresar">
@@ -142,6 +142,6 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/pagina-js.js') }}"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"></script>
 </body>
 </html>

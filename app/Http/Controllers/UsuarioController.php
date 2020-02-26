@@ -175,12 +175,12 @@ class UsuarioController extends Controller
 
         if($usuario->usuario_perfil == 1 && $usuario->usuario_academico == 1 && $usuario->usuario_ejercicio == 1){
             $user = User::find(1);
-            $user->notify(new Alerta('Ha completado su perfil', $user, "", 'fa fa-star', 11));
+            $user->notify(new Alerta('Perfil completo', $user, "", 'fa fa-star', 11));
         }
 
         if($usuario->pyme_comercial == 1 && $usuario->pyme_datos == 1){
             $user = User::find(1);
-            $user->notify(new Alerta('Ha completado su perfil', $user, "", 'fa fa-star', 11));
+            $user->notify(new Alerta('Perfil completo', $user, "", 'fa fa-star', 11));
         }
 
         if($request->password != ''){
@@ -256,7 +256,8 @@ class UsuarioController extends Controller
     public function agregarTablaVip(Request $request){
         User::updateOrCreate(
             ['id' => $request->id],
-            ['top_five' => 1]
+            ['top_five' => 1,
+             'comunidad_pyme' => 0]
         );
     }
 
@@ -270,14 +271,24 @@ class UsuarioController extends Controller
     public function agregarComunidadPyme(Request $request){
         User::updateOrCreate(
             ['id' => $request->id],
-            ['comunidad_pyme' => 1]
+            ['comunidad_pyme' => 1,
+            'presiona_tabla_vip' => 1,
+            'top_five' => 0]
         );
     }
 
     public function quitarComunidadPyme(Request $request){
         User::updateOrCreate(
             ['id' => $request->id],
-            ['comunidad_pyme' => 0]
+            [
+                'comunidad_pyme' => 0,
+                'usuario_perfil' => 0,
+                'usuario_academico' => 0,
+                'usuario_ejercicio' => 0,
+                'pyme_comercial' => 0,
+                'pyme_datos' => 0,
+                'pyme_facturacion' => 0,
+            ]
         );
     }
 
@@ -325,13 +336,13 @@ class UsuarioController extends Controller
     }
 
     public function usuario_tabla_comunidad(Request $request){
-        $usuario = Auth::user();
-        $usuario->comunidad_pyme = $request->accion == 0 ? 1 : 0;
-        $usuario->presiona_tabla_vip = 1;
-        $usuario->save();
+        //$usuario = Auth::user();
+        //$usuario->comunidad_pyme = $request->accion == 0 ? 1 : 0;
+        //$usuario->presiona_tabla_vip = 1;
+        //$usuario->save();
 
         $user = User::find(1);
-        $user->notify(new Alerta('Tabla comunidad', $user, "", 'fa fa-table', 5));
+        $user->notify(new Alerta('Ser conocido', $user, "", 'fa fa-table', 5));
 
     }
 
