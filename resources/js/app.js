@@ -109,6 +109,7 @@ Vue.component('contacto', require('./components/pagina/Contacto.vue').default);
 Vue.component('politicas', require('./components/pagina/Politicas.vue').default);
 Vue.component('pagina-servicios', require('./components/pagina/PaginaServicios.vue').default);
 Vue.component('home-intranet', require('./components/pagina/HomeIntranet.vue').default);
+Vue.component('boton-trabaja', require('./components/pagina/TrabajaConNosotros.vue').default);
 
 //Intranet
 Vue.component('general', require('./components/intranet/General.vue').default);
@@ -160,7 +161,7 @@ const app = new Vue({
     el: '#app',
     data :{
         ubicacion: 1,
-        menu : 1
+        menu : 0
     },
     router
 });

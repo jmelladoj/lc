@@ -218,7 +218,10 @@
                                 </b-col>
                             </b-row>
                             <b-row>
-                                <b-col>
+                                <b-col v-if="usuario.usuario_perfil == 1 && usuario.password.length > 0">
+                                    <b-button :disabled="usuario.password.length == 0" @click="actualizar(0, 0, 0, 1, 0)" class="btn btn-success btn-block" title="Actualiza información de tu perfil">Actualizar mi perfil</b-button>
+                                </b-col>
+                                <b-col v-else>
                                     <b-button v-show="tipo_usuario_logeado < 4" :disabled="!valid || usuario.usuario_perfil == 1" @click="actualizar(1, 0, 0, 0, 0 ,0)" class="btn btn-success btn-block" title="Actualiza información de tu perfil">Actualizar mi perfil</b-button>
                                 </b-col>
                             </b-row>
@@ -743,7 +746,10 @@
                                 </b-col>
                             </b-row>
                             <b-row>
-                                <b-col>
+                                <b-col v-if="usuario.pyme_comercial == 1 && usuario.password.length > 0">
+                                    <b-button :disabled="usuario.password.length == 0" @click="actualizar(0, 0, 0, 1, 0)" class="btn btn-success btn-block" title="Actualiza información de tu perfil">Actualizar mi perfil</b-button>
+                                </b-col>
+                                <b-col v-else>
                                     <b-button :disabled="!valid || usuario.pyme_comercial == 1" @click="actualizar(0, 0, 0, 1, 0)" class="btn btn-success btn-block" title="Actualiza información de tu perfil">Actualizar mi perfil</b-button>
                                 </b-col>
                             </b-row>
@@ -1476,6 +1482,7 @@
 
 
                 }).then(function (response) {
+                    me.usuario.password = ''
                     me.listarUsuario();
 
                     Vue.$toast.open({

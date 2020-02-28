@@ -97,40 +97,37 @@
                 @if(!request()->is('login') && !request()->is('contacto'))
                     <section class="footer-widget-area">
                         <div class="container">
-                            <div class="row text-dark h-100">
-                                <div class="col-md-4 my-auto">
+                            <div class="row text-dark">
+                                <div class="footer-widget col-lg-2 col-12 mb-lg-0 mb-4 pr-lg-4">
                                     <div class="col-sm-12 col-md-12 col-lg-12 text-center">
-                                        <img src="{{ asset('storage/general/logo_footer.png') }}" class="footer-logo" alt="LebenCO" />
+                                        <img class="footer-logo mb-4" src="{{ asset('storage/general/logo_footer.png') }}" alt="LebenCO">
                                     </div>
                                 </div>
-                                <div class="col-md-4">
-                                    <div class="footer-widget col-sm-12 col-md-12 col-lg-12 text-center">
-                                        <h6 class="footer-widget-title"><a href="{{ url('/comunidad') }}" class="{{ (request()->is('nosotros')) ? 'sale-color' : 'text-dark' }}" style="opacity: 1;">Comunidad LebenCo.</a></h6>
-                                    </div>
-                                    <div class="footer-widget col-sm-12 col-md-12 col-lg-12 text-center">
-                                        <h6 class="footer-widget-title"><a href="{{ url('/servicios') }}" class="{{ (request()->is('servicios')) ? 'sale-color' : 'text-dark' }}" style="opacity: 1;">Nuestros Servicios</a></h6>
-                                    </div>
-                                    <div class="footer-widget col-sm-12 col-md-12 col-lg-12 text-center">
-                                        <h6 class="footer-widget-title"><a href="#" class="text-dark" style="opacity: 1;">Trabaja en LebenCo.</a></h6>
-                                    </div>
+                                <div class="footer-widget col-sm-4 col-md-2 col-lg-2 col-12 mb-lg-0 mb-4 text-center justify-content-center align-self-center">
+                                    <h6 class="footer-widget-title"><a href="{{ url('/comunidad') }}" class="{{ (request()->is('nosotros')) ? 'sale-color' : 'text-dark' }}" style="opacity: 1;">Comunidad LebenCo.</a></h6>
                                 </div>
-                                <div class="col-md-4">
-                                    <div class="footer-widget col-sm-12 col-md-12 col-lg-12 text-center">
-                                        <h6 class="footer-widget-title"><a href="{{ url('/contacto') }}" class="text-dark" style="opacity: 1;">Contáctanos</a></h6>
-                                    </div>
-                                    <div class="footer-widget col-sm-12 col-md-12 col-lg-12 text-center">
-                                        <h6 class="footer-widget-title"><a href="{{ url('/politicas') }}" class="text-dark" style="opacity: 1;">Nuestras Políticas</a></h6>
-                                    </div>
+                                <div class="footer-widget col-sm-4 col-md-2 col-lg-2 col-12 mb-lg-0 mb-4 text-center justify-content-center align-self-center">
+                                    <h6 class="footer-widget-title"><a href="{{ url('/servicios') }}" class="{{ (request()->is('servicios')) ? 'sale-color' : 'text-dark' }}" style="opacity: 1;">Nuestros Servicios</a></h6>
+                                </div>
+                                <div class="footer-widget col-sm-4 col-md-2 col-lg-2 col-12 mb-lg-0 mb-4 text-center justify-content-center align-self-center">
+                                    <boton-trabaja></boton-trabaja>
+                                </div>
+                                <div class="footer-widget col-sm-4 col-md-2 col-lg-2 col-12 mb-lg-0 mb-4 text-center justify-content-center align-self-center">
+                                    <h6 class="footer-widget-title"><a href="{{ url('/contacto') }}" class="text-dark" style="opacity: 1;">Contáctanos</a></h6>
+                                </div>
+                                <div class="footer-widget col-sm-4 col-md-2 col-lg-2 col-12 mb-lg-0 mb-4 text-center justify-content-center align-self-center">
+                                    <h6 class="footer-widget-title"><a href="{{ url('/politicas') }}" class="text-dark" style="opacity: 1;">Nuestras Políticas</a></h6>
                                 </div>
                             </div>
                         </div>
                     </section>
                 @endif
+
                 <section class="footer-bottom-area">
                     <div class="container">
                         <div class="row">
                             <div class="col-md-12 text-center text-md-center">
-                                <p class="footer-copyright text-dark">El tamaño de tu voluntad, te llevará a la siguiente meta, ¡éxito! <br> <a href="https://www.youtube.com/channel/UC78DsrgVX7KslItHoTuw8uQ?view_as=subscriber" target="_blank">© 2019 Prevención LebenCo.</a>, Desarrollado por <a href="https://atupy.cl/sitio/" target="_blank">Atupy</a></p>
+                                <p class="footer-copyright text-dark"><!--El tamaño de tu voluntad, te llevará a la siguiente meta, ¡éxito! <br> --> © 2019 Diseñado por <a href="https://www.youtube.com/channel/UC78DsrgVX7KslItHoTuw8uQ?view_as=subscriber" target="_blank"> Prevención LebenCo. SpA </a> - Desarrollado por <a href="https://atupy.cl/sitio/" target="_blank">Atupy</a></p>
                             </div>
                         </div>
                     </div>

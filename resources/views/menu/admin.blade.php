@@ -25,11 +25,11 @@
                 <li>
                     <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fa fa-folder-o" aria-hidden="true"></i><span class="hide-menu">Páginas </span></a>
                     <ul aria-expanded="false" class="collapse">
+                        <li @click="menu=3"><a href="javascript:void(0)">Comunidad LebenCo</a></li>
                         <li @click="menu=2"><a href="javascript:void(0)">Nosotros</a></li>
-                        <li @click="menu=3"><a href="javascript:void(0)">Comunidad Pyme</a></li>
                         <li @click="menu=4"><a href="javascript:void(0)">Servicios</a></li>
                         <li @click="menu=5"><a href="javascript:void(0)">Login</a></li>
-                        <li @click="menu=7"><a href="javascript:void(0)">Home usuario</a></li>
+                        <li @click="menu=7"><a href="javascript:void(0)">Bienvenida</a></li>
                     </ul>
                 </li>
 
@@ -45,18 +45,18 @@
                 <li>
                     <a class="has-arrow waves-effect waves-dark" @click="menu=1" href="javascript:void(0)" aria-expanded="false"><i class="fa fa-folder-o" aria-hidden="true"></i><span class="hide-menu">Contenido </span></a>
                     <ul aria-expanded="false" class="collapse">
-                        <boton-documentos-aprobados></boton-documentos-aprobados>
                         <li @click="menu=0"><a href="javascript:void(0)">Categorías</a></li>
+                        <boton-documentos-aprobados></boton-documentos-aprobados>
                         <boton-documentos-pendientes></boton-documentos-pendientes>
                     </ul>
                 </li>
                 <li>
                     <a class="has-arrow waves-effect waves-dark" @click="menu=5" href="javascript:void(0)" aria-expanded="false"><i class="fa fa-users" aria-hidden="true"></i><span class="hide-menu">Clientes </span></a>
                     <ul aria-expanded="false" class="collapse">
-                        <li @click="menu=5"><a href="javascript:void(0)">Usuarios del sistema</a></li>
-                        <li @click="menu=3"><a href="javascript:void(0)">Categorías usuario</a></li>
-                        <li @click="menu=4"><a href="javascript:void(0)">Profesiones y rubros</a></li>
-                        <li @click="menu=24"><a href="javascript:void(0)">Tabla VIP</a></li>
+                        <li @click="menu=5"><a href="javascript:void(0)">Usuarios</a></li>
+                        <li @click="menu=3"><a href="javascript:void(0)">Categorías</a></li>
+                        <li @click="menu=4"><a href="javascript:void(0)">Actividades</a></li>
+                        <li @click="menu=24"><a href="javascript:void(0)">VIP <i class="fa fa-star text-warning" aria-hidden="true"></i> </a></li>
                     </ul>
                 </li>
                 <li>

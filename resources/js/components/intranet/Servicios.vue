@@ -6,8 +6,8 @@
                 <b-col cols="7">
                     <div class="d-flex justify-content-end align-items-right">
                         <sociales></sociales>
-                        <b-button @click="actualizarPagina()" class="btn btn-success d-lg-block m-l-15" v-b-tooltip.hover title="Actualiza información de la página servicios"><i class="fa fa-plus-circle"></i> Actualizar página</b-button>
-                        <b-button @click="abrirModal(1)" class="btn btn-success d-lg-block m-l-15" v-b-tooltip.hover title="Agrega un servicio a la plataforma"><i class="fa fa-plus-circle"></i> Agregar Servicios</b-button>
+                        <b-button @click="actualizarPagina()" class="btn btn-success d-lg-block m-l-15" v-b-tooltip.hover title="Actualiza información de la página servicios"><i class="fa fa-refresh"></i> Actualizar página</b-button>
+                        <b-button @click="abrirModal(1)" class="btn btn-success d-lg-block m-l-15" v-b-tooltip.hover title="Agrega un servicio a la plataforma"><i class="fa fa-plus-circle"></i> Agregar</b-button>
                     </div>
                 </b-col>
             </b-row>

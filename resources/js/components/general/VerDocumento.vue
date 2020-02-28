@@ -19,7 +19,7 @@
             <div class="text-center" v-text="documento.usuario.tipo_usuario < 3 ? 'Autor: Prevención LebenCo.' : 'Autor : ' + documento.usuario.nombre"></div>
             <p class="product-item-price">
                 <span class="product-price-amount">
-                    <span class="product-price-currency-symbol"></span><h6 class="titulo-documento"> {{ documento.valor | currency}} </h6>
+                    <span class="product-price-currency-symbol"></span><h6 class="titulo-documento mb-0"> {{ documento.valor | currency}} </h6>
                 </span>
             </p>
         </div>
@@ -61,7 +61,7 @@
                 <b-button size="md" variant="success" @click="descargar(documento.id)" v-if="autenticado == 1">{{ documento.valor | currency }} -  Descargar</b-button>
                 <a class="btn btn-success btn-md text-white" href="/login" v-else>{{ documento.valor | currency }} -  Descargar</a>
                 <b-button size="md" variant="danger" @click="cerrarModalVistaDocumento()"> Cerrar </b-button>
-                
+
             </template>
         </b-modal>
     </div>

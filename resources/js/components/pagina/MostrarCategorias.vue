@@ -1,5 +1,5 @@
 <template>
-    <section class="sec-padding" v-show="categorias.length > 0">
+    <section class="sec-padding-login" v-show="categorias.length > 0">
         <div class="container">
             <div class="page-head">
                 <span class="page-sub-title"></span>

@@ -14,46 +14,42 @@
 
             <b-row>
                 <b-col>
-                    <b-card title="Logos">
+                    <b-card title="Logos - Imágenes (100px como máximo):">
                         <b-row>
                             <b-col class="text-center">
-                                <b-form-group label="Logo (150px alto X 34px ancho | PNG):" label-for="logo">
-                                    <b-form-file id="logo" name="logo" @input="ver_imagen_logo" accept="image/png" placeholder="Escoge un archivo o suelta aquí" drop-placeholder="Suelta aquí"></b-form-file>
+                                <b-form-group label-for="logo">
+                                    <b-form-file id="logo" name="logo" @input="ver_imagen_logo" accept="image/png" placeholder="Arrastra o pincha aquí" drop-placeholder="Suelta aquí"></b-form-file>
                                 </b-form-group>
                                 <b-img v-show="logo != ''" :src="logo" fluid height="150" class="imagen"></b-img>
                             </b-col>
                             <b-col class="text-center">
-                                <b-form-group label="Favicon (155px alto X 95px ancho | PNG):" label-for="favicon">
-                                    <b-form-file id="favicon" name="favicon" @input="ver_imagen_favicon" accept="image/png" placeholder="Escoge un archivo o suelta aquí" drop-placeholder="Suelta aquí"></b-form-file>
+                                <b-form-group label-for="favicon">
+                                    <b-form-file id="favicon" name="favicon" @input="ver_imagen_favicon" accept="image/png" placeholder="Arrastra o pincha aquí" drop-placeholder="Suelta aquí"></b-form-file>
                                 </b-form-group>
                                 <b-img v-show="favicon != ''" :src="favicon" fluid height="150" class="imagen"></b-img>
                             </b-col>
                             <b-col class="text-center">
-                                <b-form-group label="Footer (150px alto X 34px ancho | PNG)" label-for="logo_footer">
-                                    <b-form-file id="logo_footer" name="logo_footer" @input="ver_imagen_logo_footer" accept="image/png" placeholder="Escoge un archivo o suelta aquí" drop-placeholder="Suelta aquí"></b-form-file>
+                                <b-form-group label-for="logo_footer">
+                                    <b-form-file id="logo_footer" name="logo_footer" @input="ver_imagen_logo_footer" accept="image/png" placeholder="Arrastra o pincha aquí" drop-placeholder="Suelta aquí"></b-form-file>
                                 </b-form-group>
                                 <b-img v-show="footer != ''" :src="footer" fluid height="150" class="imagen"></b-img>
                             </b-col>
                             <b-col class="text-center">
-                                <b-form-group label="Home (150px alto X 34px ancho | PNG)" label-for="logo_escritorio">
-                                    <b-form-file id="logo_escritorio" name="logo_escritorio" @input="ver_imagen_logo_escritorio" accept="image/png" placeholder="Escoge un archivo o suelta aquí" drop-placeholder="Suelta aquí"></b-form-file>
+                                <b-form-group label-for="logo_escritorio">
+                                    <b-form-file id="logo_escritorio" name="logo_escritorio" @input="ver_imagen_logo_escritorio" accept="image/png" placeholder="Arrastra o pincha aquí" drop-placeholder="Suelta aquí"></b-form-file>
                                 </b-form-group>
                                 <b-img v-show="escritorio != ''" :src="escritorio" fluid height="150" class="imagen"></b-img>
                             </b-col>
                         </b-row>
                     </b-card>
-                    <b-card title="Documentación">
-                        <b-form-group label="Terminos y condiciones" label-for="terminos" label-cols-sm="4">
-                            <b-form-file id="terminos" name="terminos" accept=".pdf" placeholder="Escoge un archivo o suelta aquí" drop-placeholder="Suelta aquí"></b-form-file>
+                    <b-card title="Mensaje de modal trabaja con nosotros">
+                        <b-form-group>
+                            <b-form-textarea v-model="mensaje_trabaja" placeholder="Ingresa el mensaje ..." rows="3" max-rows="6"></b-form-textarea>
                         </b-form-group>
-                        <b-form-group label="Políticas de privacidad" label-for="privacidad" label-cols-sm="4">
-                            <b-form-file id="privacidad" name="privacidad" accept=".pdf" placeholder="Escoge un archivo o suelta aquí" drop-placeholder="Suelta aquí"></b-form-file>
-                        </b-form-group>
-                        <b-form-group label="Políticas de satisfacción" label-for="satisfaccion" label-cols-sm="4">
-                            <b-form-file id="satisfaccion" name="satisfaccion" accept=".pdf" placeholder="Escoge un archivo o suelta aquí" drop-placeholder="Suelta aquí"></b-form-file>
-                        </b-form-group>
-                        <b-form-group label="Políticas de derecho de autor" label-for="derechos" label-cols-sm="4">
-                            <b-form-file id="derechos" name="derechos" accept=".pdf" placeholder="Escoge un archivo o suelta aquí" drop-placeholder="Suelta aquí"></b-form-file>
+                    </b-card>
+                    <b-card title="Políticas">
+                        <b-form-group>
+                            <tinymce apiKey="5pb70j35mtgqauwus85v88pphv2ig89gwfx0y7s7nhfdd3e8" id="d1" v-model="politicas" :init="{ plugins: 'spellchecker', menubar: 'tools', toolbar: 'spellchecker', spellchecker_languages: 'English=en,Danish=da,Dutch=nl,Finnish=fi,French=fr_FR,' + 'German=de,Italian=it,Polish=pl,Portuguese=pt_BR,Spanish=es,Swedish=sv' }" :other_options="options"></tinymce>
                         </b-form-group>
                     </b-card>
                 </b-col>
@@ -75,7 +71,13 @@
                 escritorio: '',
                 spinner: {
                     estado: 0
-                }
+                },
+                options: {
+                    language_url: 'intranet/js/es_ES.js',
+                    height: '500px'
+                },
+                politicas: '',
+                mensaje_trabaja: ''
             }
         },
         methods:{
@@ -98,6 +100,8 @@
                     me.favicon = response.data.general.favicon_url != null ? 'storage/' + response.data.general.favicon_url : '';
                     me.footer = response.data.general.logo_fot_url != null ? 'storage/' + response.data.general.logo_fot_url : '';
                     me.escritorio = response.data.general.logo_escritorio_url != null ? 'storage/' + response.data.general.logo_escritorio_url : '';
+                    me.politicas = response.data.general.terminos_url != null ? response.data.general.terminos_url  : ''
+                    me.mensaje_trabaja = response.data.general.mensaje_trabaja
                 })
                 .catch(function (error) {
                     console.log(error);
@@ -122,17 +126,8 @@
                 let logo_escritorio = document.querySelector('#logo_escritorio');
                 formData.append('logo_escritorio', logo_escritorio.files[0]);
 
-                let terminos = document.querySelector('#terminos');
-                formData.append('terminos', terminos.files[0]);
-
-                let privacidad = document.querySelector('#privacidad');
-                formData.append('privacidad', privacidad.files[0]);
-
-                let satisfaccion = document.querySelector('#satisfaccion');
-                formData.append('satisfaccion', satisfaccion.files[0]);
-
-                let derechos = document.querySelector('#derechos');
-                formData.append('derechos', derechos.files[0]);
+                formData.append('terminos', me.politicas);
+                formData.append('mensaje_trabaja', me.mensaje_trabaja);
 
                 axios.post('/general/actualizar',formData).then(function (response) {
                     Vue.$toast.open({

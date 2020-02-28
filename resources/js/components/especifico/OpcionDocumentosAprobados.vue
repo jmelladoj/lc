@@ -1,5 +1,5 @@
 <template>
-    <li @click="actualizar_datos"><a href="javascript:void(0)">Documentos aprobados</a></li>
+    <li @click="actualizar_datos"><a href="javascript:void(0)">Aprobados</a></li>
 </template>
 
 <script>
@@ -10,7 +10,7 @@
             return {
 
             }
-        },    
+        },
         methods:{
             actualizar_datos(){
                 this.$root.menu = 1

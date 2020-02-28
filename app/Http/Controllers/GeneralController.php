@@ -60,49 +60,8 @@ class GeneralController extends Controller
             );
         }
 
-        if ($request->hasFile('terminos')){
-            $terminos = $request->file('terminos');
-            $nombre = 'terminos.' . $request->file('terminos')->getClientOriginalExtension();
-
-            if($general->terminos_url != null) { Storage::disk('public')->delete($general->terminos_url); }
-
-            $general->terminos_url = Storage::disk('public')->putFileAs(
-                'general', $terminos, $nombre, 'public'
-            );
-        }
-
-        if ($request->hasFile('privacidad')){
-            $privacidad = $request->file('privacidad');
-            $nombre = 'privacidad.' . $request->file('privacidad')->getClientOriginalExtension();
-
-            if($general->privacidad_url != null) { Storage::disk('public')->delete($general->privacidad_url); }
-
-            $general->privacidad_url = Storage::disk('public')->putFileAs(
-                'general', $privacidad, $nombre, 'public'
-            );
-        }
-
-        if ($request->hasFile('satisfaccion')){
-            $satisfaccion = $request->file('satisfaccion');
-            $nombre = 'satisfaccion.' . $request->file('satisfaccion')->getClientOriginalExtension();
-
-            if($general->satisfaccion_url != null) { Storage::disk('public')->delete($general->satisfaccion_url); }
-
-            $general->satisfaccion_url = Storage::disk('public')->putFileAs(
-                'general', $satisfaccion, $nombre, 'public'
-            );
-        }
-
-        if ($request->hasFile('derechos')){
-            $derechos = $request->file('derechos');
-            $nombre = 'derechos.' . $request->file('derechos')->getClientOriginalExtension();
-
-            if($general->derechos_url != null) { Storage::disk('public')->delete($general->derechos_url); }
-
-            $general->derechos_url = Storage::disk('public')->putFileAs(
-                'general', $derechos, $nombre, 'public'
-            );
-        }
+        $general->terminos_url = $request->terminos;
+        $general->mensaje_trabaja = $request->mensaje_trabaja;
 
         $general->save();
     }

@@ -10,9 +10,8 @@ class Documento extends Model
     //
     use SoftDeletes;
 
-    protected $guarded = [
-        'id'
-    ];
+    protected $guarded = ['id'];
+    protected $appends = ['nombre_categoria'];
 
     protected $dates = ['deleted_at'];
 
@@ -45,6 +44,10 @@ class Documento extends Model
 
     public function categoria(){
         return $this->belongsTo(CategoriaDocumento::class, 'categorias_documentos_id');
+    }
+
+    public function getNombreCategoriaAttribute(){
+        return $this->categorias_documentos_id != null ? $this->categoria->nombre : 'Sin categoría';
     }
 
 }

@@ -23,6 +23,7 @@ class CreateGeneralsTable extends Migration
             $table->string('privacidad_url')->nullable()->default(null);
             $table->string('satisfaccion_url')->nullable()->default(null);
             $table->string('derechos_url')->nullable()->default(null);
+            $table->string('mensaje_trabaja')->nullable()->default('');
             $table->timestamps();
         });
     }

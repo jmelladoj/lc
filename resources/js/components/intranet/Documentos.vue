@@ -161,9 +161,9 @@
                             </b-col>
                             <b-col>
                                 <b-form-group class="mb-2">
-                                    <ValidationProvider name="categoria" rules="required:min_value:1" v-slot="{ errors }">
+                                    <ValidationProvider name="categoria" rules="required:min_value:0" v-slot="{ errors }">
                                         <b-form-select v-model="documento.categoria_id" class="mb-3">
-                                            <option :value="0">Seleccionar una categoría</option>
+                                            <option :value="0">Sin categoría</option>
                                             <option v-for="(categoria,index) in categorias" :key="index" :value="categoria.id" v-text="categoria.nombre"></option>
                                         </b-form-select>
                                         <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
