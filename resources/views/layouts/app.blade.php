@@ -14,6 +14,7 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 
     <!-- Styles -->
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet"></link>
     <link href="{{ asset('css/pagina-css.css') }}" rel="stylesheet">
 
     <link rel="icon" type="image/png" href="{{ asset('storage/general/favicon.png') }}">

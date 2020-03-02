@@ -2,8 +2,8 @@
     <div class="page-wrapper">
         <b-container fluid class="mb-5">
             <b-row class="page-titles">
-                <b-col cols="5" class="align-self-center"><h4 class="text-themecolor">Escritorio</h4></b-col>
-                <b-col cols="7">
+                <b-col xs="12" sm="12" md="5" class="align-self-center"><h4 class="text-themecolor">Escritorio</h4></b-col>
+                <b-col xs="12" sm="12" md="7">
                     <div class="d-flex justify-content-end align-items-right">
                         <sociales></sociales>
                     </div>
@@ -27,7 +27,7 @@
                                 </div>
                             </b-col>
                         </b-card>
-                        <b-card class="mt-0 mb-0">
+                        <b-card class="mt-0 mb-0" v-if="tips.length > 0">
                             <b-col cols="12">
                                 <div id="myCarouse2" class="slide" data-ride="carousel">
                                     <div class="carousel-inner">
@@ -92,6 +92,7 @@
                                     outlined
                                     small
                                     hover
+                                    stacked="sm"
                                     :items="items"
                                     :fields="fields"
                                     :current-page="currentPage"

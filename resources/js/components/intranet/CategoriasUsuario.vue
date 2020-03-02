@@ -2,8 +2,8 @@
     <div class="page-wrapper">
         <b-container fluid class="mb-5">
             <b-row class="page-titles">
-                <b-col cols="5" class="align-self-center"><h4 class="text-themecolor">Categorías Clientes</h4></b-col>
-                <b-col cols="7">
+                <b-col xs="12" sm="12" md="5"  class="align-self-center"><h4 class="text-themecolor">Categorías Clientes</h4></b-col>
+                <b-col xs="12" sm="12" md="7" >
                     <div class="d-flex justify-content-end align-items-right">
                         <sociales></sociales>
                         <b-button @click="abrirModal(1)" class="btn btn-success d-lg-block m-l-15" v-b-tooltip.hover title="Agrega una categoría a la plataforma"><i class="fa fa-plus-circle"></i> Agregar Categoría</b-button>
@@ -57,6 +57,7 @@
                                     outlined
                                     small
                                     hover
+                                    stacked="sm"
                                     :items="items"
                                     :fields="fields"
                                     :current-page="currentPage"
@@ -118,7 +119,7 @@
                 <b-modal ref="modal_categoria" :title="modal_categoria.titulo" size="lg" no-close-on-backdrop>
                     <b-form>
                         <b-row>
-                            <b-col>
+                            <b-col xs="12" sm="12" md="6">
                                 <b-form-group label="Nombre de Categoría">
                                     <ValidationProvider name="nombre" rules="required|min:3|alpha_spaces" v-slot="{ errors }">
                                         <b-form-input type="text" v-model="categoria.nombre"></b-form-input>
@@ -126,7 +127,7 @@
                                     </ValidationProvider>
                                 </b-form-group>
                             </b-col>
-                            <b-col>
+                            <b-col xs="12" sm="12" md="6">
                                 <b-form-group label="Nivel de Categoría">
                                     <ValidationProvider name="nivel" rules="required|min:3" v-slot="{ errors }">
                                         <b-form-input type="text" v-model="categoria.nivel"></b-form-input>
@@ -137,7 +138,7 @@
                         </b-row>
 
                         <b-row>
-                            <b-col>
+                            <b-col xs="12" sm="12" md="6">
                                 <b-form-group label="Gasta inicio">
                                     <ValidationProvider name="gasto inicio" rules="required|min_value:0|numeric" v-slot="{ errors }">
                                         <b-form-input type="numeric" v-model="categoria.gasto_inicio"></b-form-input>
@@ -145,7 +146,7 @@
                                     </ValidationProvider>
                                 </b-form-group>
                             </b-col>
-                            <b-col>
+                            <b-col xs="12" sm="12" md="6">
                                 <b-form-group label="Gasto fin">
                                     <ValidationProvider name="gasto fin" rules="required|min_value:0|numeric" v-slot="{ errors }">
                                         <b-form-input type="numeric" v-model="categoria.gasto_fin"></b-form-input>
@@ -156,7 +157,7 @@
                         </b-row>
 
                         <b-row>
-                            <b-col>
+                            <b-col xs="12" sm="12" md="6">
                                 <b-form-group label="Color">
                                     <ValidationProvider name="color" rules="required|min:1" v-slot="{ errors }">
                                         <b-form-input type="text" v-model="categoria.color"></b-form-input>
@@ -164,7 +165,7 @@
                                     </ValidationProvider>
                                 </b-form-group>
                             </b-col>
-                            <b-col>
+                            <b-col xs="12" sm="12" md="6">
                                 <b-form-group label="Bonificación">
                                     <ValidationProvider name="bonificación" rules="required|min_value:1|numeric" v-slot="{ errors }">
                                         <b-form-input type="numeric" v-model="categoria.bonificacion"></b-form-input>

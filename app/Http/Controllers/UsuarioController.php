@@ -201,6 +201,19 @@ class UsuarioController extends Controller
 
     }
 
+    public function actualizar_archivo_usuario(Request $request){
+        if ($request->hasFile('archivo_usuario')) {
+            $usuario = User::find($request->usuario_id);
+            if($usuario->archivo_usuario != null) { Storage::disk('public')->delete($usuario->archivo_usuario); }
+
+            $usuario->archivo_usuario = Storage::disk('public')->putFile('archivos_usuarios', $request->file('archivo_usuario'));
+            $usuario->nombre_archivo_usuario = $request->file('archivo_usuario')->getClientOriginalName();
+            $usuario->save();
+
+            return ['nombre_archivo_usuario' => $request->file('archivo_usuario')->getClientOriginalName()];
+        }
+    }
+
     public function actualizar_usuario_tabla_vip(Request $request){
 
         $usuario = User::find($request->id);

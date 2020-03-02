@@ -7,7 +7,7 @@
         <b-modal ref="modal_perfil" :title="modal_perfil.titulo" size="lg" no-close-on-backdrop>
             <b-form>
                 <b-row>
-                    <b-col cols="4">
+                    <b-col xs="12" sm="12" md="4">
                         <b-card>
                             <center class="mt-1">
                                 <img v-bind:src="usuario.url_perfil" alt="Imagen de usuario" class="img-circle mb-2" width="150">
@@ -24,7 +24,7 @@
                         </b-card>
 
                     </b-col>
-                    <b-col cols="8">
+                    <b-col xs="12" sm="12" md="8">
                         <b-card>
                             <b-tabs content-class="mt-3">
                                 <b-tab title="Datos comerciales" active>
@@ -36,14 +36,14 @@
                                     </b-form-group>
 
                                     <b-row>
-                                        <b-col>
+                                        <b-col  xs="12" sm="12" md="6">
                                             <b-form-group label="Teléfono">
                                                 <b-input-group prepend="+56 ">
                                                     <b-form-input type="number" v-model="usuario.telefono" :readonly="true"></b-form-input>
                                                 </b-input-group>
                                             </b-form-group>
                                         </b-col>
-                                        <b-col>
+                                        <b-col  xs="12" sm="12" md="6">
                                             <b-form-group  label="Comuna">
                                                 <b-form-input type="text" v-model="usuario.comuna" :readonly="true"></b-form-input>
                                             </b-form-group>
@@ -54,7 +54,7 @@
                                 <b-tab title="Comentarios">
                                     <b-container fluid>
                                         <b-row>
-                                            <b-col md="4" class="my-1">
+                                            <b-col xs="12" sm="12" md="4" class="my-1">
                                                 <b-form-group label-cols-sm="3" label="Filtrar" class="mb-0">
                                                 <b-input-group>
                                                     <b-form-input v-model="filter_pyme" placeholder="Escribe para buscar" />
@@ -65,7 +65,7 @@
                                                 </b-form-group>
                                             </b-col>
 
-                                            <b-col md="4" class="my-1">
+                                            <b-col xs="12" sm="12" md="4" class="my-1">
                                                 <b-form-group label-cols-sm="3" label="Ordenar" class="mb-0">
                                                 <b-input-group>
                                                     <b-form-select v-model="sortBy_pyme" :options="sortOptions_pyme">
@@ -78,7 +78,7 @@
                                                 </b-form-group>
                                             </b-col>
 
-                                            <b-col md="4" class="my-1">
+                                            <b-col xs="12" sm="12" md="4" class="my-1">
                                                 <b-form-group label-cols-sm="3" label="Dirección" class="mb-0">
                                                 <b-input-group>
                                                     <b-form-select v-model="sortDirection_pyme" slot="append">
@@ -99,6 +99,7 @@
                                             outlined
                                             small
                                             hover
+                                            stacked="sm"
                                             :items="items_pyme"
                                             :fields="fields_pyme"
                                             :current-page="currentPage_pyme"

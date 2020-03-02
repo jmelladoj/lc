@@ -135,6 +135,8 @@ Route::get('/usuarios/tabla/comunidad', 'UsuarioController@usuariosTablaComunida
 Route::post('/usuario/tabla/comunidad', 'UsuarioController@usuario_tabla_comunidad')->name('Usuario Tabla comunidad');
 Route::post('/usuario/tabla/vip', 'UsuarioController@usuario_tabla_vip')->name('Usuario Tabla vip');
 Route::post('/usuario/actualizar/avatar', 'UsuarioController@actualizar_Avatar')->name('Usuario avatar');
+Route::post('usuario/crear/actualizar/archivo', 'UsuarioController@actualizar_archivo_usuario')->name('Usuario archivo');
+
 
 
 Route::post('/usuario/recuperar/password', 'UsuarioController@recuperar')->name('Recuperar contraseña');

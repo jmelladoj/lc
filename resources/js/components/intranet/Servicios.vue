@@ -2,8 +2,8 @@
     <div class="page-wrapper">
         <b-container fluid class="mb-5">
             <b-row class="page-titles">
-                <b-col cols="5" class="align-self-center"><h4 class="text-themecolor">Servicios</h4></b-col>
-                <b-col cols="7">
+                <b-col xs="12" sm="12" md="5" class="align-self-center"><h4 class="text-themecolor">Servicios</h4></b-col>
+                <b-col xs="12" sm="12" md="7">
                     <div class="d-flex justify-content-end align-items-right">
                         <sociales></sociales>
                         <b-button @click="actualizarPagina()" class="btn btn-success d-lg-block m-l-15" v-b-tooltip.hover title="Actualiza información de la página servicios"><i class="fa fa-refresh"></i> Actualizar página</b-button>
@@ -58,6 +58,7 @@
                                     outlined
                                     small
                                     hover
+                                    stacked="sm"
                                     :items="items"
                                     :fields="fields"
                                     :current-page="currentPage"
@@ -211,6 +212,7 @@
                                         outlined
                                         small
                                         hover
+                                        stacked="sm"
                                         :items="items_sub_servicio"
                                         :fields="fields_sub_servicio"
                                         :current-page="currentPage_sub_servicio"

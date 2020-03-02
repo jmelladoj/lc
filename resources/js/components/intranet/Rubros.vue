@@ -2,8 +2,8 @@
     <div class="page-wrapper">
         <b-container fluid class="mb-5">
             <b-row class="page-titles">
-                <b-col cols="5" class="align-self-center"><h4 class="text-themecolor">Rubros</h4></b-col>
-                <b-col cols="7">
+                <b-col xs="12" sm="12" md="5" class="align-self-center"><h4 class="text-themecolor">Rubros</h4></b-col>
+                <b-col xs="12" sm="12" md="7">
                     <div class="d-flex justify-content-end align-items-right">
                         <b-button @click="abrirModal(1)" class="btn btn-success d-lg-block m-l-15" v-b-tooltip.hover title="Agregar un rubro"><i class="fa fa-plus-circle"></i> Agregar Rubro</b-button>
                     </div>
@@ -56,6 +56,7 @@
                                     outlined
                                     small
                                     hover
+                                    stacked="sm"
                                     :items="items"
                                     :fields="fields"
                                     :current-page="currentPage"

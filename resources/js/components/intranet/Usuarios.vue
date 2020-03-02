@@ -2,8 +2,8 @@
     <div class="page-wrapper">
         <b-container fluid class="mb-5">
             <b-row class="page-titles">
-                <b-col cols="5" class="align-self-center"><h4 class="text-themecolor">Usuarios</h4></b-col>
-                <b-col cols="7">
+                <b-col xs="12" sm="12" md="5" class="align-self-center"><h4 class="text-themecolor">Usuarios</h4></b-col>
+                <b-col xs="12" sm="12" md="7">
                     <div class="d-flex justify-content-end align-items-right">
                         <sociales></sociales>
                         <b-button @click="abrirModal(1)" class="btn btn-success d-lg-block m-l-15" v-b-tooltip title="Agrega un usuario a la plataforma"><i class="fa fa-plus-circle"></i> Agregar Usuario</b-button>
@@ -58,6 +58,7 @@
                                     outlined
                                     small
                                     hover
+                                    stacked="sm"
                                     :items="items"
                                     :fields="fields"
                                     :current-page="currentPage"
@@ -163,7 +164,7 @@
                 <b-modal ref="modal_usuario" :title="modal_usuario.titulo" size="lg" no-close-on-backdrop>
                     <b-form v-if="modal_usuario.accion == 1">
                         <b-row>
-                            <b-col>
+                            <b-col xs="12" sm="12" md="6">
                                 <b-form-group label="Nombre de Usuario">
                                     <ValidationProvider name="nombre" rules="required|min:3|alpha_spaces" v-slot="{ errors }">
                                         <b-form-input type="text" v-model="usuario.nombre"></b-form-input>
@@ -171,7 +172,7 @@
                                     </ValidationProvider>
                                 </b-form-group>
                             </b-col>
-                            <b-col>
+                            <b-col xs="12" sm="12" md="6">
                                 <b-form-group label="Run / rut usuario">
                                     <ValidationProvider name="run / rut" rules="required|min:3" v-slot="{ errors }">
                                         <input type="text" v-rut v-model="usuario.run" class="form-control" />
@@ -182,7 +183,7 @@
                         </b-row>
 
                         <b-row>
-                            <b-col>
+                            <b-col xs="12" sm="12" md="6">
                                 <b-form-group label="Email">
                                     <ValidationProvider name="email" rules="required|email" v-slot="{ errors }">
                                         <b-form-input type="email" v-model="usuario.email"></b-form-input>
@@ -190,7 +191,7 @@
                                     </ValidationProvider>
                                 </b-form-group>
                             </b-col>
-                            <b-col>
+                            <b-col xs="12" sm="12" md="6">
                                 <b-form-group label="Contraseña">
                                     <ValidationProvider name="contraseña" rules="required|min:6" v-slot="{ errors }">
                                         <b-form-input type="password" v-model="usuario.password"></b-form-input>
@@ -201,7 +202,7 @@
                         </b-row>
 
                         <b-row>
-                            <b-col>
+                            <b-col xs="12" sm="12" md="6">
                                 <b-form-group label="Tipo de usuario">
                                     <ValidationProvider name="tipo de usuario" rules="required|oneOf:1,2,3" v-slot="{ errors }">
                                         <b-form-select v-model="usuario.tipo_usuario">
@@ -213,9 +214,6 @@
                                         <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
                                     </ValidationProvider>
                                 </b-form-group>
-                            </b-col>
-                            <b-col>
-
                             </b-col>
                         </b-row>
                     </b-form>
@@ -235,12 +233,12 @@
                 <b-modal ref="modal_saldo" :title="modal_saldo.titulo" size="lg" no-close-on-backdrop>
                     <b-form>
                         <b-row>
-                            <b-col>
+                            <b-col xs="12" sm="12" md="6">
                                 <b-form-group label="Saldo Actual">
                                     <b-form-input type="number" v-model="usuario.saldo_actual" readonly=""></b-form-input>
                                 </b-form-group>
                             </b-col>
-                            <b-col>
+                            <b-col xs="12" sm="12" md="6">
                                 <b-form-group label="Saldo a añadir">
                                     <ValidationProvider name="saldo a añadir" rules="required|min_value:0|numeric" v-slot="{ errors }">
                                         <b-form-input type="number" v-model="usuario.nuevo_saldo"></b-form-input>

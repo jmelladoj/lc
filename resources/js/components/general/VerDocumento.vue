@@ -34,7 +34,8 @@
                         <h3 v-text="modal_vista_documento.titulo"></h3>
                     </div>
                     <div class="col-md-4">
-                        <h4>Saldo disponible: {{ saldo_disponible | currency }}</h4>
+                        <h4 v-if="autenticado == 1">Saldo disponible: {{ saldo_disponible | currency }}</h4>
+                        <h4 v-else>Para tener este documento, debes iniciar sesión</h4>
                     </div>
             </template>
 
@@ -47,7 +48,7 @@
                     <h6 class="text-center">Imagen de referencia sobre parte del documento</h6>
                 </b-form-group>
 
-                <b-form-group v-show="documento.url_imagen_vista_uno" class="mb-4">
+                <b-form-group v-show="documento.url_imagen_vista_uno" class="mb-4 text-center">
                     <b-img v-bind:src="'/storage/' + documento.url_imagen_vista_uno" fluid class="center" alt="Vista previa"></b-img>
                 </b-form-group>
 
@@ -59,7 +60,8 @@
             <template slot="modal-footer">
                 <b-spinner variant="success" label="Spinning" v-show="spinner.estado == 1"></b-spinner>
                 <b-button size="md" variant="success" @click="descargar(documento.id)" v-if="autenticado == 1">{{ documento.valor | currency }} -  Descargar</b-button>
-                <a class="btn btn-success btn-md text-white" href="/login" v-else>{{ documento.valor | currency }} -  Descargar</a>
+                <!--<a class="btn btn-success btn-md text-white" href="/login" v-else>{{ documento.valor | currency }} -  Descargar</a>-->
+                <a class="btn btn-success btn-md text-white" href="/login" v-else>Inicar sesión</a>
                 <b-button size="md" variant="danger" @click="cerrarModalVistaDocumento()"> Cerrar </b-button>
 
             </template>

@@ -109,6 +109,9 @@ class CreateUsersTable extends Migration
 
             $table->string('url_perfil')->default('img/perfil.png');
 
+            $table->string('archivo_usuario')->nullable()->default(null);
+            $table->string('nombre_archivo_usuario')->nullable()->default(null);
+
             $table->unsignedBigInteger('comuna_id')->nullable()->default(NULL);
             $table->foreign('comuna_id')->references('id')->on('comunas');
 

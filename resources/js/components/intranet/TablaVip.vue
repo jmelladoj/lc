@@ -2,8 +2,8 @@
     <div class="page-wrapper">
         <b-container fluid class="mb-5">
             <b-row class="page-titles">
-                <b-col cols="5" class="align-self-center"><h4 class="text-themecolor">Tabla VIP</h4></b-col>
-                <b-col cols="7">
+                <b-col xs="12" sm="12" md="5" class="align-self-center"><h4 class="text-themecolor">Tabla VIP</h4></b-col>
+                <b-col xs="12" sm="12" md="7">
                     <div class="d-flex justify-content-end align-items-right">
                         <sociales></sociales>
                         <b-button @click="$root.menu = 5" class="btn btn-success d-lg-block m-l-15" v-b-tooltip title="Agrega un usuario a la plataforma"><i class="fa fa-arrow-left"></i> Volver a usuarios</b-button>
@@ -13,12 +13,12 @@
 
             <b-card>
                 <b-row>
-                    <b-col>
+                    <b-col xs="12" sm="12" md="6">
                         <b-form-group label="Cliente">
                             <b-form-input v-model="tabla.empresa" type="text" readonly="" placeholder="Pyme"></b-form-input>
                         </b-form-group>
                     </b-col>
-                    <b-col>
+                    <b-col xs="12" sm="12" md="6">
                         <b-form-group label="Categoría">
                             <ValidationProvider name="posición" rules="required|numeric|between:0,10" v-slot="{ errors }">
                                 <b-form-select v-model="tabla.posicion" @change="actualizar_usuario_tabla">
@@ -33,7 +33,7 @@
                             </ValidationProvider>
                         </b-form-group>
                     </b-col>
-                    <b-col>
+                    <b-col xs="12" sm="12" md="6">
                         <b-form-group label="N° likes">
                             <ValidationProvider name="likes" rules="required|numeric|min:0" v-slot="{ errors }">
                                 <b-form-input type="number" v-model="tabla.likes" placeholder="Likes" @keyup="actualizar_usuario_tabla"></b-form-input>
@@ -41,7 +41,7 @@
                             </ValidationProvider>
                         </b-form-group>
                     </b-col>
-                    <b-col>
+                    <b-col xs="12" sm="12" md="6">
                         <b-form-group label="N° dislikes">
                             <ValidationProvider name="dislikes" rules="required|numeric|min:0" v-slot="{ errors }">
                                 <b-form-input type="number" v-model="tabla.dislikes" placeholder="Dislikes" @keyup="actualizar_usuario_tabla"></b-form-input>
@@ -108,6 +108,7 @@
                                     outlined
                                     small
                                     hover
+                                    stacked="sm"
                                     :items="items_pyme"
                                     :fields="fields_pyme"
                                     :current-page="currentPage_pyme"
@@ -209,6 +210,7 @@
                                     outlined
                                     small
                                     hover
+                                    stacked="sm"
                                     :items="items"
                                     :fields="fields"
                                     :current-page="currentPage"

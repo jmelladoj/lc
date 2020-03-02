@@ -31,6 +31,7 @@
             outlined
             small
             hover
+            stacked="sm"
             :items="items"
             :fields="fields"
             :current-page="currentPage"

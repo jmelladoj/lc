@@ -2,8 +2,8 @@
     <div class="page-wrapper">
         <b-container fluid class="mb-5">
             <b-row class="page-titles">
-                <b-col cols="5" class="align-self-center"><h4 class="text-themecolor">Seminarios</h4></b-col>
-                <b-col cols="7">
+                <b-col xs="12" sm="12" md="5" class="align-self-center"><h4 class="text-themecolor">Seminarios</h4></b-col>
+                <b-col xs="12" sm="12" md="7">
                     <div class="d-flex justify-content-end align-items-right">
                         <sociales></sociales>
                         <b-button v-if="tipo_usuario < 3" @click="abrirModal(1)" class="btn btn-success d-lg-block m-l-15" v-b-tooltip.hover title="Agrega un seminario"><i class="fa fa-plus-circle"></i> Agregar Seminario</b-button>
@@ -57,6 +57,7 @@
                                     outlined
                                     small
                                     hover
+                                    stacked="sm"
                                     :items="items"
                                     :fields="fields"
                                     :current-page="currentPage"
@@ -119,7 +120,7 @@
                 <b-modal ref="modal_seminario" :title="modal_seminario.titulo" size="md" no-close-on-backdrop scrollable>
                     <b-form>
                         <b-row>
-                            <b-col>
+                            <b-col xs="12" sm="12" md="6">
                                 <b-form-group label="Título de Seminario">
                                     <ValidationProvider name="título" rules="required|min:3" v-slot="{ errors }">
                                         <b-form-input type="text" v-model="seminario.titulo"></b-form-input>
@@ -127,7 +128,7 @@
                                     </ValidationProvider>
                                 </b-form-group>
                             </b-col>
-                            <b-col>
+                            <b-col xs="12" sm="12" md="6">
                                 <b-form-group label="Fecha de Seminario">
                                     <ValidationProvider name="fecha" rules="required|min:3" v-slot="{ errors }">
                                         <b-form-input type="date" v-model="seminario.fecha"></b-form-input>
@@ -138,7 +139,7 @@
                         </b-row>
 
                         <b-row>
-                            <b-col>
+                            <b-col xs="12" sm="12" md="6">
                                 <b-form-group label="Valor de inscripción">
                                     <ValidationProvider name="valor" rules="required|numeric|min_value:0" v-slot="{ errors }">
                                         <b-form-input type="number" v-model="seminario.valor"></b-form-input>
@@ -146,7 +147,7 @@
                                     </ValidationProvider>
                                 </b-form-group>
                             </b-col>
-                            <b-col>
+                            <b-col xs="12" sm="12" md="6">
                                 <b-form-group label="Capacidad de seminario">
                                     <ValidationProvider name="capacidad" rules="required|numeric|min_value:0" v-slot="{ errors }">
                                         <b-form-input type="number" v-model="seminario.capacidad"></b-form-input>
@@ -207,7 +208,7 @@
             <b-modal ref="modal_participantes" :title="modal_participantes.titulo" size="md" no-close-on-backdrop scrollable>
                     <b-form>
                         <b-form-group>
-                            <b-table show-empty responsive striped borderless outlined small hover
+                            <b-table show-empty responsive striped borderless outlined small hover stacked="sm"
                                 :items="participantes"
                                 :fields="campos">
 

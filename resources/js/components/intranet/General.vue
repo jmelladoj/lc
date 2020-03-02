@@ -2,8 +2,8 @@
     <div class="page-wrapper">
         <b-container fluid class="mb-5">
             <b-row class="page-titles">
-                <b-col cols="5" class="align-self-center"><h4 class="text-themecolor">General</h4></b-col>
-                <b-col cols="7">
+                <b-col xs="12" sm="12" md="5" class="align-self-center"><h4 class="text-themecolor">General</h4></b-col>
+                <b-col xs="12" sm="12" md="7">
                     <div class="d-flex justify-content-end align-items-right">
                         <sociales></sociales>
                         <b-button @click="actualizarPagina()" class="btn btn-success d-lg-block m-l-15" v-b-tooltip.hover title="Actualiza información general de la página"><i class="fa fa-plus-circle"></i> Actualizar página</b-button>
@@ -16,25 +16,25 @@
                 <b-col>
                     <b-card title="Logos - Imágenes (100px como máximo):">
                         <b-row>
-                            <b-col class="text-center">
+                            <b-col xs="12" sm="12" md="3" class="text-center">
                                 <b-form-group label-for="logo">
                                     <b-form-file id="logo" name="logo" @input="ver_imagen_logo" accept="image/png" placeholder="Arrastra o pincha aquí" drop-placeholder="Suelta aquí"></b-form-file>
                                 </b-form-group>
                                 <b-img v-show="logo != ''" :src="logo" fluid height="150" class="imagen"></b-img>
                             </b-col>
-                            <b-col class="text-center">
+                            <b-col xs="12" sm="12" md="3" class="text-center">
                                 <b-form-group label-for="favicon">
                                     <b-form-file id="favicon" name="favicon" @input="ver_imagen_favicon" accept="image/png" placeholder="Arrastra o pincha aquí" drop-placeholder="Suelta aquí"></b-form-file>
                                 </b-form-group>
                                 <b-img v-show="favicon != ''" :src="favicon" fluid height="150" class="imagen"></b-img>
                             </b-col>
-                            <b-col class="text-center">
+                            <b-col xs="12" sm="12" md="3" class="text-center">
                                 <b-form-group label-for="logo_footer">
                                     <b-form-file id="logo_footer" name="logo_footer" @input="ver_imagen_logo_footer" accept="image/png" placeholder="Arrastra o pincha aquí" drop-placeholder="Suelta aquí"></b-form-file>
                                 </b-form-group>
                                 <b-img v-show="footer != ''" :src="footer" fluid height="150" class="imagen"></b-img>
                             </b-col>
-                            <b-col class="text-center">
+                            <b-col xs="12" sm="12" md="3" class="text-center">
                                 <b-form-group label-for="logo_escritorio">
                                     <b-form-file id="logo_escritorio" name="logo_escritorio" @input="ver_imagen_logo_escritorio" accept="image/png" placeholder="Arrastra o pincha aquí" drop-placeholder="Suelta aquí"></b-form-file>
                                 </b-form-group>

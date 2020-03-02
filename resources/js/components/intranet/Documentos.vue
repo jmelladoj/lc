@@ -2,8 +2,8 @@
     <div class="page-wrapper">
         <b-container fluid class="mb-5">
             <b-row class="page-titles">
-                <b-col cols="5" class="align-self-center"><h4 class="text-themecolor" v-text="titulo"></h4></b-col>
-                <b-col cols="7">
+                <b-col xs="12" sm="12" md="5" class="align-self-center"><h4 class="text-themecolor" v-text="titulo"></h4></b-col>
+                <b-col xs="12" sm="12" md="7">
                     <div class="d-flex justify-content-end align-items-right">
                         <sociales></sociales>
                         <b-button @click="abrirModal(1)" class="btn btn-success d-lg-block m-l-15" v-b-tooltip.hover title="Agrega un documento a la plataforma"><i class="fa fa-plus-circle"></i> Agregar Documento</b-button>
@@ -58,6 +58,7 @@
                                     outlined
                                     small
                                     hover
+                                    stacked="sm"
                                     :items="items"
                                     :fields="fields"
                                     :current-page="currentPage"
@@ -125,7 +126,7 @@
                 <b-modal ref="modal_documento" :title="modal_documento.titulo" size="lg" no-close-on-backdrop scrollable>
                     <b-form>
                         <b-row>
-                            <b-col>
+                            <b-col xs="12" sm="12" :md="tipo_usuario < 3 ? 6 : 12">
                                 <b-form-group>
                                     <ValidationProvider name="titulo" rules="required|min:3" v-slot="{ errors }">
                                         <b-form-input type="text" v-model="documento.titulo" placeholder="Título"></b-form-input>
@@ -133,7 +134,7 @@
                                     </ValidationProvider>
                                 </b-form-group>
                             </b-col>
-                            <b-col v-if="tipo_usuario < 3">
+                            <b-col xs="12" sm="12" :md="tipo_usuario < 3 ? 6 : 12" v-if="tipo_usuario < 3">
                                 <b-form-group>
                                     <ValidationProvider name="Valor" rules="required|numeric|min_value:0" v-slot="{ errors }">
                                         <b-form-input type="number" v-model="documento.valor" placeholder="Valor" ></b-form-input>
@@ -151,7 +152,7 @@
                         </b-form-group>
 
                         <b-row>
-                            <b-col v-if="tipo_usuario < 3">
+                            <b-col xs="12" sm="12" :md="tipo_usuario < 3 ? 6 : 12" v-if="tipo_usuario < 3">
                                 <b-form-group  class="mb-2">
                                     <ValidationProvider name="código" rules="required|min:3" v-slot="{ errors }">
                                         <b-form-input type="text" v-model="documento.codigo" placeholder="Código"></b-form-input>
@@ -159,7 +160,7 @@
                                     </ValidationProvider>
                                 </b-form-group>
                             </b-col>
-                            <b-col>
+                            <b-col xs="12" sm="12" :md="tipo_usuario < 3 ? 6 : 12">
                                 <b-form-group class="mb-2">
                                     <ValidationProvider name="categoria" rules="required:min_value:0" v-slot="{ errors }">
                                         <b-form-select v-model="documento.categoria_id" class="mb-3">

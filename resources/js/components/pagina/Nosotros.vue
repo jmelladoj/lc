@@ -2,8 +2,8 @@
     <div class="page-wrapper">
         <b-container fluid>
             <b-row class="page-titles">
-                <b-col cols="5" class="align-self-center"><h4 class="text-themecolor">Nosotros</h4></b-col>
-                <b-col cols="7">
+                <b-col xs="12" sm="12" md="5" class="align-self-center"><h4 class="text-themecolor">Nosotros</h4></b-col>
+                <b-col xs="12" sm="12" md="7">
                     <div class="d-flex justify-content-end align-items-right">
                         <sociales></sociales>
                         <b-button @click="actualizarPagina()" class="btn btn-success d-lg-block m-l-15" v-b-tooltip.hover title="Actualiza información de la página nosotros"><i class="fa fa-plus-circle"></i> Actualizar página</b-button>
@@ -16,22 +16,22 @@
                 <b-col>
                     <b-card>
                         <b-row>
-                            <b-col cols="2">
+                            <b-col xs="12" sm="12" md="2">
                                 <b-form-group>
                                     <b-form-radio v-model="pagina.tipo" name="tipo" value="1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Link</b-form-radio>
                                     <b-form-radio v-model="pagina.tipo" name="tipo" value="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Archivo</b-form-radio>
                                 </b-form-group>
                             </b-col>
-                            <b-col v-if="pagina.tipo != 0">
+                            <b-col xs="12" sm="12" v-if="pagina.tipo != 0">
                                 <b-form-group label="Vídeo:" label-for="video" label-cols-sm="2">
                                     <b-form-input v-model="pagina.link" v-if="pagina.tipo == 1"></b-form-input>
                                     <b-form-file id="video" name="video" accept="video/*" placeholder="Sin archivo" v-else></b-form-file>
                                 </b-form-group>
                             </b-col>
-                            <b-col v-else>
+                            <b-col xs="12" sm="12" v-else>
                                 <h3 for="" v-text="pagina.nombre_video"></h3>
                             </b-col>
-                            <b-col>
+                            <b-col xs="12" sm="12">
                                <b-button @click="eliminar_video" class="btn btn-danger d-lg-block m-l-15" v-b-tooltip.hover title="Eliminar vídeo"><i class="fa fa-plus-circle"></i> Eliminar vídeo</b-button>
                             </b-col>
                         </b-row>

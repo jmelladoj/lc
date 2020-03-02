@@ -3,7 +3,7 @@
         <b-col v-if="usuario.fecha_valida == 1" cols="12">
             <b-alert variant="warning" show>Su cuenta será cerrada por ser menor de edad, a exepción de que demuestre con documentos estar emancipado.</b-alert>
         </b-col>
-        <b-col cols="4">
+        <b-col xs="12" sm="12" md="4">
             <b-card>
                 <center class="mt-1">
                     <ValidationObserver ref="observer_foto_perfil">
@@ -77,7 +77,7 @@
                 </center>
             </b-card>
         </b-col>
-        <b-col cols="8">
+        <b-col xs="12" sm="12" md="8">
             <b-card>
                 <b-tabs v-if="usuario.tipo_persona != 2" content-class="mt-3">
                     <ValidationObserver ref="observer_usuario" v-slot="{ valid }">
@@ -94,7 +94,7 @@
                                 </ValidationProvider>
                             </b-form-group>
                             <b-row>
-                                <b-col>
+                                <b-col xs="12" sm="12" md="6">
                                     <b-form-group label="Nombre completo">
                                         <ValidationProvider rules="required|min:3|alpha_spaces" v-slot="{ errors }">
                                             <b-form-input type="text" v-model="usuario.nombre" :readonly="tipo_usuario_logeado >= 3"></b-form-input>
@@ -102,7 +102,7 @@
                                         </ValidationProvider>
                                     </b-form-group>
                                 </b-col>
-                                <b-col>
+                                <b-col xs="12" sm="12" md="6">
                                     <b-form-group label="RUN">
                                         <ValidationProvider rules="min:3" v-slot="{ errors }">
                                             <input type="text" v-rut v-model="usuario.run" class="form-control" :readonly="tipo_usuario_logeado >= 3" />
@@ -112,7 +112,7 @@
                                 </b-col>
                             </b-row>
                             <b-row v-show="tipo_usuario_logeado < 4">
-                                <b-col>
+                                <b-col xs="12" sm="12" md="6">
                                     <b-form-group label="N° telefónico">
                                         <ValidationProvider rules="required|numeric|digits:8" v-slot="{ errors }">
                                             <b-input-group prepend="+56 9">
@@ -122,7 +122,7 @@
                                         </ValidationProvider>
                                     </b-form-group>
                                 </b-col>
-                                <b-col>
+                                <b-col xs="12" sm="12" md="6">
                                     <b-form-group label="Correo electrónico">
                                         <ValidationProvider rules="email" v-slot="{ errors }">
                                             <b-form-input type="email" v-model="usuario.email" :readonly="tipo_usuario_logeado > 2"></b-form-input>
@@ -132,7 +132,7 @@
                                 </b-col>
                             </b-row>
                             <b-row>
-                                <b-col>
+                                <b-col xs="12" sm="12" md="6">
                                     <b-form-group label="Fecha de nacimiento">
                                         <ValidationProvider rules="required" v-slot="{ errors }">
                                             <b-form-input type="date" v-model="usuario.fecha_nacimiento" :readonly="tipo_usuario_logeado == 4" @change="validar_fecha"></b-form-input>
@@ -140,7 +140,7 @@
                                         </ValidationProvider>
                                     </b-form-group>
                                 </b-col>
-                                <b-col>
+                                <b-col xs="12" sm="12" md="6">
                                     <b-form-group label="Dirección">
                                         <ValidationProvider rules="required" v-slot="{ errors }">
                                             <b-form-input type="text" v-model="usuario.direccion" :readonly="tipo_usuario_logeado == 4"></b-form-input>
@@ -150,7 +150,7 @@
                                 </b-col>
                             </b-row>
                             <b-row>
-                                <b-col>
+                                <b-col xs="12" sm="12" md="6">
                                     <b-form-group label="Comuna">
                                         <ValidationProvider rules="required" v-slot="{ errors }">
                                             <b-form-select v-model="usuario.comuna_id" :disabled="tipo_usuario_logeado == 4">
@@ -161,7 +161,7 @@
                                         </ValidationProvider>
                                     </b-form-group>
                                 </b-col>
-                                <b-col>
+                                <b-col xs="12" sm="12" md="6">
                                     <b-form-group label="Región">
                                         <ValidationProvider rules="required" v-slot="{ errors }">
                                             <b-form-select v-model="usuario.region">
@@ -174,7 +174,7 @@
                                 </b-col>
                             </b-row>
                             <b-row>
-                                <b-col>
+                                <b-col xs="12" sm="12" md="6">
                                     <b-form-group label="Situación sentimental">
                                         <ValidationProvider rules="required" v-slot="{ errors }">
                                             <b-form-select v-model="usuario.estado_civil" :disabled="tipo_usuario_logeado == 4">
@@ -188,16 +188,16 @@
                                         </ValidationProvider>
                                     </b-form-group>
                                 </b-col>
-                                <b-col>
+                                <b-col xs="12" sm="12" md="6">
                                     <b-form-group label="¿Tienes hij@s?">
                                         <b-row>
-                                            <b-col>
+                                            <b-col xs="12" sm="12" md="6" class="mb-1">
                                                 <b-form-radio-group id="radio-group-2" v-model="usuario.radio_hijos" name="radio-sub-component">
                                                     <b-form-radio value="0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;No</b-form-radio>
                                                     <b-form-radio value="1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sí</b-form-radio>
                                                 </b-form-radio-group>
                                             </b-col>
-                                            <b-col>
+                                            <b-col xs="12" sm="12" md="6">
                                                 <ValidationProvider rules="required|numeric|min:0" v-slot="{ errors }">
                                                     <b-form-input type="number" v-model="usuario.hijos" :readonly="tipo_usuario_logeado == 4" v-show="usuario.radio_hijos == 1"></b-form-input>
                                                     <span v-if="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0].replace('{field}', '') }}</span></span>
@@ -208,7 +208,7 @@
                                 </b-col>
                             </b-row>
                             <b-row>
-                                <b-col cols="6">
+                                <b-col xs="12" sm="12" md="6">
                                     <b-form-group label="Cambiar contraseña (opcional)">
                                         <ValidationProvider rules="min:6" v-slot="{ errors }">
                                             <b-form-input type="password" v-model="usuario.password"></b-form-input>
@@ -231,17 +231,30 @@
                     <ValidationObserver ref="observer_usuario_academico" v-slot="{ valid }">
                         <b-tab title="Datos acádemicos">
                             <b-row v-show="usuario.tipo_persona == 1">
-                                <b-col>
+                                <b-col xs="12" sm="12" md="6">
+                                    <b-form-group label="¿Posees algún título?">
+
+                                            <b-form-radio-group id="radio-group-2" v-model="usuario.posee_titulo" name="radio-sub-component">
+                                                <b-form-radio value="0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;No</b-form-radio>
+                                                <b-form-radio value="1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sí</b-form-radio>
+                                            </b-form-radio-group>
+                                    </b-form-group>
+                                </b-col>
+                                <b-col xs="12" sm="12" md="6">
                                     <b-form-group  label="¿Cuál es tu título?">
-                                        <ValidationProvider :rules="usuario.tipo_persona == 1 ? 'required|min:3|alpha_spaces' : ''" v-slot="{ errors }">
-                                            <b-form-input type="text" v-model="usuario.titulo" :readonly="tipo_usuario_logeado == 4"></b-form-input>
+                                        <ValidationProvider :rules="usuario.tipo_persona == 1 && usuario.posee_titulo == 1 ? 'required|min:3|alpha_spaces' : ''" v-slot="{ errors }">
+                                            <b-form-input type="text" v-model="usuario.titulo" :readonly="usuario.posee_titulo == 0"></b-form-input>
                                             <span v-if="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0].replace('{field}', '') }}</span></span>
                                         </ValidationProvider>
                                     </b-form-group>
                                 </b-col>
-                                <b-col v-show="usuario.titulo.length > 0">
+                            </b-row>
+
+
+                            <b-row v-show="usuario.tipo_persona == 1 && usuario.posee_titulo == 1">
+                                <b-col xs="12" sm="12" md="6" v-show="usuario.titulo.length > 0">
                                     <b-form-group label="¿Cuál fue tu casa de estudios?">
-                                        <ValidationProvider :rules="usuario.titulo.length > 0 && usuario.tipo_persona == 1 ? 'required|min:3' : ''" v-slot="{ errors }">
+                                        <ValidationProvider :rules="usuario.titulo.length > 0 && usuario.tipo_persona == 1 && usuario.posee_titulo == 1 ? 'required|min:3' : ''" v-slot="{ errors }">
                                             <b-form-input type="text" v-model="usuario.casa_estudio" :readonly="tipo_usuario_logeado == 4"></b-form-input>
                                             <span v-if="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0].replace('{field}', '') }}</span></span>
                                         </ValidationProvider>
@@ -249,7 +262,7 @@
                                 </b-col>
                             </b-row>
                             <b-row v-show="usuario.tipo_persona == 3">
-                                <b-col>
+                                <b-col xs="12" sm="12" md="6">
                                     <b-form-group label="¿Cuál es el título que obtendrás?">
                                         <ValidationProvider :rules="usuario.casa_estudio.length > 0 && usuario.tipo_persona == 3 ? 'required|min:3' : ''" v-slot="{ errors }">
                                             <b-form-input type="text" v-model="usuario.titulo" :readonly="tipo_usuario_logeado == 4"></b-form-input>
@@ -257,7 +270,7 @@
                                         </ValidationProvider>
                                     </b-form-group>
                                 </b-col>
-                                <b-col :cols="usuario.titulo.length > 0 ? 6 : 12">
+                                <b-col xs="12" sm="12" :md="usuario.titulo.length > 0 ? 6 : 12">
                                     <b-form-group v-show="usuario.titulo.length > 0"  label="¿Cuál es tu casa de estudios?">
                                         <ValidationProvider :rules="usuario.tipo_persona == 3 ? 'required|min:3|alpha_spaces' : ''" v-slot="{ errors }">
                                             <b-form-input type="text" v-model="usuario.casa_estudio" :readonly="tipo_usuario_logeado == 4"></b-form-input>
@@ -267,7 +280,7 @@
                                 </b-col>
                             </b-row>
                             <b-row v-show="usuario.tipo_persona == 3">
-                                <b-col>
+                                <b-col xs="12" sm="12" md="6">
                                     <b-form-group label="¿Cuál es tu ramo favorito?">
                                         <ValidationProvider :rules="usuario.tipo_persona == 3 ? 'required|min:3' : ''" v-slot="{ errors }">
                                             <b-form-input type="text" v-model="usuario.ramo_favorito" :readonly="tipo_usuario_logeado == 4"></b-form-input>
@@ -275,7 +288,7 @@
                                         </ValidationProvider>
                                     </b-form-group>
                                 </b-col>
-                                <b-col>
+                                <b-col xs="12" sm="12" md="6">
                                     <b-form-group label="¿Cuál es tu ramo menos favorito?">
                                         <ValidationProvider :rules="usuario.tipo_persona == 3 ? 'required|min:3' : ''" v-slot="{ errors }">
                                             <b-form-input type="text" v-model="usuario.ramo_odiado" :readonly="tipo_usuario_logeado == 4"></b-form-input>
@@ -286,7 +299,7 @@
                             </b-row>
 
                             <b-row>
-                                <b-col>
+                                <b-col xs="12" sm="12" md="6">
                                     <b-form-group label="¿Tienes algún oficio?" v-show="usuario.tipo_persona == 1">
                                         <ValidationProvider :rules="usuario.tipo_persona == 1 ? 'required|min:3' : ''" v-slot="{ errors }">
                                             <b-form-input type="text" v-model="usuario.ramo_favorito" :readonly="tipo_usuario_logeado == 4"></b-form-input>
@@ -296,7 +309,7 @@
                                 </b-col>
                             </b-row>
                             <b-row v-if="usuario.tipo_persona == 3">
-                                <b-col>
+                                <b-col xs="12" sm="12" md="6">
                                     <b-form-group  label="¿En que fecha obtendrás tu certificado de título?">
                                         <ValidationProvider :rules="usuario.tipo_persona == 3 ? 'required|min:3' : ''" v-slot="{ errors }">
                                             <b-form-input type="date" v-model="usuario.fecha_titulo" :readonly="tipo_usuario_logeado == 4"></b-form-input>
@@ -304,7 +317,7 @@
                                         </ValidationProvider>
                                     </b-form-group>
                                 </b-col>
-                                <b-col>
+                                <b-col xs="12" sm="12" md="6">
                                     <b-form-group  label="¿Necesitas ayuda para encontrar tu práctica profesional?">
                                         <ValidationProvider :rules="usuario.tipo_persona == 3 ? 'required' : ''" v-slot="{ errors }">
                                             <b-form-select v-model="usuario.seremi_o_practica" :disabled="tipo_usuario_logeado == 4">
@@ -319,7 +332,7 @@
                                 </b-col>
                             </b-row>
                             <b-row>
-                                <b-col>
+                                <b-col xs="12" sm="12" md="6">
                                     <b-form-group  label="¿Qué tipos de softwares utilizas y cuál es tu nivel de experiencia?">
                                         <ValidationProvider rules="required|min:6|max:200" v-slot="{ errors }">
                                             <b-form-textarea v-model="usuario.software" placeholder="Escribe aquí ..." rows="3" max-rows="6" :readonly="tipo_usuario_logeado == 4"></b-form-textarea>
@@ -339,7 +352,7 @@
                     <ValidationObserver ref="observer_usuario_ejercicio" v-slot="{ valid }">
                         <b-tab title="Datos del ejercicio">
                             <b-row>
-                                <b-col>
+                                <b-col xs="12" sm="12" md="6">
                                     <b-form-group label="¿Tienes sitio web o una red social?">
                                         <ValidationProvider rules="required" v-slot="{ errors }">
                                             <b-form-select v-model="usuario.tiene_sitio" :disabled="tipo_usuario_logeado == 4">
@@ -350,7 +363,7 @@
                                         </ValidationProvider>
                                     </b-form-group>
                                 </b-col>
-                                <b-col>
+                                <b-col xs="12" sm="12" md="6">
                                     <b-form-group label="Pega aquí el link">
                                         <ValidationProvider rules="min:3" v-slot="{ errors }">
                                             <input type="text" v-model="usuario.sitio_web" class="form-control" :readonly="usuario.tiene_sitio == 0" :placeholder="usuario.tiene_sitio == 0 ? 'Ej: www.prevencionlebenco.cl' : ''"/>
@@ -361,7 +374,7 @@
                             </b-row>
 
                             <b-row>
-                                <b-col>
+                                <b-col xs="12" sm="12" md="6">
                                     <b-form-group :label="usuario.tipo_persona == 1 ? '¿En qué rubro tienes mayor experiencia?' : '¿Cuál es el rubro que te llama la atención?'">
                                         <ValidationProvider rules="required" v-slot="{ errors }">
                                             <b-form-select v-model="usuario.profesion_id" :disabled="tipo_usuario_logeado == 4">
@@ -372,7 +385,7 @@
                                         </ValidationProvider>
                                     </b-form-group>
                                 </b-col>
-                                <b-col v-show="usuario.tipo_persona == 1">
+                                <b-col xs="12" sm="12" md="6" v-show="usuario.tipo_persona == 1">
                                     <b-form-group label="¿Cuántos años lo ejerciste?">
                                         <ValidationProvider :rules="usuario.tipo_persona == 1 ? 'required|numeric|min_value:0' : ''" v-slot="{ errors }">
                                             <b-form-input type="number" v-model="usuario.tiempo_experiencia" :readonly="tipo_usuario_logeado == 4"></b-form-input>
@@ -385,14 +398,14 @@
 
                             <b-form-group label="¿Cuál es tu preferencia en el ejercicio de la profesión u oficio?" >
                                 <b-row>
-                                    <b-col>
+                                    <b-col xs="12" sm="12" md="6">
                                         <ValidationProvider rules="required|numeric|min_value:0|max_value:100" v-slot="{ errors }">
                                             <label>Porcentaje en terreno: </label>
                                             <b-form-input type="number" v-model="usuario.porcentaje_terreno" placeholder="Porcentaje terreno" @keyup="calcularPorcentajeOficina()" :readonly="tipo_usuario_logeado == 4"></b-form-input>
                                             <span v-if="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0].replace('{field}', '') }}</span></span>
                                         </ValidationProvider>
                                     </b-col>
-                                    <b-col>
+                                    <b-col xs="12" sm="12" md="6">
                                         <ValidationProvider rules="required|numeric|min:0" v-slot="{ errors }">
                                             <label>Porcentaje en oficina: </label>
                                             <b-form-input type="number" v-model="usuario.porcentaje_oficina" :readonly="true" placeholder="Porcentaje oficina"></b-form-input>
@@ -403,7 +416,7 @@
                             </b-form-group>
 
                             <b-row>
-                                <b-col>
+                                <b-col xs="12" sm="12" md="6">
                                     <b-form-group label="¿Tienes algún curso de especialización?, ¿Quién lo dictó?">
                                         <ValidationProvider rules="required|min:6|max:200" v-slot="{ errors }">
                                             <b-form-textarea v-model="usuario.especializacion" placeholder="Escribe aquí ..." rows="3" max-rows="6" :readonly="tipo_usuario_logeado == 4"></b-form-textarea>
@@ -413,7 +426,7 @@
                                 </b-col>
                             </b-row>
                             <b-row>
-                                <b-col>
+                                <b-col xs="12" sm="12" md="6">
                                     <b-form-group label="Describe brevemente una habilidad sobresaliente">
                                         <ValidationProvider rules="required|min:6|max:200" v-slot="{ errors }">
                                             <b-form-textarea v-model="usuario.habilidad_sobresaliente" placeholder="Escribe aquí ..." rows="3" max-rows="6" :readonly="tipo_usuario_logeado == 4"></b-form-textarea>
@@ -421,7 +434,7 @@
                                         </ValidationProvider>
                                     </b-form-group>
                                 </b-col>
-                                <b-col>
+                                <b-col xs="12" sm="12" md="6">
                                     <b-form-group label="Describe brevemente una habilidad a mejorar">
                                        <ValidationProvider rules="required|min:6|max:200" v-slot="{ errors }">
                                             <b-form-textarea v-model="usuario.habilidad_mejora" placeholder="Escribe aquí ..." rows="3" max-rows="6" :readonly="tipo_usuario_logeado == 4"></b-form-textarea>
@@ -432,7 +445,7 @@
                             </b-row>
 
                             <b-row v-show="usuario.tipo_persona == 1">
-                                <b-col>
+                                <b-col xs="12" sm="12" md="6">
                                     <b-form-group label="Describe brevemente tu mayor logro personal y profesional">
                                         <ValidationProvider :rules="usuario.tipo_persona == 1 ? 'required|min:3' : ''" v-slot="{ errors }">
                                             <b-form-input type="text" v-model="usuario.ultimo_trabajo" :readonly="tipo_usuario_logeado == 4"></b-form-input>
@@ -440,7 +453,7 @@
                                         </ValidationProvider>
                                     </b-form-group>
                                 </b-col>
-                                <b-col>
+                                <b-col xs="12" sm="12" md="6">
                                     <b-form-group label="¿Cuál es el nombre de la Empresa donde obtuviste ese logro?">
                                         <ValidationProvider :rules="usuario.tipo_persona == 1 ? 'required|min:3' : ''" v-slot="{ errors }">
                                             <b-form-input type="text" v-model="usuario.ultimo_empresa" :readonly="tipo_usuario_logeado == 4"></b-form-input>
@@ -450,7 +463,7 @@
                                 </b-col>
                             </b-row>
                             <b-row v-show="usuario.tipo_persona == 1">
-                               <b-col>
+                               <b-col xs="12" sm="12" md="6">
                                     <b-form-group label="¿Cuál es el rubro principal de esa Empresa?">
                                         <ValidationProvider rules="required" v-slot="{ errors }">
                                             <b-form-select v-model="usuario.rubro_empresa" :disabled="tipo_usuario_logeado == 4">
@@ -461,7 +474,7 @@
                                         </ValidationProvider>
                                     </b-form-group>
                                 </b-col>
-                                <b-col>
+                                <b-col xs="12" sm="12" md="6">
                                     <b-form-group label="¿Cuál es el organismo administrador de esa Empresa?">
                                         <ValidationProvider :rules="usuario.tipo_persona == 1 ? 'required' : ''" v-slot="{ errors }">
                                             <b-form-select v-model="usuario.organismo_administrador_empresa" :disabled="tipo_usuario_logeado == 4">
@@ -478,7 +491,7 @@
                             </b-row>
 
                             <b-row>
-                                <b-col v-show="usuario.tipo_persona == 1">
+                                <b-col xs="12" sm="12" md="6" v-show="usuario.tipo_persona == 1">
                                     <b-form-group label="¿Cuál es tu situación laboral actual?">
                                         <ValidationProvider :rules="usuario.tipo_persona == 1 ? 'required' : ''" v-slot="{ errors }">
                                             <b-form-select v-model="usuario.situacion_actual" :disabled="tipo_usuario_logeado == 4">
@@ -493,7 +506,7 @@
                                         </ValidationProvider>
                                     </b-form-group>
                                 </b-col>
-                                <b-col>
+                                <b-col xs="12" sm="12" md="6">
                                     <b-form-group label="¿Cuál es tu preferencia laboral?">
                                         <ValidationProvider rules="required" v-slot="{ errors }">
                                             <b-form-select v-model="usuario.preferencia_laboral" :disabled="tipo_usuario_logeado == 4">
@@ -513,7 +526,7 @@
 
 
                             <b-row>
-                                <b-col>
+                                <b-col xs="12" sm="12" md="6">
                                     <b-form-group label="¿Tienes algún emprendimiento?">
                                         <ValidationProvider rules="required|min:3" v-slot="{ errors }">
                                             <b-form-textarea v-model="usuario.emprendimiento" placeholder="¿Si?, ¿no?, comenta brevemente ..." rows="3" max-rows="6" :readonly="tipo_usuario_logeado == 4"></b-form-textarea>
@@ -523,7 +536,7 @@
                                 </b-col>
                             </b-row>
                             <b-row>
-                                <b-col>
+                                <b-col xs="12" sm="12" md="6">
                                     <b-form-group label="¿Cómo se enteró del sitio web Prevención LebenCo.?">
                                         <ValidationProvider rules="required" v-slot="{ errors }">
                                             <b-form-select v-model="usuario.enterarse" :disabled="tipo_usuario_logeado == 4">
@@ -540,7 +553,7 @@
                                         </ValidationProvider>
                                     </b-form-group>
                                 </b-col>
-                                <b-col v-show="usuario.enterarse == 6">
+                                <b-col xs="12" sm="12" md="6" v-show="usuario.enterarse == 6">
                                     <b-form-group :label="'¿Qué forma fue?'">
                                         <ValidationProvider :rules="usuario.enterarse == 5 ? 'required|min:3' : ''" v-slot="{ errors }">
                                             <b-form-input type="text" v-model="usuario.otra_forma" :readonly="tipo_usuario_logeado == 4"></b-form-input>
@@ -551,7 +564,7 @@
                             </b-row>
 
                             <b-row v-show="usuario.tipo_usuario == 1">
-                                <b-col>
+                                <b-col xs="12" sm="12" md="6">
                                     <b-form-group :label="labels.otro_rubro">
                                         <ValidationProvider :rules="usuario.tipo_usuario == 1 ? 'required|min:3' : ''" v-slot="{ errors }">
                                             <b-form-input type="text" v-model="usuario.otro_rubro" :readonly="tipo_usuario_logeado == 4"></b-form-input>
@@ -562,7 +575,7 @@
                             </b-row>
 
                             <b-row>
-                                <b-col>
+                                <b-col xs="12" sm="12" md="6">
                                     <b-form-group label="¿Le gustaría obtener coaching para desarrollar ideas y encontrar nuevas oportunidades?">
                                         <ValidationProvider rules="required" v-slot="{ errors }">
                                             <b-form-select v-model="usuario.coaching" :disabled="tipo_usuario_logeado == 4">
@@ -574,9 +587,10 @@
                                         </ValidationProvider>
                                     </b-form-group>
                                 </b-col>
-                                <b-col>
-                                    <b-form-group :label="usuario.tipo_persona == 1 ? 'Debe subir a su cuenta un archivo Pdf que contenga: El certificado de título, el registro de experto en prevención otorgado por Seremi de salud y su cédula de identidad por ambos lados. El cual se mantendrá en su misma cuenta para que LebenCo. descargue este archivo, incluyendo el listado de preguntas y respuestas del perfil.; x ¡Sube tu archivo Pdf con tu CV + Certificados + un proyecto (opcional), o lo que tú quieras para que te conozcamos!' : 'g.	Debe subir a su cuenta un archivo Pdf que contenga: El certificado de título, el registro de experto en prevención otorgado por Seremi de salud y su cédula de identidad por ambos lados. El cual se mantendrá en su misma cuenta para que LebenCo. descargue este archivo, incluyendo el listado de preguntas y respuestas del perfil.; x ¡Sube tu archivo Pdf con tu CV + Certificados + un proyecto (opcional), o lo que tú quieras para que te conozcamos!'">
-                                        <b-form-file  ref="file-input" accept="application/pdf" placeholder="Sin archivo" ></b-form-file>
+                                <b-col xs="12" sm="12" md="6">
+                                    <b-form-group :label="usuario.tipo_persona == 1 ? '¡Sube tu archivo Pdf con tu CV + Certificados + un proyecto (opcional), o lo que tú quieras para que te conozcamos!' : '¡Sube tu archivo Pdf con tu CV + Certificados + un proyecto (opcional), o lo que tú quieras para que te conozcamos!'">
+                                        <b-form-file v-model="usuario.archivo_usuario" accept="application/pdf" placeholder="Sin archivo" drop-placeholder="Arrastra o suelta aquí" @input="actualizar_archivo_usuario"></b-form-file>
+                                        <span class="mt-1" v-if="usuario.nombre_archivo != null">Archivo actual: {{ usuario.nombre_archivo }}</span>
                                     </b-form-group>
                                 </b-col>
                             </b-row>
@@ -603,6 +617,7 @@
                                     outlined
                                     small
                                     hover
+                                    stacked="sm"
                                     :items="items_pyme"
                                     :fields="fields_pyme"
                                     sticky-header>
@@ -643,7 +658,7 @@
                                 </ValidationProvider>
                             </b-form-group>
                             <b-row>
-                                <b-col>
+                                <b-col xs="12" sm="12" md="6">
                                     <b-form-group label="Nombre de la razón social">
                                         <ValidationProvider rules="required|min:3" v-slot="{ errors }">
                                             <b-form-input type="text" v-model="usuario.nombre" :readonly="tipo_usuario_logeado >= 3"></b-form-input>
@@ -651,7 +666,7 @@
                                         </ValidationProvider>
                                     </b-form-group>
                                 </b-col>
-                                <b-col>
+                                <b-col xs="12" sm="12" md="6">
                                     <b-form-group label="RUT">
                                         <ValidationProvider rules="min:3" v-slot="{ errors }">
                                             <input type="text" v-rut v-model="usuario.run" class="form-control" :readonly="tipo_usuario_logeado >= 3" />
@@ -661,7 +676,7 @@
                                 </b-col>
                             </b-row>
                             <b-row>
-                                <b-col>
+                                <b-col xs="12" sm="12" md="6">
                                     <b-form-group label="Nombre de fantasía">
                                         <ValidationProvider rules="required|min:1" v-slot="{ errors }">
                                             <b-form-input type="text" v-model="usuario.nombre_fantasia" :readonly="tipo_usuario_logeado == 4"></b-form-input>
@@ -669,7 +684,7 @@
                                         </ValidationProvider>
                                     </b-form-group>
                                 </b-col>
-                                <b-col>
+                                <b-col xs="12" sm="12" md="6">
                                     <b-form-group label="Giro comercial principal">
                                         <ValidationProvider rules="required" v-slot="{ errors, validate }">
                                             <b-form-select v-model="usuario.giro_comercial" :disabled="tipo_usuario_logeado == 4" @change="validate">
@@ -682,7 +697,7 @@
                                 </b-col>
                             </b-row>
                             <b-row v-show="tipo_usuario_logeado < 4">
-                                <b-col>
+                                <b-col xs="12" sm="12" md="6">
                                     <b-form-group label="N° telefónico">
                                         <ValidationProvider rules="required|numeric|digits:8" v-slot="{ errors }">
                                             <b-input-group prepend="+56 9">
@@ -692,7 +707,7 @@
                                         </ValidationProvider>
                                     </b-form-group>
                                 </b-col>
-                                <b-col>
+                                <b-col xs="12" sm="12" md="6">
                                     <b-form-group label="Correo electrónico">
                                         <ValidationProvider rules="email" v-slot="{ errors }">
                                             <b-form-input type="email" v-model="usuario.email" :readonly="tipo_usuario_logeado > 2"></b-form-input>
@@ -702,7 +717,7 @@
                                 </b-col>
                             </b-row>
                             <b-row>
-                                <b-col>
+                                <b-col xs="12" sm="12" md="6">
                                     <b-form-group label="Dirección comercial actual">
                                         <ValidationProvider rules="required" v-slot="{ errors }">
                                             <b-form-input type="text" v-model="usuario.direccion" :readonly="tipo_usuario_logeado == 4"></b-form-input>
@@ -712,7 +727,7 @@
                                 </b-col>
                             </b-row>
                             <b-row>
-                                <b-col>
+                                <b-col xs="12" sm="12" md="6">
                                     <b-form-group label="Comuna">
                                         <ValidationProvider rules="required" v-slot="{ errors }">
                                             <b-form-select v-model="usuario.comuna_id" :disabled="tipo_usuario_logeado == 4">
@@ -723,7 +738,7 @@
                                         </ValidationProvider>
                                     </b-form-group>
                                 </b-col>
-                                <b-col>
+                                <b-col xs="12" sm="12" md="6">
                                     <b-form-group label="Región">
                                         <ValidationProvider rules="required" v-slot="{ errors }">
                                             <b-form-select v-model="usuario.region">
@@ -736,7 +751,7 @@
                                 </b-col>
                             </b-row>
                             <b-row>
-                                <b-col cols="6">
+                                <b-col xs="12" sm="12" md="6">
                                     <b-form-group label="Cambiar contraseña (opcional)">
                                         <ValidationProvider rules="min:6" v-slot="{ errors }">
                                             <b-form-input type="password" v-model="usuario.password"></b-form-input>
@@ -759,7 +774,7 @@
                     <ValidationObserver ref="observer_pyme_datos_pyme" v-slot="{ valid }">
                         <b-tab title="Datos de su pyme">
                             <b-row>
-                                <b-col>
+                                <b-col xs="12" sm="12" md="6">
                                     <b-form-group label="¿Su Empresa es familiar?">
                                         <ValidationProvider rules="required" v-slot="{ errors }">
                                             <b-form-select v-model="usuario.empresa_familiar" :disabled="tipo_usuario_logeado == 4">
@@ -770,7 +785,7 @@
                                         </ValidationProvider>
                                     </b-form-group>
                                 </b-col>
-                                <b-col>
+                                <b-col xs="12" sm="12" md="6">
                                     <b-form-group label="Años de funcionamiento">
                                         <ValidationProvider rules="required|numeric|min:0" v-slot="{ errors }">
                                             <input type="text" v-model="usuario.tiempo_funcionamiento" class="form-control" :readonly="tipo_usuario_logeado == 4" />
@@ -780,7 +795,7 @@
                                 </b-col>
                             </b-row>
                             <b-row>
-                                <b-col>
+                                <b-col xs="12" sm="12" md="6">
                                     <b-form-group label="Meses en que considera una alta producción (temporada alta)">
                                         <ValidationProvider rules="required|min:5" v-slot="{ errors }">
                                             <input type="text" v-model="usuario.temporada_alta" class="form-control" placeholder="Ejemplo: Enero - marzo" :readonly="tipo_usuario_logeado == 4" />
@@ -788,7 +803,7 @@
                                         </ValidationProvider>
                                     </b-form-group>
                                 </b-col>
-                                <b-col>
+                                <b-col xs="12" sm="12" md="6">
                                     <b-form-group label="N° de trabajadores contratados en temporada alta">
                                         <ValidationProvider rules="required|numeric|min:1" v-slot="{ errors }">
                                             <input type="text" v-model="usuario.cantidad_trabajadores" class="form-control" :readonly="tipo_usuario_logeado == 4" />
@@ -799,7 +814,7 @@
                             </b-row>
 
                             <b-row>
-                                <b-col>
+                                <b-col xs="12" sm="12" md="6">
                                     <b-form-group label="¿Cuál es el organismo administrador de su empresa?">
                                         <ValidationProvider rules="required" v-slot="{ errors, validate }">
                                             <b-form-select v-model="usuario.organismo_administrador_empresa" :disabled="tipo_usuario_logeado == 4" @change="validate">
@@ -816,7 +831,7 @@
                             </b-row>
 
                             <b-row>
-                                <b-col>
+                                <b-col xs="12" sm="12" md="6">
                                     <b-form-group  label="Indique una cualidad sobresaliente de su negocio">
                                         <ValidationProvider rules="required|min:20|max:200" v-slot="{ errors }">
                                             <b-form-textarea v-model="usuario.descripcion_negocio" placeholder="Escribe aquí ..." rows="3" max-rows="6" :readonly="tipo_usuario_logeado == 4"></b-form-textarea>
@@ -824,7 +839,7 @@
                                         </ValidationProvider>
                                     </b-form-group>
                                 </b-col>
-                                <b-col>
+                                <b-col xs="12" sm="12" md="6">
                                     <b-form-group  label="Mencione su o sus servicios/productos más importantes">
                                         <ValidationProvider rules="required|min:20|max:200" v-slot="{ errors }">
                                             <b-form-textarea v-model="usuario.descripcion_servicio" placeholder="Escribe aquí ..." rows="3" max-rows="6" :readonly="tipo_usuario_logeado == 4"></b-form-textarea>
@@ -835,7 +850,7 @@
                             </b-row>
 
                             <b-row>
-                                <b-col>
+                                <b-col xs="12" sm="12" md="6">
                                     <b-form-group label="¿Tienes sitio web o una red social?">
                                         <ValidationProvider rules="required" v-slot="{ errors }">
                                             <b-form-select v-model="usuario.tiene_sitio" :disabled="tipo_usuario_logeado == 4">
@@ -846,7 +861,7 @@
                                         </ValidationProvider>
                                     </b-form-group>
                                 </b-col>
-                                <b-col>
+                                <b-col xs="12" sm="12" md="6">
                                     <b-form-group label="Pega aquí el link">
                                         <ValidationProvider rules="min:3" v-slot="{ errors }">
                                             <input type="text" v-model="usuario.sitio_web" class="form-control" :readonly="usuario.tiene_sitio == 0" :placeholder="usuario.tiene_sitio == 0 ? 'Ej: www.prevencionlebenco.cl' : ''"/>
@@ -857,7 +872,7 @@
                             </b-row>
 
                             <b-row>
-                                <b-col>
+                                <b-col xs="12" sm="12" md="6">
                                     <b-form-group label="¿Cómo se enteró del sitio web Prevención LebenCo.?">
                                         <ValidationProvider rules="required" v-slot="{ errors }">
                                             <b-form-select v-model="usuario.enterarse" :disabled="tipo_usuario_logeado == 4">
@@ -874,7 +889,7 @@
                                         </ValidationProvider>
                                     </b-form-group>
                                 </b-col>
-                                <b-col v-show="usuario.enterarse == 6">
+                                <b-col xs="12" sm="12" md="6" v-show="usuario.enterarse == 6">
                                     <b-form-group :label="'¿De qué forma fue?'">
                                         <ValidationProvider :rules="usuario.enterarse == 5 ? 'required|min:3' : ''" v-slot="{ errors }">
                                             <b-form-input type="text" v-model="usuario.otra_forma" :readonly="tipo_usuario_logeado == 4"></b-form-input>
@@ -885,7 +900,7 @@
                             </b-row>
 
                             <b-row>
-                                <b-col>
+                                <b-col xs="12" sm="12" md="6">
                                     <b-form-group label="¿Le gustaría obtener coaching para desarrollar ideas, destacar sus productos o servicio y encontrar nuevas oportunidades?">
                                         <ValidationProvider rules="required" v-slot="{ errors }">
                                             <b-form-select v-model="usuario.coaching" :disabled="tipo_usuario_logeado == 4">
@@ -897,7 +912,7 @@
                                         </ValidationProvider>
                                     </b-form-group>
                                 </b-col>
-                                <b-col>
+                                <b-col xs="12" sm="12" md="6">
                                     <b-form-group label="Actualmente, ¿tiene algún otro emprendimiento?">
                                         <ValidationProvider rules="required|min:3" v-slot="{ errors }">
                                             <b-form-textarea v-model="usuario.emprendimiento" placeholder="¿Si?, ¿no?, comenta brevemente ..." rows="3" max-rows="6" :readonly="tipo_usuario_logeado == 4"></b-form-textarea>
@@ -964,6 +979,7 @@
                                     outlined
                                     small
                                     hover
+                                    stacked="sm"
                                     :items="items_pyme"
                                     :fields="fields_pyme"
                                     sticky-header>
@@ -1088,6 +1104,7 @@
                     pyme_facturacion: 0,
                     presiona_tabla_vip: 0,
                     radio_hijos: 0,
+                    posee_titulo: 0,
                     temporada_alta: '',
                     descripcion_negocio: '',
                     descripcion_servicio: '',
@@ -1095,7 +1112,9 @@
                     otra_forma: '',
                     fecha_valida: 0,
                     posicion: 0,
-                    descripcion_administrador: ''
+                    descripcion_administrador: '',
+                    archivo_usuario: null,
+                    nombre_archivo: null
                 },
                 categoria: {
                     nombre: '',
@@ -1334,7 +1353,7 @@
                     me.usuario.casa_estudio = response.data.usuario.casa_estudio == null ? '' : response.data.usuario.casa_estudio;
                     me.usuario.ramo_favorito = response.data.usuario.ramo_favorito;
                     me.usuario.ramo_odiado = response.data.usuario.ramo_odiado;
-                    me.usuario.titulo = response.data.usuario.titulo == null ? '' : response.data.usuario.titulo;;
+                    me.usuario.titulo = response.data.usuario.titulo == null ? '' : response.data.usuario.titulo;
                     me.usuario.fecha_titulo = response.data.usuario.fecha_titulo;
                     me.usuario.seremi_o_practica = response.data.usuario.seremi_o_practica;
                     me.usuario.software = response.data.usuario.software;
@@ -1378,6 +1397,7 @@
                     me.usuario.pyme_datos = response.data.usuario.pyme_datos
                     me.usuario.pyme_facturacion = response.data.usuario.pyme_facturacion
                     me.usuario.radio_hijos = response.data.usuario.hijos > 0 ? 1 : 0
+                    me.usuario.posee_titulo = response.data.usuario.titulo == null ?  0 : 1
 
                     me.usuario.situacion_actual = response.data.usuario.situacion_actual
                     me.usuario.temporada_alta = response.data.usuario.temporada_alta
@@ -1387,6 +1407,7 @@
                     me.usuario.otra_forma = response.data.usuario.otra_forma
                     me.usuario.posicion = response.data.usuario.posicion
                     me.usuario.descripcion_administrador = response.data.usuario.descripcion_administrador
+                    me.usuario.nombre_archivo = response.data.usuario.nombre_archivo_usuario
 
 
                     //Datos categoria
@@ -1410,6 +1431,28 @@
                 .catch(function (error) {
                     console.log(error);
                 });
+            },
+            actualizar_archivo_usuario(){
+                let me = this
+
+                if(me.usuario.archivo_usuario){
+                    let formData = new FormData()
+                    formData.append('usuario_id', me.usuario.id)
+                    formData.append('archivo_usuario', me.usuario.archivo_usuario)
+
+                    axios.post('usuario/crear/actualizar/archivo', formData).then(function (response) {
+                        me.usuario.nombre_archivo = response.data.nombre_archivo_usuario
+
+                        Vue.$toast.open({
+                            message: 'Archivo actualizado exitosamente',
+                            type: 'success',
+                            duration: 5000
+                        });
+
+                    }).catch(function (error) {
+                        console.error(error);
+                    });
+                }
             },
             actualizar(usuario_perfil, usuario_academico, usuario_ejercicio, pyme_comercial, pyme_datos){
                 let me = this;

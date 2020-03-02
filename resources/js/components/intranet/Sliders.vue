@@ -2,8 +2,8 @@
     <div class="page-wrapper">
         <b-container fluid class="mb-5">
             <b-row class="page-titles">
-                <b-col cols="5" class="align-self-center"><h4 class="text-themecolor">Sliders generales</h4></b-col>
-                <b-col cols="7">
+                <b-col xs="12" sm="12" md="5" class="align-self-center"><h4 class="text-themecolor">Sliders generales</h4></b-col>
+                <b-col xs="12" sm="12" md="7">
                     <div class="d-flex justify-content-end align-items-right">
                         <sociales></sociales>
                         <b-button @click="abrirModal(1)" class="btn btn-success d-lg-block m-l-15" v-b-tooltip.hover title="Agrega una slider a la plataforma"><i class="fa fa-plus-circle"></i> Agregar Slider</b-button>
@@ -140,7 +140,7 @@
                         </b-form-group>
 
                         <b-row>
-                            <b-col>
+                            <b-col xs="12" sm="12" md="6">
                                 <b-form-group label="Tamaño de letra">
                                     <ValidationProvider name="Tamaño de letra" rules="required" v-slot="{ errors }">
                                         <b-form-radio v-model="slider.letra_titulo" name="letra_titulo" value="46">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Tamaño título</b-form-radio>
@@ -150,7 +150,7 @@
                                     </ValidationProvider>
                                 </b-form-group>
                             </b-col>
-                            <b-col>
+                            <b-col xs="12" sm="12" md="6">
                                 <b-form-group label="Alineación de texto">
                                     <ValidationProvider name="Alineación de texto" rules="required" v-slot="{ errors }">
                                         <b-form-radio v-model="slider.alineacion_titulo" name="alineacion_titulo" value="text-right">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Derecha</b-form-radio>
@@ -170,7 +170,7 @@
                         </b-form-group>
 
                         <b-row>
-                            <b-col>
+                            <b-col xs="12" sm="12" md="6">
                                 <b-form-group label="Tamaño de letra">
                                     <ValidationProvider name="Tamaño de letra" rules="required" v-slot="{ errors }">
                                         <b-form-radio v-model="slider.letra_sub_titulo" name="letra_sub_titulo" value="46">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Tamaño título</b-form-radio>
@@ -180,7 +180,7 @@
                                     </ValidationProvider>
                                 </b-form-group>
                             </b-col>
-                            <b-col>
+                            <b-col xs="12" sm="12" md="6">
                                 <b-form-group label="Alineación de texto">
                                     <ValidationProvider name="Alineación de texto" rules="required" v-slot="{ errors }">
                                         <b-form-radio v-model="slider.alineacion_sub_titulo" name="alineacion_sub_titulo" value="text-right">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Derecha</b-form-radio>
@@ -267,7 +267,7 @@
                 <b-form>
                     <b-form-group label="Ubicaciones de Slider">
                         <b-row>
-                            <b-col>
+                            <b-col xs="12" sm="12" md="6">
                                 <div class="custom-control custom-checkbox">
                                     <b-form-checkbox v-model="slider.inicio">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Inicio</b-form-checkbox>
                                 </div>
@@ -281,7 +281,7 @@
                                     <b-form-checkbox v-model="slider.pagina_nosotros">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Página nosotros</b-form-checkbox>
                                 </div>
                             </b-col>
-                            <b-col>
+                            <b-col xs="12" sm="12" md="6">
                                 <div class="custom-control custom-checkbox">
                                     <b-form-checkbox v-model="slider.pagina_contacto">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Página contácto</b-form-checkbox>
                                 </div>
