@@ -15,7 +15,7 @@
             listarPromociones (){
                 let me=this;
                 axios.get('/sorteos/2').then(function (response) {
-                    me.items = response.data.promociones;
+                    me.items = response.data.sorteos;
                 })
                 .catch(function (error) {
                     console.log(error);

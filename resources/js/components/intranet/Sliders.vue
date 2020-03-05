@@ -86,18 +86,6 @@
                                     <label v-else-if="data.item.tipo_persona == 3">Estudiantes</label>
                                 </template>
 
-                                <template v-slot:cell(seccion)="data">
-                                    <label v-if="data.item.link == '/intranet/1'">Sección perfil</label>
-                                    <label v-else-if="data.item.link == '/intranet/2'">Sección solicitar documento</label>
-                                    <label v-else-if="data.item.link == '/intranet/3'">Sección sorteos</label>
-                                    <label v-else-if="data.item.link == '/intranet/4'">Sección promociones</label>
-                                    <label v-else-if="data.item.link == '/intranet/6'">Sección seminarios</label>
-                                    <label v-else-if="data.item.link == '/intranet/7'">Sección terreno</label>
-                                    <label v-else-if="data.item.link == '/intranet/8'">Sección recomiéndanos</label>
-                                    <label v-else-if="data.item.link == '/intranet/11'">Sección subir documento</label>
-                                    <label v-else-if="data.item.link == '/intranet/12'">Sección recargar</label>
-                                </template>
-
                                 <template v-slot:cell(imagen)="data">
                                     <b-img :src="'storage/' + data.item.url_imagen" fluid center alt="Slider" height="150" class="imagen"></b-img>
                                 </template>

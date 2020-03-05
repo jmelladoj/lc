@@ -242,7 +242,7 @@
             listarPagina (){
                 let me=this;
                 axios.get('/pagina/home/usuario').then(function (response) {
-                    me.pagina.contenido = response.data.pagina.contenido
+                    me.pagina.contenido = response.data.pagina.contenido != null ? response.data.pagina.contenido : ''
                     me.pagina.url_imagen = response.data.pagina.video_url;
                 })
                 .catch(function (error) {

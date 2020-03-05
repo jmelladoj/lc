@@ -161,7 +161,8 @@ const app = new Vue({
     el: '#app',
     data :{
         ubicacion: 1,
-        menu : 0
+        menu : 0,
+        menu_administrador: 0
     },
     router
 });

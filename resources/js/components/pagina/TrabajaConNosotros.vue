@@ -32,7 +32,13 @@
                 });
             },
             abrir_modal_trabaja(){
-                this.$refs['modal_trabaja'].show();
+                let me = this
+                
+                if(me.mensaje_trabaja == null || me.mensaje_trabaja == ''){
+                    me.redireccion()
+                } else {
+                    this.$refs['modal_trabaja'].show();
+                }
             },
             cerrar_modal_trabaja(){
                 this.$refs['modal_trabaja'].hide();

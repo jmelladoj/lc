@@ -24,19 +24,19 @@
                                 <input class="input--lg form-full" v-model="usuario_login.password" @blur="mostrar_botones_login" @keyup="mostrar_botones_login" autocomplete="current-password" type="password" @keyup.enter="ingresar" placeholder="Ingresa tu clave" required>
                                 <errores :errors="validationErrors" :campo="'password'" v-if="validationErrors"> </errores>
                             </p>
-                            <p class="form-field-wrapper">
-                                <label class="">
-                                    <input class="" v-model="usuario_login.remember" type="checkbox">
-                                    <span>Recuérdame</span>
-                                </label>
-                            </p>
 
                             <div class="row">
-                                <div class="col-md-6 form-field-wrapper text-left">
+                                <div class="col-md-3 form-field-wrapper text-left">
                                     <button v-if="estados.boton_login_inicia == 1" type="button" class="btn mt-0 btn btn--secondary space--1 btn-sm boton_login btn-secondary mb-0" name="login" value="Log in" @click="ingresar">Ingresar</button>
                                 </div>
+                                <div class="col-md-3 form-field-wrapper text-left">
+                                    <label class="mt-2">
+                                        <input v-model="usuario_login.remember" type="checkbox">
+                                        <span>Recuérdame</span>
+                                    </label>
+                                </div>
                                 <div class="col-md-6 form-field-wrapper lost_password text-right">
-                                    <b-button v-b-modal.recuperar_cuenta class="mt-0 btn btn--secondary space--1 btn-sm boton_login mb-0">Recuperar mi cuenta</b-button>
+                                    <label v-b-modal.recuperar_cuenta class="mt-2 mb-0" style="color: #8AB733">Recuperar mi cuenta</label>
                                 </div>
                             </div>
 
