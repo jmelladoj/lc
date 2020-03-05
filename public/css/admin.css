@@ -32523,6 +32523,10 @@ input[type]:focus,
     box-shadow: none;
 }
 
+.modal-xl {
+    max-width: 90% !important;
+}
+
 @import url(https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700);
 /*Theme Colors*/
 /**

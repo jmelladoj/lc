@@ -26,7 +26,7 @@ class CreateDocumentosTable extends Migration
             $table->string('url_imagen_vista_uno')->nullable()->default(null);
             $table->string('url_imagen_vista_dos')->nullable()->default(null);
 
-            $table->unsignedBigInteger('categorias_documentos_id');
+            $table->unsignedBigInteger('categorias_documentos_id')->nullable()->default(null);
             $table->foreign('categorias_documentos_id')->references('id')->on('categoria_documentos');
 
             $table->integer('estado')->default(0);

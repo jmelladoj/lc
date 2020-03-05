@@ -32435,3 +32435,7 @@ input[type]:focus,
 .btn-secondary.focus, .btn-secondary:focus, .btn-secondary:not(:disabled):not(.disabled).active:focus, .btn-secondary:not(:disabled):not(.disabled):active:focus, .show > .btn-secondary.dropdown-toggle:focus {
     box-shadow: none;
 }
+
+.modal-xl {
+    max-width: 90% !important;
+}

@@ -9991,7 +9991,7 @@ ul:last-child {
 
 .sec-padding-login {
     padding-top: 30px;
-    padding-bottom: 40px;
+    padding-bottom: 30px;
 }
 
 .sec-padding-contacto {
@@ -15014,12 +15014,12 @@ input.quantity[type=number]::-webkit-outer-spin-button {
 /*------------------------------------------------------------*/
 .my-account-box {
     border: 1px solid rgba(0,0,0,0.07);
-    padding: 70px;
+    padding: 40px;
 }
 
 .my-account-box-selected {
     border: 1px solid #8ab733;
-    padding: 70px;
+    padding: 40px;
 }
 
 form .form-row, form .lost_password {

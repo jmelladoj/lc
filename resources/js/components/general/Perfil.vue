@@ -222,7 +222,8 @@
                                     <b-button :disabled="usuario.password.length == 0" @click="actualizar(0, 0, 0, 1, 0)" class="btn btn-success btn-block" title="Actualiza información de tu perfil">Actualizar mi perfil</b-button>
                                 </b-col>
                                 <b-col v-else>
-                                    <b-button v-show="tipo_usuario_logeado < 4" :disabled="!valid || usuario.usuario_perfil == 1" @click="actualizar(1, 0, 0, 0, 0 ,0)" class="btn btn-success btn-block" title="Actualiza información de tu perfil">Actualizar mi perfil</b-button>
+                                    <b-button v-if="tipo_usuario_logeado == 1" @click="actualizar(1, 0, 0, 0, 0 ,0)" class="btn btn-success btn-block" title="Actualiza información de tu perfil">Actualizar perfil</b-button>
+                                    <b-button v-else :disabled="!valid || usuario.usuario_perfil == 1" @click="actualizar(1, 0, 0, 0, 0 ,0)" class="btn btn-success btn-block" title="Actualiza información de tu perfil">Actualizar mi perfil</b-button>
                                 </b-col>
                             </b-row>
                         </b-tab>
@@ -240,22 +241,28 @@
                                             </b-form-radio-group>
                                     </b-form-group>
                                 </b-col>
-                                <b-col xs="12" sm="12" md="6">
+                                <b-col v-if="usuario.posee_titulo == 1" xs="12" sm="12" md="6">
                                     <b-form-group  label="¿Cuál es tu título?">
                                         <ValidationProvider :rules="usuario.tipo_persona == 1 && usuario.posee_titulo == 1 ? 'required|min:3|alpha_spaces' : ''" v-slot="{ errors }">
-                                            <b-form-input type="text" v-model="usuario.titulo" :readonly="usuario.posee_titulo == 0"></b-form-input>
+                                            <b-form-input type="text" v-model="usuario.titulo"></b-form-input>
                                             <span v-if="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0].replace('{field}', '') }}</span></span>
                                         </ValidationProvider>
                                     </b-form-group>
                                 </b-col>
-                            </b-row>
 
-
-                            <b-row v-show="usuario.tipo_persona == 1 && usuario.posee_titulo == 1">
-                                <b-col xs="12" sm="12" md="6" v-show="usuario.titulo.length > 0">
+                                <b-col xs="12" sm="12" md="12" v-show="usuario.titulo.length > 0">
                                     <b-form-group label="¿Cuál fue tu casa de estudios?">
                                         <ValidationProvider :rules="usuario.titulo.length > 0 && usuario.tipo_persona == 1 && usuario.posee_titulo == 1 ? 'required|min:3' : ''" v-slot="{ errors }">
                                             <b-form-input type="text" v-model="usuario.casa_estudio" :readonly="tipo_usuario_logeado == 4"></b-form-input>
+                                            <span v-if="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0].replace('{field}', '') }}</span></span>
+                                        </ValidationProvider>
+                                    </b-form-group>
+                                </b-col>
+
+                                <b-col xs="12" sm="12" :md="usuario.posee_titulo == 0 ? 6 : 12">
+                                    <b-form-group label="¿Tienes algún oficio?" v-show="usuario.tipo_persona == 1">
+                                        <ValidationProvider :rules="usuario.tipo_persona == 1 ? 'required|min:3' : ''" v-slot="{ errors }">
+                                            <b-form-input type="text" v-model="usuario.ramo_favorito" :readonly="tipo_usuario_logeado == 4"></b-form-input>
                                             <span v-if="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0].replace('{field}', '') }}</span></span>
                                         </ValidationProvider>
                                     </b-form-group>
@@ -271,7 +278,7 @@
                                     </b-form-group>
                                 </b-col>
                                 <b-col xs="12" sm="12" :md="usuario.titulo.length > 0 ? 6 : 12">
-                                    <b-form-group v-show="usuario.titulo.length > 0"  label="¿Cuál es tu casa de estudios?">
+                                    <b-form-group label="¿Cuál es tu casa de estudios?">
                                         <ValidationProvider :rules="usuario.tipo_persona == 3 ? 'required|min:3|alpha_spaces' : ''" v-slot="{ errors }">
                                             <b-form-input type="text" v-model="usuario.casa_estudio" :readonly="tipo_usuario_logeado == 4"></b-form-input>
                                             <span v-if="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0].replace('{field}', '') }}</span></span>
@@ -296,17 +303,8 @@
                                         </ValidationProvider>
                                     </b-form-group>
                                 </b-col>
-                            </b-row>
 
-                            <b-row>
-                                <b-col xs="12" sm="12" md="6">
-                                    <b-form-group label="¿Tienes algún oficio?" v-show="usuario.tipo_persona == 1">
-                                        <ValidationProvider :rules="usuario.tipo_persona == 1 ? 'required|min:3' : ''" v-slot="{ errors }">
-                                            <b-form-input type="text" v-model="usuario.ramo_favorito" :readonly="tipo_usuario_logeado == 4"></b-form-input>
-                                            <span v-if="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0].replace('{field}', '') }}</span></span>
-                                        </ValidationProvider>
-                                    </b-form-group>
-                                </b-col>
+
                             </b-row>
                             <b-row v-if="usuario.tipo_persona == 3">
                                 <b-col xs="12" sm="12" md="6">
@@ -343,7 +341,8 @@
                             </b-row>
                             <b-row>
                                 <b-col>
-                                    <b-button v-show="tipo_usuario_logeado < 4" :disabled="!valid || usuario.usuario_academico == 1" @click="actualizar(0, 1, 0, 0, 0 ,0)" class="btn btn-success btn-block" title="Actualizar datos">Actualizar datos académicos</b-button>
+                                    <b-button v-if="tipo_usuario_logeado == 1" @click="actualizar(0, 1, 0, 0, 0 ,0)" class="btn btn-success btn-block" title="Actualizar datos">Actualizar datos académicos</b-button>
+                                    <b-button v-else :disabled="!valid || usuario.usuario_academico == 1" @click="actualizar(0, 1, 0, 0, 0 ,0)" class="btn btn-success btn-block" title="Actualizar datos">Actualizar datos académicos</b-button>
                                 </b-col>
                             </b-row>
                         </b-tab>
@@ -598,7 +597,8 @@
 
                             <b-row>
                                 <b-col>
-                                    <b-button v-show="tipo_usuario_logeado < 4" :disabled="!valid || usuario.usuario_ejercicio == 1" @click="actualizar(0, 0, 1, 0, 0 ,0)" class="btn btn-success btn-block" title="Actualiza información de tu perfil">Actualizar mi perfil</b-button>
+                                    <b-button v-if="tipo_usuario_logeado == 1" @click="actualizar(0, 0, 1, 0, 0 ,0)" class="btn btn-success btn-block" title="Actualiza información de tu perfil">Actualizar perfil</b-button>
+                                    <b-button v-else :disabled="!valid || usuario.usuario_ejercicio == 1" @click="actualizar(0, 0, 1, 0, 0 ,0)" class="btn btn-success btn-block" title="Actualiza información de tu perfil">Actualizar mi perfil</b-button>
                                 </b-col>
                             </b-row>
                         </b-tab>
@@ -765,7 +765,11 @@
                                     <b-button :disabled="usuario.password.length == 0" @click="actualizar(0, 0, 0, 1, 0)" class="btn btn-success btn-block" title="Actualiza información de tu perfil">Actualizar mi perfil</b-button>
                                 </b-col>
                                 <b-col v-else>
-                                    <b-button :disabled="!valid || usuario.pyme_comercial == 1" @click="actualizar(0, 0, 0, 1, 0)" class="btn btn-success btn-block" title="Actualiza información de tu perfil">Actualizar mi perfil</b-button>
+
+
+
+                                    <b-button v-if="tipo_usuario_logeado == 1" @click="actualizar(0, 0, 0, 1, 0)" class="btn btn-success btn-block" title="Actualiza información de tu perfil">Actualizar perfil</b-button>
+                                    <b-button v-else :disabled="!valid || usuario.pyme_comercial == 1" @click="actualizar(0, 0, 0, 1, 0)" class="btn btn-success btn-block" title="Actualiza información de tu perfil">Actualizar mi perfil</b-button>
                                 </b-col>
                             </b-row>
                         </b-tab>
@@ -924,7 +928,8 @@
 
                             <b-row>
                                 <b-col>
-                                    <b-button v-show="tipo_usuario_logeado < 4" :disabled="!valid || usuario.pyme_datos == 1" @click="actualizar(0, 0, 0, 0, 1)" class="btn btn-success btn-block" title="Actualiza información de tu perfil">Actualizar mi perfil</b-button>
+                                    <b-button v-if="tipo_usuario_logeado == 1" @click="actualizar(0, 0, 0, 0, 1)" class="btn btn-success btn-block" title="Actualiza información de tu perfil">Actualizar perfil</b-button>
+                                    <b-button v-else :disabled="!valid || usuario.pyme_datos == 1" @click="actualizar(0, 0, 0, 0, 1)" class="btn btn-success btn-block" title="Actualiza información de tu perfil">Actualizar mi perfil</b-button>
                                 </b-col>
                             </b-row>
                         </b-tab>
@@ -1353,7 +1358,8 @@
                     me.usuario.casa_estudio = response.data.usuario.casa_estudio == null ? '' : response.data.usuario.casa_estudio;
                     me.usuario.ramo_favorito = response.data.usuario.ramo_favorito;
                     me.usuario.ramo_odiado = response.data.usuario.ramo_odiado;
-                    me.usuario.titulo = response.data.usuario.titulo == null ? '' : response.data.usuario.titulo;
+                    me.usuario.titulo = response.data.usuario.titulo == null ? '' : response.data.usuario.titulo
+                    me.usuario.posee_titulo = response.data.usuario.titulo == null ?  0 : 1
                     me.usuario.fecha_titulo = response.data.usuario.fecha_titulo;
                     me.usuario.seremi_o_practica = response.data.usuario.seremi_o_practica;
                     me.usuario.software = response.data.usuario.software;
@@ -1397,7 +1403,6 @@
                     me.usuario.pyme_datos = response.data.usuario.pyme_datos
                     me.usuario.pyme_facturacion = response.data.usuario.pyme_facturacion
                     me.usuario.radio_hijos = response.data.usuario.hijos > 0 ? 1 : 0
-                    me.usuario.posee_titulo = response.data.usuario.titulo == null ?  0 : 1
 
                     me.usuario.situacion_actual = response.data.usuario.situacion_actual
                     me.usuario.temporada_alta = response.data.usuario.temporada_alta
@@ -1664,5 +1669,9 @@
     .table.b-table > thead > tr > .table-b-table-default, .table.b-table > tbody > tr > .table-b-table-default, .table.b-table > tfoot > tr > .table-b-table-default {
         color: none !important;
         background-color: none !important;
+    }
+
+    .form-control[readonly]{
+        border-color: #e9ecef !important;
     }
 </style>

@@ -41,9 +41,9 @@
                                     <li class="nav-menu-item"><a href="{{ url('/comunidad') }}" class="{{ (request()->is('comunidad')) ? 'sale-color' : '' }}">Comunidad LebenCo.</a></li>
                                     <li class="nav-menu-item"><a href="{{ url('/servicios') }}" class="{{ (request()->is('servicios')) ? 'sale-color' : '' }}">Nuestros Servicios</a></li>
                                     <li class="nav-menu-item"><a href="{{ url('/contacto') }}" class="{{ (request()->is('contacto')) ? 'sale-color' : '' }}">Contáctanos</a></li>
-                                    <li class="nav-menu-item">
+                                    <li class="nav-menu-item d-none">
                                         <div class="row">
-                                            <a target="_blank" href="{{ url('https://www.youtube.com/channel/UC78DsrgVX7KslItHoTuw8uQ?view_as=subscriber') }}" class="sale-color h2 ml-4 mr-2"><i class="fa fa-youtube"></i></a>
+                                            <a target="_blank" href="{{ url('https://www.youtube.com/channel/UC78DsrgVX7KslItHoTuw8uQ?view_as=subscriber') }}" class="sale-color h2 ml-4 mr-2"> <img src="{{ asset('intranet/img_mail/youtube.png') }}" class="mb-1" height="30" width="auto" alt=""></a>
                                             <a target="_blank" href="{{ url('https://www.facebook.com/prevencion.lebenco.3') }}" class="sale-color h2  ml-2 mr-2"><i class="fa fa-facebook"></i></a>
                                             <a target="_blank" href="{{ url('https://www.instagram.com/prevencionlebenco.cl/?hl=es-la') }}" class="sale-color h2  ml-2 mr-2"><i class="fa fa-instagram"></i></a>
                                             <a target="_blank" href="{{ url('https://www.linkedin.com/in/prevenci%C3%B3n-lebenco-62b632184/') }}" class="sale-color h2  ml-2 mr-2"><i class="fa fa-linkedin"></i></a>
@@ -105,7 +105,7 @@
                                     </div>
                                 </div>
                                 <div class="footer-widget col-sm-4 col-md-2 col-lg-2 col-12 mb-lg-0 mb-4 text-center justify-content-center align-self-center">
-                                    <h6 class="footer-widget-title"><a href="{{ url('/comunidad') }}" class="{{ (request()->is('nosotros')) ? 'sale-color' : 'text-dark' }}" style="opacity: 1;">Comunidad LebenCo.</a></h6>
+                                    <h6 class="footer-widget-title"><a href="{{ url('/comunidad') }}" class="{{ (request()->is('comunidad')) ? 'sale-color' : 'text-dark' }}" style="opacity: 1;">Comunidad LebenCo.</a></h6>
                                 </div>
                                 <div class="footer-widget col-sm-4 col-md-2 col-lg-2 col-12 mb-lg-0 mb-4 text-center justify-content-center align-self-center">
                                     <h6 class="footer-widget-title"><a href="{{ url('/servicios') }}" class="{{ (request()->is('servicios')) ? 'sale-color' : 'text-dark' }}" style="opacity: 1;">Nuestros Servicios</a></h6>
@@ -128,7 +128,7 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-md-12 text-center text-md-center">
-                                <p class="footer-copyright text-dark"><!--El tamaño de tu voluntad, te llevará a la siguiente meta, ¡éxito! <br> --> © 2019 Diseñado por <a href="https://www.youtube.com/channel/UC78DsrgVX7KslItHoTuw8uQ?view_as=subscriber" target="_blank"> Prevención LebenCo. SpA </a> - Desarrollado por <a href="https://atupy.cl/sitio/" target="_blank">Atupy</a></p>
+                                <p class="footer-copyright text-dark"><!--El tamaño de tu voluntad, te llevará a la siguiente meta, ¡éxito! <br> --> © 2019 Diseñado por <a href="{{ url('/#intro') }} "> Prevención LebenCo. SpA </a> - Desarrollado por <a href="https://atupy.cl/sitio/" target="_blank">Atupy</a></p>
                             </div>
                         </div>
                     </div>

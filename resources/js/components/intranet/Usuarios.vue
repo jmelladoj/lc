@@ -161,7 +161,7 @@
             </b-row>
 
             <ValidationObserver ref="observer_usuario" v-slot="{ valid }">
-                <b-modal ref="modal_usuario" :title="modal_usuario.titulo" size="lg" no-close-on-backdrop>
+                <b-modal ref="modal_usuario" :title="modal_usuario.titulo" size="xl" no-close-on-backdrop>
                     <b-form v-if="modal_usuario.accion == 1">
                         <b-row>
                             <b-col xs="12" sm="12" md="6">
@@ -523,6 +523,8 @@
                 this.modal_usuario.titulo = "";
                 this.modal_usuario.accion = 0;
                 this.$refs['modal_usuario'].hide();
+
+                this.listarUsuarios()
             },
             cerrarModalSaldo(){
                 this.modal_saldo.titulo = "";

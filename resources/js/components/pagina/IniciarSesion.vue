@@ -1,5 +1,5 @@
 <template>
-    <section class="sec-padding-login mt-5 mb-5">
+    <section class="sec-padding-login mt-3 mb-3">
         <div class="container">
             <div class="row">
                 <div class="offset-md-2 col-md-8" v-show="formulario == 0">
@@ -30,12 +30,16 @@
                                     <span>Recuérdame</span>
                                 </label>
                             </p>
-                            <p class="form-field-wrapper form-row" v-if="estados.boton_login_inicia == 1">
-                                <button type="button" class="btn btn--lg btn--secondary" name="login" value="Log in" @click="ingresar">Ingresar</button>
-                            </p>
-                            <p class="form-field-wrapper lost_password mb-5">
-                                <b-button v-b-modal.recuperar_cuenta class="mt-0 btn btn--secondary space--1 btn-sm boton_login">Recuperar mi cuenta</b-button>
-                            </p>
+
+                            <div class="row">
+                                <div class="col-md-6 form-field-wrapper text-left">
+                                    <button v-if="estados.boton_login_inicia == 1" type="button" class="btn mt-0 btn btn--secondary space--1 btn-sm boton_login btn-secondary mb-0" name="login" value="Log in" @click="ingresar">Ingresar</button>
+                                </div>
+                                <div class="col-md-6 form-field-wrapper lost_password text-right">
+                                    <b-button v-b-modal.recuperar_cuenta class="mt-0 btn btn--secondary space--1 btn-sm boton_login mb-0">Recuperar mi cuenta</b-button>
+                                </div>
+                            </div>
+
                         </form>
                     </div>
                 </div>
@@ -127,7 +131,7 @@
                                         </label>
                                     </div>
                                     <div class="col-md-6 text-right" v-if="estados.boton_registro_registrarse == 1">
-                                        <button type="button" class="btn btn--lg btn--secondary" @click="registrar">Registrarme</button>
+                                        <button type="button" class="btn mt-0 btn btn--secondary space--1 btn-sm boton_login btn-secondary" @click="registrar">Registrarme</button>
                                     </div>
                                 </div>
                             </p>
@@ -145,8 +149,8 @@
                         </b-form-group>
 
                         <template slot="modal-footer">
-                            <b-button size="md" variant="success" :disabled="!valid" @click="recuperar_password">Recuperar mi cuenta</b-button>
-                            <b-button size="md" variant="danger" @click="cerrar_modal"> Cerrar </b-button>
+                            <b-button class="redondear" size="md" variant="success" :disabled="!valid" @click="recuperar_password">Recuperar mi cuenta</b-button>
+                            <b-button class="redondear" size="md" variant="danger" @click="cerrar_modal"> Cerrar </b-button>
                         </template>
                     </b-modal>
                 </ValidationObserver>
@@ -323,5 +327,13 @@
         border-radius: 10px 10px 10px 10px !important;
         color:  #1E2F13 !important;
         background-color: #E8ECD1 !important;
+    }
+
+    .lost_password {
+        margin-top: 0px !important;
+    }
+
+    .redondear {
+        border-radius: 10px 10px 10px 10px !important;
     }
 </style>

@@ -11,7 +11,7 @@ class Documento extends Model
     use SoftDeletes;
 
     protected $guarded = ['id'];
-    protected $appends = ['nombre_categoria'];
+    protected $appends = ['nombre_categoria', 'extension_documento'];
 
     protected $dates = ['deleted_at'];
 
@@ -50,4 +50,26 @@ class Documento extends Model
         return $this->categorias_documentos_id != null ? $this->categoria->nombre : 'Sin categoría';
     }
 
+    public function getExtensionDocumentoAttribute(){
+        switch ($this->extension) {
+            case "pdf":
+                return "PDF";
+                break;
+            case "docx":
+                return "WORD";
+                break;
+            case "xlsx":
+                return "EXCEL";
+                break;
+            case "mp4":
+                return "MP4";
+                break;
+            case "pptx":
+                return "POWER POINT";
+                break;
+            case "mp3":
+                return "MP3";
+                break;
+        }
+    }
 }

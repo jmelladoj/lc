@@ -213,6 +213,10 @@
         border-color: rgba(0, 0, 0, 0.08) !important;
     }
 
+    textarea::placeholder {
+        color: #333;
+    }
+
     .form-control::placeholder {
         color: #333 !important;
         opacity: 0.5;
@@ -222,11 +226,13 @@
         font-size: 14px !important;
     }
 
-    textarea[data-v-25e73d5d] {
+    textarea:focus[data-v-25e73d5d] {
         border-color: #8AB733 !important;
     }
 
     .container {
         max-width: 1240px !important;
     }
+
+
 </style>

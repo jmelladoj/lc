@@ -249,6 +249,22 @@
                                 <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
                             </ValidationProvider>
                         </b-form-group>
+
+                        <b-form-group>
+                            <ValidationProvider name="Link alternativo uno" rules="min:3" v-slot="{ errors }">
+                                <b-form-input type="text" v-model="slider.link_alternativo_uno" placeholder="Link alternativo uno"></b-form-input>
+                                <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
+                            </ValidationProvider>
+                        </b-form-group>
+
+
+                        <b-form-group>
+                            <ValidationProvider name="Link alternativo dos" rules="min:3" v-slot="{ errors }">
+                                <b-form-input type="text" v-model="slider.link_alternativo_dos" placeholder="Link alternativo dos"></b-form-input>
+                                <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
+                            </ValidationProvider>
+                        </b-form-group>
+
                     </b-form>
 
                     <template slot="modal-footer">
@@ -338,7 +354,9 @@
                     letra_titulo: '46',
                     alineacion_titulo: 'text-center',
                     letra_sub_titulo: '36',
-                    alineacion_sub_titulo: 'text-center'
+                    alineacion_sub_titulo: 'text-center',
+                    link_alternativo_uno: '',
+                    link_alternativo_dos: ''
                 },
                 estado_checkbox: false,
                 colors: ['#E8ECD1', '#8AB733', '#3F8A24', '#1E2F13', '#D4AF37', '#D7552A', '#0070C0', '#FFFF99' ,''],
@@ -442,6 +460,10 @@
                 formData.append('letra_sub_titulo', this.slider.letra_sub_titulo);
                 formData.append('alineacion_sub_titulo', this.slider.alineacion_sub_titulo);
 
+                formData.append('link_alternativo_uno', this.slider.link_alternativo_uno);
+                formData.append('link_alternativo_dos', this.slider.link_alternativo_dos);
+
+
                 axios.post('slider/crear/actualizar',formData).then(function (response) {
                     me.listarSliders();
                     me.cerrarModal();
@@ -542,6 +564,8 @@
                     me.slider.alineacion_titulo = data.alineacion_titulo
                     me.slider.letra_sub_titulo = data.letra_sub_titulo
                     me.slider.alineacion_sub_titulo = data.alineacion_sub_titulo
+                    me.slider.link_alternativo_uno = data.link_alternativo_uno
+                    me.slider.link_alternativo_dos = data.link_alternativo_dos
                 }
 
                 this.$refs['modal_slider'].show();
@@ -594,6 +618,8 @@
                 this.slider.alineacion_titulo = 'text-center'
                 this.slider.letra_sub_titulo = '36',
                 this.slider.alineacion_sub_titulo = 'text-center'
+                this.slider.link_alternativo_uno = ''
+                this.slider.link_alternativo_dos = ''
             }
         },
         mounted() {

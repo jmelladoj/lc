@@ -63,7 +63,9 @@ class SliderController extends Controller
                 'letra_titulo' => $request->letra_titulo,
                 'alineacion_titulo' => $request->alineacion_titulo,
                 'letra_sub_titulo' => $request->letra_sub_titulo,
-                'alineacion_sub_titulo' => $request->alineacion_sub_titulo
+                'alineacion_sub_titulo' => $request->alineacion_sub_titulo,
+                'link_alternativo_uno' => $request->link_alternativo_uno,
+                'link_alternativo_dos' => $request->link_alternativo_dos
             ]
         );
 
