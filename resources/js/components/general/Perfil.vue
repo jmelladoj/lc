@@ -67,7 +67,7 @@
                         </p>
 
 
-                        <b-form-group v-show="usuario.tipo_usuario < 3">
+                        <b-form-group v-if="tipo_usuario_logeado < 3">
                             <b-form-textarea v-model="usuario.descripcion_administrador" placeholder="Escribe aquí ..." rows="3" max-rows="6"></b-form-textarea>
                         </b-form-group>
 
