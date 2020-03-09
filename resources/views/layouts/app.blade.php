@@ -53,7 +53,7 @@
                             </div>
 
                             <div class="nav-icons">
-                                <ul class="mt-2">
+                                <ul>
                                     <li class="nav-icon-item d-lg-none">
                                         <div class="nav-icon-trigger menu-mobile-btn" title="Menú de navegación"><span><i class="fa fa-list"></i></span></div>
                                     </li>

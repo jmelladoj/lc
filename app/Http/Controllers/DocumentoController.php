@@ -32,10 +32,10 @@ class DocumentoController extends Controller
     public function indexHome($tipo){
         switch ($tipo) {
             case 1:
-                $documentos = Documento::where('estado', 1)->with('usuario')->orderBy('cantidad_descargas', 'desc')->get();
+                $documentos = Documento::where('seccion_nuevo', 1)->where('estado', 1)->with('usuario')->orderBy('updated_at', 'desc')->get();
                 break;
             case 2:
-                $documentos = Documento::where('estado', 1)->with('usuario')->orderBy('updated_at', 'asc')->get();
+                $documentos = Documento::where('seccion_descargados', 1)->where('estado', 1)->with('usuario')->orderBy('updated_at', 'desc')->get();
                 break;
         }
 
@@ -63,7 +63,8 @@ class DocumentoController extends Controller
                 'descripcion' => $request->descripcion,
                 'codigo' => $request->codigo,
                 'valor' => $request->valor,
-                'cantidad_descargas' => $request->cantidad_descargas,
+                'seccion_nuevo' => $request->seccion_nuevo,
+                'seccion_descargados' => $request->seccion_descargados,
                 'categorias_documentos_id' => $request->categoria_id == 0 ? null : $request->categoria_id,
                 'estado' => $request->estado,
                 'user_id' => Auth::user()->id

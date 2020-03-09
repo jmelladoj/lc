@@ -136,7 +136,7 @@
                             </b-col>
                             <b-col xs="12" sm="12" :md="tipo_usuario < 3 ? 6 : 12" v-if="tipo_usuario < 3">
                                 <b-form-group>
-                                    <ValidationProvider name="Valor" rules="required|numeric|min_value:0" v-slot="{ errors }">
+                                    <ValidationProvider name="Valor" :rules="tipo_usuario < 3 ? 'required|numeric|min_value:0' : ''" v-slot="{ errors }">
                                         <b-form-input type="number" v-model="documento.valor" placeholder="Valor" ></b-form-input>
                                         <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
                                     </ValidationProvider>
@@ -154,7 +154,7 @@
                         <b-row>
                             <b-col xs="12" sm="12" :md="tipo_usuario < 3 ? 6 : 12" v-if="tipo_usuario < 3">
                                 <b-form-group  class="mb-2">
-                                    <ValidationProvider name="código" rules="required|min:3" v-slot="{ errors }">
+                                    <ValidationProvider name="código" :rules="tipo_usuario < 3 ? 'required|min:3' : ''" v-slot="{ errors }">
                                         <b-form-input type="text" v-model="documento.codigo" placeholder="Código"></b-form-input>
                                         <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
                                     </ValidationProvider>
@@ -172,6 +172,17 @@
                                 </b-form-group>
                             </b-col>
                         </b-row>
+
+                        <b-form-group v-if="tipo_usuario < 3" label="¿En dónde se mostrara el documento?">
+                            <b-row>
+                                <b-col xs="12" sm="12" md="5">
+                                    <b-form-checkbox v-model="documento.seccion_nuevo" value="1" unchecked-value="0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Sección nuevos documentos</b-form-checkbox>
+                                </b-col>
+                                <b-col xs="12" sm="12" md="5">
+                                    <b-form-checkbox v-model="documento.seccion_descargados" value="1" unchecked-value="0" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Sección preferidos</b-form-checkbox>
+                                </b-col>
+                            </b-row>
+                        </b-form-group>
 
                         <b-form-group>
                             <ValidationProvider name="documento" rules="required|ext:pdf,docx,xlsx,mp4,pptx,mp3" v-slot="{ errors, validate }">
@@ -229,7 +240,9 @@
                     documento_url: null,
                     valor: null,
                     categoria_id: 0,
-                    estado: this.tipo_documento
+                    seccion_nuevo: 0,
+                    seccion_descargados: 0,
+                    estado: 0
                 },
                 modal_documento: {
                     titulo: '',
@@ -310,6 +323,9 @@
                 formData.append('documento_url', this.documento.documento_url);
                 formData.append('valor', this.documento.valor == null ? 0 : this.documento.valor);
                 formData.append('categoria_id', this.documento.categoria_id);
+                formData.append('estado', this.documento.estado);
+                formData.append('seccion_nuevo', this.documento.seccion_nuevo);
+                formData.append('seccion_descargados', this.documento.seccion_descargados);
                 formData.append('estado', this.documento.estado);
 
                 axios.post('documento/crear/actualizar',formData).then(function (response) {
@@ -425,6 +441,9 @@
                     me.documento.codigo = data['codigo'];
                     me.documento.valor = data['valor'];
                     me.documento.categoria_id = data['id_categoria'];
+                    me.documento.seccion_nuevo = data['seccion_nuevo'];
+                    me.documento.seccion_descargados = data['seccion_descargados'];
+                    me.documento.estado = data['estado'];
                 }
 
                 this.$refs['modal_documento'].show();
@@ -437,6 +456,9 @@
                 this.documento.documento_url = null;
                 this.documento.valor = null;
                 this.documento.categoria_id = 0;
+                this.documento.seccion_nuevo = 0;
+                this.documento.seccion_descargados = 0;
+                this.documento.estado = 0;
             },
             obtener_registros_documentos(){
                 this.listarCategorias();

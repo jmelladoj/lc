@@ -23,6 +23,8 @@ class CreateDocumentosTable extends Migration
             $table->integer('cantidad_descargas')->nullable()->default(0);
             $table->string('extension')->nullable()->default('');
             $table->integer('version')->default('1');
+            $table->integer('seccion_nuevo')->default(0);
+            $table->integer('seccion_descargados')->default(0);
             $table->string('url_imagen_vista_uno')->nullable()->default(null);
             $table->string('url_imagen_vista_dos')->nullable()->default(null);
 
