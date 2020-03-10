@@ -148,8 +148,8 @@
 
                             <b-row>
                                 <b-col>
-                                    <div  v-show="pagina.url_imagen.length > 0"  class="clearfix">
-                                        <b-img v-show="pagina.url_imagen.length > 0" :src="'storage/' + pagina.url_imagen" center fluid class="maxima-altura"></b-img>
+                                    <div  v-show="pagina.url_imagen != null"  class="clearfix">
+                                        <b-img v-show="pagina.url_imagen != null" :src="'storage/' + pagina.url_imagen" center fluid class="maxima-altura"></b-img>
                                     </div>
                                 </b-col>
                             </b-row>

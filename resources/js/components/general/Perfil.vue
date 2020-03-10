@@ -231,7 +231,7 @@
 
                     <ValidationObserver ref="observer_usuario_academico" v-slot="{ valid }">
                         <b-tab title="Datos acádemicos">
-                            <b-row v-show="usuario.tipo_persona == 1">
+                            <b-row v-if="usuario.tipo_persona == 1">
                                 <b-col xs="12" sm="12" md="6">
                                     <b-form-group label="¿Posees algún título?">
                                             <b-form-radio-group id="radio-group-2" v-model="usuario.posee_titulo" name="radio-sub-component">
@@ -267,7 +267,7 @@
                                     </b-form-group>
                                 </b-col>
                             </b-row>
-                            <b-row v-show="usuario.tipo_persona == 3">
+                            <b-row v-if="usuario.tipo_persona == 3">
                                 <b-col xs="12" sm="12" md="6">
                                     <b-form-group label="¿Cuál es el título que obtendrás?">
                                         <ValidationProvider :rules="usuario.posee_titulo == 1 && usuario.tipo_persona == 3 ? 'required|min:3' : ''" v-slot="{ errors }">
@@ -361,7 +361,7 @@
                                 <b-col xs="12" sm="12" md="6" v-if="usuario.radio_sitio_web == 1">
                                     <b-form-group label="Pega aquí el link">
                                         <ValidationProvider :rules="usuario.radio_sitio_web == 1 ? 'required|min:3' : ''" v-slot="{ errors }">
-                                            <input type="text" v-model="usuario.sitio_web" class="form-control" :placeholder="usuario.tiene_sitio == 0 ? 'Ej: www.prevencionlebenco.cl' : ''"/>
+                                            <input type="text" v-model="usuario.sitio_web" class="form-control" placeholder="Ej: www.prevencionlebenco.cl"/>
                                             <span v-if="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0].replace('{field}', '') }}</span></span>
                                         </ValidationProvider>
                                     </b-form-group>
@@ -1397,7 +1397,7 @@
                     me.usuario.pyme_comercial = response.data.usuario.pyme_comercial
                     me.usuario.pyme_datos = response.data.usuario.pyme_datos
                     me.usuario.pyme_facturacion = response.data.usuario.pyme_facturacion
-                    me.usuario.radio_hijos = response.data.usuario.hijos > 0 ? 1 : 0
+                    me.usuario.radio_hijos = response.data.usuario.hijos == parseInt(0) ? parseInt(0) : parseInt(1)
 
                     me.usuario.situacion_actual = response.data.usuario.situacion_actual
                     me.usuario.temporada_alta = response.data.usuario.temporada_alta
@@ -1456,9 +1456,16 @@
             },
             actualizar(usuario_perfil, usuario_academico, usuario_ejercicio, pyme_comercial, pyme_datos){
                 let me = this;
+                var titulo_usuario = null
 
-                var titulo_usuario = me.usuario.posee_titulo == 0 ? null : me.usuario.titulo
+                if(me.usuario.tipo_persona == 1){
+                    var titulo_usuario = me.usuario.posee_titulo == 0 ? null : me.usuario.titulo
+                } else {
+                     var titulo_usuario = me.usuario.titulo.length == 0 ? null : me.usuario.titulo
+                }
+
                 var sitio_usuario = me.usuario.radio_sitio_web == 0 ? null : me.usuario.sitio_web
+                var hijos_usuario = me.usuario.radio_hijos == 0 ? 0 : me.usuario.hijos
 
                 axios.post('usuario/crear/actualizar',{
                     'usuario_id': me.usuario.id,
@@ -1474,7 +1481,7 @@
                     'telefono': me.usuario.telefono,
                     'direccion': me.usuario.direccion,
                     'comuna_id': me.usuario.comuna_id,
-                    'hijos': me.usuario.hijos,
+                    'hijos': hijos_usuario,
                     'estado_civil': me.usuario.estado_civil,
                     'casa_estudio': me.usuario.casa_estudio,
                     'ramo_favorito': me.usuario.ramo_favorito,
