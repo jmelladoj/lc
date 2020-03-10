@@ -129,7 +129,7 @@ class UsuarioController extends Controller
                 'tiempo_funcionamiento' => $request->tiempo_funcionamiento,
                 'cantidad_trabajadores' => $request->cantidad_trabajadores,
                 'tiene_sitio' => $request->tiene_sitio,
-                'sitio_web' => $request->tiene_sitio == 1 ? $request->sitio_web : null,
+                'sitio_web' => $request->sitio_web,
                 'nombre_contratistas' => $request->nombre_contratistas,
                 'temporada_alta' => $request->temporada_alta,
                 'descripcion_negocio' => $request->descripcion_negocio,

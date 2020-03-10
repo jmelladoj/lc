@@ -713,7 +713,7 @@
                                 </b-col>
                             </b-row>
                             <b-row>
-                                <b-col xs="12" sm="12" md="6">
+                                <b-col xs="12" sm="12" md="12">
                                     <b-form-group label="Dirección comercial actual">
                                         <ValidationProvider rules="required" v-slot="{ errors }">
                                             <b-form-input type="text" v-model="usuario.direccion" :readonly="tipo_usuario_logeado == 4"></b-form-input>
@@ -833,7 +833,7 @@
                             <b-row>
                                 <b-col xs="12" sm="12" md="6">
                                     <b-form-group  label="Indique una cualidad sobresaliente de su negocio">
-                                        <ValidationProvider rules="required|min:20|max:200" v-slot="{ errors }">
+                                        <ValidationProvider rules="required|min:6|max:200" v-slot="{ errors }">
                                             <b-form-textarea v-model="usuario.descripcion_negocio" placeholder="Escribe aquí ..." rows="3" max-rows="6" :readonly="tipo_usuario_logeado == 4"></b-form-textarea>
                                             <span v-if="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0].replace('{field}', '') }}</span></span>
                                         </ValidationProvider>
@@ -841,7 +841,7 @@
                                 </b-col>
                                 <b-col xs="12" sm="12" md="6">
                                     <b-form-group  label="Mencione su o sus servicios/productos más importantes">
-                                        <ValidationProvider rules="required|min:20|max:200" v-slot="{ errors }">
+                                        <ValidationProvider rules="required|min:6|max:200" v-slot="{ errors }">
                                             <b-form-textarea v-model="usuario.descripcion_servicio" placeholder="Escribe aquí ..." rows="3" max-rows="6" :readonly="tipo_usuario_logeado == 4"></b-form-textarea>
                                             <span v-if="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0].replace('{field}', '') }}</span></span>
                                         </ValidationProvider>
@@ -1387,7 +1387,7 @@
                     me.usuario.cantidad_trabajadores = response.data.usuario.cantidad_trabajadores
                     me.usuario.tiene_sitio = response.data.usuario.tiene_sitio
                     me.usuario.sitio_web = response.data.usuario.sitio_web
-                    me.usuario.radio_sitio_web = response.data.usuario.sitio_web != null ? 1 : 0
+                    me.usuario.radio_sitio_web = response.data.usuario.sitio_web == null ? 0 : 1
                     me.usuario.nombre_contratistas = response.data.usuario.nombre_contratistas
                     me.usuario.presiona_tabla_vip = response.data.usuario.presiona_tabla_vip
 
@@ -1457,6 +1457,9 @@
             actualizar(usuario_perfil, usuario_academico, usuario_ejercicio, pyme_comercial, pyme_datos){
                 let me = this;
 
+                var titulo_usuario = me.usuario.posee_titulo == 0 ? null : me.usuario.titulo
+                var sitio_usuario = me.usuario.radio_sitio_web == 0 ? null : me.usuario.sitio_web
+
                 axios.post('usuario/crear/actualizar',{
                     'usuario_id': me.usuario.id,
                     'nombre': me.usuario.nombre,
@@ -1476,7 +1479,7 @@
                     'casa_estudio': me.usuario.casa_estudio,
                     'ramo_favorito': me.usuario.ramo_favorito,
                     'ramo_odiado': me.usuario.ramo_odiado,
-                    'titulo': me.usuario.titulo,
+                    'titulo': titulo_usuario,
                     'fecha_titulo': me.usuario.fecha_titulo,
                     'seremi_o_practica': me.usuario.seremi_o_practica,
                     'software': me.usuario.software,
@@ -1509,7 +1512,7 @@
                     'tiempo_funcionamiento': me.usuario.tiempo_funcionamiento,
                     'cantidad_trabajadores': me.usuario.cantidad_trabajadores,
                     'tiene_sitio': me.usuario.tiene_sitio,
-                    'sitio_web': me.usuario.sitio_web,
+                    'sitio_web': sitio_usuario,
                     'nombre_contratistas': me.usuario.nombre_contratistas,
                     'usuario_perfil': usuario_perfil,
                     'usuario_academico': usuario_academico,
