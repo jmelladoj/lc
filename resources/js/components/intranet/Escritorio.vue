@@ -210,7 +210,7 @@
                 subtips: [],
                 fields: [
                     { key: 'index', label: '#', sortable: true, sortDirection: 'desc', class: 'text-center' },
-                    { key: 'titulo', label: 'Título', sortable: true, class: 'text-left' },
+                    { key: 'titulo', label: 'Nombre del documento', sortable: true, class: 'text-left' },
                     { key: 'acciones', label: 'Acciones', sortable: true, class: 'text-center' }
                 ],
                 currentPage: 1,

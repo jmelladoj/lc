@@ -69,8 +69,8 @@
 
                                     <template slot="empty">
                                         <center>
-                                            <h5>Lo sentimos, no hay coincidencias.</h5><br>
-                                            <b-button variant="success" size="md" @click="$root.menu = 2">Solicita un documento a pedido</b-button>
+                                            <h5>Lo sentimos, no hay coincidencias. Prueba con la herramienta</h5><br>
+                                            <b-button variant="success" size="md" @click="$root.menu = 2">Documentos a pedido</b-button>
                                         </center>
                                     </template>
 
