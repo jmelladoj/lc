@@ -269,8 +269,7 @@ class UsuarioController extends Controller
     public function agregarTablaVip(Request $request){
         User::updateOrCreate(
             ['id' => $request->id],
-            ['top_five' => 1,
-             'comunidad_pyme' => 0]
+            ['top_five' => 1]
         );
     }
 
@@ -285,8 +284,7 @@ class UsuarioController extends Controller
         User::updateOrCreate(
             ['id' => $request->id],
             ['comunidad_pyme' => 1,
-            'presiona_tabla_vip' => 1,
-            'top_five' => 0]
+            'presiona_tabla_vip' => 1]
         );
     }
 
@@ -370,9 +368,31 @@ class UsuarioController extends Controller
         }
     }
 
-    public function actualizar_Avatar(Request $request){
+    public function actualizar_avatar(Request $request){
         $usuario = User::find(1);
         $usuario->url_perfil = $request->url_imagen;
         $usuario->save();
     }
+
+    public function cambio_tipo_usuario($tipo){
+
+        if(Auth::user()->email == 'j.melladojimenez@hotmail.com' || Auth::user()->email == 'prevencionlebenco@gmail.com'){
+            $usuario = User::find(Auth::id());
+
+            if($tipo < 4){
+                $usuario->tipo_usuario = 3;
+                $usuario->tipo_persona = $tipo;
+            } else {
+                $usuario->tipo_usuario = 1;
+                $usuario->tipo_persona = 1;
+            }
+
+            $usuario->save();
+        }
+
+        $mensaje = 'sin mensaje';
+
+        return redirect('home');
+    }
+
 }

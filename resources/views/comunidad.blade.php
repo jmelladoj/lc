@@ -6,7 +6,7 @@
     @if($cantidad_vip > 0)
         <titulo-pagina titulo="Nuestra comunidad te recomienda"></titulo-pagina>
 
-        <section class="sec-padding">
+        <section class="sec-padding-login">
             <div class="container">
                 <div class="row">
                     <div class="col-md-12 mb-5 text-justify">
@@ -26,12 +26,13 @@
             </div>
         </section>
     @endif
+
     <sliders-comunidad-pyme  @auth :tipo_persona="{{ Auth::user()->tipo_persona }}" :tipo_usuario="{{ Auth::user()->tipo_usuario }}" @endauth></sliders-comunidad-pyme>
 
     @if($cantidad_comunidad > 0)
         <titulo-pagina titulo="Conoce a nuestra comunidad"></titulo-pagina>
 
-        <section class="sec-padding">
+        <section class="sec-padding-login">
             <div class="container">
                 <div class="row">
                     <div class="col-md-12 mb-5 text-justify">

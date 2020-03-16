@@ -172,9 +172,9 @@
             </b-modal>
 
             <b-modal ref="modal_bienvenida" v-if="mensaje != undefined" title="¡Bienvenido!" :visible="true" >
-                <h2 class="text-center">¡Felicidades!</h2>
-                <p class="my-4 text-justify">
-                    Ya eres parte de nuestra Comunidad Prevención LebenCo. y para celebrar. Tienes una recarga disponible en tu saldo inicial.¡Disfruta!.
+                <h2 class="text-center">¡Bienvenido!</h2>
+                <p class="my-4 text-center">
+                    Ya eres parte de nuestra Comunidad Prevención LebenCo. <br> Aquí encontrarás más de una buena idea para ti y tu proyecto.
                 </p>
 
                 <template slot="modal-footer">

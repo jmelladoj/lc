@@ -46,12 +46,12 @@
         <br><br>
 
         <div class="iconos">
-            <div class="icono">
+            <div class="icono" style="display: none;">
                 <a target="_blank" href="https://www.youtube.com/channel/UC78DsrgVX7KslItHoTuw8uQ?view_as=subscriber" class="activo">
                     <img src="{{ asset('intranet/img_mail/youtube.png') }}" height="50" width="auto" alt="">
                 </a>
             </div>
-            <div class="icono">
+            <div class="icono" style="display: none;">
                 <a target="_blank" href="https://www.facebook.com/prevencion.lebenco.3" class="activo">
                     <img src="{{ asset('intranet/img_mail/facebook.png') }}" height="50" width="auto" alt="">
                 </a>
@@ -61,7 +61,7 @@
                     <img src="{{ asset('intranet/img_mail/instagram.png') }}" height="50" width="auto" alt="">
                 </a>
             </div>
-            <div class="icono">
+            <div class="icono" style="display: none;">
                 <a target="_blank" href="https://www.linkedin.com/in/prevenci%C3%B3n-lebenco-62b632184/" class="activo">
                     <img src="{{ asset('intranet/img_mail/linkedin.png') }}" height="50" width="auto" alt="">
                 </a>

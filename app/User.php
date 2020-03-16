@@ -22,7 +22,7 @@ class User extends Authenticatable
         'id'
     ];
 
-    protected $appends = ['region', 'porcentaje_like', 'like_porcentaje_admin'];
+    protected $appends = ['region', 'porcentaje_like', 'like_porcentaje_admin', 'nombre_comuna', 'nombre_rubro'];
 
     /**
      * The attributes that should be hidden for arrays.
@@ -66,27 +66,32 @@ class User extends Authenticatable
         return $this->hasMany(Valoracion::class, 'user_id')->where('tipo_votacion', 2)->where('tipo_usuario_votacion', '<', 3)->count();
     }
 
+    public function getNombreComunaAttribute(){
+        return $this->comuna ? $this->comuna->nombre : 'Sin comuna';
+    }
+
+    public function getNombreRubroAttribute(){
+        return $this->rubro ? $this->rubro->nombre : 'Sin rubro';
+    }
+
     public function getLikePorcentajeAdminAttribute(){
         $porcentaje = 0;
 
-        $total_likes = $this->cantidadLike + $this->likes;
-        $total_dislikes = $this->cantidadDislike + $this->dislikes;
-        $total_valoraciones_admin = $total_likes + $total_dislikes;
+        $total_numero_likes = $this->cantidadLike + $this->cantidadLikeAdmin;
+        $total_numero_dislikes = $this->cantidadDislike + $this->cantidadDislikeAdmin;
 
-        $porcentaje_likes_admin = $this->CantidadValoracionesAdmin > 0 ? (int) ($this->cantidadLikeAdmin * 100 / $this->CantidadValoracionesAdmin) : 0;
-        $porcentaje_dislike_admin = $porcentaje_likes_admin > 0 ? 100 - $porcentaje_likes_admin : 0;
+        $total_valoraciones_usuario = $this->cantidadLike + $this->cantidadDislike;
+        $total_valoraciones_admin = $this->cantidadLikeAdmin + $this->cantidadDislikeAdmin;
+        $total_valoraciones = $total_valoraciones_admin + $total_valoraciones_usuario;
 
-        $diferencia_porcentajes_admin = $porcentaje_likes_admin - $porcentaje_dislike_admin;
+        $diferencia_porcentaje_admin = $this->likes - $this->dislikes;
 
-        //likes
-        //dislikes
-
-        if($this->likes > 0 || $this->dislikes > 0){
-            $porcentaje = ($total_likes / $total_valoraciones_admin) + $diferencia_porcentajes_admin;
-        } else if($this->cantidadLikeAdmin > 0 || $this->cantidadDislikeAdmin > 0){
-            $porcentaje = ($this->cantidad_like / $this->cantidad_valoraciones) + $diferencia_porcentajes_admin;
-        } else {
-            $porcentaje = $this->porcentajeLike;
+        if($this->likes > 0 || $this->dislikes > 0 && $total_valoraciones > 0 ){
+            $porcentaje = (($total_numero_likes * 100) / $total_valoraciones) + $diferencia_porcentaje_admin;
+        } else if($this->likes > 0 || $this->dislikes > 0 && $total_valoraciones == 0){
+            $porcentaje = (($this->cantidadLike * 100) / $total_valoraciones_usuario) + $diferencia_porcentaje_admin;
+        } else if($this->cantidadLike > 0 || $this->cantidadDislike > 0){
+            $porcentaje = ($this->cantidadLike * 100) / ($this->cantidadLike + $this->cantidadDislike);
         }
 
         return $porcentaje;
@@ -122,6 +127,10 @@ class User extends Authenticatable
 
     public function comuna(){
         return $this->belongsTo(Comuna::class, 'comuna_id');
+    }
+
+    public function rubro(){
+        return $this->belongsTo(Rubro::class, 'rubro_id');
     }
 
     public function valoraciones(){

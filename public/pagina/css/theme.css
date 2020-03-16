@@ -6401,3 +6401,7 @@ form .lost_password {
     margin-bottom: 0px !important;
 }
 
+.modal-xl {
+    max-width: 90% !important;
+}
+

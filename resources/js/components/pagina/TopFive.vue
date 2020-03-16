@@ -82,7 +82,7 @@
             <b-modal ref="modal_votacion" :title="modal_votacion.titulo" size="md" no-close-on-backdrop>
                 <b-form>
                     <b-form-group v-show="logeado == 1" :label="modal_votacion.accion == 1 ? '¿Qué te ha gustado de la pyme?' : '¿Qué no te ha gustado de la Pyme?'">
-                        <ValidationProvider name="Calificación" rules="required|min:20|max:200" v-slot="{ errors }">
+                        <ValidationProvider name="Calificación" rules="required|min:6|max:200" v-slot="{ errors }">
                             <b-form-textarea v-model="valoracion.descripcion" placeholder="Escribe aquí ..." rows="3" max-rows="6"></b-form-textarea>
                             <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
                         </ValidationProvider>
@@ -169,6 +169,7 @@
                 me.valoracion.descripcion = '';
                 me.modal_votacion.titulo = 'Valorando a ' + data['nombre'];
                 me.modal_votacion.accion = accion;
+                me.usuario.id = data.id
 
                 this.$refs['modal_votacion'].show();
             },
@@ -177,12 +178,14 @@
 
                 me.modal_votacion.titulo = '';
                 me.modal_votacion.accion = 0;
+                me.usuario.id = 0;
                 this.$refs['modal_votacion'].hide();
             },
             enviarValoracion (){
                 let me = this;
 
                 axios.post('/valorar/pyme',{
+                    'usuario_id': me.usuario.id,
                     'detalle': me.valoracion.descripcion,
                     'tipo_votacion': me.modal_votacion.accion
                 }).then(function (response) {
@@ -222,17 +225,17 @@
             if(this.logeado == 0){
                 if(this.tipo == 1){
                     this.fields = [
-                        { key: 'nombre', label: 'Recomendados', sortable: true, class: 'text-left font-weight-bold' },
-                        { key: 'nombreComuna', label: 'Comuna', sortable: true, class: 'text-left' },
-                        { key: 'nombreRubro', label: 'Rubro', sortable: true, class: 'text-left' },
+                        { key: 'nombre', label: 'Recomendados', sortable: true, class: 'text-left' },
+                        { key: 'nombre_comuna', label: 'Comuna', sortable: true, class: 'text-left' },
+                        { key: 'nombre_rubro', label: 'Rubro', sortable: true, class: 'text-left' },
                         { key: 'perfil', label: 'Perfil', sortable: true, class: 'text-center' },
                         { key: 'valoracion', label: 'Calificación', sortable: true, class: 'text-center' },
                     ]
                 } else {
                     this.fields = [
-                        { key: 'nombre', label: 'Recomendados', sortable: true, class: 'text-left font-weight-bold' },
-                        { key: 'nombreComuna', label: 'Comuna', sortable: true, class: 'text-left' },
-                        { key: 'nombreRubro', label: 'Rubro', sortable: true, class: 'text-left' },
+                        { key: 'nombre', label: 'Recomendados', sortable: true, class: 'text-left' },
+                        { key: 'nombre_comuna', label: 'Comuna', sortable: true, class: 'text-left' },
+                        { key: 'nombre_rubro', label: 'Rubro', sortable: true, class: 'text-left' },
                         { key: 'perfil', label: 'Perfil', sortable: true, class: 'text-center' },
                         { key: 'valoracion', label: 'Calificación', sortable: true, class: 'text-center' },
                     ]
@@ -242,9 +245,9 @@
 
                 if(this.tipo == 1){
                     this.fields = [
-                        { key: 'nombre', label: 'Recomendados', sortable: true, class: 'text-left font-weight-bold' },
-                        { key: 'nombreComuna', label: 'Comuna', sortable: true, class: 'text-left' },
-                        { key: 'nombreRubro', label: 'Rubro', sortable: true, class: 'text-left' },
+                        { key: 'nombre', label: 'Recomendados', sortable: true, class: 'text-left' },
+                        { key: 'nombre_comuna', label: 'Comuna', sortable: true, class: 'text-left' },
+                        { key: 'nombre_rubro', label: 'Rubro', sortable: true, class: 'text-left' },
                         { key: 'perfil', label: 'Perfil', sortable: true, class: 'text-center' },
                         { key: 'valoracion', label: 'Calificación', sortable: true, class: 'text-center' },
                         { key: 'like_porcentaje_admin', label: 'Me gusta', sortable: true, class: 'text-center like' },
@@ -252,9 +255,9 @@
                     ]
                 } else {
                     this.fields = [
-                        { key: 'nombre', label: 'Recomendados', sortable: true, class: 'text-left font-weight-bold' },
-                        { key: 'nombreComuna', label: 'Comuna', sortable: true, class: 'text-left' },
-                        { key: 'nombreRubro', label: 'Rubro', sortable: true, class: 'text-left' },
+                        { key: 'nombre', label: 'Recomendados', sortable: true, class: 'text-left' },
+                        { key: 'nombre_comuna', label: 'Comuna', sortable: true, class: 'text-left' },
+                        { key: 'nombre_rubro', label: 'Rubro', sortable: true, class: 'text-left' },
                         { key: 'perfil', label: 'Perfil', sortable: true, class: 'text-center' },
                         { key: 'valoracion', label: 'Calificación', sortable: true, class: 'text-center' },
                         { key: 'like_porcentaje_admin', label: 'Me gusta', sortable: true, class: 'text-center like' },

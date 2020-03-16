@@ -4,7 +4,7 @@
             <i class="fa fa-user sale-color"></i>
         </a>
 
-        <b-modal ref="modal_perfil" :title="modal_perfil.titulo" size="lg" no-close-on-backdrop>
+        <b-modal ref="modal_perfil" :title="modal_perfil.titulo" size="xl" no-close-on-backdrop>
             <b-form>
                 <b-row>
                     <b-col xs="12" sm="12" md="4">
@@ -19,7 +19,7 @@
                                 </p>
                                 <hr>
                                 <small class="text-muted">Correo: </small><h6 v-text="usuario.email"></h6><br>
-                                <small v-if="usuario.sitio_web" class="text-muted">Sitio web: </small><a v-if="usuario.sitio_web" :href="'../' + usuario.sitio_web" target="_blank">{{ usuario.sitio_web }}</a>
+                                <small v-if="usuario.sitio_web" class="text-muted">Sitio web: </small><a v-if="usuario.sitio_web" :href="'../' + usuario.sitio_web" target="_blank" class="sale-color">{{ usuario.sitio_web }}</a>
                             </center>
                         </b-card>
 
@@ -38,14 +38,14 @@
                                     <b-row>
                                         <b-col  xs="12" sm="12" md="6">
                                             <b-form-group label="Teléfono">
-                                                <b-input-group prepend="+56 ">
+                                                <b-input-group prepend="+569 ">
                                                     <b-form-input type="number" v-model="usuario.telefono" :readonly="true"></b-form-input>
                                                 </b-input-group>
                                             </b-form-group>
                                         </b-col>
                                         <b-col  xs="12" sm="12" md="6">
                                             <b-form-group  label="Comuna">
-                                                <b-form-input type="text" v-model="usuario.comuna" :readonly="true"></b-form-input>
+                                                <b-form-input type="text" v-model="usuario.nombre_comuna" :readonly="true"></b-form-input>
                                             </b-form-group>
                                         </b-col>
                                     </b-row>
@@ -53,44 +53,6 @@
 
                                 <b-tab title="Comentarios">
                                     <b-container fluid>
-                                        <b-row>
-                                            <b-col xs="12" sm="12" md="4" class="my-1">
-                                                <b-form-group label-cols-sm="3" label="Filtrar" class="mb-0">
-                                                <b-input-group>
-                                                    <b-form-input v-model="filter_pyme" placeholder="Escribe para buscar" />
-                                                    <b-input-group-append>
-                                                    <b-button :disabled="!filter_pyme" @click="filter_pyme = ''">Limpiar</b-button>
-                                                    </b-input-group-append>
-                                                </b-input-group>
-                                                </b-form-group>
-                                            </b-col>
-
-                                            <b-col xs="12" sm="12" md="4" class="my-1">
-                                                <b-form-group label-cols-sm="3" label="Ordenar" class="mb-0">
-                                                <b-input-group>
-                                                    <b-form-select v-model="sortBy_pyme" :options="sortOptions_pyme">
-                                                    <option slot="first" :value="null">-- nada --</option>
-                                                    </b-form-select>
-                                                    <b-form-select :disabled="!sortBy_pyme" v-model="sortDesc_pyme" slot="append">
-                                                    <option :value="false">Asc</option> <option :value="true">Desc</option>
-                                                    </b-form-select>
-                                                </b-input-group>
-                                                </b-form-group>
-                                            </b-col>
-
-                                            <b-col xs="12" sm="12" md="4" class="my-1">
-                                                <b-form-group label-cols-sm="3" label="Dirección" class="mb-0">
-                                                <b-input-group>
-                                                    <b-form-select v-model="sortDirection_pyme" slot="append">
-                                                    <option value="asc">Asc</option> <option value="desc">Desc</option>
-                                                    <option value="last">Último</option>
-                                                    </b-form-select>
-                                                </b-input-group>
-                                                </b-form-group>
-                                            </b-col>
-                                        </b-row>
-
-                                        <!-- Main table element -->
                                         <b-table
                                             show-empty
                                             responsive
@@ -110,10 +72,6 @@
                                             :sort-direction="sortDirection_pyme"
                                             @filtered="onFiltered_pyme">
 
-                                            <template v-slot:cell(index)="data">
-                                                {{ data.index + 1 }}
-                                            </template>
-
                                             <template slot="empty">
                                                 <center><h5>No hay registros para mostrar.</h5></center>
                                             </template>
@@ -126,12 +84,6 @@
                                                 <label v-text="row.item.tipo_votacion == 1 ? 'Positivo' : 'Negativo'"></label>
                                             </template>
                                         </b-table>
-
-                                        <b-row>
-                                            <b-col>
-                                                <b-pagination :total-rows="totalRows_pyme" :per-page="perPage_pyme" v-model="currentPage_pyme" class="my-3" align="fill"/>
-                                            </b-col>
-                                        </b-row>
                                     </b-container>
                                 </b-tab>
                             </b-tabs>
@@ -201,7 +153,6 @@
                 },
                 items_pyme: [],
                 fields_pyme: [
-                    { key: 'index', label: '#', sortable: true, sortDirection: 'desc', class: 'text-center' },
                     { key: 'nombre_usuario', label: 'Autor', sortable: true, class: 'text-left' },
                     { key: 'tipo_votacion', label: 'Tipo comentario', sortable: true, class: 'text-left' },
                     { key: 'descripcion', label: 'Comentario', sortable: true, class: 'text-left' }

@@ -7,8 +7,8 @@
                     <h2 class="intro-title" :class="slider.alineacion_titulo" v-text="slider.texto" :style="'color:' + slider.color + ';' + 'font-size:' + slider.letra_titulo + 'px;'"></h2>
                     <h4 v-if="slider.subtexto != ''" :class="slider.alineacion_sub_titulo" :style="'color:' + slider.subcolor + ';' + 'font-size:' + slider.letra_sub_titulo + 'px;'" v-text="slider.subtexto"></h4>
                     <button class="btn btn--primary space--1 btn-sm" @click="redireccion(slider.link)" v-show="slider.link != '/intranet/0'">Ver más</button>
-                    <a class="btn btn--primary space--1 btn-sm" :href="slider.link_alternativo_uno" v-show="slider.link_alternativo_uno != ''" target="_blank">Ir al enlace</a>
-                    <a class="btn btn--primary space--1 btn-sm" :href="slider.link_alternativo_dos" v-show="slider.link_alternativo_dos != ''" target="_blank">Ir al enlace</a>
+                    <a class="btn btn--primary space--1 btn-sm" :href="slider.link_alternativo_uno" v-show="slider.link_alternativo_uno != null" target="_blank">Ir al enlace</a>
+                    <a class="btn btn--primary space--1 btn-sm" :href="slider.link_alternativo_dos" v-show="slider.link_alternativo_dos != null" target="_blank">Ir al enlace</a>
                 </b-carousel-slide>
 
             </b-carousel>

@@ -11,46 +11,48 @@
                 </b-col>
             </b-row>
 
-            <b-card>
-                <b-row>
-                    <b-col xs="12" sm="12" md="6">
-                        <b-form-group label="Cliente">
-                            <b-form-input v-model="tabla.empresa" type="text" readonly="" placeholder="Pyme"></b-form-input>
-                        </b-form-group>
-                    </b-col>
-                    <b-col xs="12" sm="12" md="6">
-                        <b-form-group label="Categoría">
-                            <ValidationProvider name="posición" rules="required|numeric|between:0,10" v-slot="{ errors }">
-                                <b-form-select v-model="tabla.posicion" @change="actualizar_usuario_tabla">
-                                    <option value="0">Estrellas</option>
-                                    <option value="1">1 Estrella(s)</option>
-                                    <option value="2">2 Estrella(s)</option>
-                                    <option value="3">3 Estrella(s)</option>
-                                    <option value="4">4 Estrella(s)</option>
-                                    <option value="5">5 Estrella(s)</option>
-                                </b-form-select>
-                                <span v-show="errors[0]"><span class="d-block alert alert-danger">{{ errors[0] }}</span></span>
-                            </ValidationProvider>
-                        </b-form-group>
-                    </b-col>
-                    <b-col xs="12" sm="12" md="6">
-                        <b-form-group label="N° likes">
-                            <ValidationProvider name="likes" rules="required|numeric|min:0" v-slot="{ errors }">
-                                <b-form-input type="number" v-model="tabla.likes" placeholder="Likes" @keyup="actualizar_usuario_tabla"></b-form-input>
-                                <span v-show="errors[0]"><span class="d-block alert alert-danger">{{ errors[0] }}</span></span>
-                            </ValidationProvider>
-                        </b-form-group>
-                    </b-col>
-                    <b-col xs="12" sm="12" md="6">
-                        <b-form-group label="N° dislikes">
-                            <ValidationProvider name="dislikes" rules="required|numeric|min:0" v-slot="{ errors }">
-                                <b-form-input type="number" v-model="tabla.dislikes" placeholder="Dislikes" @keyup="actualizar_usuario_tabla"></b-form-input>
-                                <span v-show="errors[0]"><span class="d-block alert alert-danger">{{ errors[0] }}</span></span>
-                            </ValidationProvider>
-                        </b-form-group>
-                    </b-col>
-                </b-row>
-            </b-card>
+            <ValidationObserver ref="observer_valoracion">
+                <b-card v-show="tabla.usuario_id > 0">
+                    <b-row>
+                        <b-col xs="12" sm="12" md="6">
+                            <b-form-group label="Cliente">
+                                <b-form-input v-model="tabla.empresa" type="text" readonly="" placeholder="Pyme"></b-form-input>
+                            </b-form-group>
+                        </b-col>
+                        <b-col xs="12" sm="12" md="6">
+                            <b-form-group label="Categoría">
+                                <ValidationProvider name="posición" rules="required|numeric|between:1,5" v-slot="{ errors }">
+                                    <b-form-select v-model="tabla.posicion" @change="actualizar_usuario_tabla">
+                                        <option value="0">Estrellas</option>
+                                        <option value="1">1 Estrella(s)</option>
+                                        <option value="2">2 Estrella(s)</option>
+                                        <option value="3">3 Estrella(s)</option>
+                                        <option value="4">4 Estrella(s)</option>
+                                        <option value="5">5 Estrella(s)</option>
+                                    </b-form-select>
+                                    <span v-show="errors[0]"><span class="d-block alert alert-danger">{{ errors[0] }}</span></span>
+                                </ValidationProvider>
+                            </b-form-group>
+                        </b-col>
+                        <b-col xs="12" sm="12" md="6">
+                            <b-form-group label="Porcentaje likes">
+                                <ValidationProvider name="likes" rules="required|numeric|between:0,100" v-slot="{ errors }">
+                                    <b-form-input type="number" v-model="tabla.likes" placeholder="Likes" @keyup="actualizar_usuario_tabla"></b-form-input>
+                                    <span v-show="errors[0]"><span class="d-block alert alert-danger">{{ errors[0] }}</span></span>
+                                </ValidationProvider>
+                            </b-form-group>
+                        </b-col>
+                        <b-col xs="12" sm="12" md="6">
+                            <b-form-group label="Porcentaje dislikes">
+                                <ValidationProvider name="dislikes" rules="required|numeric|between:0,100" v-slot="{ errors }">
+                                    <b-form-input type="number" v-model="tabla.dislikes" placeholder="Dislikes" @keyup="actualizar_usuario_tabla"></b-form-input>
+                                    <span v-show="errors[0]"><span class="d-block alert alert-danger">{{ errors[0] }}</span></span>
+                                </ValidationProvider>
+                            </b-form-group>
+                        </b-col>
+                    </b-row>
+                </b-card>
+            </ValidationObserver>
 
             <b-row v-show="tabla.usuario_id > 0">
                 <b-col>
@@ -277,9 +279,9 @@
                             </ValidationProvider>
                         </b-form-group>
 
-                        <b-form-group>
+                        <b-form-group label="Tipo de comentario">
                             <ValidationProvider name="Tipo de comentario" rules="required" v-slot="{ errors }">
-                                <b-form-select v-model="comentario.tipo_votacion" class="mb-3">
+                                <b-form-select v-model="comentario.tipo_votacion">
                                     <option :value="1" selected>Positivo</option>
                                     <option :value="2" selected>Negativo</option>
                                 </b-form-select>
@@ -333,8 +335,8 @@
                 fields: [
                     { key: 'posicion', label: '#', sortable: true, sortDirection: 'desc', class: 'text-center' },
                     { key: 'nombre', label: 'Pyme', sortable: true, class: 'text-left' },
-                    { key: 'nombreComuna', label: 'Comuna', sortable: true, class: 'text-left' },
-                    { key: 'nombreRubro', label: 'Rubro', sortable: true, class: 'text-left' },
+                    { key: 'nombre_comuna', label: 'Comuna', sortable: true, class: 'text-left' },
+                    { key: 'nombre_rubro', label: 'Rubro', sortable: true, class: 'text-left' },
                     { key: 'like_porcentaje_admin', label: 'Likes', sortable: true, class: 'text-center' },
                     { key: 'porcentaje_dislike_vip', label: 'Dislikes', sortable: true, class: 'text-center' },
                     { key: 'acciones', label: 'Acciones', sortable: true, class: 'text-center' }
@@ -415,6 +417,10 @@
             actualizar_usuario_tabla(){
                 let me = this;
 
+                if(me.tabla.likes < 0 || me.tabla.likes > 100 || me.tabla.dislikes < 0 || me.tabla.dislikes > 0){
+                    return false;
+                }
+
                 axios.post('/usuario/actualizar/tabla/vip',{
                     'id': me.tabla.usuario_id,
                     'posicion': me.tabla.posicion,
@@ -469,6 +475,7 @@
 
                 axios.post('/valorar/pyme',{
                     'id': me.comentario.id,
+                    'usuario_id': me.tabla.usuario_id,
                     'autor': me.comentario.autor,
                     'detalle': me.comentario.detalle,
                     'tipo_votacion': me.comentario.tipo_votacion
@@ -508,6 +515,7 @@
                         }).then(function (response) {
                             var mensaje = 'Registro borrado exitosamente';
                             me.listar_valoraciones();
+                            me.listarUsuariosTablaVip();
 
 							Vue.$toast.open({
 		                        message: mensaje,

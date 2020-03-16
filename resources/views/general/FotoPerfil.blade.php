@@ -8,11 +8,14 @@
 
                 <span class="caret"></span>
             </a>
-            {{-- <div class="dropdown-menu animated flipInY">
-                <a @if(Auth::user()->tipo_usuario == 3) @click="menu=1" @else @click="menu=6" @endif  href="javascript:void(0)" class="dropdown-item"><i class="fa fa-user"></i> Mi perfil</a>
-                <div class="dropdown-divider"></div>
-            </div>
-             --}}
+            @if(Auth::user()->email == 'j.melladojimenez@hotmail.com' || Auth::user()->email == 'prevencionlebenco@gmail.com')
+                <div class="dropdown-menu animated flipInY">
+                    <a href="/cambio/usuario/4" class="dropdown-item"> Administrador</a>
+                    <a href="/cambio/usuario/1" class="dropdown-item"> Persona</a>
+                    <a href="/cambio/usuario/3" class="dropdown-item"> Estudiante</a>
+                    <a href="/cambio/usuario/2" class="dropdown-item"> Pyme</a>
+                </div>
+            @endif
         </div>
     </div>
 </div>

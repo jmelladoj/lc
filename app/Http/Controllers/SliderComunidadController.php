@@ -23,7 +23,7 @@ class SliderComunidadController extends Controller
             ['id' => $request->slider_id],
             [
                 'texto' => $request->texto_slider,
-                'subtexto' => $request->subtexto,
+                'subtexto' => $request->subtexto == 'null' ? NULL : $request->subtexto,
                 'color' => $request->color,
                 'subcolor' => $request->subcolor,
                 'texto_boton' => $request->texto_boton,
@@ -34,8 +34,8 @@ class SliderComunidadController extends Controller
                 'alineacion_titulo' => $request->alineacion_titulo,
                 'letra_sub_titulo' => $request->letra_sub_titulo,
                 'alineacion_sub_titulo' => $request->alineacion_sub_titulo,
-                'link_alternativo_uno' => $request->link_alternativo_uno,
-                'link_alternativo_dos' => $request->link_alternativo_dos
+                'link_alternativo_uno' => $request->link_alternativo_uno == 'null' ? NULL : $request->link_alternativo_uno,
+                'link_alternativo_dos' => $request->link_alternativo_dos == 'null' ? NULL : $request->link_alternativo_dos,
             ]
         );
 

@@ -20,6 +20,8 @@ Route::get('/', function () {
 
 Auth::routes();
 
+
+
 Route::get('/politicas', 'PaginaController@indexHomePoliticas')->name('Mostrar Página de politicas');
 Route::get('/nosotros', 'PaginaController@indexHomeNosotros')->name('Mostrar Página nosotros');
 Route::get('/comunidad', 'PaginaController@indexHomeComunidad')->name('Mostrar Página Comunidad');
@@ -134,7 +136,7 @@ Route::get('/usuarios/tabla/vip', 'UsuarioController@usuariosTablaVip')->name('U
 Route::get('/usuarios/tabla/comunidad', 'UsuarioController@usuariosTablaComunidad')->name('Usuario Tabla comunidad');
 Route::post('/usuario/tabla/comunidad', 'UsuarioController@usuario_tabla_comunidad')->name('Usuario Tabla comunidad');
 Route::post('/usuario/tabla/vip', 'UsuarioController@usuario_tabla_vip')->name('Usuario Tabla vip');
-Route::post('/usuario/actualizar/avatar', 'UsuarioController@actualizar_Avatar')->name('Usuario avatar');
+Route::post('/usuario/actualizar/avatar', 'UsuarioController@actualizar_avatar')->name('Usuario avatar');
 Route::post('usuario/crear/actualizar/archivo', 'UsuarioController@actualizar_archivo_usuario')->name('Usuario archivo');
 
 
@@ -214,7 +216,7 @@ Route::post('/venta/carga','VentaController@recargar')->name('Realizar carga');
 Route::post('/venta/procesar','VentaController@procesar')->name('Procesar carga');
 Route::post('/venta/finalizar','VentaController@finalizar')->name('Procesar carga');
 
-
+Route::get('/cambio/usuario/{tipo}', 'UsuarioController@cambio_tipo_usuario')->name('Cambiar tipo de usuario');
 
 
 
