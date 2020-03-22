@@ -225,7 +225,7 @@
 
     export default {
         props: [
-            'tipo', 'tipo_documento', 'titulo', 'tipo_usuario'
+            'tipo', 'tipo_documento', 'titulo', 'tipo_usuario', 'estado'
         ],
         data() {
             return {
@@ -326,7 +326,7 @@
                 formData.append('estado', this.documento.estado);
                 formData.append('seccion_nuevo', this.documento.seccion_nuevo);
                 formData.append('seccion_descargados', this.documento.seccion_descargados);
-                formData.append('estado', this.documento.estado);
+                formData.append('estado', this.estado);
 
                 axios.post('documento/crear/actualizar',formData).then(function (response) {
                     me.listarDocumentos();

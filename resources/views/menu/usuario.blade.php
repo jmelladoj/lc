@@ -51,7 +51,7 @@
 </template>
 
 <template v-if="ubicacion == 1 && menu==11">
-    <documentos :tipo="3" :tipo_documento="0" :titulo="'Comparte tu documento'" :tipo_usuario="{{ Auth::user()->tipo_usuario }}"></documentos>
+    <documentos :tipo="3" :tipo_documento="0" :titulo="'Comparte tu documento'" :tipo_usuario="{{ Auth::user()->tipo_usuario }}" :estado="0"></documentos>
 </template>
 
 <template v-if="ubicacion == 1 && menu==12">

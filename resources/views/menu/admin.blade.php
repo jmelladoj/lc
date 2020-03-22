@@ -144,11 +144,11 @@
 </template>
 
 <template v-if="ubicacion == 1 && menu==1">
-    <documentos :tipo="1" :tipo_documento="1" :titulo="'Documentos Aprobados'" :tipo_usuario="{{ Auth::user()->tipo_usuario }}"></documentos>
+    <documentos :tipo="1" :tipo_documento="1" :titulo="'Documentos Aprobados'" :tipo_usuario="{{ Auth::user()->tipo_usuario }}" :estado="1"></documentos>
 </template>
 
 <template v-if="ubicacion == 1 && menu==2">
-    <documentos :tipo="2" :tipo_documento="0" :titulo="'Documentos Pendientes'" :tipo_usuario="{{ Auth::user()->tipo_usuario }}"></documentos>
+    <documentos :tipo="2" :tipo_documento="0" :titulo="'Documentos Pendientes'" :tipo_usuario="{{ Auth::user()->tipo_usuario }}" :estado="0"></documentos>
 </template>
 
 <template v-if="ubicacion == 1 && menu==3">

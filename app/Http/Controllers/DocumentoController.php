@@ -26,6 +26,9 @@ class DocumentoController extends Controller
             case 3:
                 return ['documentos' => Documento::where('user_id', Auth::id())->orderBy('created_at', 'asc')->get()];
                 break;
+            case 4:
+                return ['documentos' => Documento::where('estado', 1)->with('categoria')->orderBy('created_at', 'desc')->inRandomOrder()->limit(5)->get()];
+                break;
         }
     }
 
@@ -36,6 +39,9 @@ class DocumentoController extends Controller
                 break;
             case 2:
                 $documentos = Documento::where('seccion_descargados', 1)->where('estado', 1)->with('usuario')->orderBy('updated_at', 'desc')->get();
+                break;
+            case 4:
+                return ['documentos' => Documento::where('estado', 1)->with('categoria')->orderBy('created_at', 'desc')->inRandomOrder()->limit(5)->get()];
                 break;
         }
 
@@ -70,6 +76,11 @@ class DocumentoController extends Controller
                 'user_id' => Auth::user()->id
             ]
         );
+
+        if(Auth::user()->tipo_usuario < 3){
+            $documento->estado = 1;
+            $documento->save();
+        }
 
         if ($request->hasFile('documento')) {
             $url = Storage::disk('public')->putFile('documentos', $request->file('documento'));

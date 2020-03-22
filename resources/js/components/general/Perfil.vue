@@ -440,18 +440,10 @@
                             </b-row>
 
                             <b-row v-show="usuario.tipo_persona == 1">
-                                <b-col xs="12" sm="12" md="6">
+                                <b-col xs="12" sm="12" md="12">
                                     <b-form-group label="Describe brevemente tu mayor logro personal y profesional">
                                         <ValidationProvider :rules="usuario.tipo_persona == 1 ? 'required|min:3' : ''" v-slot="{ errors }">
                                             <b-form-input type="text" v-model="usuario.ultimo_trabajo" :readonly="tipo_usuario_logeado == 4"></b-form-input>
-                                            <span v-if="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0].replace('{field}', '') }}</span></span>
-                                        </ValidationProvider>
-                                    </b-form-group>
-                                </b-col>
-                                <b-col xs="12" sm="12" md="6">
-                                    <b-form-group label="¿Cuál es el nombre de la Empresa donde obtuviste ese logro?">
-                                        <ValidationProvider :rules="usuario.tipo_persona == 1 ? 'required|min:3' : ''" v-slot="{ errors }">
-                                            <b-form-input type="text" v-model="usuario.ultimo_empresa" :readonly="tipo_usuario_logeado == 4"></b-form-input>
                                             <span v-if="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0].replace('{field}', '') }}</span></span>
                                         </ValidationProvider>
                                     </b-form-group>

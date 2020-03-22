@@ -260,8 +260,8 @@
             },
             listarDocumentos(){
                 let me=this;
-                axios.get('/documentos/tipo/2').then(function (response) {
-                    me.items = response.data.ddocumentos;
+                axios.get('/documentos/tipo/4').then(function (response) {
+                    me.items = response.data.documentos;
                 })
                 .catch(function (error) {
                     console.log(error);
@@ -284,6 +284,7 @@
             }
         },
         beforeMount() {
+            this.listarDocumentos();
             this.listarTips();
             this.obtener_saldo()
             this.listarPagina()
