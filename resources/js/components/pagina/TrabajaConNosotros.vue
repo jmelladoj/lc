@@ -6,8 +6,8 @@
             <h4 class="my-4 text-justify" v-text="mensaje_trabaja"></h4>
 
             <template slot="modal-footer">
-                <b-button size="md" variant="danger" @click="cerrar_modal_trabaja()"> Cerrar </b-button>
-                <b-button size="md" variant="success" @click="redireccion()"> ¡Regístrate! </b-button>
+                <b-button size="md" variant="danger" @click="cerrar_modal_trabaja()" class="boton_redondo"> Cerrar </b-button>
+                <b-button size="md" variant="success" @click="redireccion()" class="boton_redondo"> ¡Regístrate! </b-button>
             </template>
         </b-modal>
     </div>

@@ -52,16 +52,8 @@
                 <center><h5>No hay registros que coincidan con su solicitud.</h5></center>
             </template>
 
-            <template v-slot:cell(nombre_comuna)="data">
-                {{ data.item.comuna.nombre }}
-            </template>
-
             <template v-slot:cell(valoracion)="data">
                 A {{ data.item.like_porcentaje_admin }} % les gusta esto.
-            </template>
-
-            <template v-slot:cell(nombre_rubro)>
-                Sin rubro
             </template>
 
             <template v-slot:cell(like_porcentaje_admin)="data">
@@ -94,8 +86,8 @@
                 </b-form>
 
                 <template slot="modal-footer">
-                    <b-button :disabled="!valid" v-show="logeado == 1" size="md" variant="success" @click="enviarValoracion()"> Guardar </b-button>
-                    <b-button size="md" variant="danger" @click="cerrarModalValoracion()"> Cerrar </b-button>
+                    <b-button :disabled="!valid" v-show="logeado == 1" size="md" variant="success" @click="enviarValoracion()" class="boton_redondo"> Guardar </b-button>
+                    <b-button size="md" variant="danger" @click="cerrarModalValoracion()" class="boton_redondo"> Cerrar </b-button>
                 </template>
             </b-modal>
         </ValidationObserver>

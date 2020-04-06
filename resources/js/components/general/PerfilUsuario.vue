@@ -10,16 +10,17 @@
                     <b-col xs="12" sm="12" md="4">
                         <b-card>
                             <center class="mt-1">
-                                <img v-bind:src="usuario.url_perfil" alt="Imagen de usuario" class="img-circle mb-2" width="150">
+                                <img v-bind:src="usuario.url_perfil" alt="Imagen de usuario" class="mb-2" width="150">
                                 <p v-show="usuario.posicion > 0" @click="abrirModalValoracion">
                                     <i class="fa fa-star fa-2x text-warning" aria-hidden="true" v-for="index in usuario.posicion" :key="index"></i>
                                 </p>
                                 <p>
-                                    A {{ usuario.likes }} % les gusta esto.
+                                    <span v-if="usuario.like_porcentaje_admin > 0">A {{ usuario.like_porcentaje_admin }} % les gusta esto.</span>
+                                    <span v-else>Califica a nuestro socio con tu comentario.</span>
                                 </p>
                                 <hr>
-                                <small class="text-muted">Correo: </small><h6 v-text="usuario.email"></h6><br>
-                                <small v-if="usuario.sitio_web" class="text-muted">Sitio web: </small><a v-if="usuario.sitio_web" :href="'../' + usuario.sitio_web" target="_blank" class="sale-color">{{ usuario.sitio_web }}</a>
+                                <h6 v-text="usuario.email"></h6><br>
+                                <a v-if="usuario.sitio_web" v-bind:href="usuario.sitio_web" target="_blank" class="sale-color">{{ usuario.sitio_web }}</a>
                             </center>
                         </b-card>
 
@@ -38,14 +39,14 @@
                                     <b-row>
                                         <b-col  xs="12" sm="12" md="6">
                                             <b-form-group label="Teléfono">
-                                                <b-input-group prepend="+569 ">
+                                                <b-input-group prepend="+56 9 ">
                                                     <b-form-input type="number" v-model="usuario.telefono" :readonly="true"></b-form-input>
                                                 </b-input-group>
                                             </b-form-group>
                                         </b-col>
                                         <b-col  xs="12" sm="12" md="6">
                                             <b-form-group  label="Comuna">
-                                                <b-form-input type="text" v-model="usuario.nombre_comuna" :readonly="true"></b-form-input>
+                                                <b-form-input type="text" v-model="usuario.comuna" :readonly="true"></b-form-input>
                                             </b-form-group>
                                         </b-col>
                                     </b-row>
@@ -93,7 +94,7 @@
             </b-form>
 
             <template slot="modal-footer">
-                <b-button size="md" variant="danger" @click="cerrar_modal_perfil()"> Cerrar </b-button>
+                <b-button size="md" variant="danger" class="boton_redondo" @click="cerrar_modal_perfil()"> Cerrar </b-button>
             </template>
         </b-modal>
 
@@ -245,7 +246,7 @@
                     me.usuario.likes = response.data.usuario.likes
                     me.usuario.direccion = response.data.usuario.direccion
                     me.usuario.telefono = response.data.usuario.telefono
-                    me.usuario.comuna = response.data.usuario.nombreComuna
+                    me.usuario.comuna = response.data.usuario.nombre_comuna
                     me.usuario.sitio_web = response.data.usuario.sitio_web
                     me.usuario.descripcion_administrador = response.data.usuario.descripcion_administrador
 
@@ -284,7 +285,16 @@
                 this.usuario.comuna = ''
                 this.usuario.sitio_web = ''
                 this.usuario.descripcion_administrador = ''
+            },
+            redirigir_sitio_web(link){
+                window.open(link, '_blank');
             }
         }
     }
 </script>
+
+<style>
+    .boton_redondo {
+        border-radius: 10px;
+    }
+</style>

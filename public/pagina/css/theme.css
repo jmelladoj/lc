@@ -6405,3 +6405,6 @@ form .lost_password {
     max-width: 90% !important;
 }
 
+.boton_redondo {
+    border-radius: 10px;
+}

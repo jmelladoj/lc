@@ -51,7 +51,7 @@
                     <img src="{{ asset('intranet/img_mail/youtube.png') }}" height="50" width="auto" alt="">
                 </a>
             </div>
-            <div class="icono" style="display: none;">
+            <div class="icono">
                 <a target="_blank" href="https://www.facebook.com/prevencion.lebenco.3" class="activo">
                     <img src="{{ asset('intranet/img_mail/facebook.png') }}" height="50" width="auto" alt="">
                 </a>
@@ -72,7 +72,6 @@
 
         <p class="text-center">
             Sigue el link y pide tu primer documento <br><br>  <a href="www.prevencionlebenco.cl/login"><img src="{{ asset('intranet/img_mail/salir.png') }}" height="50" width="auto" /></a>
-
 
             @if($usuario->mailing == 1)
                 Solo te enviaremos información relevante, para que estés informado y tomes decisiones.

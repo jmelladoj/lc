@@ -11,7 +11,7 @@
                                 </div>
                                 <div class="col-md-6 text-right">
                                     <button type="button" class="mt-0 btn btn--secondary space--1 btn-sm boton_login" @click="limpiar_login" v-show="estados.boton_login_inicia == 1">Limpiar</button>
-                                    <button type="button" class="mt-0 btn btn--secondary space--1 boton_login" @click="formulario = 1" v-if="estados.boton_login_registrate == 1">... Regístrate</button>
+                                    <button type="button" class="mt-0 redondear btn btn-success btn-md text-white" @click="formulario = 1" v-if="estados.boton_login_registrate == 1">... Regístrate</button>
                                 </div>
                             </div>
 
@@ -52,7 +52,7 @@
                                 </div>
                                 <div class="col-md-6 text-right">
                                     <button type="button" class="mt-0 btn btn--secondary space--1 btn-sm boton_login" @click="limpiar_registro" v-show="estados.boton_registro_registrarse == 1">Limpiar</button>
-                                    <button type="button" class="mt-0 btn btn--secondary space--1 btn-sm boton_login" @click="formulario = 0" v-if="estados.boton_registro_inicia == 1">... Inicia tu sesión</button>
+                                    <button type="button" class="mt-0 redondear btn btn-success btn-md text-white" @click="formulario = 0" v-if="estados.boton_registro_inicia == 1">... Inicia tu sesión</button>
                                 </div>
                             </div>
 

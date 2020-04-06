@@ -50,7 +50,7 @@
                     <img src="{{ asset('intranet/img_mail/youtube.png') }}" height="50" width="auto" alt="">
                 </a>
             </div>
-            <div class="icono" style="display: none;">
+            <div class="icono">
                 <a target="_blank" href="https://www.facebook.com/prevencion.lebenco.3" class="activo">
                     <img src="{{ asset('intranet/img_mail/facebook.png') }}" height="50" width="auto" alt="">
                 </a>

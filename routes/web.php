@@ -209,6 +209,10 @@ Route::get('/sliders/comunidad', 'SliderComunidadController@index')->name('Lista
 Route::post('/slider/comunidad/crear/actualizar', 'SliderComunidadController@crearOactualizar')->name('Crear o Actualizar Sliders comunidad');
 Route::post('/slider/comunidad/eliminar', 'SliderComunidadController@eliminar')->name('Borrar Slider comunidad');
 
+//Rutas de informes
+Route::get('/informe/venta/contenido', 'InformeController@ventaContenido')->name('Listar informe venta contenido');
+Route::get('/informe/clientes/activos', 'InformeController@clientesActivos')->name('Listar informe clientes activos');
+
 //Rutas de ventas
 Route::get('/ventas/{tipo}','VentaController@index')->name('Listar recargas');
 Route::post('/venta/carga','VentaController@recargar')->name('Realizar carga');

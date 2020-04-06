@@ -19,7 +19,9 @@
             <div class="text-center" v-text="documento.usuario.tipo_usuario < 3 ? 'Prevención LebenCo.' : documento.usuario.nombre"></div>
             <p class="product-item-price">
                 <span class="product-price-amount">
-                    <span class="product-price-currency-symbol"></span><h6 class="titulo-documento mb-0"> {{ documento.valor | currency}} </h6>
+                    <span class="product-price-currency-symbol"></span>
+                    <h6 class="titulo-documento mb-0" v-if="documento.valor > 0"> {{ documento.valor | currency}} </h6>
+                    <h6 class="titulo-documento mb-0" v-else>Contenido gratuito</h6>
                 </span>
             </p>
         </div>
@@ -34,8 +36,8 @@
                         <h3 v-text="modal_vista_documento.titulo"></h3>
                     </div>
                     <div class="col-md-4">
-                        <h4 class="font-size-titulo" v-if="autenticado == 1">Saldo disponible: {{ saldo_disponible | currency }}</h4>
-                        <h4 class="font-size-titulo" v-else>Para tener este documento, debes iniciar sesión</h4>
+                        <h4 class="font-size-titulo border border-success text-center" v-if="autenticado == 1">Saldo disponible {{ saldo_disponible | currency }} .-</h4>
+                        <h4 class="font-size-titulo text-center" v-else>Descárgalo al iniciar tu sesión</h4>
                     </div>
             </template>
 
@@ -59,10 +61,11 @@
 
             <template slot="modal-footer">
                 <b-spinner variant="success" label="Spinning" v-show="spinner.estado == 1"></b-spinner>
-                <b-button class="redondear" size="md" variant="success" @click="descargar(documento.id)" v-if="autenticado == 1">{{ documento.valor | currency }} -  Descargar</b-button>
+
+                <b-button class="redondear" size="md" variant="success" @click="descargar(documento.id)" v-if="autenticado == 1 && documento.valor > 0" >{{ documento.valor | currency }} -  Descargar</b-button>
+                <b-button class="redondear" size="md" variant="success" @click="descargar(documento.id)" v-if="autenticado == 1 && documento.valor == 0" > Contenido gratuito -  Descargar</b-button>
                 <!--<a class="btn btn-success btn-md text-white" href="/login" v-else>{{ documento.valor | currency }} -  Descargar</a>-->
-                <a class="redondear btn btn-success btn-md text-white" href="/login" v-else>Inicar sesión</a>
-                <b-button class="redondear" size="md" variant="danger" @click="cerrarModalVistaDocumento()"> Cerrar </b-button>
+                <b-button class="redondear" size="md" variant="danger" @click="cerrarModalVistaDocumento()"> Cerrar </b-button> 
 
             </template>
         </b-modal>
@@ -215,5 +218,9 @@
 
     .font-size-titulo {
         font-size: 16px !important;
+    }
+
+    .product-item:hover {
+        background-color: #8AB733;
     }
 </style>

@@ -58,21 +58,20 @@
 
                         <h4 class="card-title m-t-10" v-text="usuario.nombre"></h4>
                         <h6 class="card-subtitle" v-text="categoria.nombre + ' - ' + categoria.nivel"></h6>
-                        <h6 class="card-subtitle" v-if="usuario.tipo_persona == 1"> Persona</h6>
-                        <h6 class="card-subtitle" v-else-if="usuario.tipo_persona == 2"> Pyme</h6>
-                        <h6 class="card-subtitle" v-else-if="usuario.tipo_persona == 3"> Estudiante</h6>
-
+                        <h6 class="card-subtitle" v-text="usuario.persona"> Persona</h6>
+                        <h6 v-text="usuario.email"></h6>
+                        
                         <p v-show="usuario.posicion > 0 && usuario.tipo_persona == 2">
                             <i class="fa fa-star fa-2x text-warning" aria-hidden="true" v-for="index in usuario.posicion" :key="index"></i>
                         </p>
+
+                        <br>
+                        <br>
 
 
                         <b-form-group v-if="tipo_usuario_logeado < 3">
                             <b-form-textarea v-model="usuario.descripcion_administrador" placeholder="Escribe aquí ..." rows="3" max-rows="6"></b-form-textarea>
                         </b-form-group>
-
-                        <hr>
-                        <small class="text-muted">Correo: </small><h6 v-text="usuario.email"></h6>
                     </ValidationObserver>
                 </center>
             </b-card>

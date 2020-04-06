@@ -148,7 +148,9 @@ Vue.component('escritorio', require('./components/intranet/Escritorio.vue').defa
 Vue.component('resultados-busqueda', require('./components/intranet/ResultadosBusqueda.vue').default);
 Vue.component('avatares', require('./components/intranet/Avatars.vue').default);
 
-
+//Informes
+Vue.component('informe-venta-contenido', require('./components/intranet/InformeVentasContenido.vue').default);
+Vue.component('informe-clientes-activos', require('./components/intranet/InformeClientesActivos.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -163,6 +165,5 @@ const app = new Vue({
         ubicacion: 1,
         menu : 0,
         menu_administrador: 0
-    },
-    router
+    }
 });

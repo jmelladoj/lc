@@ -25,15 +25,15 @@
                     <div class="navbar-header">
                         <a class="navbar-brand" href="{{ url('/') }}">
                             <b>
-                                <img src={{ asset('storage/general/logo_escritorio.png') }} alt="homepage" class="dark-logo" height="50">
+                                <img id="general_logo" name="general_logo" src={{ asset('storage/general/logo_escritorio.png') }} alt="homepage" class="dark-logo d-none" height="50">
                             </b>
                         </a>
                     </div>
 
                     <div class="navbar-collapse">
                         <ul class="navbar-nav mr-auto">
-                            <li class="nav-item"> <a class="nav-link nav-toggler d-block d-sm-none waves-effect waves-dark" href="javascript:void(0)"><i class="ti-menu"></i></a> </li>
-                            <li class="nav-item"> <a class="nav-link sidebartoggler d-none d-lg-block d-md-block waves-effect waves-dark" href="javascript:void(0)"><i class="icon-menu"></i></a> </li>
+                            <li class="nav-item" id="mostrar_logo" name="mostrar_logo"> <a class="nav-link nav-toggler d-block d-sm-none waves-effect waves-dark" href="javascript:void(0)"><i class="ti-menu"></i></a> </li>
+                            <li class="nav-item" id="esconder_logo" name="esconder_logo"> <a class="nav-link sidebartoggler d-none d-lg-block d-md-block waves-effect waves-dark" href="javascript:void(0)"><i class="icon-menu"></i></a> </li>
                             <busqueda-documento></busqueda-documento>
                         </ul>
 
@@ -71,6 +71,9 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/admin.js') }}"></script>
+    <script src="https://unpkg.com/tableexport.jquery.plugin@1.10.16/tableExport.min.js"></script>
+
+    
 
     <script>
         $(document).ready(function() {

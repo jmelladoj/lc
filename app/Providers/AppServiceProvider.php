@@ -26,9 +26,9 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         //
-        $cantidad_servicios = Servicio::get()->count();
+        //$cantidad_servicios = Servicio::get()->count();
 
-        View::share('cantidad_servicios', $cantidad_servicios);
-        date_default_timezone_set('America/Santiago');
+        //View::share('cantidad_servicios', $cantidad_servicios);
+        //date_default_timezone_set('America/Santiago');
     }
 }

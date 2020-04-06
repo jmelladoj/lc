@@ -95,7 +95,7 @@
                                     <br>
                                     <div class="row">
                                         <div class="form-field-wrapper col-md-12">
-                                            <input v-show="estado_boton == 1" class="submit btn btn--lg btn--primary" value="Enviar mensaje" :disabled="!valid" type="button" @click="contactar(); reset">
+                                            <input v-show="estado_boton == 1" class="submit btn btn--lg btn--primary redondear" value="Enviar mensaje" :disabled="!valid" type="button" @click="contactar(); reset">
                                         </div>
                                     </div>
                                 </div>
@@ -150,6 +150,7 @@
             },
             contactar(){
                 let me=this;
+                
                 Swal.fire({
                     title: '¿Deseas contactarnos?',
                     type: 'warning',
@@ -186,15 +187,17 @@
                 })
             },
             limpiar_formulario(){
-                this.usuario.nombre = '';
-                this.usuario.email = '';
-                this.usuario.asunto = '';
-                this.usuario.telefono = null;
-                this.usuario.mensaje = '';
-                this.usuario.tipo_persona = 0;
-                this.estado_boton = 0;
+                if(this.user){
+                    this.usuario.nombre = '';
+                    this.usuario.email = '';
+                    this.usuario.telefono = null;
+                    this.usuario.tipo_persona = 0;
+                    this.estado_boton = 0;
+                    this.$refs.observer_contacto.reset()
+                }
 
-                this.$refs.observer_contacto.reset()
+                this.usuario.asunto = '';
+                this.usuario.mensaje = '';
             }
         },
         mounted() {
@@ -234,5 +237,7 @@
         max-width: 1240px !important;
     }
 
-
+    #basic-addon1 {
+        border-radius: 0px !important;
+    }
 </style>

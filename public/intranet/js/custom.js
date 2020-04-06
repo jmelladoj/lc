@@ -6,6 +6,18 @@ $(function () {
     jQuery(document).on('click', '.mega-dropdown', function (e) {
         e.stopPropagation()
     });
+
+    $( "#mostrar_logo" ).click(function() {
+        console.log('Se muestra')
+    });
+
+    $( "#esconder_logo" ).click(function() {
+        if($("#general_logo").hasClass("d-none")){
+            $("#general_logo").removeClass('d-none')
+        } else {
+            $("#general_logo").addClass('d-none')
+        }
+    });
     // ============================================================== 
     // This is for the top header part and sidebar part
     // ==============================================================  

@@ -28,9 +28,11 @@
         "babel-runtime": "^6.26.0",
         "bootstrap-vue": "^2.2.0",
         "core-js": "^3.6.1",
+        "file-saverjs": "^1.3.6",
         "intersection-observer": "^0.7.0",
         "regenerator-runtime": "^0.13.3",
         "sweetalert2": "^8.18.0",
+        "tableexport": "^5.2.0",
         "vee-validate": "^3.0.10",
         "vue-carousel": "^0.18.0",
         "vue-currency-filter": "^3.4.3",
@@ -40,6 +42,7 @@
         "vue-router": "^3.1.3",
         "vue-swatches": "^1.0.4",
         "vue-tinymce-editor": "^1.6.2",
-        "vue-toast-notification": "0.0.3"
+        "vue-toast-notification": "0.0.3",
+        "xlsx": "^0.15.6"
     }
 }

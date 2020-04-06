@@ -44,8 +44,8 @@
                                     <li class="nav-menu-item">
                                         <div class="row">
                                             <a target="_blank" href="{{ url('https://www.youtube.com/channel/UC78DsrgVX7KslItHoTuw8uQ?view_as=subscriber') }}" class="sale-color h2 ml-4 mr-2 d-none"> <img src="{{ asset('intranet/img_mail/youtube.png') }}" class="mb-1" height="30" width="auto" alt=""></a>
-                                            <a target="_blank" href="{{ url('https://www.facebook.com/prevencion.lebenco.3') }}" class="sale-color h2  ml-2 mr-2 d-none"><i class="fa fa-facebook"></i></a>
-                                            <a target="_blank" href="{{ url('https://www.instagram.com/prevencionlebenco.cl/?hl=es-la') }}" class="sale-color h2  ml-4 mr-2"><i class="fa fa-instagram"></i></a>
+                                            <a target="_blank" href="{{ url('https://www.facebook.com/prevencion.lebenco.3') }}" class="sale-color h2  ml-4 mr-2"><i class="fa fa-facebook"></i></a>
+                                            <a target="_blank" href="{{ url('https://www.instagram.com/prevencionlebenco.cl/?hl=es-la') }}" class="sale-color h2  ml-2 mr-2"><i class="fa fa-instagram"></i></a>
                                             <a target="_blank" href="{{ url('https://www.linkedin.com/in/prevenci%C3%B3n-lebenco-62b632184/') }}" class="sale-color h2  ml-2 mr-2 d-none"><i class="fa fa-linkedin"></i></a>
                                         </div>
                                     </li>

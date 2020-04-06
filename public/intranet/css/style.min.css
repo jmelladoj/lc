@@ -29116,7 +29116,6 @@ ul.list-style-none li a:hover {
 }
 
 .user-profile .user-pro-body img {
-    width: 50px;
     display: block;
     margin: 0 auto 10px
 }
@@ -32439,3 +32438,13 @@ input[type]:focus,
 .modal-xl {
     max-width: 90% !important;
 }
+
+.user-profile .user-pro-body img {
+    width: auto !important;
+}
+
+/*@media (min-width:768px) {
+    .dark-logo {
+        display: none !important;
+    }
+}*/

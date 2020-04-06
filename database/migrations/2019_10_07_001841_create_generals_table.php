@@ -19,7 +19,7 @@ class CreateGeneralsTable extends Migration
             $table->string('favicon_url')->nullable()->default(null);
             $table->string('logo_fot_url')->nullable()->default(null);
             $table->string('logo_escritorio_url')->nullable()->default(null);
-            $table->string('terminos_url')->nullable()->default(null);
+            $table->longText('terminos_url')->nullable()->default(null);
             $table->string('privacidad_url')->nullable()->default(null);
             $table->string('satisfaccion_url')->nullable()->default(null);
             $table->string('derechos_url')->nullable()->default(null);

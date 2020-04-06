@@ -196,6 +196,14 @@
     <tips></tips>
 </template>
 
+<template v-if="ubicacion == 1 && menu==16">
+    <informe-venta-contenido></informe-venta-contenido>
+</template>
+
+<template v-if="ubicacion == 1 && menu==17">
+    <informe-clientes-activos></informe-clientes-activos>
+</template>
+
 <template v-if="ubicacion == 1 && menu==20">
     <alertas ref="componente_alerta"></alertas>
 </template>
@@ -207,3 +215,6 @@
 <template v-if="ubicacion == 1 && menu==24">
     <tabla-vip></tabla-vip>
 </template>
+
+
+

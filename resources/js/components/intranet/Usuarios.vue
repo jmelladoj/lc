@@ -448,76 +448,48 @@
                 })
             },
             agregarQuitarTablaVip(id, accion){
+                let me = this
+                
                 var mensaje = accion == 2 ? '¿Deseas agregar a la tabla vip al usuario?' : '¿Deseas quitar de la tabla vip el usuario?';
 
-                Swal.fire({
-                    title: mensaje,
-                    type: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#8AB733',
-                    cancelButtonColor: '#d7552a',
-                    confirmButtonText: 'Aceptar!',
-                    cancelButtonText: 'Cancelar',
-                    confirmButtonClass: 'btn btn-success',
-                    cancelButtonClass: 'btn btn-danger',
-                }).then((result) => {
-                    if (result.value) {
-                        let me = this;
+                var url = accion == 2 ? '/usuario/tabla/vip/agregar' : '/usuario/tabla/vip/quitar';
+                axios.post(url,{
+                    'id': id
+                }).then(function (response) {
+                    var mensaje = accion == 2 ? 'El usuario ha sido agregado a la tabla vip!' : 'El usuario ha sido quitado a la tabla vip!';
+                    me.listarUsuarios();
 
-                        var url = accion == 2 ? '/usuario/tabla/vip/agregar' : '/usuario/tabla/vip/quitar';
-                        axios.post(url,{
-                            'id': id
-                        }).then(function (response) {
-                            var mensaje = accion == 2 ? 'El usuario ha sido agregado a la tabla vip!' : 'El usuario ha sido quitado a la tabla vip!';
-                            me.listarUsuarios();
+                    Vue.$toast.open({
+                        message: mensaje,
+                        type: 'success',
+                        duration: 5000
+                    });
 
-                            Vue.$toast.open({
-		                        message: mensaje,
-		                        type: 'success',
-		                        duration: 5000
-		                    });
-
-                        }).catch(function (error) {
-                            console.log(error);
-                        });
-                    } else if (result.dismiss === Swal.DismissReason.cancel) {}
-                })
+                }).catch(function (error) {
+                    console.log(error);
+                });
             },
             agregarQuitarComunidadPyme(id, accion){
+                let me = this
+
                 var mensaje = accion == 2 ? '¿Deseas agregar de la tabla comunidad pyme al usuario?' : '¿Deseas quitar de la tabla comunidad pyme el usuario?';
 
-                Swal.fire({
-                    title: mensaje,
-                    type: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#8AB733',
-                    cancelButtonColor: '#d7552a',
-                    confirmButtonText: 'Aceptar!',
-                    cancelButtonText: 'Cancelar',
-                    confirmButtonClass: 'btn btn-success',
-                    cancelButtonClass: 'btn btn-danger',
-                }).then((result) => {
-                    if (result.value) {
-                        let me = this;
+                var url = accion == 2 ? '/usuario/comunidad/agregar' : '/usuario/comunidad/quitar';
+                axios.post(url,{
+                    'id': id
+                }).then(function (response) {
+                    var mensaje = accion == 2 ? 'El usuario ha sido agregado a la tabla comunidad pyme!' : 'El usuario ha sido quitado de la tabla comunidad pyme!';
+                    me.listarUsuarios();
 
-                        var url = accion == 2 ? '/usuario/comunidad/agregar' : '/usuario/comunidad/quitar';
-                        axios.post(url,{
-                            'id': id
-                        }).then(function (response) {
-                            var mensaje = accion == 2 ? 'El usuario ha sido agregado a la tabla comunidad pyme!' : 'El usuario ha sido quitado de la tabla comunidad pyme!';
-                            me.listarUsuarios();
+                    Vue.$toast.open({
+                        message: mensaje,
+                        type: 'success',
+                        duration: 5000
+                    });
 
-                            Vue.$toast.open({
-		                        message: mensaje,
-		                        type: 'success',
-		                        duration: 5000
-		                    });
-
-                        }).catch(function (error) {
-                            console.log(error);
-                        });
-                    } else if (result.dismiss === Swal.DismissReason.cancel) {}
-                })
+                }).catch(function (error) {
+                    console.log(error);
+                });
             },
             cerrarModal(){
                 this.modal_usuario.titulo = "";

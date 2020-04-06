@@ -22,7 +22,7 @@ class User extends Authenticatable
         'id'
     ];
 
-    protected $appends = ['region', 'porcentaje_like', 'like_porcentaje_admin', 'nombre_comuna', 'nombre_rubro'];
+    protected $appends = ['persona', 'region', 'porcentaje_like', 'like_porcentaje_admin', 'nombre_comuna', 'nombre_rubro', 'ultima_recarga', 'total_invertido', 'nivel_cliente', 'nombre_profesion', 'total_bono_acumulado'];
 
     /**
      * The attributes that should be hidden for arrays.
@@ -72,6 +72,18 @@ class User extends Authenticatable
 
     public function getNombreRubroAttribute(){
         return $this->rubro ? $this->rubro->nombre : 'Sin rubro';
+    }
+
+    public function getUltimaRecargaAttribute(){
+        return $this->recargas()->count() > 0 ? $this->recargas()->first()->created_at->format('Y-m-d h:m:s') : 'Sin recargas aún.';
+    }
+
+    public function getTotalInvertidoAttribute(){
+        return $this->recargas()->count() > 0 ? $this->recargas()->sum('monto_venta') : 0;
+    }
+    
+    public function getTotalBonoAcumuladoAttribute(){
+        return $this->recargas()->count() > 0 ? $this->recargas()->sum('monto_bonificacion') : 0;
     }
 
     public function getLikePorcentajeAdminAttribute(){
@@ -133,8 +145,24 @@ class User extends Authenticatable
         return $this->belongsTo(Rubro::class, 'rubro_id');
     }
 
+    public function profesion(){
+        return $this->belongsTo(Profesion::class, 'profesion_id');
+    }
+
     public function valoraciones(){
         return $this->hasMany(Valoracion::class, 'user_id');
+    }
+
+    public function recargas(){
+        return $this->hasMany(Venta::class, 'user_id')->orderBy('created_at', 'desc')->get();
+    }
+
+    public function getNivelClienteAttribute(){
+        return isset($this->categoria) ? $this->categoria->nivel : 'Sin información';
+    }
+
+    public function getNombreProfesionAttribute(){
+        return isset($this->profesion) ? $this->profesion->nombre : 'Sin información';
     }
 
     public function getPersonaAttribute(){

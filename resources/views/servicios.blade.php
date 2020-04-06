@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    @if($cantidad_servicios > 0)
+    @if(count($servicios) > 0)
         <section class="breadcrumb">
             <div class="breadcrumb-content">
                 <div class="container">
