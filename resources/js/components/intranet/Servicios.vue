@@ -172,89 +172,52 @@
                             <b-form-group>
                                 <b-container fluid>
                                     <b-row>
-                                        <b-col md="4" class="my-1">
-                                            <b-form-group label-cols-sm="3" label="Filtrar" class="mb-0">
-                                            <b-input-group>
-                                                <b-form-input v-model="filter_sub_servicio" placeholder="Escribe para buscar" />
-                                                <b-input-group-append>
-                                                <b-button :disabled="!filter_sub_servicio" @click="filter_sub_servicio = ''">Limpiar</b-button>
-                                                </b-input-group-append>
-                                            </b-input-group>
-                                            </b-form-group>
-                                        </b-col>
+                                        <b-table
+                                            show-empty
+                                            responsive
+                                            striped
+                                            borderless
+                                            outlined
+                                            small
+                                            hover
+                                            stacked="sm"
+                                            :items="items_sub_servicio"
+                                            :fields="fields_sub_servicio"
+                                            :current-page="currentPage_sub_servicio"
+                                            :per-page="perPage_sub_servicio"
+                                            :filter="filter_sub_servicio"
+                                            :sort-by.sync="sortBy_sub_servicio"
+                                            :sort-desc.sync="sortDesc_sub_servicio"
+                                            :sort-direction="sortDirection_sub_servicio"
+                                            @filtered="onFiltered_sub_servicio">
 
-                                        <b-col md="4" class="my-1">
-                                            <b-form-group label-cols-sm="3" label="Ordenar" class="mb-0">
-                                            <b-input-group>
-                                                <b-form-select v-model="sortBy_sub_servicio" :options="sortOptions_sub_servicio">
-                                                <option slot="first" :value="null">-- nada --</option>
-                                                </b-form-select>
-                                                <b-form-select :disabled="!sortBy_sub_servicio" v-model="sortDesc_sub_servicio" slot="append">
-                                                <option :value="false">Asc</option> <option :value="true">Desc</option>
-                                                </b-form-select>
-                                            </b-input-group>
-                                            </b-form-group>
-                                        </b-col>
+                                            <template slot="empty">
+                                                <center><h5>No hay registros para mostrar.</h5></center>
+                                            </template>
 
-                                        <b-col md="4" class="my-1">
-                                            <b-form-group label-cols-sm="4" label="Por página" class="mb-0">
-                                            <b-form-select :options="pageOptions_sub_servicio" v-model="perPage_sub_servicio" />
-                                            </b-form-group>
-                                        </b-col>
-                                    </b-row>
+                                            <template slot="emptyfiltered">
+                                                <center><h5>No hay registros que coincidan con su solicitud.</h5></center>
+                                            </template>
 
-                                    <!-- Main table element -->
-                                    <b-table
-                                        show-empty
-                                        responsive
-                                        striped
-                                        borderless
-                                        outlined
-                                        small
-                                        hover
-                                        stacked="sm"
-                                        :items="items_sub_servicio"
-                                        :fields="fields_sub_servicio"
-                                        :current-page="currentPage_sub_servicio"
-                                        :per-page="perPage_sub_servicio"
-                                        :filter="filter_sub_servicio"
-                                        :sort-by.sync="sortBy_sub_servicio"
-                                        :sort-desc.sync="sortDesc_sub_servicio"
-                                        :sort-direction="sortDirection_sub_servicio"
-                                        @filtered="onFiltered_sub_servicio">
+                                            <template v-slot:cell(index)="data">
+                                                {{ data.index + 1 }}
+                                            </template>
 
-                                        <template slot="empty">
-                                            <center><h5>No hay registros para mostrar.</h5></center>
-                                        </template>
+                                            <template v-slot:cell(acciones)="row">
+                                                <b-button size="xs" variant="success" title="Agregar detalle" @click="abrir_modal_detalle(row.item)">
+                                                    <i class="fa fa-plus"></i>
+                                                </b-button>
 
-                                        <template slot="emptyfiltered">
-                                            <center><h5>No hay registros que coincidan con su solicitud.</h5></center>
-                                        </template>
+                                                <b-button size="xs" variant="warning" title="Actualizar subservicio" @click="editar_sub_servicio(row.item)">
+                                                    <i class="fa fa-pencil"></i>
+                                                </b-button>
 
-                                        <template v-slot:cell(index)="data">
-                                            {{ data.index + 1 }}
-                                        </template>
+                                                <b-button size="xs" variant="danger" title="Eliminar servicio" @click="borrar_sub_servicio(row.item.id)">
+                                                    <i class="fa fa-trash"></i>
+                                                </b-button>
+                                            </template>
 
-                                        <template v-slot:cell(acciones)="row">
-                                            <b-button size="xs" variant="success" title="Agregar detalle" @click="abrir_modal_detalle(row.item)">
-                                                <i class="fa fa-plus"></i>
-                                            </b-button>
-
-                                            <b-button size="xs" variant="warning" title="Actualizar subservicio" @click="editar_sub_servicio(row.item)">
-                                                <i class="fa fa-pencil"></i>
-                                            </b-button>
-
-                                            <b-button size="xs" variant="danger" title="Eliminar servicio" @click="borrar_sub_servicio(row.item.id)">
-                                                <i class="fa fa-trash"></i>
-                                            </b-button>
-                                        </template>
-
-                                    </b-table>
-
-                                    <b-row>
-                                        <b-col>
-                                            <b-pagination :total-rows="totalRows_sub_servicio" :per-page="perPage_sub_servicio" v-model="currentPage_sub_servicio" class="my-3" align="fill"/>
-                                        </b-col>
+                                        </b-table>
                                     </b-row>
                                 </b-container>
                             </b-form-group>

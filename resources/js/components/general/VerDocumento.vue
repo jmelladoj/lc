@@ -5,7 +5,7 @@
                 <img v-bind:src="'../' + documento.imagen" alt="Imagen de documento" />
             </a>
 
-            <div class="add-to-link">
+            <div class="add-to-link" v-if="documento.timer == 0">
                 <a class="btn btn--primary btn--sm" v-if="autenticado == 1" @click="descargar(documento.id)">Descargar</a>
             </div>
             <div class="hover-product-icon">
@@ -15,6 +15,13 @@
             </div>
         </div>
         <div class="product-item-content">
+            <countdown :time="documento.timer * 1000" v-if="documento.timer > 0">
+                <template slot-scope="props">
+                    <span class="sale-color">
+                        Liberado en：{{ props.days }} día(s), {{ props.hours }} hs, {{ props.minutes }} min.
+                    </span>
+                </template>
+            </countdown>
             <div class="text-center"><b><h6 class="titulo-documento"> {{ documento.titulo }} </h6></b></div>
             <div class="text-center" v-text="documento.usuario.tipo_usuario < 3 ? 'Prevención LebenCo.' : documento.usuario.nombre"></div>
             <p class="product-item-price">
@@ -37,7 +44,7 @@
                     </div>
                     <div class="col-md-4">
                         <h4 class="font-size-titulo border border-success text-center" v-if="autenticado == 1">Saldo disponible {{ saldo_disponible | currency }} .-</h4>
-                        <h4 class="font-size-titulo text-center" v-else>Descárgalo al iniciar tu sesión</h4>
+                        <h4 class="font-size-titulo border border-success text-center" v-else>Descárgalo al iniciar tu sesión</h4>
                     </div>
             </template>
 
@@ -62,9 +69,9 @@
             <template slot="modal-footer">
                 <b-spinner variant="success" label="Spinning" v-show="spinner.estado == 1"></b-spinner>
 
-                <b-button class="redondear" size="md" variant="success" @click="descargar(documento.id)" v-if="autenticado == 1 && documento.valor > 0" >{{ documento.valor | currency }} -  Descargar</b-button>
-                <b-button class="redondear" size="md" variant="success" @click="descargar(documento.id)" v-if="autenticado == 1 && documento.valor == 0" > Contenido gratuito -  Descargar</b-button>
-                <!--<a class="btn btn-success btn-md text-white" href="/login" v-else>{{ documento.valor | currency }} -  Descargar</a>-->
+                <b-button class="redondear" size="md" variant="success" @click="descargar(documento.id)" v-if="autenticado == 1 && documento.valor > 0 && documento.timer == 0" >{{ documento.valor | currency }} -  Descargar</b-button>
+                <b-button class="redondear" size="md" variant="success" @click="descargar(documento.id)" v-if="autenticado == 1 && documento.valor == 0  && documento.timer == 0"> Contenido gratuito -  Descargar</b-button>
+                <a class="btn btn-success btn-md text-white redondear" href="javascript:void(0)" v-if="documento.timer != 0">Este documento aún no se libera</a>
                 <b-button class="redondear" size="md" variant="danger" @click="cerrarModalVistaDocumento()"> Cerrar </b-button> 
 
             </template>
@@ -220,7 +227,11 @@
         font-size: 16px !important;
     }
 
-    .product-item:hover {
-        background-color: #8AB733;
+    .product-item-normal:hover {
+        border: 5px solid #8AB733;
+    }
+
+    .product-item-timer:hover {
+        border: 5px solid #E8ECD1;
     }
 </style>

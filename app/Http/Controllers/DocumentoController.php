@@ -63,6 +63,15 @@ class DocumentoController extends Controller
     }
 
     public function crearOactualizar(Request $request){
+
+        if($request->timer_dias == 'null'){
+            $request->timer_dias = NULL;
+        }
+
+        if($request->timer_hora == 'null'){
+            $request->timer_hora = NULL;
+        }
+
         $documento = Documento::updateOrCreate(
             ['id' => $request->documento_id],
             ['titulo' => $request->titulo,
@@ -73,6 +82,9 @@ class DocumentoController extends Controller
                 'seccion_descargados' => $request->seccion_descargados,
                 'categorias_documentos_id' => $request->categoria_id == 0 ? null : $request->categoria_id,
                 'estado' => $request->estado,
+                'timer_dias' => $request->timer_dias,
+                'timer_hora' => $request->timer_hora,
+                'codigo_interno' => $request->codigo_interno,
                 'user_id' => Auth::user()->id
             ]
         );

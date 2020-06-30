@@ -16,6 +16,14 @@
 
     <link rel="icon" type="image/png" href="{{ asset('storage/general/favicon.png') }}">
 
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-163854896-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-163854896-1');
+    </script>
 </head>
 <body class="fixed-layout skin-green">
     <div id="app">

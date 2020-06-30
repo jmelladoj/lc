@@ -25,10 +25,10 @@ class UsuarioController extends Controller
 
         switch ($tipo) {
             case 1:
-                return ['usuarios' => User::withTrashed()->orderBy('nombre', 'desc')->get()];
+                return ['usuarios' => User::withTrashed()->orderBy('tipo_usuario')->orderBy('nombre', 'desc')->get()];
                 break;
             case 2:
-                return ['usuarios' => User::withTrashed()->where('lista_negra', 1)->orderBy('nombre', 'desc')->get()];
+                return ['usuarios' => User::withTrashed()->where('lista_negra', 1)->orderBy('tipo_usuario')->orderBy('nombre', 'desc')->get()];
                 break;
         }
     }
@@ -249,7 +249,9 @@ class UsuarioController extends Controller
     }
 
     public function saldo_disponible(){
-        return ['saldo_disponible' => Auth::user()->saldo];
+        if(Auth::check()){
+            return ['saldo_disponible' => Auth::user()->saldo];
+        }
     }
 
     public function blacklistAgregar(Request $request){

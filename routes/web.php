@@ -49,6 +49,7 @@ Route::get('/intranet/{ubicacion}', 'PaginaController@index_intranet')->name('in
 Route::get('/sliders', 'SliderController@index')->name('Listar Sliders');
 Route::post('/slider/crear/actualizar', 'SliderController@crearOactualizar')->name('Crear o Actualizar Sliders');
 Route::post('/slider/eliminar', 'SliderController@eliminar')->name('Borrar Slider');
+Route::post('/slider/duplicar', 'SliderController@duplicar')->name('duplicar Slider');
 Route::post('slider/ubicaciones/actualizar', 'SliderController@ubicaciones')->name('Actualizar Ubicaciones');
 
 //Rutas de avatares
@@ -208,6 +209,7 @@ Route::post('/sitio/eliminar', 'InteresController@eliminar')->name('Borrar sitio
 Route::get('/sliders/comunidad', 'SliderComunidadController@index')->name('Listar Sliders comunidad');
 Route::post('/slider/comunidad/crear/actualizar', 'SliderComunidadController@crearOactualizar')->name('Crear o Actualizar Sliders comunidad');
 Route::post('/slider/comunidad/eliminar', 'SliderComunidadController@eliminar')->name('Borrar Slider comunidad');
+Route::post('/slider/comunidad/duplicar', 'SliderComunidadController@duplicar')->name('duplicar Slider comunidad');
 
 //Rutas de informes
 Route::get('/informe/venta/contenido', 'InformeController@ventaContenido')->name('Listar informe venta contenido');

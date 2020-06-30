@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class SliderComunidad extends Model
 {
     //
-    protected $guarded = [];
+    protected $guarded = ['id'];
     
     protected $table = 'slider_comunidades';
     

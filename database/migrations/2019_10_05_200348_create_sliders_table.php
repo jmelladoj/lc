@@ -15,8 +15,8 @@ class CreateSlidersTable extends Migration
     {
         Schema::create('sliders', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('texto');
-            $table->string('color');
+            $table->string('texto')->nullable()->default(null);
+            $table->string('color')->nullable()->default(null);
             $table->string('subtexto')->nullable()->default(null);
             $table->string('subcolor')->nullable()->default(null);
             $table->string('url_imagen')->nullable()->default(null);
@@ -33,8 +33,23 @@ class CreateSlidersTable extends Migration
             $table->string('alineacion_titulo')->nullable()->default('text-center');
             $table->string('letra_sub_titulo')->nullable()->default('36');
             $table->string('alineacion_sub_titulo')->nullable()->default('text-center');
+
             $table->string('link_alternativo_uno')->nullable()->default('');
             $table->string('link_alternativo_dos')->nullable()->default('');
+
+            $table->string('parrafo')->nullable()->default(null);
+            $table->string('parrafo_color')->nullable()->default(null);
+            $table->string('alineacion_parrafo')->nullable()->default('text-center');
+            $table->string('letra_parrafo')->nullable()->default('36');
+            
+            $table->string('texto_borde_externo')->nullable()->default(0);
+            $table->string('texto_color_fondo')->nullable()->default('transparent');
+
+            $table->string('subtitulo_borde_externo')->nullable()->default(0);
+            $table->string('subtitulo_color_fondo')->nullable()->default('transparent');
+
+            $table->string('parrafo_borde_externo')->nullable()->default(0);
+            $table->string('parrafo_color_fondo')->nullable()->default('transparent');
 
             $table->softDeletes();
             $table->timestamps();

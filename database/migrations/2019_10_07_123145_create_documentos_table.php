@@ -36,6 +36,10 @@ class CreateDocumentosTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
 
+            $table->string('timer_dias')->nullable()->default(null);
+            $table->string('timer_hora')->nullable()->default(null);
+            $table->string('codigo_interno')->nullable()->default('');
+
             $table->softDeletes();
             $table->timestamps();
         });

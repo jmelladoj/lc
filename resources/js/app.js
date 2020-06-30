@@ -34,8 +34,7 @@ import { rutInputDirective } from 'vue-dni';
 import VueRouter from 'vue-router';
 import router from './routes.js';
 import VueToast from 'vue-toast-notification';
-
-
+import VueCountdown from '@chenfengyuan/vue-countdown';
 
 import 'vue-toast-notification/dist/index.css';
 
@@ -62,7 +61,7 @@ Vue.component('ValidationProvider', ValidationProvider);
 Vue.component('ValidationObserver', ValidationObserver);
 Vue.component('Swatches', Swatches);
 Vue.component('tinymce', tinymce);
-
+Vue.component('countdown', VueCountdown);
 
 
 Vue.use(VueRouter);

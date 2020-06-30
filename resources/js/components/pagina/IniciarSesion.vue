@@ -249,6 +249,8 @@
                     this.estados.boton_login_registrate = 0;
                     this.estados.boton_login_inicia = 1;
                 }
+
+                this.limitar_caracteres_run()
             },
             mostrar_botones_registrate(){
                 if(this.usuario_nuevo.tipo_persona == 0 || this.usuario_nuevo.nombre.length == 0 || this.usuario_nuevo.run.length == 0 || this.usuario_nuevo.email.length == 0 || this.usuario_nuevo. clave_uno.length == 0 || this.usuario_nuevo.clave_dos.length == 0){
@@ -313,6 +315,11 @@
                     });
                 });
 
+            },
+            limitar_caracteres_run(){
+                if(this.usuario_login.run.length > 12){
+                    this.usuario_login.run = this.usuario_login.run.slice(0,12); 
+                }
             }
         },
         mounted(){

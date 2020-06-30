@@ -7,7 +7,18 @@ use Illuminate\Database\Eloquent\Model;
 class Servicio extends Model
 {
     //
-    protected $fillable = [
-        'id', 'nombre', 'descripcion', 'imagen_url'
+    protected $guarded = [
+        'id'
     ];
+
+    protected $appends = ['cantidad'];
+
+    public function getCantidadAttribute($key){
+        return $this->servicios->count();
+    }
+
+    public function servicios(){
+        return $this->hasMany(Subservicio::class, 'servicio_id');
+    }
+
 }

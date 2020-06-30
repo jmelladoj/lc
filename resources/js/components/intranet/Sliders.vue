@@ -91,6 +91,10 @@
                                 </template>
 
                                 <template v-slot:cell(acciones)="row">
+                                    <b-button size="xs" variant="info" title="Duplicar" @click="duplicar_slider(row.item)">
+                                        <i class="fa fa-files-o"></i>
+                                    </b-button>
+
                                     <b-button size="xs" variant="success" title="Agregar ubicaciones" @click="abrirModalUbicaciones(row.item)">
                                         <i class="fa fa-plus"></i>
                                     </b-button>
@@ -118,7 +122,7 @@
             </b-row>
 
             <ValidationObserver ref="observer_slider" v-slot="{ valid }">
-                <b-modal ref="modal_slider" :title="modal_slider.titulo" no-close-on-backdrop scrollable>
+                <b-modal ref="modal_slider" size="xl" :title="modal_slider.titulo" no-close-on-backdrop scrollable>
                     <b-form>
                         <b-form-group>
                             <ValidationProvider name="título" rules="required|min:3" v-slot="{ errors }">
@@ -128,17 +132,40 @@
                         </b-form-group>
 
                         <b-row>
-                            <b-col xs="12" sm="12" md="6">
+                            <b-col md="6">
+                                <ValidationProvider name="Borde externo letra" rules="numeric|min:0" v-slot="{ errors }">
+                                    <b-form-input type="text" v-model="slider.texto_borde_externo" placeholder="Borde de letras expresadas en píxeles"></b-form-input>
+                                    <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
+                                </ValidationProvider>                                
+                            </b-col>    
+                            <b-col md="6">
+                                <ValidationProvider name="color de título" rules="" v-slot="{ errors }">
+                                    <b-row>
+                                        <b-col md="6">
+                                            Color para el fondo del texto: 
+                                        </b-col>
+                                        <b-col>
+                                            <swatches v-model="slider.texto_color_fondo" :colors="colors" show-fallback popover-to="left"></swatches>
+                                        </b-col>
+                                    </b-row>
+                                    
+                                    <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
+                                </ValidationProvider>
+                            </b-col>
+                        </b-row>
+
+                        <b-row>
+                            <b-col md="3">
                                 <b-form-group label="Tamaño de letra">
                                     <ValidationProvider name="Tamaño de letra" rules="required" v-slot="{ errors }">
-                                        <b-form-radio v-model="slider.letra_titulo" name="letra_titulo" value="46">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Tamaño título</b-form-radio>
-                                        <b-form-radio v-model="slider.letra_titulo" name="letra_titulo" value="36">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Tamaño sub título</b-form-radio>
-                                        <b-form-radio v-model="slider.letra_titulo" name="letra_titulo" value="20">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Tamaño parrafo</b-form-radio>
+                                        <b-form-radio v-model="slider.letra_titulo" name="letra_titulo" value="46">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Título</b-form-radio>
+                                        <b-form-radio v-model="slider.letra_titulo" name="letra_titulo" value="36">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Sub título</b-form-radio>
+                                        <b-form-radio v-model="slider.letra_titulo" name="letra_titulo" value="20">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Parrafo</b-form-radio>
                                         <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
                                     </ValidationProvider>
                                 </b-form-group>
                             </b-col>
-                            <b-col xs="12" sm="12" md="6">
+                            <b-col md="3">
                                 <b-form-group label="Alineación de texto">
                                     <ValidationProvider name="Alineación de texto" rules="required" v-slot="{ errors }">
                                         <b-form-radio v-model="slider.alineacion_titulo" name="alineacion_titulo" value="text-right">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Derecha</b-form-radio>
@@ -158,17 +185,41 @@
                         </b-form-group>
 
                         <b-row>
-                            <b-col xs="12" sm="12" md="6">
+                            <b-col md="6">
+                                <ValidationProvider name="Borde externo letra" rules="numeric|min:0" v-slot="{ errors }">
+                                    <b-form-input type="text" v-model="slider.subtitulo_borde_externo" placeholder="Borde de letras expresadas en píxeles"></b-form-input>
+                                    <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
+                                </ValidationProvider>                                
+                            </b-col>    
+                            <b-col md="6">
+                                <ValidationProvider name="color de subtítulo" rules="" v-slot="{ errors }">
+                                    <b-row>
+                                        <b-col md="6">
+                                            Color para el fondo del subtitulo: 
+                                        </b-col>
+                                        <b-col>
+                                            <swatches v-model="slider.subtitulo_color_fondo" :colors="colors" show-fallback popover-to="left"></swatches>
+                                        </b-col>
+                                    </b-row>
+                                    
+                                    <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
+                                </ValidationProvider>
+                            </b-col>
+                        </b-row>
+
+
+                        <b-row>
+                            <b-col md="6">
                                 <b-form-group label="Tamaño de letra">
                                     <ValidationProvider name="Tamaño de letra" rules="required" v-slot="{ errors }">
-                                        <b-form-radio v-model="slider.letra_sub_titulo" name="letra_sub_titulo" value="46">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Tamaño título</b-form-radio>
-                                        <b-form-radio v-model="slider.letra_sub_titulo" name="letra_sub_titulo" value="36">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Tamaño sub título</b-form-radio>
-                                        <b-form-radio v-model="slider.letra_sub_titulo" name="letra_sub_titulo" value="20">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Tamaño parrafo</b-form-radio>
+                                        <b-form-radio v-model="slider.letra_sub_titulo" name="letra_sub_titulo" value="46">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Título</b-form-radio>
+                                        <b-form-radio v-model="slider.letra_sub_titulo" name="letra_sub_titulo" value="36">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Sub título</b-form-radio>
+                                        <b-form-radio v-model="slider.letra_sub_titulo" name="letra_sub_titulo" value="20">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Parrafo</b-form-radio>
                                         <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
                                     </ValidationProvider>
                                 </b-form-group>
                             </b-col>
-                            <b-col xs="12" sm="12" md="6">
+                            <b-col md="6">
                                 <b-form-group label="Alineación de texto">
                                     <ValidationProvider name="Alineación de texto" rules="required" v-slot="{ errors }">
                                         <b-form-radio v-model="slider.alineacion_sub_titulo" name="alineacion_sub_titulo" value="text-right">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Derecha</b-form-radio>
@@ -180,6 +231,58 @@
                             </b-col>
                         </b-row>
 
+                        <b-form-group>
+                            <ValidationProvider name="Parrafo" rules="min:3" v-slot="{ errors }">
+                                <b-form-input type="text" v-model="slider.parrafo" placeholder="Parrafo"></b-form-input>
+                                <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
+                            </ValidationProvider>
+                        </b-form-group>
+
+                        <b-row>
+                            <b-col md="6">
+                                <ValidationProvider name="Borde externo letra" rules="numeric|min:0" v-slot="{ errors }">
+                                    <b-form-input type="text" v-model="slider.parrafo_borde_externo" placeholder="Borde de letras expresadas en píxeles"></b-form-input>
+                                    <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
+                                </ValidationProvider>                                
+                            </b-col>    
+                            <b-col md="6">
+                                <ValidationProvider name="color de parrafo" rules="" v-slot="{ errors }">
+                                    <b-row>
+                                        <b-col md="6">
+                                            Color para el fondo del parrafo: 
+                                        </b-col>
+                                        <b-col>
+                                            <swatches v-model="slider.parrafo_color_fondo" :colors="colors" show-fallback popover-to="left"></swatches>
+                                        </b-col>
+                                    </b-row>
+                                    
+                                    <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
+                                </ValidationProvider>
+                            </b-col>
+                        </b-row>
+
+                        <b-row>
+                            <b-col md="6">
+                                <b-form-group label="Tamaño de letra">
+                                    <ValidationProvider name="Tamaño de letra" rules="required" v-slot="{ errors }">
+                                        <b-form-radio v-model="slider.letra_parrafo" name="letra_parrafo" value="46">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Título</b-form-radio>
+                                        <b-form-radio v-model="slider.letra_parrafo" name="letra_parrafo" value="36">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Sub título</b-form-radio>
+                                        <b-form-radio v-model="slider.letra_parrafo" name="letra_parrafo" value="20">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Parrafo</b-form-radio>
+                                        <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
+                                    </ValidationProvider>
+                                </b-form-group>
+                            </b-col>
+                            <b-col md="6">
+                                <b-form-group label="Alineación de texto">
+                                    <ValidationProvider name="Alineación de texto" rules="required" v-slot="{ errors }">
+                                        <b-form-radio v-model="slider.alineacion_parrafo" name="alineacion_parrafo" value="text-right">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Derecha</b-form-radio>
+                                        <b-form-radio v-model="slider.alineacion_parrafo" name="alineacion_parrafo" value="text-left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Izquierda</b-form-radio>
+                                        <b-form-radio v-model="slider.alineacion_parrafo" name="alineacion_parrafo" value="text-center">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Centrado</b-form-radio>
+                                        <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
+                                    </ValidationProvider>
+                                </b-form-group>
+                            </b-col>
+                        </b-row>
 
                         <b-row>
                             <b-col class="text-center">
@@ -198,6 +301,14 @@
                                     </ValidationProvider>
                                 </b-form-group>
                             </b-col>
+                            <b-col class="text-center">
+                                <b-form-group label="Color de parrafo">
+                                    <ValidationProvider name="color de parrafo" v-slot="{ errors }">
+                                        <swatches v-model="slider.parrafo_color" :colors="colors" show-fallback popover-to="left"></swatches>
+                                        <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
+                                    </ValidationProvider>
+                                </b-form-group>
+                            </b-col>
                         </b-row>
 
                         <b-form-group label="Imagen (1080px alto como minímo | JPG, JPEG y PNG)">
@@ -210,7 +321,7 @@
 
                         <b-form-group>
                             <ValidationProvider name="redirección" rules="required" v-slot="{ errors }">
-                                <b-form-select v-model="slider.link" class="mb-3">
+                                <b-form-select v-model="slider.link">
                                     <option :value="0" selected>Sin redirección</option>
                                     <option :value="1" selected>Sección mi perfil</option>
                                     <option :value="2" selected>Sección pide documento</option>
@@ -228,7 +339,7 @@
 
                         <b-form-group>
                             <ValidationProvider name="segmento de personas" v-slot="{ errors }">
-                                <b-form-select v-model="slider.tipo_persona" class="mb-3">
+                                <b-form-select v-model="slider.tipo_persona">
                                     <option :value="null" selected>Para todos los Clientes</option>
                                     <option :value="1" selected>Solo para Personas</option>
                                     <option :value="2" selected>Solo para Pymes</option>
@@ -271,7 +382,7 @@
                 <b-form>
                     <b-form-group label="Ubicaciones de Slider">
                         <b-row>
-                            <b-col xs="12" sm="12" md="6">
+                            <b-col md="6">
                                 <div class="custom-control custom-checkbox">
                                     <b-form-checkbox v-model="slider.inicio">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Inicio</b-form-checkbox>
                                 </div>
@@ -285,7 +396,7 @@
                                     <b-form-checkbox v-model="slider.pagina_nosotros">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Página nosotros</b-form-checkbox>
                                 </div>
                             </b-col>
-                            <b-col xs="12" sm="12" md="6">
+                            <b-col md="6">
                                 <div class="custom-control custom-checkbox">
                                     <b-form-checkbox v-model="slider.pagina_contacto">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Página contácto</b-form-checkbox>
                                 </div>
@@ -344,7 +455,17 @@
                     letra_sub_titulo: '36',
                     alineacion_sub_titulo: 'text-center',
                     link_alternativo_uno: '',
-                    link_alternativo_dos: ''
+                    link_alternativo_dos: '',
+                    parrafo: '',
+                    parrafo_color: '#E8ECD1',
+                    letra_parrafo: '36',
+                    alineacion_parrafo: 'text-center',
+                    texto_borde_externo: null,
+                    texto_color_fondo: "",
+                    subtitulo_borde_externo: null,
+                    subtitulo_color_fondo: "",
+                    parrafo_borde_externo: null,
+                    parrafo_color_fondo: ""
                 },
                 estado_checkbox: false,
                 colors: ['#E8ECD1', '#8AB733', '#3F8A24', '#1E2F13', '#D4AF37', '#D7552A', '#0070C0', '#FFFF99' ,''],
@@ -451,6 +572,19 @@
                 formData.append('link_alternativo_uno', this.slider.link_alternativo_uno);
                 formData.append('link_alternativo_dos', this.slider.link_alternativo_dos);
 
+                formData.append('parrafo', this.slider.parrafo);
+                formData.append('parrafo_color', this.slider.parrafo_color);
+                formData.append('letra_parrafo', this.slider.letra_parrafo);
+                formData.append('alineacion_parrafo', this.slider.alineacion_parrafo);
+
+                formData.append('texto_borde_externo', this.slider.texto_borde_externo);
+                formData.append('texto_color_fondo', this.slider.texto_color_fondo);
+
+                formData.append('subtitulo_borde_externo', this.slider.subtitulo_borde_externo);
+                formData.append('subtitulo_color_fondo', this.slider.subtitulo_color_fondo);
+
+                formData.append('parrafo_borde_externo', this.slider.parrafo_borde_externo);
+                formData.append('parrafo_color_fondo', this.slider.parrafo_color_fondo);
 
                 axios.post('slider/crear/actualizar',formData).then(function (response) {
                     me.listarSliders();
@@ -523,6 +657,37 @@
                     } else if (result.dismiss === Swal.DismissReason.cancel) {}
                 })
             },
+            duplicar_slider(id){
+                Swal.fire({
+                    title: '¿Deseas duplicar el Slider?',
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#8AB733',
+                    cancelButtonColor: '#d7552a',
+                    confirmButtonText: 'Aceptar!',
+                    cancelButtonText: 'Cancelar',
+                    confirmButtonClass: 'btn btn-success',
+                    cancelButtonClass: 'btn btn-danger',
+                }).then((result) => {
+                    if (result.value) {
+                        let me = this;
+                        axios.post('/slider/duplicar',{
+                            'id': id
+                        }).then(function (response) {
+                            me.listarSliders();
+
+                            Vue.$toast.open({
+                                message: 'El Slider ha sido duplicado!',
+                                type: 'success',
+                                duration: 5000
+                            });
+
+                        }).catch(function (error) {
+                            console.log(error);
+                        });
+                    } else if (result.dismiss === Swal.DismissReason.cancel) {}
+                })
+            },
             cerrarModal(){
                 this.modal_slider.titulo = "";
                 this.modal_slider.accion = 0;
@@ -554,6 +719,20 @@
                     me.slider.alineacion_sub_titulo = data.alineacion_sub_titulo
                     me.slider.link_alternativo_uno = data.link_alternativo_uno
                     me.slider.link_alternativo_dos = data.link_alternativo_dos
+
+                    me.slider.parrafo = data.parrafo
+                    me.slider.parrafo_color = data.parrafo_color
+                    me.slider.letra_parrafo = data.letra_parrafo
+                    me.slider.alineacion_parrafo = data.alineacion_parrafo
+
+                    me.slider.texto_borde_externo =  data.texto_borde_externo == 0 ? null : data.texto_borde_externo 
+                    me.slider.texto_color_fondo = data.texto_color_fondo == 'transparent' ? '' : data.texto_color_fondo
+
+                    me.slider.subtitulo_borde_externo =  data.subtitulo_borde_externo == 0 ? null : data.subtitulo_borde_externo 
+                    me.slider.subtitulo_color_fondo = data.subtitulo_color_fondo == 'transparent' ? '' : data.subtitulo_color_fondo
+
+                    me.slider.parrafo_borde_externo =  data.parrafo_borde_externo == 0 ? null : data.parrafo_borde_externo 
+                    me.slider.parrafo_color_fondo = data.parrafo_color_fondo == 'transparent' ? '' : data.parrafo_color_fondo
                 }
 
                 this.$refs['modal_slider'].show();
@@ -608,6 +787,20 @@
                 this.slider.alineacion_sub_titulo = 'text-center'
                 this.slider.link_alternativo_uno = ''
                 this.slider.link_alternativo_dos = ''
+
+                this.slider.parrafo = ''
+                this.slider.parrafo_color = '#E8ECD1'
+                this.slider.letra_parrafo = '36'
+                this.slider.alineacion_parrafo = 'text-center'
+
+                this.slider.texto_borde_externo = null
+                this.slider.texto_color_fondo = ''
+
+                this.slider.subtitulo_borde_externo= null
+                this.slider.subtitulo_color_fondo = ''
+                
+                this.slider.parrafo_borde_externo = null
+                this.slider.parrafo_color_fondo = ''
             }
         },
         mounted() {

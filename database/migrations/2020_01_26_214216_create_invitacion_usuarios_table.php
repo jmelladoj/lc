@@ -18,7 +18,7 @@ class CreateInvitacionUsuariosTable extends Migration
             $table->string('correo_invitado');
             $table->smallInteger('pagada')->nullable()->default(0);
             $table->smallInteger('inicio_sesion')->nullable()->default(0);
-            $table->integer('recompensa')->nullable()->default(1000);
+            $table->integer('recompensa')->nullable()->default(250);
 
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');

@@ -9,7 +9,7 @@
         <div class="container">
             <carousel :per-page="6" :autoplay="true" :navigationEnabled="true" :loop="true" paginationActiveColor="#8ab733" :centerMode="true">
                 <slide v-for="(documento, index) in documentos" :key="index">
-                    <div class="product-item ml-2 mr-2">
+                    <div class="product-item ml-2 mr-2" :class="documento.timer == 0 ? 'product-item-normal' : 'product-item-timer'">
                         <ver-documento :documento="documento" :autenticado="autenticado"></ver-documento>
                     </div>
                 </slide>

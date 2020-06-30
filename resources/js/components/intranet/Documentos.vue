@@ -144,6 +144,20 @@
                             </b-col>
                         </b-row>
 
+                        <b-row v-if="tipo_usuario < 3">
+                            <b-col md="6">
+                                <b-form-group>
+                                    <b-form-input type="date" v-model="documento.timer_dias" placeholder="Fecha en que se libera" ></b-form-input>
+                                </b-form-group>
+                            </b-col>
+                            <b-col md="6">
+                                <b-form-group>
+                                    <b-form-input type="time" v-model="documento.timer_hora" placeholder="Hora en que se libera" ></b-form-input>
+                                </b-form-group>
+                            </b-col>
+                        </b-row>
+
+
                         <b-form-group>
                             <ValidationProvider name="Descripción" rules="required|min:3" v-slot="{ errors }">
                                 <b-form-textarea v-model="documento.descripcion"  rows="3" max-rows="6" placeholder="Descripción"></b-form-textarea>
@@ -152,7 +166,7 @@
                         </b-form-group>
 
                         <b-row>
-                            <b-col xs="12" sm="12" :md="tipo_usuario < 3 ? 6 : 12" v-if="tipo_usuario < 3">
+                            <b-col :md="tipo_usuario < 3 ? 4 : 12" v-if="tipo_usuario < 3">
                                 <b-form-group  class="mb-2">
                                     <ValidationProvider name="código" :rules="tipo_usuario < 3 ? 'required|min:3' : ''" v-slot="{ errors }">
                                         <b-form-input type="text" v-model="documento.codigo" placeholder="Código"></b-form-input>
@@ -160,7 +174,15 @@
                                     </ValidationProvider>
                                 </b-form-group>
                             </b-col>
-                            <b-col xs="12" sm="12" :md="tipo_usuario < 3 ? 6 : 12">
+                            <b-col :md="tipo_usuario < 3 ? 4 : 12" v-if="tipo_usuario < 3">
+                                <b-form-group  class="mb-2">
+                                    <ValidationProvider name="código interno" :rules="tipo_usuario < 3 ? 'min:3' : ''" v-slot="{ errors }">
+                                        <b-form-input type="text" v-model="documento.codigo_interno" placeholder="Código interno"></b-form-input>
+                                        <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
+                                    </ValidationProvider>
+                                </b-form-group>
+                            </b-col>
+                            <b-col :md="tipo_usuario < 3 ? 4 : 12">
                                 <b-form-group class="mb-2">
                                     <ValidationProvider name="categoria" rules="required:min_value:0" v-slot="{ errors }">
                                         <b-form-select v-model="documento.categoria_id" class="mb-3">
@@ -185,8 +207,8 @@
                         </b-form-group>
 
                         <b-form-group>
-                            <ValidationProvider name="documento" rules="required|ext:pdf,docx,xlsx,mp4,pptx,mp3" v-slot="{ errors, validate }">
-                                <b-form-file id="documento" name="documento" accept=".pdf,.docx,.xlsx,.mp4,.pptx,.mp3" placeholder="Documento" @input="validate"></b-form-file>
+                            <ValidationProvider name="documento" rules="required|ext:pdf,docx,xlsx,mp4,pptx,mp3,rar,zip,7zip" v-slot="{ errors, validate }">
+                                <b-form-file id="documento" name="documento" accept=".pdf,.docx,.xlsx,.mp4,.pptx,.mp3,.rar,.zip,.7zip" placeholder="Documento" @input="validate"></b-form-file>
                                 <span v-show="errors[0]"><span class="d-block alert alert-danger m-t-5">{{ errors[0] }}</span></span>
                             </ValidationProvider>
                         </b-form-group>
@@ -242,7 +264,10 @@
                     categoria_id: 0,
                     seccion_nuevo: 0,
                     seccion_descargados: 0,
-                    estado: 0
+                    estado: 0,
+                    timer_dias: '',
+                    timer_hora: '',
+                    codigo_interno: ''
                 },
                 modal_documento: {
                     titulo: '',
@@ -326,7 +351,10 @@
                 formData.append('estado', this.documento.estado);
                 formData.append('seccion_nuevo', this.documento.seccion_nuevo);
                 formData.append('seccion_descargados', this.documento.seccion_descargados);
-                formData.append('estado', this.estado);
+
+                formData.append('timer_dias', this.documento.timer_dias);
+                formData.append('timer_hora', this.documento.timer_hora);
+                formData.append('codigo_interno', this.documento.codigo_interno);
 
                 axios.post('documento/crear/actualizar',formData).then(function (response) {
                     me.listarDocumentos();
@@ -444,6 +472,9 @@
                     me.documento.seccion_nuevo = data['seccion_nuevo'];
                     me.documento.seccion_descargados = data['seccion_descargados'];
                     me.documento.estado = data['estado'];
+                    me.documento.timer_dias = data['timer_dias'];
+                    me.documento.timer_hora = data['timer_hora'];
+                    me.documento.codigo_interno = data['codigo_interno'];
                 }
 
                 this.$refs['modal_documento'].show();
@@ -459,6 +490,9 @@
                 this.documento.seccion_nuevo = 0;
                 this.documento.seccion_descargados = 0;
                 this.documento.estado = 0;
+                this.documento.timer_dias = ''
+                this.documento.timer_hora = ''
+                this.documento.codigo_interno = ''
             },
             obtener_registros_documentos(){
                 this.listarCategorias();

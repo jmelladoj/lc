@@ -80,7 +80,7 @@ class CreateUsersTable extends Migration
             $table->integer('tipo_usuario')->nullable()->default(3);
             $table->integer('tipo_persona')->nullable()->default(1);
             $table->integer('mailing')->nullable()->default(0);
-            $table->integer('saldo')->default(1000);
+            $table->integer('saldo')->default(250);
             $table->boolean('lista_negra')->default(false);
 
             //Datos pyme

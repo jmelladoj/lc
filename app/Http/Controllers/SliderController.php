@@ -66,6 +66,16 @@ class SliderController extends Controller
                 'alineacion_sub_titulo' => $request->alineacion_sub_titulo,
                 'link_alternativo_uno' => $request->link_alternativo_uno == 'null' ? NULL : $request->link_alternativo_uno,
                 'link_alternativo_dos' => $request->link_alternativo_dos == 'null' ? NULL : $request->link_alternativo_dos,
+                'parrafo' => $request->parrafo,
+                'parrafo_color' => $request->parrafo_color,
+                'letra_parrafo' => $request->letra_parrafo,
+                'alineacion_parrafo' => $request->alineacion_parrafo,
+                'texto_borde_externo' => $request->texto_borde_externo == 'null' ? '0' : $request->texto_borde_externo,
+                'texto_color_fondo' => $request->texto_color_fondo,
+                'subtitulo_borde_externo' => $request->subtitulo_borde_externo == 'null' ? '0' : $request->subtitulo_borde_externo,
+                'subtitulo_color_fondo' => $request->subtitulo_color_fondo,
+                'parrafo_borde_externo' => $request->parrafo_borde_externo == 'null' ? '0' : $request->parrafo_borde_externo,
+                'parrafo_color_fondo' => $request->parrafo_color_fondo
             ]
         );
 
@@ -89,8 +99,49 @@ class SliderController extends Controller
             ]
         );
     }
+
     public function eliminar(Request $request){
         Slider::findOrFail($request->id)->delete();
+    }
+
+    public function duplicar(Request $request){
+        $slider = Slider::where('id', $request->id)->first();
+
+        Slider::updateOrCreate(
+            ['id' => null],
+            [
+                'texto' => $slider->texto,
+                'color' => $slider->color,
+                'link' => $slider->link,
+                'subtexto' => $slider->subtexto,
+                'subcolor' =>  $slider->subcolor,
+                'tipo_persona' => $slider->tipo_persona,
+                'inicio' => 1,
+                'descanso_uno' => 1,
+                'descanso_dos' => 1,
+                'pagina_nosotros' => 1,
+                'pagina_contacto' => 1,
+                'pagina_comunidad' => 1,
+                'pagina_servicios' => 1,
+                'letra_titulo' => $slider->letra_titulo,
+                'alineacion_titulo' => $slider->alineacion_titulo,
+                'letra_sub_titulo' => $slider->letra_sub_titulo,
+                'alineacion_sub_titulo' => $slider->alineacion_sub_titulo,
+                'link_alternativo_uno' => $slider->link_alternativo_uno,
+                'link_alternativo_dos' => $slider->link_alternativo_dos,
+                'parrafo' => $slider->parrafo,
+                'parrafo_color' => $slider->parrafo_color,
+                'letra_parrafo' => $slider->letra_parrafo,
+                'alineacion_parrafo' => $slider->alineacion_parrafo,
+                'url_imagen' => $slider->url_imagen,
+                'texto_borde_externo' => $slider->texto_borde_externo,
+                'texto_color_fondo' => $slider->texto_color_fondo,
+                'subtitulo_borde_externo' => $slider->subtitulo_borde_externo,
+                'subtitulo_color_fondo' => $slider->subtitulo_color_fondo,
+                'parrafo_borde_externo' => $slider->parrafo_borde_externo,
+                'parrafo_color_fondo' => $slider->parrafo_color_fondo
+            ]
+        );
     }
 }
 

@@ -11,11 +11,12 @@
 
                 <b-carousel v-else-if="tipo_persona == 2 || tipo_usuario < 3"  :interval="5000" controls indicators background="rgba(0,0,0,0.6)" img-width="" img-height="200" style="text-shadow: 1px 1px 2px #333;">
                     <b-carousel-slide v-for="(slider, index) in sliders" :key="index" :img-src="'storage/' + slider.url_imagen">
-                        <h2 class="intro-title" :class="slider.alineacion_titulo" v-text="slider.texto" :style="'color:' + slider.color + ';' + 'font-size:' + slider.letra_titulo + 'px;'"></h2>
-                        <h4 v-if="slider.subtexto != ''" :class="slider.alineacion_sub_titulo" :style="'color:' + slider.subcolor + ';' + 'font-size:' + slider.letra_sub_titulo + 'px;'" v-text="slider.subtexto"></h4>
-                        <button class="btn btn--primary space--1 btn-sm" @click="redireccion(slider.link)" v-show="slider.link != '/intranet/0'">Ver más</button>
-                        <a class="btn btn--primary space--1 btn-sm boton_redondo" :href="slider.link_alternativo_uno" v-show="slider.link_alternativo_uno != null" target="_blank">Ir al enlace</a>
-                        <a class="btn btn--primary space--1 btn-sm boton_redondo" :href="slider.link_alternativo_dos" v-show="slider.link_alternativo_dos != null" target="_blank">Ir al enlace</a>
+                        <h2 class="intro-title" :class="slider.alineacion_titulo" v-text="slider.texto" :style="'color:' + slider.color + ';' + 'font-size:' + slider.letra_titulo + 'px; -webkit-text-stroke:' + slider.texto_borde_externo + 'px black; background-color: ' + slider.texto_color_fondo + ';'"></h2>
+                        <h4 v-if="slider.subtexto != ''" :class="slider.alineacion_sub_titulo" :style="'color:' + slider.subcolor + ';' + 'font-size:' + slider.letra_sub_titulo + 'px; -webkit-text-stroke:' + slider.subtitulo_borde_externo + 'px black; background-color: ' + slider.subtitulo_color_fondo + ';'" v-text="slider.subtexto"></h4>
+                        <h4 v-if="slider.parrafo != ''" :class="slider.alineacion_parrafo" :style="'color:' + slider.parrafo_color + ';' + 'font-size:' + slider.letra_parrafo + 'px; -webkit-text-stroke:' + slider.parrafo_borde_externo + 'px black; background-color: ' + slider.parrafo_color_fondo + ';'" v-text="slider.parrafo"></h4>
+                        <button class="btn btn--primary space--1 btn-sm boton_redondo" @click="redireccion(slider.link)" v-show="slider.link != '/intranet/0'">Ver más</button>
+                        <a class="btn btn--primary space--1 btn-sm boton_redondo" :href="slider.link_alternativo_uno" v-show="slider.link_alternativo_uno != null" target="_blank">Ver más</a>
+                        <a class="btn btn--primary space--1 btn-sm boton_redondo" :href="slider.link_alternativo_dos" v-show="slider.link_alternativo_dos != null" target="_blank">Ver más</a>
                     </b-carousel-slide>
                 </b-carousel>
             </div>

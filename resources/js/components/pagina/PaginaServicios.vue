@@ -26,26 +26,26 @@
                         </div>
                     </div>
                     <div class="col-md-2 mx-auto my-auto  mt-0 ml-0 mr-0 mb-0">
-                        <b-button variant="success" size="md" @click="abrir_modal_detalle(item)">Ver más</b-button>
+                        <b-button v-if="item.cantidad > 0" variant="success" size="md" class="boton_redondo" @click="abrir_modal_detalle(item)">Ver más</b-button>
                     </div>
                 </div>
             </div>
         </div>
 
-        <b-modal ref="modal_detalle" :title="modal_detalle.titulo" no-close-on-backdrop scrollable>
+        <b-modal size="lg" ref="modal_detalle" :title="modal_detalle.titulo" no-close-on-backdrop scrollable>
             <b-card>
-                <b-tabs content-class="mt-3">
-                    <b-tab v-for="(item, index) in items_sub_servicio" :key="index" :active="index == 0" >
-                        <b-tab :title="item.nombre">
-                            <p class="text-justify" v-text="item.descripcion">
-                            </p>
-                        </b-tab>
-                    </b-tab>
-                </b-tabs>
+                <div  v-for="(item, index) in items_sub_servicio" :key="index">
+                    <h3 class="text-left">{{ item.nombre }}</h3>
+                    <p class="text-justify">
+                        {{ item.descripcion }}
+                    </p>
+                    <hr />
+                </div>
+
             </b-card>
 
             <template slot="modal-footer">
-                <b-button size="md" variant="danger" @click="cerrar_modal_detalle()"> Cerrar </b-button>
+                <b-button size="md" variant="danger" class="boton_redondo" @click="cerrar_modal_detalle()"> Cerrar </b-button>
             </template>
         </b-modal>
     </section>
